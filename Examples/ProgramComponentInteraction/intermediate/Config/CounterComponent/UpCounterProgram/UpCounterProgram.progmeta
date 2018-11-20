@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MetaConfigurationDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" schemaVersion="2.0" xmlns="http://www.phoenixcontact.com/schema/metaconfig">
+  <Program type="UpCounterProgram">
+    <Ports>
+      <Port name="OP_Counter" type="uint8" attributes="Output|Opc" />
+    </Ports>
+  </Program>
+</MetaConfigurationDocument>
