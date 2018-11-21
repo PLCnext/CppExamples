@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <MetaConfigurationDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" schemaVersion="2.0" xmlns="http://www.phoenixcontact.com/schema/metaconfig">
-  <Library name="Template" applicationDomain="CPLUSPLUS">
-    <File path="Template.so" />
+  <Library name="CppDataTypeTest" applicationDomain="CPLUSPLUS">
+    <File path="CppDataTypeTest.so" />
     <TypeIncludes>
-      <Include path="Template.typemeta" />
+      <Include path="CppDataTypeTest.typemeta" />
     </TypeIncludes>
     <ComponentIncludes>
-      <Include path="TemplateComponent/TemplateComponent.compmeta" />
+      <Include path="CppDataTypeTestComponent/CppDataTypeTestComponent.compmeta" />
     </ComponentIncludes>
   </Library>
 </MetaConfigurationDocument>

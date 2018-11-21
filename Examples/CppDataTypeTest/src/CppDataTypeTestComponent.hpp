@@ -1,7 +1,3 @@
-//  
-// Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
-// Licensed under the MIT. See LICENSE file in the project root for full license information.  
-//  
 #pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/System/Acf/ComponentBase.hpp"
@@ -9,12 +5,18 @@
 #include "Arp/Plc/Commons/Esm/IProgramComponent.hpp"
 #include "Arp/Plc/Commons/Meta/IMetaComponent.hpp"
 #include "Arp/Plc/Commons/Meta/DataInfoProvider.hpp"
-#include "Template/TemplateComponentProgramProvider.hpp"
-#include "Template/TemplateLibrary.hpp"
+#include "CppDataTypeTest/CppDataTypeTestComponentProgramProvider.hpp"
+#include "CppDataTypeTest/CppDataTypeTestLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 
-namespace Template 
+// Added Stuff
+#include "Arp/Plc/Commons/Domain/IPlcComponent.hpp"
+#include "Arp/System/Commons/Threading/WorkerThread.hpp"
+
+
+
+namespace CppDataTypeTest 
 {
 
 using namespace Arp;
@@ -22,13 +24,13 @@ using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
 
-class TemplateComponent : public ComponentBase, public IProgramComponent, public IMetaComponent, private Loggable<TemplateComponent>
+class CppDataTypeTestComponent : public ComponentBase, public IProgramComponent, public IMetaComponent, private Loggable<CppDataTypeTestComponent>
 {
 public: // typedefs
 
 public: // construction/destruction
-    TemplateComponent(IApplication& application, const String& name);
-    virtual ~TemplateComponent() = default;
+    CppDataTypeTestComponent(IApplication& application, const String& name);
+    virtual ~CppDataTypeTestComponent() = default;
 
 public: // IComponent operations
     void Initialize() override;
@@ -42,12 +44,12 @@ public: // IComponent operations
     void Dispose() override;
     void PowerDown() override;
 
-private: // TemplateComponent.meta.cpp
+private: // CppDataTypeTestComponent.meta.cpp
     void RegisterComponentPorts();
 
 private: // methods
-    TemplateComponent(const TemplateComponent& arg) = delete;
-    TemplateComponent& operator= (const TemplateComponent& arg) = delete;
+    CppDataTypeTestComponent(const CppDataTypeTestComponent& arg) = delete;
+    CppDataTypeTestComponent& operator= (const CppDataTypeTestComponent& arg) = delete;
 
 public: // static factory operations
     static IComponent::Ptr Create(Arp::System::Acf::IApplication& application, const String& componentName);
@@ -60,24 +62,24 @@ public: // IMetaComponent operations
     IDataNavigator*     GetDataNavigator() override;
 
 private: // fields
-    TemplateComponentProgramProvider programProvider;
+    CppDataTypeTestComponentProgramProvider programProvider;
     DataInfoProvider    dataInfoProvider;
 
 public: // ports
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// inline methods of class TemplateComponent
-inline TemplateComponent::TemplateComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::Template::TemplateLibrary::GetInstance(), name, ComponentCategory::Custom)
+// inline methods of class CppDataTypeTestComponent
+inline CppDataTypeTestComponent::CppDataTypeTestComponent(IApplication& application, const String& name)
+: ComponentBase(application, ::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance(), name, ComponentCategory::Custom)
 , programProvider(*this)
-, dataInfoProvider(::Template::TemplateLibrary::GetInstance().GetNamespace(), &(this->programProvider))
+, dataInfoProvider(::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance().GetNamespace(), &(this->programProvider))
 {
 }
 
 #pragma region IProgramComponent implementation
 
-inline IProgramProvider& TemplateComponent::GetProgramProvider(bool /*useBackgroundDomain*/)
+inline IProgramProvider& CppDataTypeTestComponent::GetProgramProvider(bool /*useBackgroundDomain*/)
 {
     return this->programProvider;
 }
@@ -86,21 +88,21 @@ inline IProgramProvider& TemplateComponent::GetProgramProvider(bool /*useBackgro
 
 #pragma region IMetaComponent implementation
 
-inline IDataInfoProvider& TemplateComponent::GetDataInfoProvider(bool /*useBackgroundDomain*/)
+inline IDataInfoProvider& CppDataTypeTestComponent::GetDataInfoProvider(bool /*useBackgroundDomain*/)
 {
     return this->dataInfoProvider;
 }
 
-inline IDataNavigator* TemplateComponent::GetDataNavigator()
+inline IDataNavigator* CppDataTypeTestComponent::GetDataNavigator()
 {
     return nullptr;
 }
 
 #pragma endregion
 
-inline IComponent::Ptr TemplateComponent::Create(Arp::System::Acf::IApplication& application, const String& componentName)
+inline IComponent::Ptr CppDataTypeTestComponent::Create(Arp::System::Acf::IApplication& application, const String& componentName)
 {
-    return IComponent::Ptr(new TemplateComponent(application, componentName));
+    return IComponent::Ptr(new CppDataTypeTestComponent(application, componentName));
 }
 
-} // end of namespace Template
+} // end of namespace CppDataTypeTest
