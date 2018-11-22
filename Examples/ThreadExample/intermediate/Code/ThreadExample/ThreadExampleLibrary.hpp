@@ -6,21 +6,21 @@
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/Plc/Commons/Meta/TypeSystem/TypeDomain.hpp"
 
-namespace Template 
+namespace ThreadExample 
 {
 
 using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Meta;
 using namespace Arp::Plc::Commons::Meta::TypeSystem;
 
-class TemplateLibrary : public MetaLibraryBase, public Singleton<TemplateLibrary>
+class ThreadExampleLibrary : public MetaLibraryBase, public Singleton<ThreadExampleLibrary>
 {
 public: // typedefs
-    typedef Singleton<TemplateLibrary> SingletonBase;
+    typedef Singleton<ThreadExampleLibrary> SingletonBase;
 
 public: // construction/destruction
-    TemplateLibrary(AppDomain& appDomain);
-    virtual ~TemplateLibrary() = default;
+    ThreadExampleLibrary(AppDomain& appDomain);
+    virtual ~ThreadExampleLibrary() = default;
 
 public: // static operations (called through reflection)
     static void Main(AppDomain& appDomain);
@@ -29,8 +29,8 @@ private: // methods
     void InitializeTypeDomain();
 
 private: // deleted methods
-    TemplateLibrary(const TemplateLibrary& arg) = delete;
-    TemplateLibrary& operator= (const TemplateLibrary& arg) = delete;
+    ThreadExampleLibrary(const ThreadExampleLibrary& arg) = delete;
+    ThreadExampleLibrary& operator= (const ThreadExampleLibrary& arg) = delete;
 
 private:  // fields
     TypeDomain typeDomain;
@@ -39,6 +39,6 @@ private:  // fields
 extern "C" ARP_CXX_SYMBOL_EXPORT ILibrary& ArpDynamicLibraryMain(AppDomain& appDomain);
 
 ///////////////////////////////////////////////////////////////////////////////
-// inline methods of class TemplateLibrary
+// inline methods of class ThreadExampleLibrary
 
-} // end of namespace Template
+} // end of namespace ThreadExample
