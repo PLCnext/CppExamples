@@ -1,5 +1,5 @@
 # PLCnext Technology - PLCnext_CppExamples
-
+[![pipeline status](https://git-ima.europe.phoenixcontact.com/TCS_SupportService/PLCnext_Controls/Project_Collection/PLCnext_CppExamples/badges/CI/pipeline.svg)](https://git-ima.europe.phoenixcontact.com/TCS_SupportService/PLCnext_Controls/Project_Collection/PLCnext_CppExamples/commits/CI)
 [![Feature Requests](https://img.shields.io/github/issues/PLCnext/PLCnext_CppExamples/feature-request.svg)](https://github.com/PLCnext/PLCnext_CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
 [![Bugs](https://img.shields.io/github/issues/PLCnext/PLCnext_CppExamples/bug.svg)](https://github.com/PLCnext/PLCnext_CppExamples/issues?utf8=✓&q=is%3Aissue+is%3Aopen+label%3Abug)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
