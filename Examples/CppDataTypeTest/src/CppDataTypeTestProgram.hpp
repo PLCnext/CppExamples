@@ -8,7 +8,7 @@
 #include "Arp/Plc/Commons/PlcTypes.h"
 #include "Arp/Plc/Commons/Gds/StaticString.hxx"
 
-#include "CppDataTypeTestcomponent.hpp"
+#include "CppDataTypeTestComponent.hpp"
 
 namespace CppDataTypeTest 
 {
