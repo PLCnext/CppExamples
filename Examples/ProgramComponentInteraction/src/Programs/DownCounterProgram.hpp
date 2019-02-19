@@ -18,11 +18,10 @@ using namespace Arp;
 using namespace Arp::System::Commons::Diagnostics::Logging;
 using namespace Arp::Plc::Commons::Esm;
 
-//forward declaration
-//class CounterComponent;
 
 // Asigning Program to component for the PLCNCLI
-//#component(CounterComponent)
+//#program
+//#component(ProgramComponentInteraction::CounterComponent)
 class   DownCounterProgram : 
         public ProgramBase , 
         private Loggable<DownCounterProgram>

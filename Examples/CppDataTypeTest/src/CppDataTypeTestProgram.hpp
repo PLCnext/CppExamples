@@ -8,6 +8,8 @@
 #include "Arp/Plc/Commons/PlcTypes.h"
 #include "Arp/Plc/Commons/Gds/StaticString.hxx"
 
+#include "CppDataTypeTestcomponent.hpp"
+
 namespace CppDataTypeTest 
 {
 
@@ -15,11 +17,9 @@ using namespace Arp;
 using namespace Arp::System::Commons::Diagnostics::Logging;
 using namespace Arp::Plc::Commons::Esm;
 
-//TODO not neccessary here. Include header instead
-//forwards
-class CppDataTypeTestComponent;
 
-//#component(CppDataTypeTestComponent)
+//#program
+//#component(CppDataTypeTest::CppDataTypeTestComponent)
 class CppDataTypeTestProgram : public ProgramBase, private Loggable<CppDataTypeTestProgram>
 {
 public: // typedefs

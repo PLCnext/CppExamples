@@ -2,7 +2,7 @@
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/ProgramBase.hpp"
 #include "Arp/System/Commons/Logging.h"
-
+#include "ThreadExampleComponent.hpp"
 namespace ThreadExample 
 {
 
@@ -10,11 +10,9 @@ using namespace Arp;
 using namespace Arp::System::Commons::Diagnostics::Logging;
 using namespace Arp::Plc::Commons::Esm;
 
-//TODO not neccessary here. Include header instead
-//forwards
-class ThreadExampleComponent;
 
-//#component(ThreadExampleComponent)
+//#program
+//#component(ThreadExample::ThreadExampleComponent)
 class ThreadExampleProgram : public ProgramBase, private Loggable<ThreadExampleProgram>
 {
 public: // typedefs
