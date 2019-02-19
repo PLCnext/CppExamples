@@ -5,8 +5,8 @@
 #include "Arp/Plc/Commons/Esm/IProgramComponent.hpp"
 #include "Arp/Plc/Commons/Meta/IMetaComponent.hpp"
 #include "Arp/Plc/Commons/Meta/DataInfoProvider.hpp"
-#include "CppDataTypeTest/CppDataTypeTestComponentProgramProvider.hpp"
-#include "CppDataTypeTest/CppDataTypeTestLibrary.hpp"
+#include "CppDataTypeTestComponentProgramProvider.hpp"
+#include "CppDataTypeTestLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 
@@ -24,6 +24,7 @@ using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
 
+//#component
 class CppDataTypeTestComponent : public ComponentBase, public IProgramComponent, public IMetaComponent, private Loggable<CppDataTypeTestComponent>
 {
 public: // typedefs

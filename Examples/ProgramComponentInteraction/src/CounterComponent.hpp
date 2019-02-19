@@ -10,13 +10,13 @@
 
 #include "Arp/System/Commons/Logging.h"
 #include "Arp/Plc/Commons/Esm/IProgramComponent.hpp"
-#include "ProgramComponentInteraction/CounterComponentProgramProvider.hpp"
+#include "CounterComponentProgramProvider.hpp"
 
 
 #include "Arp/Plc/Commons/Meta/IMetaComponent.hpp"
 #include "Arp/Plc/Commons/Meta/DataInfoProvider.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
-#include "ProgramComponentInteraction/ProgramComponentInteractionLibrary.hpp"
+#include "ProgramComponentInteractionLibrary.hpp"
 
 #include "Helpers/Enums.hpp"
 
@@ -35,7 +35,7 @@ using namespace Arp::Plc::Commons::Meta;
 #define DEBUG_FUNCTION_CALL
 #endif
 
-
+//component
 class CounterComponent : 
 public ComponentBase, 
 public IProgramComponent, 

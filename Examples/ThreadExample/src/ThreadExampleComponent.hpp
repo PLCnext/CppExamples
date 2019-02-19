@@ -8,8 +8,8 @@
 #include "Arp/Plc/Commons/Esm/IProgramComponent.hpp"
 #include "Arp/Plc/Commons/Meta/IMetaComponent.hpp"
 #include "Arp/Plc/Commons/Meta/DataInfoProvider.hpp"
-#include "ThreadExample/ThreadExampleComponentProgramProvider.hpp"
-#include "ThreadExample/ThreadExampleLibrary.hpp"
+#include "ThreadExampleComponentProgramProvider.hpp"
+#include "ThreadExampleLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 
@@ -28,6 +28,7 @@ using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
 
+//#component
 class ThreadExampleComponent
 		: public ComponentBase
 		, public IControllerComponent
