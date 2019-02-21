@@ -1,49 +1,36 @@
-#include "CppDataTypeTestComponent.hpp"
+﻿#include "CppDataTypeTestComponent.hpp"
+#include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 
-namespace CppDataTypeTest 
+namespace CppDataTypeTest
 {
 
 void CppDataTypeTestComponent::Initialize()
 {
-}
+    // never remove next line
+    ProgramComponentBase::Initialize();
 
-void CppDataTypeTestComponent::LoadSettings(const String& settingsPath)
-{
-}
-
-void CppDataTypeTestComponent::SetupSettings()
-{
-}
-
-void CppDataTypeTestComponent::SubscribeServices()
-{
+    // subscribe events from the event system (Nm) here
 }
 
 void CppDataTypeTestComponent::LoadConfig()
 {
+    // load project config here
 }
 
 void CppDataTypeTestComponent::SetupConfig()
 {
-    // DO NOT REMOVE THIS!
-    CppDataTypeTestComponent::RegisterComponentPorts();
+    // never remove next line
+    ProgramComponentBase::SetupConfig();
+
+    // setup project config here
 }
 
 void CppDataTypeTestComponent::ResetConfig()
 {
-	 this->dataInfoProvider.Reset();
-}
+    // never remove next line
+    ProgramComponentBase::ResetConfig();
 
-void CppDataTypeTestComponent::PublishServices()
-{
-}
-
-void CppDataTypeTestComponent::Dispose()
-{
-}
-
-void CppDataTypeTestComponent::PowerDown()
-{
+    // implement this inverse to SetupConfig() and LoadConfig()
 }
 
 } // end of namespace CppDataTypeTest

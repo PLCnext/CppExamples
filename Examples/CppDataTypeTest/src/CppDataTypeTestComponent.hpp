@@ -1,22 +1,14 @@
-#pragma once
+﻿#pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/System/Acf/ComponentBase.hpp"
 #include "Arp/System/Acf/IApplication.hpp"
-#include "Arp/Plc/Commons/Esm/IProgramComponent.hpp"
-#include "Arp/Plc/Commons/Meta/IMetaComponent.hpp"
-#include "Arp/Plc/Commons/Meta/DataInfoProvider.hpp"
+#include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "CppDataTypeTestComponentProgramProvider.hpp"
 #include "CppDataTypeTestLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 
-// Added Stuff
-#include "Arp/Plc/Commons/Domain/IPlcComponent.hpp"
-#include "Arp/System/Commons/Threading/WorkerThread.hpp"
-
-
-
-namespace CppDataTypeTest 
+namespace CppDataTypeTest
 {
 
 using namespace Arp;
@@ -25,7 +17,7 @@ using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
 
 //#component
-class CppDataTypeTestComponent : public ComponentBase, public IProgramComponent, public IMetaComponent, private Loggable<CppDataTypeTestComponent>
+class CppDataTypeTestComponent : public ComponentBase, public ProgramComponentBase, private Loggable<CppDataTypeTestComponent>
 {
 public: // typedefs
 
@@ -35,38 +27,35 @@ public: // construction/destruction
 
 public: // IComponent operations
     void Initialize() override;
-    void LoadSettings(const String& settingsPath) override;
-    void SetupSettings() override;
-    void SubscribeServices() override;
     void LoadConfig() override;
     void SetupConfig() override;
     void ResetConfig() override;
-    void PublishServices() override;
-    void Dispose() override;
-    void PowerDown() override;
 
-private: // CppDataTypeTestComponent.meta.cpp
-    void RegisterComponentPorts();
+public: // ProgramComponentBase operations
+    void RegisterComponentPorts() override;
 
 private: // methods
     CppDataTypeTestComponent(const CppDataTypeTestComponent& arg) = delete;
     CppDataTypeTestComponent& operator= (const CppDataTypeTestComponent& arg) = delete;
 
 public: // static factory operations
-    static IComponent::Ptr Create(Arp::System::Acf::IApplication& application, const String& componentName);
-
-public: // IProgramComponent operations
-    IProgramProvider & GetProgramProvider(bool useBackgroundDomain) override;
-
-public: // IMetaComponent operations
-    IDataInfoProvider & GetDataInfoProvider(bool isChanging) override;
-    IDataNavigator*     GetDataNavigator() override;
+    static IComponent::Ptr Create(Arp::System::Acf::IApplication& application, const String& name);
 
 private: // fields
     CppDataTypeTestComponentProgramProvider programProvider;
-    DataInfoProvider    dataInfoProvider;
 
-public: // ports
+public: /* Ports
+           =====
+           Component ports are defined in the following way:
+           //#port
+           //#name(NameOfPort)
+           boolean portField;
+
+           The name comment defines the name of the port and is optional. Default is the name of the field.
+           Attributes which are defined for a component port are IGNORED. If component ports with attributes
+           are necessary, define a single structure port where attributes can be defined foreach field of the
+           structure.
+        */
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,36 +63,13 @@ public: // ports
 inline CppDataTypeTestComponent::CppDataTypeTestComponent(IApplication& application, const String& name)
 : ComponentBase(application, ::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance(), name, ComponentCategory::Custom)
 , programProvider(*this)
-, dataInfoProvider(::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance().GetNamespace(), &(this->programProvider))
+, ProgramComponentBase(::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance().GetNamespace(), programProvider)
 {
 }
 
-#pragma region IProgramComponent implementation
-
-inline IProgramProvider& CppDataTypeTestComponent::GetProgramProvider(bool /*useBackgroundDomain*/)
+inline IComponent::Ptr CppDataTypeTestComponent::Create(Arp::System::Acf::IApplication& application, const String& name)
 {
-    return this->programProvider;
-}
-
-#pragma endregion
-
-#pragma region IMetaComponent implementation
-
-inline IDataInfoProvider& CppDataTypeTestComponent::GetDataInfoProvider(bool /*useBackgroundDomain*/)
-{
-    return this->dataInfoProvider;
-}
-
-inline IDataNavigator* CppDataTypeTestComponent::GetDataNavigator()
-{
-    return nullptr;
-}
-
-#pragma endregion
-
-inline IComponent::Ptr CppDataTypeTestComponent::Create(Arp::System::Acf::IApplication& application, const String& componentName)
-{
-    return IComponent::Ptr(new CppDataTypeTestComponent(application, componentName));
+    return IComponent::Ptr(new CppDataTypeTestComponent(application, name));
 }
 
 } // end of namespace CppDataTypeTest
