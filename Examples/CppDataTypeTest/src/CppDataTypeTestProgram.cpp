@@ -3,7 +3,7 @@
  * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
  * Licensed under the MIT. See LICENSE file in the project root for full license information.  
  *
- *  CppDataTypeTestProgram.hpp
+ *  CppDataTypeTestProgram.cpp
  *
  *  Created on: 21.02.2019
  *  	Author: Eduard Münz, Oliver Warneke
