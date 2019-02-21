@@ -78,7 +78,6 @@ All supported elementary data types are documented in the user manual "PLCnext T
 				outFloat64:LREAL;
 			 END_STRUCT
 
-		PLCnEng_STRING_80:STRING[80];
 			
 		bool_array: ARRAY[0..9] OF BOOL;  
 		//8Bit
