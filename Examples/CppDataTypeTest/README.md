@@ -15,7 +15,7 @@
 <!-- /TOC -->
 
 
-# Introduction
+## Introduction
 
 This example demonstrates the creating and using of port variables in PLCnext Enginner and C++ application for data exchange via elementary data types.
 All supported elementary data types are documented in the user manual "PLCnext Technology".
@@ -116,9 +116,9 @@ All supported elementary data types are documented in the user manual "PLCnext T
 - If the project is successfully implemented and downloaded, you can follow the data exchange in PLCnext Engineer debug mode and/or in watch-window. 
 - If the project is not started successfully, please see the error messages in Output.log File on the plcnext target e.g. /opt/plcnext/logs/Output.log
 
-# Cpp SourceCode
+## Cpp SourceCode
 
-## CppDataTypeTestProgram.hpp
+### CppDataTypeTestProgram.hpp
 
 ```cpp
 		/******************************************************************************
@@ -381,7 +381,7 @@ All supported elementary data types are documented in the user manual "PLCnext T
 
 
 
-## CppDataTypeTestProgram.cpp
+### CppDataTypeTestProgram.cpp
 ```cpp
 		/******************************************************************************
 		 * 
