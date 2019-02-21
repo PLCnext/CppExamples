@@ -1,56 +1,55 @@
 # Table of contents
 
-<!-- TOC depthFrom:1 orderedList:true -->
+<!-- TOC depthFrom:2 orderedList:true -->
 
-1. [Table of contents](#table-of-contents)
-2. [Introduction](#introduction)
-3. [Example details](#example-details)
-4. [Preconditions](#preconditions)
-5. [Project compiling in Eclipse](#project-compiling-in-eclipse)
-6. [PLCnext Engineer project](#plcnext-engineer-project)
-7. [Start-Up instructions](#start-up-instructions)
-8. [Cpp Source Code](#cpp-source-code)  
-8.1. [CppDataTypeTestProgram.hpp](#cppdatatypetestprogramhpp)  
-8.2. [CppDataTypeTestProgram.cpp](#cppdatatypetestprogramcpp)  
+1. [Introduction](#introduction)
+2. [Example details](#example-details)
+3. [Preconditions](#preconditions)
+4. [Project compiling in Eclipse](#project-compiling-in-eclipse)
+5. [PLCnext Engineer project](#plcnext-engineer-project)
+6. [Start-Up instructions](#start-up-instructions)
+7. [Cpp Source Code](#cpp-source-code)  
+7.1. [CppDataTypeTestProgram.hpp](#cppdatatypetestprogramhpp)  
+7.2. [CppDataTypeTestProgram.cpp](#cppdatatypetestprogramcpp)  
 
 <!-- /TOC -->
 
 
 ## Introduction
 
-This example demonstrates the creating and using of port variables in PLCnext Enginner and C++ application for data exchange via elementary data types.
-All supported elementary data types are documented in the user manual "PLCnext Technology".
+This example demonstrates the creation and usage of port variables in PLCnext Engineer and C++ applications for data exchange via elementary data types.
+All supported elementary data types are documented in the "PLCnext Technology User Manual".
 
 ## Example details
 
 |Description | Value |
 |------------ |-----------|
 |Controller| AXC F 2152 | 
-|FW | 2019.0|
-|SDK | 2019.0|
-|PLCnext Engineer| 2019.0 | 
+|FW | 2019.0 LTS|
+|SDK | 2019.0 LTS|
+|PLCnext Engineer| 2019.0 LTS | 
 
 
 ## Preconditions
 
-- AXC F 2152 controller with firmware 2019.0
-- Eclipse IDE "Photon" 
-- PLCnext Engineer 2019.0
+- PLCnext Control AXC F 2152 with firmware 2019.0 LTS
+- PLCnext Engineer 2019.0 LTS
+- Eclipse<sup>&reg;</sup> IDE "Photon" 
 
 
 ## Project compiling in Eclipse
 
-1. Create in Eclipse the project "CppDataTypeTest" with Component "CppDataTypeTestComponent" and Program "CppDataTypeTestProgram".
-2. Replace in the project the files "CppDataTypeTestProgram.cpp" and "CppDataTypeTestProgram.hpp" with files from this repository. Alternatively you can create your own project with component and programs and include the source code of "CppDataTypeTestProgram.cpp" and "CppDataTypeTestProgram.hpp" in your source code files.
+1. In Eclipse create a project "CppDataTypeTest" with component "CppDataTypeTestComponent" and program "CppDataTypeTestProgram".
+2. In the project replace the files "CppDataTypeTestProgram.cpp" and "CppDataTypeTestProgram.hpp" with files from this repository. Alternatively you can create your own project with component and programs and include the source code of "CppDataTypeTestProgram.cpp" and "CppDataTypeTestProgram.hpp" in your source code files.
 3. Compile the Eclipse project. 
-4. After successfull project compilation, the PLCnext Engineer library will be created automatically. You can find it under eclipse workspace folder: e.g.: "workspace\CppDataTypeTest\bin\CppDataTypeTest.pcwlx" 
+4. After successful project compilation, the PLCnext Engineer .pcwlx library will be created automatically. You can find it in the Eclipse workspace folder; e.g.: "workspace\CppDataTypeTest\bin\CppDataTypeTest.pcwlx".
 
 
 ## PLCnext Engineer project 
 
-1. Create in PLCnext Engineer a new project and include the "CppDataTypeTest.pcwlx" in the project.
-2. Instantiate the Program "CppDataTypeTestProgram" under previously defined task.
-3. Create in the "COMPONENT" Area under Programming -> Datatypes an new datatype-worksheet and include the following user defined datatypes:
+1. In PLCnext Engineer create a project and include the "CppDataTypeTest.pcwlx" in the project.
+2. Instantiate the program "CppDataTypeTestProgram" under a previously defined task.
+3. In the "COMPONENT" area under "Programming" -> "Datatypes" create an new datatype worksheet and include the following user-defined datatypes:
 
 ```cpp
 		TYPE
@@ -106,17 +105,17 @@ All supported elementary data types are documented in the user manual "PLCnext T
 		Lreal_array: ARRAY[0..9] OF LREAL;  
 		END_TYPE
 ```
-4. Declare the portvariables of user defined and elementary datatypes e.g. in "main" program. Please find the table of elementary datatypes in user manual "PLCnext Technology".
-5. Connect the C++ Prortvariables and IEC61131 Portvariables in PLCnext Engineer under "PLCnext"-Node in tne "PLANT" area.
-6. Download the PLCnext Engineer project to the plcnext controller.
+4. Declare the port variables of user-defined and elementary datatypes in a program, e.g. "main". Find a table of elementary datatypes in the "PLCnext Technology User Manual".
+5. Connect the C++ port variables and IEC 61131 port variables under the "PLCnext" node in the "PLANT" area of PLCnext Engineer.
+6. Download the PLCnext Engineer project to the PLCnext Control.
 
 
-## Start-Up instructions
+## Start-up instructions
 
-- If the project is successfully implemented and downloaded, you can follow the data exchange in PLCnext Engineer debug mode and/or in watch-window. 
-- If the project is not started successfully, please see the error messages in Output.log File on the plcnext target e.g. /opt/plcnext/logs/Output.log
+- If the project is successfully implemented and downloaded, you can follow the data exchange in PLCnext Engineer running in debug mode and/or in the watchwindow. 
+- If the project did not start successfully, please see the error messages in Output.log file on the PLCnext target; e.g.: /opt/plcnext/logs/Output.log
 
-## Cpp SourceCode
+## Cpp Source Code
 
 ### CppDataTypeTestProgram.hpp
 
@@ -202,7 +201,7 @@ All supported elementary data types are documented in the user manual "PLCnext T
 				   //#name(NameOfPort)
 				   boolean portField;
 
-				   The attributes comment define the port attributes and is optional.
+				   The attributes comment defines the port attributes and is optional.
 				   The name comment defines the name of the port and is optional. Default is the name of the field.
 				*/
 
