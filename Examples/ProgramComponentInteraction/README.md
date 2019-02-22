@@ -50,5 +50,5 @@ You need to have PLCnext Engineer installed and a installed C++ SDK.
 2. start the PLC
 3. Login with PLCnext Engineer Debug or SSH.
 4. Check Progress
-    4. You can now see the Counters going up and down int the `PLCNext - Datalist`.<!-- or stop the proccess with the component port `IP_Stop`. -->
-    4. You can see the progress in the Output.log file with `tail -f /opt/plcnext/logs/Output.log`.
+    4. You can now see the Counters going up and down in the `PLCNext - Datalist` in the PLCnext Engineer.
+    4. You can also see the progress in the Output.log file with `tail -f /opt/plcnext/logs/Output.log`.

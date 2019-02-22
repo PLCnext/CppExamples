@@ -14,12 +14,13 @@ void DownCounterProgram::Execute()
 {
 // Print the current progress and the counter value to the Output.log file
 	Command c = refCounterComponent.get_command();
-	log.Info("DC Execute Progress:{0}, Value:{1}  Command:{2}", (int)progress, (int)OP_Counter, (int)c);
+	
     switch(progress)
     {
          // Check if counting shall be started next cycle
         case Progress::Done : // idle state
         {
+            log.Info("DC Done");
             // access get_command() funktion of the Component via reference.
             if( c == Command::CountDown)
             {

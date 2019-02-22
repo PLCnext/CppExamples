@@ -12,7 +12,7 @@ namespace ProgramComponentInteraction
 void UpCounterProgram::Execute()
 {
 	 Command c = refCounterComponent.get_command();
-     log.Info("UC Execute Progress:{0}, Value:{1}  Command:{2}", (int)progress, (int)OP_Counter, (int)c);
+    
     // This method will be executed each cycle
     // We just increase the counter by one here
 switch(progress)
@@ -20,6 +20,7 @@ switch(progress)
         // Check if counting shall be started next cycle
 		case Progress::Done :// idle state
 		{
+             log.Info("UC Done");
 			if( c == Command::CountUp)
             {
                 progress = Progress::Running;
