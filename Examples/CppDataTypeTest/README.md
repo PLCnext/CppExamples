@@ -105,7 +105,7 @@ All supported elementary data types are documented in the [PLCnext Technology Us
 		Lreal_array: ARRAY[0..9] OF LREAL;  
 		END_TYPE
 ```
-4. Declare the port variables of user-defined and elementary datatypes in a program, e.g. "main". Find a table of elementary datatypes in the "PLCnext Technology User Manual".
+4. Declare the port variables of user-defined and elementary datatypes in a program, e.g. "main". Find a table of elementary datatypes in the [PLCnext Technology User Manual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en).
 5. Connect the C++ port variables and IEC 61131 port variables under the "PLCnext" node in the "PLANT" area of PLCnext Engineer.
 6. Download the PLCnext Engineer project to the PLCnext Control.
 
