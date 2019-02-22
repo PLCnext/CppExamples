@@ -25,9 +25,9 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 ## Getting started
 
 - [PLCnext User Manual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en)
-- [Tutorial Video: Tools installation on Windows](https://plcnext-community.net/index.php?option=com_content&view=article&id=335:install-windows-tools-for-c-programming-with-eclipse-ide&catid=66&Itemid=343&lang=en)
-- [Tools installation on Linux](https://plcnext-community.net/index.php?option=com_content&view=category&id=66&Itemid=343&lang=en)
-- [First Cpp project](https://plcnext-community.net/index.php?option=com_content&view=article&id=327:c-programming-with-eclipse-ide&catid=66&Itemid=343&lang=en)
+- [Tutorial video: tool installation on Windows](https://plcnext-community.net/index.php?option=com_content&view=article&id=335:install-windows-tools-for-c-programming-with-eclipse-ide&catid=66&Itemid=343&lang=en)
+- [Tutorial video: tool installation on Linux](https://plcnext-community.net/index.php?option=com_content&view=category&id=66&Itemid=343&lang=en)
+- [Tutorial video: First Cpp project](https://plcnext-community.net/index.php?option=com_content&view=article&id=327:c-programming-with-eclipse-ide&catid=66&Itemid=343&lang=en)
 
 ## Compiling an example
 
