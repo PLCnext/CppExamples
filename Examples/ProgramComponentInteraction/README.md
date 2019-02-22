@@ -1,4 +1,4 @@
-# Program Componenent Interaction 
+# Program Component Interaction 
 This example shows how data can be sent from a program to a component.
 The program can also receive data by calling public getter methods of the component.
 
@@ -46,7 +46,7 @@ Note left of CounterComponent: Command::CountUp
 - PLCnext Technology SDK for C++ is installed
 
 
-## Start-Up instructions
+## Start-up instructions
 
 1. Instantiate one instance of each Program
 2. Start the PLCnext Control
