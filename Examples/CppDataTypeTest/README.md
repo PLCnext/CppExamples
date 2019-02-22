@@ -19,6 +19,7 @@
 
 This example demonstrates the creation and usage of port variables in PLCnext Engineer and C++ applications for data exchange via elementary data types.
 All supported elementary data types are documented in the "PLCnext Technology User Manual".
+[PLCnext Usermanual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en)
 
 ## Example details
 
@@ -112,8 +113,8 @@ All supported elementary data types are documented in the "PLCnext Technology Us
 
 ## Start-up instructions
 
-- If the project is successfully implemented and downloaded, you can follow the data exchange in PLCnext Engineer running in debug mode and/or in the watchwindow. 
-- If the project did not start successfully, please see the error messages in Output.log file on the PLCnext target; e.g.: /opt/plcnext/logs/Output.log
+- If the project is successfully implemented and downloaded, you can follow the data exchange in PLCnext Engineer running in debug mode and/or in the watchwindow of PLCnext Engineer. 
+- If the project did not start successfully, please see the error messages in Output.log file on the PLCnext target: /opt/plcnext/logs/Output.log
 
 ## Cpp Source Code
 
@@ -208,7 +209,7 @@ All supported elementary data types are documented in the "PLCnext Technology Us
 			//#port
 			//#attributes(Output|Retain)
 			//#name(outBoolean)
-			boolean	outBoolean		=	false;	//BOOL
+			boolean	outBoolean	=	false;	//BOOL
 
 			//#port
 			//#attributes(Output|Retain)
@@ -354,12 +355,12 @@ All supported elementary data types are documented in the "PLCnext Technology Us
 			//#port
 			//#attributes(Output|Retain)
 			//#name(outarrayFloat32)
-			float32	outarrayFloat32[10] = {0.0};//Real
+			float32	outarrayFloat32[10] = {0.0};	//Real
 
 			//#port
 			//#attributes(Output|Retain)
 			//#name(outarrayFloat64)
-			float64	outarrayFloat64[10] = {0.0};//LREAL
+			float64	outarrayFloat64[10] = {0.0};	//LREAL
 
 		private: // fields
 			CppDataTypeTest::CppDataTypeTestComponent& cppDataTypeTestComponent;
@@ -415,30 +416,30 @@ All supported elementary data types are documented in the "PLCnext Technology Us
 				else
 					outBoolean = true;
 
-			outInt8++; 	//SINT
+			outInt8++;	//SINT
 			outUint8++;	//USINT
-			outStruct.outInt8++; //StructElement
-			outStruct.outUint8++; //StructElement
+			outStruct.outInt8++;	//StructElement
+			outStruct.outUint8++;	//StructElement
 
 			outInt16++;	//INT
-			outUint16++;//UINT
-			outStruct.outInt16++; //StructElement
-			outStruct.outUint16++; //StructElement
+			outUint16++;	//UINT
+			outStruct.outInt16++;	//StructElement
+			outStruct.outUint16++;	//StructElement
 
 			outInt32++;	//DINT
-			outUint32++;//UDINT
-			outStruct.outInt32++; //StructElement
-			outStruct.outUint32++; //StructElement
+			outUint32++;	//UDINT
+			outStruct.outInt32++;	//StructElement
+			outStruct.outUint32++;	//StructElement
 
 			outInt64++;	//LINT
-			outUint64++;//ULINT
-			outStruct.outInt64++; //StructElement
-			outStruct.outUint64++; //StructElement
+			outUint64++;	//ULINT
+			outStruct.outInt64++;	//StructElement
+			outStruct.outUint64++;	//StructElement
 
-			outFloat32++;//REAL
-			outFloat64++;//LREAL
-			outStruct.outFloat32++; //StructElement
-			outStruct.outFloat64++; //StructElement
+			outFloat32++;	//REAL
+			outFloat64++;	//LREAL
+			outStruct.outFloat32++;	//StructElement
+			outStruct.outFloat64++;	//StructElement
 
 			outByte++;	//Byte
 			outWord++;	//Word
@@ -457,20 +458,20 @@ All supported elementary data types are documented in the "PLCnext Technology Us
 				else
 					outarrayBoolean[i] = true;
 
-				outarrayInt8[i]++; 	//SINT
+				outarrayInt8[i]++;	//SINT
 				outarrayUint8[i]++;	//USINT
 
 				outarrayInt16[i]++;	//INT
-				outarrayUint16[i]++;//UINT
+				outarrayUint16[i]++;	//UINT
 
 				outarrayInt32[i]++;	//DINT
 				outarrayUint32[i]++;//UDINT
 
 				outarrayInt64[i]++;	//LINT
-				outarrayUint64[i]++;//ULINT
+				outarrayUint64[i]++;	//ULINT
 
-				outarrayFloat32[i]++;//REAL
-				outarrayFloat64[i]++;//LREAL
+				outarrayFloat32[i]++;	//REAL
+				outarrayFloat64[i]++;	//LREAL
 
 				outarrayByte[i]++;	//Byte
 				outarrayWord[i]++;	//Word
