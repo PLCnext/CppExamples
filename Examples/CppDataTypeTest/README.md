@@ -465,7 +465,7 @@ All supported elementary data types are documented in the "PLCnext Technology Us
 				outarrayUint16[i]++;	//UINT
 
 				outarrayInt32[i]++;	//DINT
-				outarrayUint32[i]++;//UDINT
+				outarrayUint32[i]++;	//UDINT
 
 				outarrayInt64[i]++;	//LINT
 				outarrayUint64[i]++;	//ULINT
