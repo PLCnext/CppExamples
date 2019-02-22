@@ -1,9 +1,9 @@
 # Program Componenent Interaction 
 This example shows how data can be exchanged from a `Program` to a `Component`.
-The `Program`  can also recieve data by calling public `Getter` methods of the `Component`.
+The `Program`  can also recieve data by calling public getter methods of the `Component`.
 
 The programms `UpCounterProgram` and `DownCounterProgram` access the Component `CounterComponent` with these methods.
-They use the `CounterComponent.get_command()` to recieve an enum of `Commands` and a `setProgress()` method to inform the Component of the state the Program is in.
+They use the `CounterComponent.GetCommand()` to recieve an enum of `Commands` and a `setProgress()` method to inform the Component of the state the Program is in.
 Once the programm has got a command it will continue to execute this command and when finnished 
 execute the`CounterComponent.RefreshState()` method wich will then initiate a state change.
 
@@ -16,7 +16,7 @@ sequenceDiagram
  CounterComponent->>DownCounterProgram: create
 Note left of CounterComponent: Command::CountUp
     loop Execute
-        UpCounterProgram->>CounterComponent: get command
+        UpCounterProgram->>CounterComponent: GetCommand
        
         UpCounterProgram->UpCounterProgram: count Up   
         UpCounterProgram->>CounterComponent: set current State 
