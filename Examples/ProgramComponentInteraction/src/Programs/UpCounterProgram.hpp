@@ -48,8 +48,9 @@ private: // fields
     Progress progress =  Progress::Done;
 
  public: 
-    // outports;
-    //#port(Output|OPC)
+	//#port
+	//#attributes(Output|Retain)
+	//#name(UP_Counter)
     uint8 OP_Counter = 0; 
 };
 

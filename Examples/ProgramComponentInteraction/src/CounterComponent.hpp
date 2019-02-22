@@ -105,7 +105,8 @@ private: // member variables for Program Component Interaction
     Command command{Command::CountDown};
 
 public: // ports
-//#port(INPUT|OPC)
+    //#port
+    //#name(StopCounting)
     boolean IP_Stop{false};
 };
 

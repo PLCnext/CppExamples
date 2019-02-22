@@ -46,8 +46,9 @@ private: // fields
     Progress progress = Progress::Done;
 //    IComponentInteraction& const CCRef= nullptr;
 public: 
-    // outports;
- //#port(Output)
+	//#port
+	//#attributes(Output|Retain)
+	//#name(Down_Counter)
     uint8 OP_Counter = 255;    
 };
 
