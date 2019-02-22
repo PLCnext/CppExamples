@@ -92,12 +92,12 @@ public: // Component Interaction operations
     void RefreshState();
      
     // Set progress of the DownCounterProgram
-    void Set_progress_DC(Progress p){progress_DC = p;}
+    void SetProgressDC(Progress p){progress_DC = p;}
     // Set progress of the UpCounterProgram
-    void Set_progress_UC(Progress p){progress_UC = p;}   
+    void SetProgressUC(Progress p){progress_UC = p;}   
     
     // returns the current command
-    Command get_command(void){return command;}
+    Command GetCommand(void){return command;}
 
 private: // member variables for Program Component Interaction
     Progress progress_UC = Progress::Stopped;

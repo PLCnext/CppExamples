@@ -13,7 +13,7 @@ namespace ProgramComponentInteraction
 void DownCounterProgram::Execute()
 {
 // Print the current progress and the counter value to the Output.log file
-	Command c = refCounterComponent.get_command();
+	Command c = refCounterComponent.GetCommand();
 	
     switch(progress)
     {
@@ -21,7 +21,7 @@ void DownCounterProgram::Execute()
         case Progress::Done : // idle state
         {
            
-            // access get_command() funktion of the Component via reference.
+            // access GetCommand() funktion of the Component via reference.
             if( c == Command::CountDown)
             {
                 log.Info("DC Start");
@@ -55,7 +55,7 @@ void DownCounterProgram::Execute()
     }
 
     // Push the current progress to the component.
-    refCounterComponent.Set_progress_DC(progress);
+    refCounterComponent.SetProgressDC(progress);
 }
 
 }

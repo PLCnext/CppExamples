@@ -11,7 +11,7 @@ namespace ProgramComponentInteraction
 
 void UpCounterProgram::Execute()
 {
-	 Command c = refCounterComponent.get_command();
+	 Command c = refCounterComponent.GetCommand();
     
     // This method will be executed each cycle
     // We just increase the counter by one here
@@ -52,6 +52,6 @@ switch(progress)
         break;
     } 
         // Push the Progress to the Component.
-    refCounterComponent.Set_progress_UC(progress); 
+    refCounterComponent.SetProgressUC(progress); 
 }
 }
