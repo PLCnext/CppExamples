@@ -18,8 +18,7 @@
 ## Introduction
 
 This example demonstrates the creation and usage of port variables in PLCnext Engineer and C++ applications for data exchange via elementary data types.
-All supported elementary data types are documented in the "PLCnext Technology User Manual".
-[PLCnext Usermanual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en)
+All supported elementary data types are documented in the [PLCnext Technology User Manual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en).
 
 ## Example details
 
