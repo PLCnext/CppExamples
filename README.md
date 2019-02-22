@@ -6,7 +6,6 @@
 [![Web](https://img.shields.io/badge/PLCnext-Website-blue.svg)](https://www.phoenixcontact.com/plcnext)
 [![Community](https://img.shields.io/badge/PLCnext-Community-blue.svg)](https://www.plcnext-community.net)
 
-Write an introduction for your Project.
 
 The PLCnext_CppExamples repository is a collection of various sample code for PLCnext Technology controllers. 
 It is assumed that the reader has basic know how in C++ programming and has read the User Manual and the PLCnext Technology Quick Start Guide. 
@@ -55,7 +54,7 @@ Further more you can help us by discussing issues and let us know where you have
 Provide information how feedback can be given e.g.:
 
 * Ask a question in our [Forum](https://www.plcnext-community.net/index.php?option=com_easydiscuss&view=categories&Itemid=221&lang=en).
-* Request a new feature on [GitHub](CONTRIBUTING.md).
+* Request a new feature or Example to be added on [GitHub](CONTRIBUTING.md).
 * Vote for [Popular Feature Requests](https://github.com/PLCnext/PLCnext_CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc).
 * File a bug in [GitHub Issues](https://github.com/PLCnext/PLCnext_CppExamples/issues).
 
