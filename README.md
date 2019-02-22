@@ -7,12 +7,12 @@
 [![Community](https://img.shields.io/badge/PLCnext-Community-blue.svg)](https://www.plcnext-community.net)
 
 
-The PLCnext_CppExamples repository is a collection of various sample code for PLCnext Technology controllers. 
+The [CppExamples](https://github.com/PLCnext/CppExamples) repository is a collection of various sample code for PLCnext Technology controllers. 
 It is assumed that the reader has basic know how in C++ programming and has read the User Manual and the PLCnext Technology Quick Start Guide. 
 Each example explains one or more topics. 
-Explanations are given in the README.md document and in the comments of the example code.
+Explanations are given in the 'README.md' document and in the comments of the example code.
 
-Each example is a seperate user component wich can be instantiate on a `PLCnext-Control`.
+Each example holds seperate user components wich can be instantiate on a `PLCnext-Control`.
 
 ## Table of Contents
 |\#| Topic | Content | SourceCode
@@ -55,8 +55,8 @@ Provide information how feedback can be given e.g.:
 
 * Ask a question in our [Forum](https://www.plcnext-community.net/index.php?option=com_easydiscuss&view=categories&Itemid=221&lang=en).
 * Request a new feature or Example to be added on [GitHub](CONTRIBUTING.md).
-* Vote for [Popular Feature Requests](https://github.com/PLCnext/PLCnext_CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc).
-* File a bug in [GitHub Issues](https://github.com/PLCnext/PLCnext_CppExamples/issues).
+* Vote for [Popular Feature Requests](https://github.com/PLCnext/CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc).
+* File a bug in [GitHub Issues](https://github.com/PLCnext/CppExamples/issues).
 
 ## License
 
