@@ -1,7 +1,7 @@
-# PLCnext Technology - PLCnext_CppExamples
+# PLCnext Technology - CppExamples
 
-[![Feature Requests](https://img.shields.io/github/issues/PLCnext/PLCnext_CppExamples/feature-request.svg)](https://github.com/PLCnext/PLCnext_CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
-[![Bugs](https://img.shields.io/github/issues/PLCnext/PLCnext_CppExamples/bug.svg)](https://github.com/PLCnext/PLCnext_CppExamples/issues?utf8=✓&q=is%3Aissue+is%3Aopen+label%3Abug)
+[![Feature Requests](https://img.shields.io/github/issues/PLCnext/CppExamples/feature-request.svg)](https://github.com/PLCnext/CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
+[![Bugs](https://img.shields.io/github/issues/PLCnext/CppExamples/bug.svg)](https://github.com/PLCnext/PLCnext_CppExamples/issues?utf8=✓&q=is%3Aissue+is%3Aopen+label%3Abug)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Web](https://img.shields.io/badge/PLCnext-Website-blue.svg)](https://www.phoenixcontact.com/plcnext)
 [![Community](https://img.shields.io/badge/PLCnext-Community-blue.svg)](https://www.plcnext-community.net)
@@ -19,7 +19,7 @@ Each example is a seperate user component wich can be instantiate on a `PLCnext-
 |\#| Topic | Content | SourceCode
 | ----- | ------ | ------ |------
 |[01](Examples/ProgramComponentInteraction/)| [Program Component Interaction](Examples/ProgramComponentInteraction/README.md)| Shows a `PLCnext-Program` interacting with a`PLCnext-Component` by getting or setting variables through reference.| [SourceCode](Examples/ProgramComponentInteraction/src/)
-|[02](Examples/CppDataTypeTest/)| [Data Type exchange Example](Examples/CppDataTypeTest/README.md)| | [SourceCode](Examples/CppDataTypeTest/src/)
+|[02](Examples/CppDataTypeTest/)| [Data Type exchange Example](Examples/CppDataTypeTest/README.md)| This example shows how to transfere data from a C++ Project to the GDS. Variables published to the GDS can be accessed by other Programs (IEC/C++/Matlab/C#) or the IOs| [SourceCode](Examples/CppDataTypeTest/src/)
 
 
 ## Getting Started
