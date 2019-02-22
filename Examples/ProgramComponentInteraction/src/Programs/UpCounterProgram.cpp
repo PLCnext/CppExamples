@@ -20,9 +20,9 @@ switch(progress)
         // Check if counting shall be started next cycle
 		case Progress::Done :// idle state
 		{
-             log.Info("UC Done");
+            
 			if( c == Command::CountUp)
-            {
+            {   log.Info("UC Start");
                 progress = Progress::Running;
             }
          break;
@@ -40,6 +40,7 @@ switch(progress)
         // Reset the Counter
         case Progress::Stopped :// reinitialize state
         {
+             log.Info("UC Done");
             this->OP_Counter = 0;
             refCounterComponent.RefreshState();
             progress = Progress::Done;

@@ -20,10 +20,11 @@ void DownCounterProgram::Execute()
          // Check if counting shall be started next cycle
         case Progress::Done : // idle state
         {
-            log.Info("DC Done");
+           
             // access get_command() funktion of the Component via reference.
             if( c == Command::CountDown)
             {
+                log.Info("DC Start");
                 progress = Progress::Running;
             }
             break;
@@ -41,6 +42,7 @@ void DownCounterProgram::Execute()
         // Reset the Counter
         case Progress::Stopped :// reinitialize state
         {
+            log.Info("DC Done");
             this->OP_Counter = 255;
             refCounterComponent.RefreshState();
             progress = Progress::Done;
