@@ -1,11 +1,10 @@
 # Program Componenent Interaction 
-This example shows how data can be exchanged from a `Program` to a `Component`.
-The `Program`  can also recieve data by calling public getter methods of the `Component`.
+This example shows how data can be sent from a program to a component.
+The program can also receive data by calling public getter methods of the component.
 
-The programms `UpCounterProgram` and `DownCounterProgram` access the Component `CounterComponent` with these methods.
-They use the `CounterComponent.GetCommand()` to recieve an enum of `Commands` and a `setProgress()` method to inform the Component of the state the Program is in.
-Once the programm has got a command it will continue to execute this command and when finnished 
-execute the`CounterComponent.RefreshState()` method wich will then initiate a state change.
+The *UpCounterProgram* and *DownCounterProgram* access the *CounterComponent* with these methods.
+They use the *CounterComponent.GetCommand()* to receive an *enum* of *Commands* and a *setProgress()* method to inform the component of the state of the program.
+Once the program has received a command it will continue to execute this command, and - when finished - execute the *CounterComponent.RefreshState()* method which will then initiate a state change.
 
 ```mermaid
 sequenceDiagram
@@ -37,18 +36,22 @@ Note left of CounterComponent: Command::CountUp
 |Description | Value |
 |------------ |-----------|
 |Controller | AXC F 2152 | 
-|FW | 2019.0 |
-|SDK | 2019.0 |
+|FW | 2019.0 LTS |
+|SDK | 2019.0 LTS |
 
 
 ## Preconditions
-You need to have PLCnext Engineer installed and a installed C++ SDK.
+
+- PLCnext Engineer is installed 
+- PLCnext Technology SDK for C++ is installed
 
 
 ## Start-Up instructions
-1. instantiate one instance of each Program
-2. start the PLC
+
+1. Instantiate one instance of each Program
+2. Start the PLCnext Control
 3. Login with PLCnext Engineer Debug or SSH.
-4. Check Progress
-4. You can now see the Counters going up and down in the `PLCNext - Datalist` in the PLCnext Engineer.
-4. You can also see the progress in the Output.log file with `tail -f /opt/plcnext/logs/Output.log`.
+4. Check progress
+
+You can now see the counters going up and down in the *PLCnext - Datalist* in PLCnext Engineer.
+You can see also the progress in the *Output.log* file with `tail -f /opt/plcnext/logs/Output.log`.
