@@ -8,4 +8,6 @@ Names of the original copyright holders (individuals or organizations) should be
 * Phoenix Contact GmbH & Co. KG
   - Marcel Luhmann
   - Oliver Warneke
+  - Eduard Münz
+  - Gundula Breder
 
