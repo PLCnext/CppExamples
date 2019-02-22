@@ -1,25 +1,35 @@
+﻿/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ *  CppDataTypeTestProgram.cpp
+ *
+ *  Created on: 21.02.2019
+ *  	Author: Eduard Münz, Oliver Warneke
+ *
+ ******************************************************************************/
 
-// Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
-// Licensed under the MIT. See LICENSE file in the project root for full license information. 
+/******************************************************************************/
+/*  INCLUDES                                                                  */
+/******************************************************************************/
 
 #include "CppDataTypeTestProgram.hpp"
 #include "Arp/System/Commons/Logging.h"
 #include "Arp/System/Core/ByteConverter.hpp"
 
-namespace CppDataTypeTest 
+namespace CppDataTypeTest
 {
  
 void CppDataTypeTestProgram::Execute()
 {
-   //TODO implement program 
+    //implement program 
+
 
 	if(outBoolean == true)
 			outBoolean = false;
 		else
 			outBoolean = true;
-
-	//outStaticString = inStaticString;
-	//outStruct.inString = outStruct.outString; //StructElement
 
 	outInt8++; 	//SINT
 	outUint8++;	//USINT
@@ -55,15 +65,13 @@ void CppDataTypeTestProgram::Execute()
 	outStruct.outDword++; //StructElement
 	outStruct.outLword++; //StructElement
 
-	for(int i=0; i<10;i++)
+
+	for(int i=0; i < 10;i++)
 	{
 		if(outarrayBoolean[i] == true)
-		{
 			outarrayBoolean[i] = false;
-		}else
-		{
+		else
 			outarrayBoolean[i] = true;
-		}
 
 		outarrayInt8[i]++; 	//SINT
 		outarrayUint8[i]++;	//USINT
@@ -86,4 +94,5 @@ void CppDataTypeTestProgram::Execute()
 		outarrayLword[i]++;	//Lword
 	}
 }
+
 } // end of namespace CppDataTypeTest
