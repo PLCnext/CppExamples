@@ -1,5 +1,5 @@
 # PLCnext Technology - PLCnext_CppExamples
-[![pipeline status](https://git-ima.europe.phoenixcontact.com/TCS_SupportService/PLCnext_Controls/Project_Collection/PLCnext_CppExamples/badges/CI/pipeline.svg)](https://git-ima.europe.phoenixcontact.com/TCS_SupportService/PLCnext_Controls/Project_Collection/PLCnext_CppExamples/commits/CI)
+
 [![Feature Requests](https://img.shields.io/github/issues/PLCnext/PLCnext_CppExamples/feature-request.svg)](https://github.com/PLCnext/PLCnext_CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
 [![Bugs](https://img.shields.io/github/issues/PLCnext/PLCnext_CppExamples/bug.svg)](https://github.com/PLCnext/PLCnext_CppExamples/issues?utf8=✓&q=is%3Aissue+is%3Aopen+label%3Abug)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -19,29 +19,31 @@ Each example is a seperate user component wich can be instantiate on a `PLCnext-
 |\#| Topic | Content | SourceCode
 | ----- | ------ | ------ |------
 |[01](Examples/ProgramComponentInteraction/)| [Program Component Interaction](Examples/ProgramComponentInteraction/README.md)| Shows a `PLCnext-Program` interacting with a`PLCnext-Component` by getting or setting variables through reference.| [SourceCode](Examples/ProgramComponentInteraction/src/)
+|[02](Examples/CppDataTypeTest/)| [Data Type exchange Example](Examples/CppDataTypeTest/README.md)| | [SourceCode](Examples/CppDataTypeTest/src/)
+
 
 ## Getting Started
 [PLCnext Usermanual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en)
 
-### Compiling a Example
-    (CMAKE instructions to build a Shared Object)[someFile]
+## Compiling an Example
+You have multiple choices how to build your code.
 
-<!--
-## Compile the Code with the PLCnCLI
-1. Install the SDK,  Eclipse Plugin and PLCNCLI.[HowTo](https://plcnext-community.net/index.php?option=com_content&view=article&id=153:relaunch-22-9&catid=36&Itemid=248&lang=en)
-2. Create a new empty Eclipse project named `ProgramComponentInteraction`
-3. Delete the auto generated `Component.hpp` and `Program.hpp`
-4. Insert the content of the folder `src` into the Eclipse projects `src` folder.
-5. Press build
--->
+### Compile the Code with the PLCnCLI [HowToPLCnCLI](https://plcnext-community.net/index.php?option=com_content&view=article&id=153:relaunch-22-9&catid=36&Itemid=248&lang=en)
+1. Install the SDK,  Eclipse Plugin and PLCNCLI.
+2. clone this repository
+3. navigate to the Project you want to test for example 'cd Examples/ProgramComponentInteraction' 
+3. execute 'plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*'
+4. execute 'plcncli generate all' to generate intermediate code and Config files
+5. execute 'plcncli build' to build the code.
+6. execute 'plcncli generate library' to generate a pcwlx file that can be included in PLCnext Engineer. 
 
-### Deploying a Example
-  Exampleconfig files: 
-  [ESM](Template/intermediate/Config/ESM*),
-  [GDS](Template/intermediate/Config/GDS*),
-  [Progmeta](Template/intermediate/Config/Progmeta*),
-  [Compmeta](Template/intermediate/Config/Compmeta*),
-  [Libmeta](Template/intermediate/Config/Libmeta*)
+### Compile using Eclipse Addin
+1. create a new empty project named like the example you want to test.
+2. remove the source files located at 'ProjectName/src'.
+3. move the source files from the example you want to use into your workspace at 'ProjectName/src'
+4. build the project
+[See also this tutorial video](https://plcnext-community.net/index.php?option=com_content&view=article&id=157:tutorial-video-your-first-steps-with-eclipse-and-c&catid=66&Itemid=343&lang=en)
+
 
 ## Contributing
 
