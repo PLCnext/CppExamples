@@ -35,7 +35,7 @@ using namespace Arp::Plc::Commons::Meta;
 #define DEBUG_FUNCTION_CALL
 #endif
 
-//component
+//#component
 class CounterComponent : 
 public ComponentBase, 
 public IProgramComponent, 
