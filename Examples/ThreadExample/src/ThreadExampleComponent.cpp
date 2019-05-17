@@ -6,7 +6,7 @@
  *  ThreadExampleComponent.cpp
  *
  *  Created on: 16.05.2019
- *  	Author: Eduard Münz, Oliver Warneke
+ *  Author: Eduard Münz, Oliver Warneke
  *
  ******************************************************************************/
 
@@ -79,7 +79,7 @@ void ThreadExampleComponent::Stop(void) {
 /// Thread Body
 void ThreadExampleComponent::workerThreadBody(void) {
 
-	if(xStopThread == false)
+	if(!xStopThread)
 	{
 		if(iCountervalue < iEndValue)
 			iCountervalue ++;
