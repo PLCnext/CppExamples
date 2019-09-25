@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EsmConfiguration version="1" importRevision="1">
+	<Esms>
+		<Esm id="a9ce5b6b-8482-4f62-80e5-fc413d0a34f4" name="ESM1" cpuAffinity="1" timerInterval="1000000" taskSchedulerMode="" comment="" readonly="False" />
+		<Esm id="fb4cb995-3bd6-4c23-b815-3c23af3a00cd" name="ESM2" cpuAffinity="2" timerInterval="1000000" taskSchedulerMode="" comment="" readonly="False" />
+	</Esms>
+	<Tasks>
+		<Task id="8a13b8b7-9b21-4ea2-9822-ae8efe229495" name="GO" taskType="CyclicTask" priority="0" intervalTime="100000000" watchdogTime="100000000" executionTimeThreshold="0" coreAffinity="0" stackSize="0" taskBuffer="None" comment="" esmId="a9ce5b6b-8482-4f62-80e5-fc413d0a34f4" readonly="False">
+			<ProgramInstances>
+				<ProgramInstance id="12d19311-d897-422c-822c-2d4fa41537e5" name="PG_ReactToNotification1" programType="PG_ReactToNotification" componentId="85311bcc-4ca7-448f-8dd0-d68a3c448e28" libraryName="NotificationExample" componentName="COMP_Notifications1" componentType="COMP_Notifications" comment="" readonly="False" groupName="" />
+				<ProgramInstance id="d8332765-fd34-4b34-bc65-4f4a23df0d42" name="PG_SendNotification1" programType="PG_SendNotification" componentId="85311bcc-4ca7-448f-8dd0-d68a3c448e28" libraryName="NotificationExample" componentName="COMP_Notifications1" componentType="COMP_Notifications" comment="" readonly="False" groupName="" />
+				<ProgramInstance id="425e4476-85fe-4d2c-9811-a5e43b447d70" name="NewProgram1" programType="NewProgram" componentId="00000000-0000-0000-0000-000000000000" libraryName="Arp.Plc.Eclr" componentName="Arp.Plc.Eclr" componentType="EclrComponent" comment="" readonly="False" groupName="" />
+			</ProgramInstances>
+		</Task>
+	</Tasks>
+</EsmConfiguration>

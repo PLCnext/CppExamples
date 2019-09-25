@@ -1,0 +1,37 @@
+#//
+#// Copyright (c) 2019 Phoenix Contact GmbH & Co. KG. All rights reserved.
+#// Licensed under the MIT. See LICENSE file in the project root for full license information.
+#// SPDX-License-Identifier: MIT
+#//
+.GenerateConfigTemplate:
+ stage: generate
+ tags:
+  - docker
+  - debian-based
+ script: 
+  - set -x
+  - tools/generate-config.sh -p ${PROJECTNAME}
+  - set +x  
+  - ls -la build/$PROJECTNAME/intermediate
+  - find build/$PROJECTNAME  -name "*${PROJECTNAME}.libmeta" | egrep '.*'
+  - find build/$PROJECTNAME  -name "*${PROJECTNAME}.typemeta" | egrep '.*'
+  - Components=($(plcncli get components -p build/${PROJECTNAME}/ | grep -oPe "(?<=\:)[A-Z][a-zA-Z0-9_]+"))
+  - |
+    for c in "${Components[@]}"; \
+    do \
+    find build/$PROJECTNAME  -name "${c}.compmeta" | egrep '.*'; \
+    done
+  - Programs=($(plcncli get programs -p build/${PROJECTNAME}/ | grep -oPe "(?<=\:)[A-Z][a-zA-Z0-9_]+"))
+  - |
+    for p in "${Programs[@]}"; \
+    do \
+    find build/$PROJECTNAME  -name "${p}.progmeta" | egrep '.*'; \
+    done
+ cache:
+  key: ${PROJECTNAME}
+  paths:
+   - build/${PROJECTNAME}
+ artifacts:
+   expire_in: 120 min
+   paths:
+    -  build/${PROJECTNAME}
