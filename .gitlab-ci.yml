@@ -1,0 +1,213 @@
+stages:
+ - prepare
+ - generate
+ - build
+ - assemble
+ - deploy
+
+image: $SDK_IMAGE
+
+variables:
+ PROJECTNAME: "TEST" 
+ BUILDTYPE: "RELEASE"
+ BUILD_HARDWARE: "AXCF2152 RFC4072S GTCF2172 NFC482S"
+
+before_script:
+  - chmod +x tools/*
+  - which cmake
+  - cmake --version
+  - which make
+  - make --version
+  - which plcncli
+
+
+##############
+##############
+#####TEMPLATES
+include:  
+  - 'tools/CI_Templates/prepare.gitlab-ci.yml'
+  - 'tools/CI_Templates/config.gitlab-ci.yml'
+  - 'tools/CI_Templates/code.gitlab-ci.yml'
+  - 'tools/CI_Templates/build.gitlab-ci.yml'
+  - 'tools/CI_Templates/assemble.gitlab-ci.yml'
+
+############
+############
+#Package All
+DeployAll:
+ stage: deploy
+ tags:
+  - docker
+  - debian-based
+ dependencies:
+  - ProgramComponentInteraction_assemble
+  - ThreadExample_assemble
+  - CppDataTypeTest_assemble
+  - NotificationExample_assemble
+ script:
+  - ls -la deploy/*/*
+  - echo "TODO"
+  - echo "find all pcwlx"
+  - echo "find all sos"
+  - echo "add READMEs"
+  - echo "add headers"
+  - echo "add Additional Config files"
+  - echo "zip it up"
+  - echo "upload"
+ after_script:
+  - plcncli get project-targets -p "build/${PROJECTNAME}"
+  - ls -la deploy/*/*.so
+  - ls -la deploy/*/*.pcwlx
+ artifacts:
+  expire_in: 5 day
+  paths:
+   - deploy/*
+ only:
+  refs:
+   - master
+   - develop
+
+############
+############
+####EXAMPLES
+
+## ProgramComponentInteraction
+ProgramComponentInteraction_prep:
+ extends: .PrepareProjectTemplate 
+ variables:
+  PROJECTNAME: ProgramComponentInteraction
+
+ProgramComponentInteraction_gen_code:
+ extends: .GenerateCodeTemplate
+ dependencies:
+  - ProgramComponentInteraction_prep
+ variables:
+  PROJECTNAME: ProgramComponentInteraction
+
+ProgramComponentInteraction_gen_config:
+ extends: .GenerateConfigTemplate
+ dependencies:
+  - ProgramComponentInteraction_prep
+ variables:
+  PROJECTNAME: ProgramComponentInteraction
+
+ProgramComponentInteraction_build:
+ extends: .BuildProjectTemplate
+ dependencies:
+  - ProgramComponentInteraction_gen_code
+  - ProgramComponentInteraction_gen_config
+ variables:
+  PROJECTNAME: "ProgramComponentInteraction"  
+
+ProgramComponentInteraction_assemble:
+ extends: .AssembleLibraryTemplate
+ dependencies:
+  - ProgramComponentInteraction_build
+ variables:
+  PROJECTNAME: "ProgramComponentInteraction"
+
+## ThreadExample
+ThreadExample_prep:
+ extends: .PrepareProjectTemplate 
+ variables:
+  PROJECTNAME: ThreadExample
+
+ThreadExample_gen_code:
+ extends: .GenerateCodeTemplate
+ dependencies:
+  - ThreadExample_prep
+ variables:
+  PROJECTNAME: ThreadExample
+
+ThreadExample_gen_config:
+ extends: .GenerateConfigTemplate
+ dependencies:
+  - ThreadExample_prep
+ variables:
+  PROJECTNAME: ThreadExample
+
+ThreadExample_build:
+ extends: .BuildProjectTemplate
+ dependencies:
+  - ThreadExample_gen_code
+  - ThreadExample_gen_config
+ variables:
+  PROJECTNAME: "ThreadExample"  
+
+ThreadExample_assemble:
+ extends: .AssembleLibraryTemplate
+ dependencies:
+  - ThreadExample_build
+ variables:
+  PROJECTNAME: "ThreadExample"
+
+## CppDataTypeTest
+CppDataTypeTest_prep:
+ extends: .PrepareProjectTemplate 
+ variables:
+  PROJECTNAME: CppDataTypeTest
+
+CppDataTypeTest_gen_code:
+ extends: .GenerateCodeTemplate
+ dependencies:
+  - CppDataTypeTest_prep
+ variables:
+  PROJECTNAME: CppDataTypeTest
+
+CppDataTypeTest_gen_config:
+ extends: .GenerateConfigTemplate
+ dependencies:
+  - CppDataTypeTest_prep
+ variables:
+  PROJECTNAME: CppDataTypeTest
+
+CppDataTypeTest_build:
+ extends: .BuildProjectTemplate
+ dependencies:
+  - CppDataTypeTest_gen_code
+  - CppDataTypeTest_gen_config
+ variables:
+  PROJECTNAME: "CppDataTypeTest"  
+
+CppDataTypeTest_assemble:
+ extends: .AssembleLibraryTemplate
+ dependencies:
+  - CppDataTypeTest_build
+ variables:
+  PROJECTNAME: "CppDataTypeTest"
+
+
+## NotificationExample
+NotificationExample_prep:
+ extends: .PrepareProjectTemplate 
+ variables:
+  PROJECTNAME: NotificationExample
+
+NotificationExample_gen_code:
+ extends: .GenerateCodeTemplate
+ dependencies:
+  - NotificationExample_prep
+ variables:
+  PROJECTNAME: NotificationExample
+
+NotificationExample_gen_config:
+ extends: .GenerateConfigTemplate
+ dependencies:
+  - NotificationExample_prep
+ variables:
+  PROJECTNAME: NotificationExample
+
+NotificationExample_build:
+ extends: .BuildProjectTemplate
+ dependencies:
+  - NotificationExample_gen_code
+  - NotificationExample_gen_config
+ variables:
+  PROJECTNAME: "NotificationExample"  
+
+NotificationExample_assemble:
+ extends: .AssembleLibraryTemplate
+ dependencies:
+  - NotificationExample_build
+ variables:
+  PROJECTNAME: "NotificationExample"

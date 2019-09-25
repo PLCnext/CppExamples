@@ -1,17 +1,15 @@
 # Table of contents
 
 <!-- TOC depthFrom:1 orderedList:true -->
-
-1. [Introduction](# Introduction)
-2. [Example details](## Example details)
-3. [Preconditions](## Preconditions)
-4. [Project compiling in Eclipse](## Project compiling in Eclipse)
-5. [PLCnext Engineer project](## PLCnext Engineer project)
-6. [Start-Up instructions](## Start-up instructions)
-7. [Manually basic Setup](### Basic manual setup)
-8. [Commons::WorkerThread and Commons::Thread](### Commons::WorkerThread and Commons::Thread)
-9. [General Notes](#### General Notes)
-
+1. [Introduction](# "Introduction")
+2. [Example details](## "Example details")
+3. [Preconditions](## "Preconditions")
+4. [Project compiling in Eclipse](## "Project compiling in Eclipse")
+5. [PLCnext Engineer project](## "PLCnext Engineer project")
+6. [Start-Up instructions](## "Start-up instructions")
+7. [Manually basic Setup](### "Basic manual setup")
+8. [Commons::WorkerThread and Commons::Thread](### "Commons::WorkerThread and Commons::Thread")
+9. [General Notes](#### "General Notes")
 <!-- /TOC -->
 
 # Introduction

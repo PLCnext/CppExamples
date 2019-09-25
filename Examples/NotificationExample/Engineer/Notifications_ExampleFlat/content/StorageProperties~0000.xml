@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Properties>
+    <Title>Notifications_Example</Title>
+    <Identifier>5d4c72f7-cb8e-42e8-bacf-5366d8e415cf</Identifier>
+    <Type>Project</Type>
+    <Requirements>
+        <Item>Areas</Item>
+    </Requirements>
+    <AdditionalProperties>
+        <Property Key="Application" Value="PLCnext Engineer" />
+        <Property Key="SubType" Value="" />
+        <Property Key="ApplicationVersion" Value="3.16.211.0" />
+        <Property Key="ProductVersion" Value="2019.6" />
+    </AdditionalProperties>
+</Properties>

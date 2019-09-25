@@ -1,0 +1,6 @@
+{ CustomGroupDefinition('ff869203-6c1d-44c7-a561-1c6ca8f9cb95', '') }
+
+VAR_GLOBAL
+    test : UINT { CustomGroupReference('ff869203-6c1d-44c7-a561-1c6ca8f9cb95'), OutputPort } {Id('733db651-4e48-4aa6-84eb-63d5f11c97af')};
+    test2 : UINT { CustomGroupReference('ff869203-6c1d-44c7-a561-1c6ca8f9cb95'), OutputPort } {Id('cde62c24-7cbc-4632-b804-28593c3561e0')};
+END_VAR

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataListReferenceDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DataListReference.xsd" Version="1.00">
+    <DataListReference ParentUri="adeprojectref:///template" ParentIdentifier="00000000-0000-0000-0000-000000000000">
+        <RoleConfigurationFile>VariableRoleConfiguration.xml</RoleConfigurationFile>
+        <DataListConfigurationFile>VariableDataListConfiguration.xml</DataListConfigurationFile>
+        <DatumFilter>
+            <RoleTypeName>Variable</RoleTypeName>
+            <NetworkProtocol>Any</NetworkProtocol>
+            <SourceId />
+        </DatumFilter>
+    </DataListReference>
+</DataListReferenceDocument>

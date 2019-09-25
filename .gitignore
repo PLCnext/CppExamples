@@ -36,4 +36,5 @@
 *.pcweax
 
 build/*
-
+deploy/*
+.vscode

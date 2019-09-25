@@ -22,7 +22,7 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[02](Examples/CppDataTypeTest/)| [Data Type Exchange Example](Examples/CppDataTypeTest/README.md)| This example shows how to transfer data from a C++ project to the GDS. Variables published to the GDS can be accessed by other programs (IEC/C++/Simulink/C#) or the IOs| [SourceCode](Examples/CppDataTypeTest/src/)
 |[03](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
 |[04](Examples/ThreadExample/)| [Thread Example](Examples/ThreadExample/README.md)| This describes how to implement Threads in a component of C++ project.| [SourceCode](Examples/ThreadExample/src/)
-
+|[05](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.md)| This describes how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
 
 
 ## Getting started
@@ -52,6 +52,14 @@ There are different ways how to build your code:
 2. Remove the source files located at `ProjectName/src`
 3. Move the source files from the example you want to use into your workspace at `ProjectName/src`
 4. Build the project
+
+### Compile using [build-local.sh](tools/build-local.sh) script
+1. Clone this Repository
+1. Modify the [build-local.sh](tools/build-local.sh) script to fit your needs
+    1. select Hardware
+    1. select Project
+1. Make sure it is executable for example with ```chmod +x tools/build-local.sh```
+1. Execute the script ```./tools/build-local.sh``` or  ```sh tools/build-local.sh ```
 
 ## Contributing
 

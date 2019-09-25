@@ -1,0 +1,29 @@
+#//
+#// Copyright (c) 2019 Phoenix Contact GmbH & Co. KG. All rights reserved.
+#// Licensed under the MIT. See LICENSE file in the project root for full license information.
+#// SPDX-License-Identifier: MIT
+#//
+.BuildProjectTemplate:
+ stage: build
+ tags:
+  - docker
+  - debian-based
+ script:
+  - set -x
+  - echo $CI_TOOLCHAINS
+  - tools/before-script.sh
+  - tools/build-all.sh -p  "${PROJECTNAME}"  -h "${BUILD_HARDWARE}" -t "${BUILDTYPE}"
+  - set +x
+ after_script:
+  - plcncli get project-targets -p "build/${PROJECTNAME}"
+  - ls -la deploy/*/*.so
+  - ls -la deploy/*/*.pcwlx
+ cache:
+  key: ${PROJECTNAME}
+  paths:
+   - build/${PROJECTNAME}
+ artifacts:
+  expire_in: 120 min
+  paths:
+   - deploy
+   - build/${PROJECTNAME}

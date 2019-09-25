@@ -1,0 +1,38 @@
+#//
+#// Copyright (c) 2019 Phoenix Contact GmbH & Co. KG. All rights reserved.
+#// Licensed under the MIT. See LICENSE file in the project root for full license information.
+#// SPDX-License-Identifier: MIT
+#//
+.PrepareProjectTemplate:
+ stage: prepare
+ tags:
+  - docker
+  - debian-based
+ script:
+ - echo "create folders"
+ - WORKDIR=$(pwd)
+ - mkdir -p $WORKDIR/build/$PROJECTNAME
+ - echo "create Project"
+ - |
+    plcncli new project \
+            --name $PROJECTNAME \
+            --output $WORKDIR/build/$PROJECTNAME \
+            --force \
+            --verbose
+ - rm build/$PROJECTNAME/src/*.cpp
+ - rm build/$PROJECTNAME/src/*.hpp
+ - cp -r $WORKDIR/Examples/$PROJECTNAME/src/. build/$PROJECTNAME/src
+ - set -x 
+ - CMAKEFILE="$WORKDIR/Examples/$PROJECTNAME/CMakeLists.txt"; \
+ - |
+  if [ -f "$CMAKEFILE" ]; then \
+  cp --force "$WORKDIR/Examples/$PROJECTNAME/CMakeLists.txt" "build/$PROJECTNAME/CMakeLists.txt"; \
+  fi
+ cache:
+  key: ${PROJECTNAME}
+  paths:
+   - build/${PROJECTNAME}
+ artifacts:
+   expire_in: 120 min
+   paths:
+    -  build/${PROJECTNAME}
