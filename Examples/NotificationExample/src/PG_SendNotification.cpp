@@ -26,7 +26,7 @@ void PG_SendNotification::Execute()
 		// Compare port value of "IP_uiWarningValue" with previous value to detect a change
 		if(IP_uiWarningValue != uiPrevWarningValue)
 		{
-            String aStringVariable = "What happens whenn I pass in a String Variable";
+            String aStringVariable = "What happens when I pass in a String Variable";
 			MySenderRegistration2.SendNotificationWithTimestamp(TimeStamp, ExamplePayload{IP_uiWarningValue, aStringVariable});
             aStringVariable = "And now I do change the String content.";
             aStringVariable = "And now I do change the String but make it way way way Loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooonger";

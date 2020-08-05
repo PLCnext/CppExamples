@@ -6,6 +6,7 @@
 #include "COMP_NotificationsProgramProvider.hpp"
 #include "NotificationExampleLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
+#include "Arp/Plc/Commons/Domain/PlcState.hpp"
 #include "Arp/System/Commons/Logging.h"
 
 #include "Arp/System/Nm/NotificationManager.hpp"
@@ -85,10 +86,10 @@ inline COMP_Notifications::COMP_Notifications(IApplication& application, const S
 : ComponentBase(application, ::NotificationExample::NotificationExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
 , programProvider(*this)
 , ProgramComponentBase(::NotificationExample::NotificationExampleLibrary::GetInstance().GetNamespace(), programProvider)
-,    Custom_subscription("My.NameSpace.1", nm)
-,    Custom_subscription2("My.NameSpace.2", nm)
-,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged", nm)
-,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged", nm)
+,    Custom_subscription("My.NameSpace.1")
+,    Custom_subscription2("My.NameSpace.2")
+,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged")
+,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged")
 {
 
 }
