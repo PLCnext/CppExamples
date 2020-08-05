@@ -9,11 +9,12 @@
 - [When to use Notifications](#when-to-use-notifications)
 - [Limitations](#limitations)
 - [Quick-start example](#quick-start-example)
-- [PART 1 - Receiving notifications](#part-1---receiving-notifications)
-- [PART 2 - Creating custom notifications](#part-2---creating-custom-notifications)
-- [PART 3 - Sending notifications](#part-3---sending-notifications)
-- [PART 4 - Logging notifications](#part-4---logging-notifications)
-- [PART 5 - Reading notification history](#part-5---reading-notification-history)
+- [PART 1 - Receiving notifications](#part-1-receiving-notifications)
+- [PART 2 - Creating custom notifications](#part-2-creating-custom-notifications)
+- [PART 3 - Sending notifications](#part-3-sending-notifications)
+- [PART 4 - Debugging notifications](#part-4-debugging-notifications)
+- [PART 5 - Logging notifications](#part-5-logging-notifications)
+- [PART 6 - Viewing notification history](#part-6-viewing-notification-history)
 - [IMPORTANT NOTE on notification logging](#important-note-on-notification-logging)
 - [Further information](#further-information)
 
@@ -31,13 +32,13 @@ Both the PLCnext Technology firmware and user-defined components can send notifi
 |Description | Value |
 |------------ |-----------|
 |Created | 20.09.2019 |
-|Last modified| 20.09.2019 |
+|Last modified| 05.08.2020 |
 |Controller| AXC F 2152 |
-|FW|2019.6.3|
-|Arpversion| 19.6.3.22423|
-|SVN Revision|22423|
-|SDK| 19.6.3.22423 |
-|PLCnext CLI | 2019.0 LTS (19.0.2.779)|
+|FW| 2020.6.1 |
+|Arpversion| 20.6.1.30859 |
+|SVN Revision| 30859 |
+|SDK| 20.6.1.30859 |
+|PLCnext CLI | 2020.0 (20.0.0.243) |
 
 ## When to use Notifications
 
@@ -63,15 +64,15 @@ At present, the Notification Manager can only be accessed by C++ components and 
 
 This example demonstrates features of the Notification Manager.
 
-It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext-community.net/index.php?option=com_content&view=article&id=327:c-programming-with-eclipse-ide&catid=84&Itemid=483&lang=en).
+It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm).
 
 Prerequisites:
 
-- PLCnext Command Line Interface (CLI) tool, version 2019.0 LTS HF02. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Command Line Interface (CLI) tool, version 2020.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
 
-- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2019.6.3. This is available on the Phoenix Contact website, and must be installed using the PLCnext CLI.
+- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2020.6.1. This is also included in the "PLCnext Technology C++ tool chain".
 
-- PLCnext Engineer version 2019.6.
+- PLCnext Engineer version 2020.6.
 
 Procedure:
 
@@ -92,7 +93,7 @@ Procedure:
    ```sh
    plcncli generate all
    plcncli build
-   plcncli generate library
+   plcncli deploy
    ```
 
 - Copy the file `NotificationExample.pcwlx` from the `bin` directory to the User Library directory of PLCnext Engineer (default: C:\Users\Public\Documents\PLCnext Engineer\Libraries)
@@ -150,11 +151,11 @@ In order to receive notifications, a header file must be included for each notif
 #include "ExamplePayload.hpp"
 ```
 
-The above code snippet includes header files that describe the payloads for two PLCnext system notifications ("PlcStateChanged" and "NetworkConfigurationChanged") and one custom notification ("Example").
+The above code snippet includes header files that describe the payloads for two PLCnext Runtime system notifications ("PlcStateChanged" and "NetworkConfigurationChanged") and one custom notification ("Example").
 
-A list of all available System notifications is available in the [PLCnext Technology User Manual](https://d1dzb4fxoqjk3j.cloudfront.net/109166_en_00/Section02/Section02.htm?rhtocid=_1_12_0#TOC_2_13_1_Notifications_ofbc-42).
+A list of all available PLCnext Runtime *system* notifications is available in the [PLCnext Technology Info Center](https://www.plcnext.help/te/Service_Components/Notifications/Notifications_by_Runtime.htm).
 
-To subscribe to a custom notification, the developer of the component that generates the notification must provide the header file that defines the notification payload.
+To subscribe to a *custom* notification, the developer of the component that generates the notification must provide the header file that defines the notification payload.
 
 Next, a reference to the global Notification Manager service is obtained:
 
@@ -180,10 +181,10 @@ inline COMP_Notifications::COMP_Notifications(IApplication& application, const S
 : ComponentBase(application, ::NotificationExample::NotificationExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
 , programProvider(*this)
 , ProgramComponentBase(::NotificationExample::NotificationExampleLibrary::GetInstance().GetNamespace(), programProvider)
-,    Custom_subscription("My.NameSpace.1", nm)
-,    Custom_subscription2("My.NameSpace.2", nm)
-,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged", nm)
-,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged", nm)
+,    Custom_subscription("My.NameSpace.1")
+,    Custom_subscription2("My.NameSpace.2")
+,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged")
+,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged")
 {
 
 }
@@ -303,25 +304,58 @@ Custom notifications generated by your application may be useful to components c
 
 If your application generates notifications that may be useful to others, then this information should be published with your application.
 
-## PART 4 - Logging notifications
+## PART 4 - Debugging notifications
 
-When a notification is sent to the notification manager, it is immediately distributed to all the receivers that have subscribed to that notification (if any).
+When a notification is sent to the notification manager, it is immediately distributed to all the receivers that have subscribed to that notification (if any). During development, you probably want to check that your custom notifications are being generated correctly, however this requires a receiver to subscribe to those custom notifications. To save you the effort of creating a dummy notification receiver, the PLCnext Runtime includes a Notification Debugger for precisely this purpose. When enabled, the notification debugger simply logs all received notifications to the standard [Output.log](https://www.plcnext.help/te/PLCnext_Runtime/output_log.htm) file on the PLC.
 
-It is also possible to send notifications to a persistent data store, if required, using the Notification Logger. The Notification Logger can be configured to subscribe to custom notifications and store these notifications in non-volatile memory.
+To enable the Notification Debugger:
 
-The notification logger can be configured using configuration files (in XML format), located in a specific directory on the PLCnext Control.
+- Create a configuration file that defines
+   - what notifications should be received
+   - the logging level in the Output.log file.
 
-In this example, the notification logger is configured using the file [My_Nm_Logger.config](My_Nm_Logger.config).
+- Create a settings file that contains a reference to the configuration file.
 
-Information on the required format of the configuration file is available in the [PLCnext Technology User Manual](https://d1dzb4fxoqjk3j.cloudfront.net/109166_en_00/Section02/Section02.htm?rhtocid=_1_13_2#TOC_2_14_3_Configuring_thebc-46).
+- Create an `.acf.config` file that instantiates the Notification Debugger ACF component, using the settings file created in the previous step.
 
-To apply a custom configuration file to the notification logger, the configuration file must be placed in the `/opt/plcnext/projects/Default/Services/NotificationLogger` directory on the PLC, and the PLC restarted. There can be any number of configuration files in this directory, but only file names ending in `.config` will be recognised by the notification logger.
+- Restart the PLCnext Runtime.
 
-## PART 5 - Reading notification history
+Now, messages similar to the following will appear in the Output.log file for every new notification:
+
+```text
+05.08.20 12:28:25.243 Arp.Services.NmUtilities.NotificationDebugger.Internal.NotificationDebugger INFO  - Got notification: id=15, notificationName='My.NameSpace.1'(110), sender='COMP_Notifications1/PG_SendNotification1', timestamp=2020-08-05T12:28:25.240733, severity=Info, payloadType=NotificationExample::ExamplePayload, payload: The value is: 42
+```
+
+Examples of the configuration and settings files required for the notification debugger are provided here:
+
+- Notification debugger configuration file: [MyNmDebug.config](MyNmDebug.config)
+- Component settings file: [MyNmDebug.settings](MyNmDebug.settings)
+- ACF configuration file: [My_Nm.acf.config](My_Nm.acf.config)
+
+In this case all three files will be located in the PLC directory `/opt/plcnext/projects/Default`.
+
+## PART 5 - Logging notifications
+
+It is also possible to send notifications to a persistent data store, if required, using the **Notification Logger**. The Notification Logger can be configured to subscribe to custom notifications and store these notifications in non-volatile memory.
+
+The notification logger can be configured using configuration files (in XML format), located in a specific directory on the PLCnext Control. The required format and location of the configuration file is described in the [PLCnext Technology User Manual](https://www.plcnext.help/te/Service_Components/Notifications/Notification_Logger.htm#reference).
+
+By default, the PLCnext Runtime configures the notification logger to store notifications from the `Arp` and `Security` namespaces. The default configuration files can be seen on the PLC, in the `/opt/plcnext/projects/Default/Services/NotificationLogger` directory.
+
+To apply a custom configuration file to the notification logger, additional configuration file(s) can be added to the `/opt/plcnext/projects/Default/Services/NotificationLogger` directory on the PLC, and the PLC restarted. There can be any number of configuration files in this directory, but only file names ending in `.config` will be recognised by the notification logger.
+
+An example of a custom notification logger configuration file is [My_Nm_Logger.config](My_Nm_Logger.config), which will log the custom notifications generated by this project.
+
+## PART 6 - Viewing notification history
+
+It is possible to view stored notifications:
+
+- In PLCnext Engineer, in the "Notifications" section of the controller "Cockpit" window. Note that PLCnext Engineer must be connected to the PLC for notifications to be displayed.
+- On the PLCs [Web Based Management](https://www.plcnext.help/te/WBM/Diagnostics_Notification_Logger.htm) page, in the "Notifications" section of the "Diagnostics" window.
+
+Notification archives can be managed in C++ using the [Notification Logger RSC service](https://www.plcnext.help/te/Service_Components/Remote_Service_Calls_RSC/Querying_notifications_via_RSC.htm).
 
 The notification logger stores notification messages in an sqlite database, in the location specified in the `.config` file. In this example, the sqlite database is located at `/opt/plcnext/logs/My_Nm_Logger.sqlite`. This database can be copied from the PLC if necessary, and accessed in the same way as any other sqlite database (e.g. using [DB Browser for SQLite](https://sqlitebrowser.org/)).
-
-In the future, it will also be possible to view stored notifications from PLCnext Engineer, in the "Logging" window of the Cross-Function area.
 
 ## IMPORTANT NOTE on notification logging
 
@@ -329,10 +363,8 @@ If you are thinking of using the notification logger to record changes in proces
 
 The notification manager (and the notification logger) are intended for information and error notifications, not for the transfer of real-time process data.
 
-If the logging of process data is required, then the solution is to use the [Data Logger](https://github.com/PLCnext/PLCnext_RT_Datalogger) service, which is designed specifically for this purpose.
+If the logging of process data is required, then the solution is to use the [Data Logger](https://www.plcnext.help/te/Service_Components/DataLogger/DataLogger_concept.htm) service, which is designed specifically for this purpose.
 
 ## Further information
 
-1. PLCnext Technology User Manual 2019.6, section 2.13 - "[Notification manager](https://d1dzb4fxoqjk3j.cloudfront.net/109166_en_00/Section02/Section02.htm?rhtocid=_1_12#TOC_2_13_Notification_managerbc-41)"
-
-1. PLCnext Technology User Manual 2019.6, section 5.7 - "[Notifications](https://d1dzb4fxoqjk3j.cloudfront.net/index.html#rhsyns=%20&t=109166_en_00%2FSection05%2FSection05.htm%23TOC_5_7_Notificationsbc-23&rhtocid=_4_6)"
+- PLCnext Technology Info Center - "[Notifications](https://www.plcnext.help/te/Service_Components/Notifications/Notification_manager.htm)"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NotificationDebuggerSettingsDocument
+  xmlns="http://www.phoenixcontact.com/schema/notificationdebuggersettings"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.phoenixcontact.com/schema/notificationdebuggersettings"
+  schemaVersion="1.0">
+
+  <ConfigSettings path="$ARP_PROJECTS_DIR$/Default/MyNmDebug.config" />
+
+</NotificationDebuggerSettingsDocument >
