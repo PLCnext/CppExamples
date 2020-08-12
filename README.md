@@ -39,21 +39,23 @@ There are different ways how to build your code:
 ### Compile the code with the PLCnext CLI 
 
 1. Install Eclipse IDE, CLI, SDK and Eclipse Add-in (how-to guide: see links in the "Getting started" section above)
-2. Clone this repository
-3. Navigate to the project you want to test, e.g. `cd Examples/ProgramComponentInteraction` 
-3. Execute `plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*`
-4. Execute `plcncli generate all` to generate intermediate code and Config files
-5. Execute `plcncli build` to build the code.
-6. Execute `plcncli generate library` to generate a *.pcwlx* file that can be included in PLCnext Engineer 
+1. Clone this repository
+1. Navigate to the project you want to test, e.g. `cd Examples/ProgramComponentInteraction` 
+1. Execute `plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*`
+1. Execute `plcncli set target --add --name AXCF2152 --version 2020.6` to specify details of the build target
+1. Execute `plcncli generate all` to generate intermediate code and Config files
+1. Execute `plcncli build` to build the code.
+1. Execute `plcncli deploy` to generate a *.pcwlx* file that can be included in PLCnext Engineer 
 
 ### Compile using the Eclipse Add-in
 
 1. Create a new empty project named like the example you want to test
-2. Remove the source files located at `ProjectName/src`
-3. Move the source files from the example you want to use into your workspace at `ProjectName/src`
-4. Build the project
+1. Remove the source files located at `ProjectName/src`
+1. Move the source files from the example you want to use into your workspace at `ProjectName/src`
+1. Build the project
 
 ### Compile using [build-local.sh](tools/build-local.sh) script
+
 1. Clone this Repository
 1. Modify the [build-local.sh](tools/build-local.sh) script to fit your needs
     1. select Hardware
