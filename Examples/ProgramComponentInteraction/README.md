@@ -6,6 +6,7 @@ The *UpCounterProgram* and *DownCounterProgram* access the *CounterComponent* wi
 They use the *CounterComponent.GetCommand()* to receive an *enum* of *Commands* and a *setProgress()* method to inform the component of the state of the program.
 Once the program has received a command it will continue to execute this command, and - when finished - execute the *CounterComponent.RefreshState()* method which will then initiate a state change.
 
+<!-- Original mermaid source, for when github decides to allow it.
 ```mermaid
 sequenceDiagram
     participant CounterComponent
@@ -31,13 +32,15 @@ loop Execute
 DownCounterProgram->>CounterComponent: Refresh Command 
 Note left of CounterComponent: Command::CountUp
 ```
+-->
+![Sequence diagram](mermaid-diagram.svg "Sequence")
 
 ## Example details
 |Description | Value |
 |------------ |-----------|
 |Controller | AXC F 2152 | 
-|FW | 2019.0 LTS |
-|SDK | 2019.0 LTS |
+|FW | 2020.6.1 |
+|SDK | 2020.6.1 |
 
 
 ## Preconditions
@@ -48,7 +51,7 @@ Note left of CounterComponent: Command::CountUp
 
 ## Start-up instructions
 
-1. Instantiate one instance of each Program
+1. Create one instance of each Program
 2. Start the PLCnext Control
 3. Login with PLCnext Engineer Debug or SSH.
 4. Check progress
