@@ -10,4 +10,4 @@ Names of the original copyright holders (individuals or organizations) should be
   - Oliver Warneke
   - Eduard Münz
   - Gundula Breder
-
+  - Martin Boers

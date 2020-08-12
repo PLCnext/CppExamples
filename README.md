@@ -8,7 +8,7 @@
 
 
 The [CppExamples](https://github.com/PLCnext/CppExamples) repository is a collection of various sample code for PLCnext Technology controllers. 
-It is assumed that the reader has basic know-how of C++ programming and has read the [PLCnext Technology User Manual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en).  
+It is assumed that the reader has basic know-how of C++ programming and has read the key parts of the [PLCnext Info Center](https://www.plcnext.help/).  
 Each example explains one or more topics on how to use C++11 with PLCnext Technology. Explanations are given in the *README.md* document and via comments in the example code. 
 Each example holds separate user components which can be instantiated on a *PLCnext Control*. 
 
@@ -27,10 +27,9 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 
 ## Getting started
 
-- [PLCnext User Manual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en)
-- [Tutorial video: tool installation on Windows](https://plcnext-community.net/index.php?option=com_content&view=article&id=335:install-windows-tools-for-c-programming-with-eclipse-ide&catid=66&Itemid=343&lang=en)
-- [Tutorial video: tool installation on Linux](https://www.plcnext-community.net/index.php?option=com_content&view=article&id=334:install-linux-tools-for-c-programming-with-eclipse-ide&catid=84&Itemid=483&lang=en)
-- [Tutorial video: First Cpp project](https://www.plcnext-community.net/index.php?option=com_content&view=article&id=327:c-programming-with-eclipse-ide&catid=84&Itemid=483&lang=en)
+- [C++ programs in PLCnext Technology](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm)
+- [Required Installations for C++ programming](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Required_Installations.htm)
+- [Creating a new C++ project in Eclipse](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Creating_a_Cpp_project_in_Eclipse.htm)
 
 ## Compiling an example
 
@@ -69,7 +68,7 @@ You can participate in this project by submitting bugs and feature requests.
 Furthermore you can help us by discussing issues and letting us know where you have problems or where others could struggle.
 
 ## Feedback
-* Ask a question in our [Forum](https://www.plcnext-community.net/index.php?option=com_easydiscuss&view=categories&Itemid=221&lang=en)
+* Ask a question in our [Forum](https://www.plcnext-community.net/en/discussions-2-offcanvas/forums.html)
 * Request a new feature or example to be added on [GitHub](CONTRIBUTING.md)
 * Vote for [Popular Feature Requests](https://github.com/PLCnext/CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
 * File a bug in [GitHub Issues](https://github.com/PLCnext/CppExamples/issues)
