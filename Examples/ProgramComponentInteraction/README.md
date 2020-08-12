@@ -41,13 +41,12 @@ Note left of CounterComponent: Command::CountUp
 |Controller | AXC F 2152 | 
 |FW | 2020.6.1 |
 |SDK | 2020.6.1 |
-
+|PLCnext Engineer | 2020.6 |
 
 ## Preconditions
 
 - PLCnext Engineer is installed 
 - PLCnext Technology SDK for C++ is installed
-
 
 ## Start-up instructions
 
@@ -56,5 +55,6 @@ Note left of CounterComponent: Command::CountUp
 3. Login with PLCnext Engineer Debug or SSH.
 4. Check progress
 
-You can now see the counters going up and down in the *PLCnext - Datalist* in PLCnext Engineer.
+You can now see the counters going up and down in the *PLCnext - Port List* window in PLCnext Engineer. The value of the `Down_Counter` port on the `DownCounterProgram instance` will decrement from 255 to zero, then the value of the `UP_Counter` port on the `UpCounterProgram instance` will increment from zero to 255.
+
 You can see also the progress in the *Output.log* file with `tail -f /opt/plcnext/logs/Output.log`.
