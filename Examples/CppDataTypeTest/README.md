@@ -23,15 +23,15 @@ All supported elementary data types are documented in the [PLCnext Info Center](
 
 |Description | Value |
 |------------ |-----------|
-|Controller| AXC F 2152 | 
-|FW | 2020.6.1 |
-|SDK | 2020.6.1 |
-|PLCnext Engineer| 2020.6 | 
+|Controller| AXC F 2152 |
+|FW | 2020.0 LTS or later |
+|SDK | 2020.0 LTS or later |
+|PLCnext Engineer| 2020.0 LTS |
 
 ## Preconditions
 
-- PLCnext Control AXC F 2152 with firmware 2020.6.1
-- PLCnext Engineer 2020.6
+- PLCnext Control AXC F 2152 with firmware 2020.0 LTS or later
+- PLCnext Engineer 2020.0 LTS or later
 - Eclipse<sup>&reg;</sup> IDE "Photon" or later
 
 ## Project compiling in Eclipse

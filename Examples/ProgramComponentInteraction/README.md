@@ -38,14 +38,14 @@ Note left of CounterComponent: Command::CountUp
 ## Example details
 |Description | Value |
 |------------ |-----------|
-|Controller | AXC F 2152 | 
-|FW | 2020.6.1 |
-|SDK | 2020.6.1 |
-|PLCnext Engineer | 2020.6 |
+|Controller | AXC F 2152 |
+|FW | 2020.0 LTS or later |
+|SDK | 2020.0 LTS or later |
+|PLCnext Engineer | 2020.0 LTS or later |
 
 ## Preconditions
 
-- PLCnext Engineer is installed 
+- PLCnext Engineer is installed
 - PLCnext Technology SDK for C++ is installed
 
 ## Start-up instructions
