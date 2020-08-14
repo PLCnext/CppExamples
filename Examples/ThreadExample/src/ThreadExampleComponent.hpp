@@ -101,6 +101,10 @@ private: // fields
     //Commons/Thread Example
     Thread delegateThreadInstance;
     Thread staticThreadInstance;
+
+    ThreadSettings delegateThreadSettings {"DelegateThreadName", 0, 0, 0};
+    ThreadSettings staticThreadSettings {"StaticThreadName", 0, 0, 0};
+
     void delegateThreadBody(void * pParameter);
 
     int myparameter{123};
@@ -135,8 +139,8 @@ inline ThreadExampleComponent::ThreadExampleComponent(IApplication& application,
 , workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
 
 //Commons/Thread Example
-, delegateThreadInstance(this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
-, staticThreadInstance(&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
+, delegateThreadInstance(delegateThreadSettings,this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
+, staticThreadInstance(staticThreadSettings,&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
 {
 }
 
