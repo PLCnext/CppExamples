@@ -4,17 +4,14 @@
 |Description | Value |
 |------------ |-----------|
 |Created | 11.01.2019|
-|Last modified|16.04.2019|
-|Controller| AXC F 2152 | 
-|FW|2019.3 LTS|
-|Arpversion| 19.3.0.18509|
-|SVN Revision|18509|
-|SDK| 19.3.0.18509|
-|PLCnext CLI | 2019.0 LTS (19.0.0.747)|
+|Last modified| 13.08.2020 |
+|Controller| AXC F 2152 |
+|FW | 2020.0 LTS or later |
 
 ### Introduction
 
 When developing components and programs for PLCnext in C++, it is often required to use functions provided by external, open source libraries. Open source libraries are available for applications including:
+
 - Machine learning
 - Special communication protocols
 - Database management
@@ -24,13 +21,12 @@ PLCnext Technology allows functions in external libraries to be called directly 
 This guide describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse.
 
 > NOTE: When using third-party software, it is the responsibility of the user to ensure that all license conditions are complied with.
-<hr id="system-readmore" />
 
 ### Prerequisites
 
-- AXC F 2152 FW 2019.0 LTS or higher
-- PLCnext Engineer 2019.0 LTS or higher
-- PLCnext Command Line Interface (CLI) 2019.0 LTS or higher.
+- AXC F 2152 FW 2020.0 LTS or higher
+- PLCnext Engineer 2020.0 LTS or higher
+- PLCnext Command Line Interface (CLI) 2020.0 LTS or higher.
 - A suitable PLCnext Software Development Kit (SDK), installed using the CLI.
 - Eclipse IDE for C/C++ developers, with the PLCnext Technology add-in.
 

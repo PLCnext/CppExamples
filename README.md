@@ -8,7 +8,7 @@
 
 
 The [CppExamples](https://github.com/PLCnext/CppExamples) repository is a collection of various sample code for PLCnext Technology controllers. 
-It is assumed that the reader has basic know-how of C++ programming and has read the [PLCnext Technology User Manual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en).  
+It is assumed that the reader has basic know-how of C++ programming and has read the key parts of the [PLCnext Info Center](https://www.plcnext.help/).  
 Each example explains one or more topics on how to use C++11 with PLCnext Technology. Explanations are given in the *README.md* document and via comments in the example code. 
 Each example holds separate user components which can be instantiated on a *PLCnext Control*. 
 
@@ -27,10 +27,9 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 
 ## Getting started
 
-- [PLCnext User Manual](https://plcnext-community.net/index.php?option=com_wrapper&view=wrapper&Itemid=353&lang=en)
-- [Tutorial video: tool installation on Windows](https://plcnext-community.net/index.php?option=com_content&view=article&id=335:install-windows-tools-for-c-programming-with-eclipse-ide&catid=66&Itemid=343&lang=en)
-- [Tutorial video: tool installation on Linux](https://www.plcnext-community.net/index.php?option=com_content&view=article&id=334:install-linux-tools-for-c-programming-with-eclipse-ide&catid=84&Itemid=483&lang=en)
-- [Tutorial video: First Cpp project](https://www.plcnext-community.net/index.php?option=com_content&view=article&id=327:c-programming-with-eclipse-ide&catid=84&Itemid=483&lang=en)
+- [C++ programs in PLCnext Technology](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm)
+- [Required Installations for C++ programming](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Required_Installations.htm)
+- [Creating a new C++ project in Eclipse](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Creating_a_Cpp_project_in_Eclipse.htm)
 
 ## Compiling an example
 
@@ -39,21 +38,23 @@ There are different ways how to build your code:
 ### Compile the code with the PLCnext CLI 
 
 1. Install Eclipse IDE, CLI, SDK and Eclipse Add-in (how-to guide: see links in the "Getting started" section above)
-2. Clone this repository
-3. Navigate to the project you want to test, e.g. `cd Examples/ProgramComponentInteraction` 
-3. Execute `plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*`
-4. Execute `plcncli generate all` to generate intermediate code and Config files
-5. Execute `plcncli build` to build the code.
-6. Execute `plcncli generate library` to generate a *.pcwlx* file that can be included in PLCnext Engineer 
+1. Clone this repository
+1. Navigate to the project you want to test, e.g. `cd Examples/ProgramComponentInteraction` 
+1. Execute `plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*`
+1. Execute `plcncli set target --add --name AXCF2152 --version 2020.6` to specify details of the build target
+1. Execute `plcncli generate all` to generate intermediate code and Config files
+1. Execute `plcncli build` to build the code.
+1. Execute `plcncli deploy` to generate a *.pcwlx* file that can be included in PLCnext Engineer 
 
 ### Compile using the Eclipse Add-in
 
 1. Create a new empty project named like the example you want to test
-2. Remove the source files located at `ProjectName/src`
-3. Move the source files from the example you want to use into your workspace at `ProjectName/src`
-4. Build the project
+1. Remove the source files located at `ProjectName/src`
+1. Move the source files from the example you want to use into your workspace at `ProjectName/src`
+1. Build the project
 
 ### Compile using [build-local.sh](tools/build-local.sh) script
+
 1. Clone this Repository
 1. Modify the [build-local.sh](tools/build-local.sh) script to fit your needs
     1. select Hardware
@@ -67,7 +68,7 @@ You can participate in this project by submitting bugs and feature requests.
 Furthermore you can help us by discussing issues and letting us know where you have problems or where others could struggle.
 
 ## Feedback
-* Ask a question in our [Forum](https://www.plcnext-community.net/index.php?option=com_easydiscuss&view=categories&Itemid=221&lang=en)
+* Ask a question in our [Forum](https://www.plcnext-community.net/en/discussions-2-offcanvas/forums.html)
 * Request a new feature or example to be added on [GitHub](CONTRIBUTING.md)
 * Vote for [Popular Feature Requests](https://github.com/PLCnext/CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
 * File a bug in [GitHub Issues](https://github.com/PLCnext/CppExamples/issues)

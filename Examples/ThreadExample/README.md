@@ -1,15 +1,15 @@
 # Table of contents
 
 <!-- TOC depthFrom:1 orderedList:true -->
-1. [Introduction](# "Introduction")
-2. [Example details](## "Example details")
-3. [Preconditions](## "Preconditions")
-4. [Project compiling in Eclipse](## "Project compiling in Eclipse")
-5. [PLCnext Engineer project](## "PLCnext Engineer project")
-6. [Start-Up instructions](## "Start-up instructions")
-7. [Manually basic Setup](### "Basic manual setup")
-8. [Commons::WorkerThread and Commons::Thread](### "Commons::WorkerThread and Commons::Thread")
-9. [General Notes](#### "General Notes")
+1. [Introduction](#introduction)
+2. [Example details](#example-details)
+3. [Preconditions](#preconditions)
+4. [Project compiling in Eclipse](#project-compiling-in-eclipse)
+5. [PLCnext Engineer project](#plcnext-engineer-project)
+6. [Start-Up instructions](#start-up-instructions)
+7. [Manually basic Setup](#basic-manual-setup)
+8. [Commons::WorkerThread and Commons::Thread](#commonsworkerthread-and-commonsthread)
+9. [General Notes](#general-notes)
 <!-- /TOC -->
 
 # Introduction
@@ -22,52 +22,47 @@ The purpose of staticThread implementation is to start a non real-time task, e.g
 
 The purpose of the delegateThread implementation is to use a call-back function (the thread has access to this*).
 
-
 ## Example details
 
 |Description | Value |
 |------------ |-----------|
-|Controller| AXC F 2152 | 
-|FW | 2019.3|
-|SDK | 2019.3|
-|PLCnext Engineer| 2019.3 | 
-
+|Controller| AXC F 2152 |
+|FW | 2020.0 LTS or later |
+|SDK | 2020.0 LTS or later |
+|PLCnext Engineer| 2020.0 LTS or later |
 
 ## Preconditions
 
-- AXC F 2152 controller with firmware 2019.3
-- Eclipse IDE "Photon" 
-- PLCnext Engineer 2019.3
-
+- AXC F 2152 controller with firmware 2020.0 LTS or later
+- Eclipse IDE "Photon" or later
+- PLCnext Engineer 2020.0 LTS or later
 
 ## Project compiling in Eclipse
 
 1. In Eclipse, create the project "ThreadExample" with Component "ThreadExampleComponent" and Program "ThreadExampleProgram".
-2. In the project, replace the files "ThreadExampleComponent.cpp", "ThreadExampleComponent.hpp", "ThreadExampleProgram.cpp", and "ThreadExampleProgram.hpp" with the according files from this repository. Alternatively, you can create your own project with component and programs and include the source code in your application.
-3. Compile the Eclipse project. 
-4. After successfull project compilation, the PLCnext Engineer library will be created automatically. You can find it in your Eclipse workspace folder, e.g.: "workspace\ThreadExample\bin\ThreadExample.pcwlx" 
+1. In the project, replace the files "ThreadExampleComponent.cpp", "ThreadExampleComponent.hpp", "ThreadExampleProgram.cpp", and "ThreadExampleProgram.hpp" with the according files from this repository. Alternatively, you can create your own project with component and programs and include the source code in your application.
+1. Compile the Eclipse project.
+1. After successfull project compilation, the PLCnext Engineer library will be created automatically. You can find it in your Eclipse workspace folder, e.g.: "workspace\ThreadExample\bin\ThreadExample.pcwlx"
 
-
-## PLCnext Engineer project 
+## PLCnext Engineer project
 
 1. In PLCnext Engineer, create a new project and include the "ThreadExample.pcwlx" in the project.
-2. Instantiate the "ThreadExampleProgram" under a previously defined task.
-3. Declare a port variable of "INT" datatype, e.g. in the "main" program.
-4. In the "PLANT" area of the PLCnext Engineer, unfold the "PLCnext" node and connect the C++ port variable "i_pCounter" and the IEC 61131 port variable.
-5. Download the PLCnext Engineer project to the PLCnext Control.
-
+1. Instantiate the "ThreadExampleProgram" under a previously defined task.
+1. Declare a port variable of "INT" datatype, e.g. in the "main" program.
+1. In the "PLANT" area of the PLCnext Engineer, unfold the "PLCnext" node and connect the C++ port variable "i_pCounter" and the IEC 61131 port variable.
+1. Download the PLCnext Engineer project to the PLCnext Control.
 
 ## Start-up instructions
 
 - If the project is successfully implemented and downloaded, you can follow the value incrementation of variable "i_pCounter" in PLCnext Engineer debug mode and/or in a watchwindow and threads status in the Output.log file on the plcnext target; see: /opt/plcnext/logs/Output.log
 - If the project does not start successfully, please see the error messages in Output.log file on the PLCnext target, see: /opt/plcnext/logs/Output.log
 
-
 ### Basic manual setup
 
 1. Add `#include "Arp/System/Acf/IControllerComponent.hpp"` and inherit the `IControllerComponent` interface.
-2. Implement the `Component.Start()` and `Component.Stop()` method.
-3. Include the threading headers:
+1. Implement the `Component.Start()` and `Component.Stop()` method.
+1. Include the threading headers:
+
 ```cpp
 #include "Arp/System/Commons/Threading/WorkerThread.hpp"
 #include "Arp/System/Commons/Threading/Thread.hpp"
@@ -111,12 +106,11 @@ inline ThreadExampleComponent::ThreadExampleComponent(IApplication& application,
 , workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
 
 //// Delegate Thread Example
-, delegateThreadInstance(this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
+, delegateThreadInstance(delegateThreadSettings,this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
 
 //// Static Thread Example
-, staticThreadInstance(&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
+, staticThreadInstance(staticThreadSettings,&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
 ```
-
 
 4.) Add `workerThreadInstance.Start()`, `workerThreadInstance.Stop()`, `delegateThreadInstance.Start()`, `staticThreadInstance.Start()` to the Component. The Start method is used to start or stop the threads during start of the controller or/and component, respectively.
 The Thread body will be executed, and after this, the thread sleeps for the specified idle time. The `WorkerThread.Stop()` method blocks until the thread finishes its current work, if it is not sleeping. 
