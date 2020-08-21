@@ -6,7 +6,7 @@
  *  CppDataTypeTestProgram.cpp
  *
  *  Created on: 21.02.2019
- *  	Author: Eduard Münz, Oliver Warneke
+ *  	Author: Eduard Münz, Oliver Warneke, Martin Boers
  *
  ******************************************************************************/
 
@@ -65,6 +65,9 @@ void CppDataTypeTestProgram::Execute()
 	outStruct.outDword++; //StructElement
 	outStruct.outLword++; //StructElement
 
+	outString = "This is a standard IEC 61131 string (max. 80 char).";
+	outString420 = "This is a custom length string - in this case, with a maximum of 420 chars, but can be up to 32766 chars.";
+	outStruct.outString = "This is a standard IEC 61131 string (max. 80 char).";  //StructElement
 
 	for(int i=0; i < 10;i++)
 	{
@@ -92,6 +95,8 @@ void CppDataTypeTestProgram::Execute()
 		outarrayWord[i]++;	//Word
 		outarrayDword[i]++;	//DWORD
 		outarrayLword[i]++;	//Lword
+
+		outarrayString[i] = "This is a standard IEC 61131 string (max. 80 chars).";
 	}
 }
 
