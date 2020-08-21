@@ -6,7 +6,7 @@
  *  CppDataTypeTestProgram.hpp
  *
  *  Created on: 21.02.2019
- *  	Author: Eduard Münz, Oliver Warneke
+ *  	Author: Eduard Münz, Oliver Warneke, Martin Boers
  *
  ******************************************************************************/
 
@@ -55,6 +55,9 @@ public: // typedefs
 
 		float32	outFloat32	=	0.0;	//Real
 		float64	outFloat64	=	0.0;	//LREAL
+
+		StaticString<80> outString = "";  // String
+		// Structs containing custom-length strings  are currently not supported by PLCnext Engineer (version 2020.6).
 
 	};
 
@@ -160,6 +163,16 @@ public: /* Ports
 	//#name(outFloat64)
 	float64	outFloat64	=	0.0;	//LREAL
 
+	//#port
+	//#attributes(Output|Retain)
+	//#name(outString)
+ 	StaticString<80> outString = "";  // String
+
+	//#port
+	//#attributes(Output|Retain)
+	//#name(outString420)
+ 	StaticString<420> outString420 = "";  // Custom-length string
+
 
 	//#port
 	//#attributes(Output|Retain)
@@ -240,6 +253,13 @@ public: /* Ports
 	//#attributes(Output|Retain)
 	//#name(outarrayFloat64)
  	float64	outarrayFloat64[10] = {0.0};//LREAL
+
+	//#port
+	//#attributes(Output|Retain)
+	//#name(outarrayString)
+ 	StaticString<80> outarrayString[10] = {""};  // String
+
+ 	// Array of custom-length strings are currently not supported by PLCnext  Engineer (version 2020.6).
 
 private: // fields
     CppDataTypeTest::CppDataTypeTestComponent& cppDataTypeTestComponent;
