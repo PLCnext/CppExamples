@@ -1,10 +1,16 @@
+///////////////////////////////////////////////////////////////////////////////"
+//
+//  Copyright PHOENIX CONTACT Electronics GmbH
+//
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/ProgramBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 #include "COMP_Notifications.hpp"
 // 1. Added header files
-#include "Arp/System/Nm/NotificationManager.hpp"								
+#include "Arp/System/Nm/NotificationManager.hpp"
 #include "ExamplePayload.hpp"
 
 
@@ -16,7 +22,7 @@ using namespace Arp::System::Commons::Diagnostics::Logging;
 using namespace Arp::Plc::Commons::Esm;
 
 // 2. Added namespace use
-using namespace Arp::System::Nm;												
+using namespace Arp::System::Nm;
 
 //#program
 //#component(NotificationExample::COMP_Notifications)
@@ -39,7 +45,7 @@ public: // operations
 
 private:
     // 3. Needed for the time stamp
-    DateTime now() const;														
+    DateTime now() const;
 
 public: /* Ports
            =====
@@ -53,7 +59,7 @@ public: /* Ports
            The name comment defines the name of the port and is optional. Default is the name of the field.
         */
             // 4. Added port variables
-    		//#port																
+    		//#port
             //#attributes(Input)
         	uint16 IP_uiInfoValue = 0;
 
@@ -62,11 +68,11 @@ public: /* Ports
         	uint16 IP_uiWarningValue = 0;
 
             // 5. Added local variables to save the previous value of the ports
-        	uint16 uiPrevInfoValue = 0;											
+        	uint16 uiPrevInfoValue = 0;
         	uint16 uiPrevWarningValue = 0;
 
             // 6. Manager instance and registrations
-        	NotificationManager& nm = NotificationManager::GetInstance();				
+        	NotificationManager& nm = NotificationManager::GetInstance();
         	NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration1;	// non-blocking needed because of real-time code execution
         	NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration2;
 

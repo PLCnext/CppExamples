@@ -1,4 +1,10 @@
-﻿#include "PG_ReactToNotification.hpp"
+﻿///////////////////////////////////////////////////////////////////////////////"
+//
+//  Copyright PHOENIX CONTACT Electronics GmbH
+//
+///////////////////////////////////////////////////////////////////////////////
+
+#include "PG_ReactToNotification.hpp"
 #include "Arp/System/Commons/Logging.h"
 #include "Arp/System/Core/ByteConverter.hpp"
 
