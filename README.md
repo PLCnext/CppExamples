@@ -23,7 +23,8 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[03](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
 |[04](Examples/ThreadExample/)| [Thread Example](Examples/ThreadExample/README.md)| This describes how to implement Threads in a component of C++ project.| [SourceCode](Examples/ThreadExample/src/)
 |[05](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.MD)| This describes how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
-|[06](Examples/E_Learning_InternalFunctionExtensions/)| [E-Learning: InternalFunctionExtensions](Examples/E_Learning_InternalFunctionExtensions/README.MD)| This describes how to use the Internal Function Extensions.| [SourceCode](Examples/E_Learning_InternalFunctionExtensions/src/)
+|[06](Examples/SubscriptionExample/)| [Subscription Example](Examples/SubscriptionExample/README.MD)| This describes how to use the Subscription service.| [SourceCode](Examples/SubscriptionExample/src/)
+|[07](Examples/E_Learning_InternalFunctionExtensions/)| [E-Learning: InternalFunctionExtensions](Examples/E_Learning_InternalFunctionExtensions/README.MD)| This describes how to use the Internal Function Extensions.| [SourceCode](Examples/E_Learning_InternalFunctionExtensions/src/)
 
 ## Getting started
 
