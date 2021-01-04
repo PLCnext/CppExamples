@@ -1,32 +1,33 @@
-///////////////////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////////////////"
 //
 //  Copyright PHOENIX CONTACT Electronics GmbH
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent2.hpp"
+#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "SubscriptionsLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
-#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 
-namespace Apps { namespace Demo { namespace Subscriptions
+namespace Subscriptions
 {
 
 using Arp::System::Rsc::ServiceManager;
-using Arp::Plc::Commons::Domain::PlcDomainProxy;
+using namespace Arp::Plc::Commons::Domain;
 
 const String SubscriptionsComponent2::varTask100msName = "Arp.Plc.Eclr/RealTimeProgram100ms.varUInt16";
 const String SubscriptionsComponent2::varTask500msName = "Arp.Plc.Eclr/RealTimeProgram500ms.varUInt16";
 
 SubscriptionsComponent2::SubscriptionsComponent2(IApplication& application, const String& name)
-    : ComponentBase(application, SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-    , subscriptionThread(this, &SubscriptionsComponent2::LogSubscription, 1000, "SubscriptionLogThread")
-{
+: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
+, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+, subscriptionThread(this, &SubscriptionsComponent2::LogSubscription, 1000, "SubscriptionLogThread"){
 }
-
-#pragma region IComponent operations
 
 void SubscriptionsComponent2::Initialize()
 {
+    // never remove next line
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -47,17 +48,20 @@ void SubscriptionsComponent2::SubscribeServices()
 
 void SubscriptionsComponent2::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent2::SetupSettings()
 {
-    // setup firmware settings here
+    // never remove next line
+    MetaComponentBase::SetupSettings();
+
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent2::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent2::LoadConfig()
@@ -67,7 +71,7 @@ void SubscriptionsComponent2::LoadConfig()
 
 void SubscriptionsComponent2::SetupConfig()
 {
-    // setup config here
+    // setup project config here
 }
 
 void SubscriptionsComponent2::ResetConfig()
@@ -77,6 +81,9 @@ void SubscriptionsComponent2::ResetConfig()
 
 void SubscriptionsComponent2::Dispose()
 {
+    // never remove next line
+    MetaComponentBase::Dispose();
+
     // implement this inverse to SetupSettings(), LoadSettings() and Initialize()
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -91,32 +98,11 @@ void SubscriptionsComponent2::Dispose()
 
 void SubscriptionsComponent2::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data must be retained even on power down event
 }
-
-#pragma endregion
-
-#pragma region IControllerComponent operations
-
-void SubscriptionsComponent2::Start()
-{
-    // This operation is called once during system startup
-    // Start your threads here accessing any Arp components or services
-}
-
-void SubscriptionsComponent2::Stop()
-{
-    // This operation is called once during system shutdown
-    // Stop your threads here accessing any Arp components or services
-}
-
-#pragma endregion
-
-#pragma region Plc event handlers
 
 void SubscriptionsComponent2::OnPlcLoaded()
 {
-    this->SetupSubscription();
 }
 
 void SubscriptionsComponent2::OnPlcStarted()
@@ -131,26 +117,19 @@ void SubscriptionsComponent2::OnPlcStopping()
 
 void SubscriptionsComponent2::OnPlcUnloading(bool)
 {
-    this->ResetSubscription();
 }
 
 void SubscriptionsComponent2::OnPlcChanging()
 {
     this->StopSubscription();
-    this->ResetSubscription();
 }
 
 void SubscriptionsComponent2::OnPlcChanged(bool /*success*/)
 {
-    this->SetupSubscription();
     this->StartSubscription();
 }
 
-#pragma endregion
-
-#pragma region Subscription operations
-
-void SubscriptionsComponent2::SetupSubscription()
+void SubscriptionsComponent2::StartSubscription()
 {
     // First the subscription has to be created.
     // There exists several subscription kinds, in this simple example the 'HightPerformance' kind is used,
@@ -206,25 +185,15 @@ void SubscriptionsComponent2::SetupSubscription()
     // As long as the subscription is not modified, the variable infos remain exactly the same.
     if (variableInfos[1].Name.CStr() == varTask100msName)
     {
-        this->value1.varName = varTask100msName;
-        this->value2.varName = varTask500msName;
+        this->value1->varName = varTask100msName;
+        this->value2->varName = varTask500msName;
     }
     else
     {
-        this->value1.varName = varTask500msName;
-        this->value2.varName = varTask100msName;
+        this->value1->varName = varTask500msName;
+        this->value2->varName = varTask100msName;
     }
-}
 
-void SubscriptionsComponent2::ResetSubscription()
-{
-    this->subscriptionServicePtr->DeleteSubscription(this->subscriptionId);
-    this->subscriptionId = 0;
-}
-
-void SubscriptionsComponent2::StartSubscription()
-{
-    this->subscriptionServicePtr->Subscribe(this->subscriptionId, 0);
     this->subscriptionThread.Start();
 }
 
@@ -234,7 +203,7 @@ void SubscriptionsComponent2::StopSubscription()
     this->subscriptionThread.Stop();
 }
 
-void SubscriptionsComponent2::LogSubscription(void)
+void SubscriptionsComponent2::LogSubscription()
 {
     // To read the data from the subscription a delegate function is required.
     // In this example the delegate is created locally in this method and in every thread cycle because we don't
@@ -263,11 +232,11 @@ void SubscriptionsComponent2::LogSubscription(void)
                     int64 usTicks = value.GetValue<int64>();
                     if ((i / 2) == 0)
                     {
-                        this->value1.timestamp = DateTime::FromUnixTimeMicroseconds(usTicks);
+                    	this->value1->timestamp = DateTime::FromUnixTimeMicroseconds(usTicks);
                     }
                     else
                     {
-                        this->value2.timestamp = DateTime::FromUnixTimeMicroseconds(usTicks);
+                        this->value2->timestamp = DateTime::FromUnixTimeMicroseconds(usTicks);
                     }
                     break;
                 }
@@ -276,11 +245,11 @@ void SubscriptionsComponent2::LogSubscription(void)
                     uint16 v = value.GetValue<uint16>();
                     if ((i / 2) == 0)
                     {
-                        this->value1.value = v;
+                        this->value1->value = v;
                     }
                     else
                     {
-                        this->value2.value = v;
+                        this->value2->value = v;
                     }
 
                     break;
@@ -295,10 +264,8 @@ void SubscriptionsComponent2::LogSubscription(void)
     // Now read function could be called with the previous created read-delegate to write the value to the system log.
     this->subscriptionServicePtr->ReadTimeStampedValues(this->subscriptionId, readValuesDelegate);
 
-    log.Info("{}: {} - {}", this->value1.varName, this->value1.timestamp.ToIso8601String(), this->value1.value);
-    log.Info("{}: {} - {}", this->value2.varName, this->value2.timestamp.ToIso8601String(), this->value2.value);
+    log.Info("{}: {} - {}", this->value1->varName, this->value1->timestamp.ToIso8601String(), this->value1->value);
+    log.Info("{}: {} - {}", this->value2->varName, this->value2->timestamp.ToIso8601String(), this->value2->value);
 }
 
-#pragma endregion
-
-}}} // end of namespace Apps::Demo::Subscriptions
+} // end of namespace Subscriptions

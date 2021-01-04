@@ -1,29 +1,30 @@
-///////////////////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////////////////"
 //
 //  Copyright PHOENIX CONTACT Electronics GmbH
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent.hpp"
+#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "SubscriptionsLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
-#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 
-namespace Apps { namespace Demo { namespace Subscriptions
+namespace Subscriptions
 {
 
 using Arp::System::Rsc::ServiceManager;
-using Arp::Plc::Commons::Domain::PlcDomainProxy;
+using namespace Arp::Plc::Commons::Domain;
 
 SubscriptionsComponent::SubscriptionsComponent(IApplication& application, const String& name)
-    : ComponentBase(application, SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-    , subscriptionThread(this, &SubscriptionsComponent::LogSubscription, 1000, "SubscriptionLogThread")
-{
+: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
+, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+, subscriptionThread(this, &SubscriptionsComponent::LogSubscription, 1000, "SubscriptionLogThread"){
 }
-
-#pragma region IComponent operations
 
 void SubscriptionsComponent::Initialize()
 {
+    // never remove next line
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -44,17 +45,20 @@ void SubscriptionsComponent::SubscribeServices()
 
 void SubscriptionsComponent::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent::SetupSettings()
 {
-    // setup firmware settings here
+    // never remove next line
+    MetaComponentBase::SetupSettings();
+
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent::LoadConfig()
@@ -64,7 +68,7 @@ void SubscriptionsComponent::LoadConfig()
 
 void SubscriptionsComponent::SetupConfig()
 {
-    // setup config here
+    // setup project config here
 }
 
 void SubscriptionsComponent::ResetConfig()
@@ -74,6 +78,9 @@ void SubscriptionsComponent::ResetConfig()
 
 void SubscriptionsComponent::Dispose()
 {
+    // never remove next line
+    MetaComponentBase::Dispose();
+
     // implement this inverse to SetupSettings(), LoadSettings() and Initialize()
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -88,32 +95,11 @@ void SubscriptionsComponent::Dispose()
 
 void SubscriptionsComponent::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data must be retained even on power down event
 }
-
-#pragma endregion
-
-#pragma region IControllerComponent operations
-
-void SubscriptionsComponent::Start()
-{
-    // This operation is called once during system startup
-    // Start your threads here accessing any Arp components or services
-}
-
-void SubscriptionsComponent::Stop()
-{
-    // This operation is called once during system shutdown
-    // Stop your threads here accessing any Arp components or services
-}
-
-#pragma endregion
-
-#pragma region Plc event handlers
 
 void SubscriptionsComponent::OnPlcLoaded()
 {
-    this->SetupSubscription();
 }
 
 void SubscriptionsComponent::OnPlcStarted()
@@ -128,26 +114,19 @@ void SubscriptionsComponent::OnPlcStopping()
 
 void SubscriptionsComponent::OnPlcUnloading(bool)
 {
-    this->ResetSubscription();
 }
 
 void SubscriptionsComponent::OnPlcChanging()
 {
     this->StopSubscription();
-    this->ResetSubscription();
 }
 
 void SubscriptionsComponent::OnPlcChanged(bool /*success*/)
 {
-    this->SetupSubscription();
     this->StartSubscription();
 }
 
-#pragma endregion
-
-#pragma region Subscription operations
-
-void SubscriptionsComponent::SetupSubscription()
+void SubscriptionsComponent::StartSubscription()
 {
     // First the subscription has to be created.
     // There exists several subscription kinds, in this simple example the 'HightPerformance' kind is used,
@@ -155,7 +134,7 @@ void SubscriptionsComponent::SetupSubscription()
     // Check the description of Subscription/SubscriptionKind for more information.
     this->subscriptionId = this->subscriptionServicePtr->CreateSubscription(SubscriptionKind::HighPerformance);
 
-    // The previous call should return a valid, non-zero subscription id otherwise anything failed.
+    // The previous call should return a valid, non-zero subscription id otherwise something failed.
 
     // After the subscription has been created, at least one variable has to be added.
     // To add more than one variable, this function could be called another time or the 'AddVariables' function could be used
@@ -167,18 +146,7 @@ void SubscriptionsComponent::SetupSubscription()
 
     // now the subscription is created, configured and subscribed and the sampled date might be processed in the function
     // 'LogSubscription' which is triggered by the 'subscriptionThread'.
-}
 
-void SubscriptionsComponent::ResetSubscription()
-{
-    // implement this inverse to SetupConfig() and LoadConfig()
-    this->subscriptionServicePtr = ServiceManager::GetService<ISubscriptionService>();
-    this->subscriptionId = 0;
-}
-
-void SubscriptionsComponent::StartSubscription()
-{
-    this->subscriptionServicePtr->Subscribe(this->subscriptionId, 0);
     this->subscriptionThread.Start();
 }
 
@@ -217,7 +185,7 @@ void SubscriptionsComponent::LogSubscription()const
             }
             else
             {
-                log.Warning("Unexpected type: '{}'", current.GetType());
+                log.Warning("Unexpeted type: '{}'", current.GetType());
             }
         }
         readEnumerator.EndRead();
@@ -227,6 +195,4 @@ void SubscriptionsComponent::LogSubscription()const
     this->subscriptionServicePtr->ReadValues(this->subscriptionId, readSubscriptionDelegate);
 }
 
-#pragma endregion
-
-}}} // end of namespace Apps::Demo::Subscriptions
+} // end of namespace Subscriptions

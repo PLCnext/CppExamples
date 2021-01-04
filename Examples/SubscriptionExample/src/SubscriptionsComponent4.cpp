@@ -1,34 +1,36 @@
-///////////////////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////////////////"
 //
 //  Copyright PHOENIX CONTACT Electronics GmbH
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent4.hpp"
+#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "SubscriptionsLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
 #include "Arp/System/Rsc/Services/RscArrayReader.hpp"
 #include "Arp/System/Rsc/Services/RscStructReader.hxx"
-#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 
-namespace Apps { namespace Demo { namespace Subscriptions
+namespace Subscriptions
 {
 
+using namespace Arp::Plc::Commons::Domain;
 using Arp::System::Rsc::ServiceManager;
-using Arp::Plc::Commons::Domain::PlcDomainProxy;
 
 const String SubscriptionsComponent4::varTask100msName = "Arp.Plc.Eclr/RealTimeProgram100ms.varUInt16";
 const String SubscriptionsComponent4::varTask500msName = "Arp.Plc.Eclr/RealTimeProgram500ms.varUInt16";
 
 SubscriptionsComponent4::SubscriptionsComponent4(IApplication& application, const String& name)
-    : ComponentBase(application, SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-    , subscriptionThread(this, &SubscriptionsComponent4::LogSubscription, 1000, "SubscriptionLogThread")
+: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
+, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+, subscriptionThread(this, &SubscriptionsComponent4::LogSubscription, 1000, "SubscriptionLogThread")
 {
 }
 
-#pragma region IComponent operations
-
 void SubscriptionsComponent4::Initialize()
 {
+    // never remove next line
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -49,17 +51,20 @@ void SubscriptionsComponent4::SubscribeServices()
 
 void SubscriptionsComponent4::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent4::SetupSettings()
 {
-    // setup firmware settings here
+    // never remove next line
+    MetaComponentBase::SetupSettings();
+
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent4::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent4::LoadConfig()
@@ -69,7 +74,7 @@ void SubscriptionsComponent4::LoadConfig()
 
 void SubscriptionsComponent4::SetupConfig()
 {
-    // setup config here
+    // setup project config here
 }
 
 void SubscriptionsComponent4::ResetConfig()
@@ -79,6 +84,9 @@ void SubscriptionsComponent4::ResetConfig()
 
 void SubscriptionsComponent4::Dispose()
 {
+    // never remove next line
+    MetaComponentBase::Dispose();
+
     // implement this inverse to SetupSettings(), LoadSettings() and Initialize()
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -93,32 +101,11 @@ void SubscriptionsComponent4::Dispose()
 
 void SubscriptionsComponent4::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data must be retained even on power down event
 }
-
-#pragma endregion
-
-#pragma region IControllerComponent operations
-
-void SubscriptionsComponent4::Start()
-{
-    // This operation is called once during system startup
-    // Start your threads here accessing any Arp components or services
-}
-
-void SubscriptionsComponent4::Stop()
-{
-    // This operation is called once during system shutdown
-    // Stop your threads here accessing any Arp components or services
-}
-
-#pragma endregion
-
-#pragma region Plc event handlers
 
 void SubscriptionsComponent4::OnPlcLoaded()
 {
-    this->SetupSubscription();
 }
 
 void SubscriptionsComponent4::OnPlcStarted()
@@ -133,26 +120,19 @@ void SubscriptionsComponent4::OnPlcStopping()
 
 void SubscriptionsComponent4::OnPlcUnloading(bool)
 {
-    this->ResetSubscription();
 }
 
 void SubscriptionsComponent4::OnPlcChanging()
 {
     this->StopSubscription();
-    this->ResetSubscription();
 }
 
 void SubscriptionsComponent4::OnPlcChanged(bool /*success*/)
 {
-    this->SetupSubscription();
     this->StartSubscription();
 }
 
-#pragma endregion
-
-#pragma region Subscription operations
-
-void SubscriptionsComponent4::SetupSubscription()
+void SubscriptionsComponent4::StartSubscription()
 {
     // First the subscription has to be created.
     // This example creates a subscription of kind 'Recording' and add two variables from different
@@ -200,18 +180,7 @@ void SubscriptionsComponent4::SetupSubscription()
     // So to make sure which variable belongs to which record it is necessary to get the subscription
     // variable information.
     this->GetRecordVariableInfos(this->recordVariableInfos);
-}
 
-void SubscriptionsComponent4::ResetSubscription()
-{
-    this->subscriptionServicePtr->DeleteSubscription(this->subscriptionId);
-    this->subscriptionId = 0;
-    this->recordVariableInfos.clear();
-}
-
-void SubscriptionsComponent4::StartSubscription()
-{
-    this->subscriptionServicePtr->Subscribe(this->subscriptionId, 0);
     this->subscriptionThread.Start();
 }
 
@@ -380,6 +349,4 @@ void SubscriptionsComponent4::LogVariant(const RscVariant<512>& rscVariant, std:
     }
 }
 
-#pragma endregion
-
-}}} // end of namespace Apps::Demo::Subscriptions
+} // end of namespace Subscriptions

@@ -1,33 +1,35 @@
-///////////////////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////////////////"
 //
 //  Copyright PHOENIX CONTACT Electronics GmbH
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent3.hpp"
+#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "SubscriptionsLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
 #include "Arp/System/Rsc/Services/RscArrayReader.hpp"
 #include "Arp/System/Rsc/Services/RscStructReader.hxx"
-#include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 
-namespace Apps { namespace Demo { namespace Subscriptions
+namespace Subscriptions
 {
 
+using namespace Arp::Plc::Commons::Domain;
 using Arp::System::Rsc::ServiceManager;
-using Arp::Plc::Commons::Domain::PlcDomainProxy;
 
 const String SubscriptionsComponent3::complexVarName = "Arp.Plc.Eclr/RealTimeProgram100ms.varSampleStruct";
 
 SubscriptionsComponent3::SubscriptionsComponent3(IApplication& application, const String& name)
-    : ComponentBase(application, SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-    , subscriptionThread(this, &SubscriptionsComponent3::LogSubscription, 1000, "SubscriptionLogThread")
+: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
+, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+, subscriptionThread(this, &SubscriptionsComponent3::LogSubscription, 1000, "SubscriptionLogThread")
 {
 }
 
-#pragma region IComponent operations
-
 void SubscriptionsComponent3::Initialize()
 {
+    // never remove next line
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -48,17 +50,20 @@ void SubscriptionsComponent3::SubscribeServices()
 
 void SubscriptionsComponent3::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent3::SetupSettings()
 {
-    // setup firmware settings here
+    // never remove next line
+    MetaComponentBase::SetupSettings();
+
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent3::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent3::LoadConfig()
@@ -68,7 +73,7 @@ void SubscriptionsComponent3::LoadConfig()
 
 void SubscriptionsComponent3::SetupConfig()
 {
-    // publish the services of this component here
+    // setup project config here
 }
 
 void SubscriptionsComponent3::ResetConfig()
@@ -78,6 +83,9 @@ void SubscriptionsComponent3::ResetConfig()
 
 void SubscriptionsComponent3::Dispose()
 {
+    // never remove next line
+    MetaComponentBase::Dispose();
+
     // implement this inverse to SetupSettings(), LoadSettings() and Initialize()
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
 
@@ -92,37 +100,15 @@ void SubscriptionsComponent3::Dispose()
 
 void SubscriptionsComponent3::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data must be retained even on power down event
 }
-
-#pragma endregion
-
-#pragma region IControllerComponent operations
-
-void SubscriptionsComponent3::Start()
-{
-    // This operation is called once during system startup
-    // Start your threads here accessing any Arp components or services
-}
-
-void SubscriptionsComponent3::Stop()
-{
-    // This operation is called once during system shutdown
-    // Stop your threads here accessing any Arp components or services
-}
-
-#pragma endregion
-
-#pragma region Plc event handlers
 
 void SubscriptionsComponent3::OnPlcLoaded()
 {
-    this->SetupSubscription();
 }
 
 void SubscriptionsComponent3::OnPlcStarted()
 {
-
     this->StartSubscription();
 }
 
@@ -133,70 +119,53 @@ void SubscriptionsComponent3::OnPlcStopping()
 
 void SubscriptionsComponent3::OnPlcUnloading(bool)
 {
-    this->StopSubscription();
 }
 
 void SubscriptionsComponent3::OnPlcChanging()
 {
     this->StopSubscription();
-    this->ResetSubscription();
 }
 
 void SubscriptionsComponent3::OnPlcChanged(bool /*success*/)
 {
-    this->SetupSubscription();
     this->StartSubscription();
-}
-
-#pragma endregion
-
-#pragma region Subscription operations
-
-void SubscriptionsComponent3::SetupSubscription()
-{
-    // First the subscription has to be created.
-    // There exists several subscription kinds, in this simple example the 'HightPerformance' kind is used,
-    // which operates with a double-buffer and ensures that the read data is task consistent.
-    // Check the description of Subscription/SubscriptionKind for more information.
-    this->subscriptionId = this->subscriptionServicePtr->CreateSubscription(SubscriptionKind::HighPerformance);
-
-    // The previous call should return a valid, non-zero subscription id otherwise something went wrong.
-
-    // After the subscription has been created, at least one variable has to be added.
-    // To add more than one variable, this function could be called another time or the 'AddVariables' function could be used
-    // to add a set of variables. In this example a complex variable of the following type is added:
-    //     struct SampleStruct
-    //     {
-    //         uint16 varUInt16 = false;
-    //         bool varBool = false;
-    //         uint16 varUInt16Array_5[5];
-    //     };
-    this->subscriptionServicePtr->AddVariable(this->subscriptionId, SubscriptionsComponent3::complexVarName);
-
-    // Finally the 'Subscribe' function has to be called to start the data sampling of the previous added variables.
-    this->subscriptionServicePtr->Subscribe(this->subscriptionId, 0);
-
-    // now the subscription is created, configured and subscribed and the sampled date might be processed in the function
-    // 'LogSubscription' which is triggerd by the 'subscriptionThread'.
-
-    // At least the delegate which will write the current read variables data to the info log is created
-    // and stored in a member variable
-    //
-    // expected log output:
-    //   SubscriptionsComponent3 INFO  - Struct( 101, true, Array[5]( 101, 102, 103, 104, 105))
-    this->readSubscriptionValuesDelegate = make_delegate(*this, &SubscriptionsComponent3::LogValues);
-}
-
-void SubscriptionsComponent3::ResetSubscription()
-{
-    this->subscriptionServicePtr->DeleteSubscription(this->subscriptionId);
-    this->subscriptionId = 0;
 }
 
 void SubscriptionsComponent3::StartSubscription()
 {
-    this->subscriptionServicePtr->Subscribe(this->subscriptionId, 0);
-    this->subscriptionThread.Start();
+	   // First the subscription has to be created.
+	    // There exists several subscription kinds, in this simple example the 'HightPerformance' kind is used,
+	    // which operates with a double-buffer and ensures that the read data is task consistent.
+	    // Check the description of Subscription/SubscriptionKind for more information.
+	    this->subscriptionId = this->subscriptionServicePtr->CreateSubscription(SubscriptionKind::HighPerformance);
+
+	    // The previous call should return a valid, non-zero subscription id otherwise something went wrong.
+
+	    // After the subscription has been created, at least one variable has to be added.
+	    // To add more than one variable, this function could be called another time or the 'AddVariables' function could be used
+	    // to add a set of variables. In this example a complex variable of the following type is added:
+	    //     struct SampleStruct
+	    //     {
+	    //         uint16 varUInt16 = false;
+	    //         bool varBool = false;
+	    //         uint16 varUInt16Array_5[5];
+	    //     };
+	    this->subscriptionServicePtr->AddVariable(this->subscriptionId, SubscriptionsComponent3::complexVarName);
+
+	    // Finally the 'Subscribe' function has to be called to start the data sampling of the previous added variables.
+	    this->subscriptionServicePtr->Subscribe(this->subscriptionId, 0);
+
+	    // now the subscription is created, configured and subscribed and the sampled date might be processed in the function
+	    // 'LogSubscription' which is triggerd by the 'subscriptionThread'.
+
+	    // At least the delegate which will write the current read variables data to the info log is created
+	    // and stored in a member variable
+	    //
+	    // expected log output:
+	    //   SubscriptionsComponent3 INFO  - Struct( 101, true, Array[5]( 101, 102, 103, 104, 105))
+	    this->readSubscriptionValuesDelegate = make_delegate(*this, &SubscriptionsComponent3::LogValues);
+
+	    this->subscriptionThread.Start();
 }
 
 void SubscriptionsComponent3::StopSubscription()
@@ -348,6 +317,4 @@ void SubscriptionsComponent3::LogVariant(const RscVariant<512>& rscVariant, std:
     }
 }
 
-#pragma endregion
-
-}}} // end of namespace Apps::Demo::Subscriptions
+} // end of namespace Subscriptions
