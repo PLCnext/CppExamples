@@ -20,7 +20,7 @@ The PLCnext Runtime provides an RSC service, called `IDataAccessService`, that a
 ## Guide details
 |Description | Value |
 |------------ |-----------|
-|Created | 7.1.2021 |
+|Created | 7.01.2021 |
 |Last modified| 7.01.2021 |
 |Controller| AXC F 2152 |
 |FW| 2021.0.0 LTS |
