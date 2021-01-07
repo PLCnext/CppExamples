@@ -34,7 +34,7 @@ The PLCnext Runtime provides an RSC service, called `ISubscriptionService`, that
 A complete description of the Subscription service is available from these sources:
 
 - [PLCnext Info Center](https://www.plcnext.help/te/Service_Components/Remote_Service_Calls_RSC/RSC_GDS_services.htm#ISubscriptionService)
-- [API documentation](https://api.plcnext.help/api_docs_2020-6/classArp_1_1Plc_1_1Gds_1_1Services_1_1ISubscriptionService.html)
+- [API documentation](https://api.plcnext.help/api_docs_2021-0-LTS/classArp_1_1Plc_1_1Gds_1_1Services_1_1ISubscriptionService.html)
 
 ## Quick-start example
 
