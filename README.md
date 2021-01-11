@@ -24,8 +24,9 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[04](Examples/ThreadExample/)| [Thread Example](Examples/ThreadExample/README.md)| This describes how to implement Threads in a component of C++ project.| [SourceCode](Examples/ThreadExample/src/)
 |[05](Examples/DataAccessExample/)| [Data Access Example](Examples/DataAccessExample/README.MD)| This example shows how to read and write GDS variables using the Data Access service.| [SourceCode](Examples/DataAccessExample/src/)
 |[06](Examples/SubscriptionExample/)| [Subscription Example](Examples/SubscriptionExample/README.MD)| This example shows how to read GDS variables using the Subscription service.| [SourceCode](Examples/SubscriptionExample/src/)
-|[07](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.MD)| This example shows how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
-|[08](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
+|[07](Examples/ForceExample/)| [Force Example](Examples/ForceExample/README.MD)| This example shows how GDS variables can be forced using the Force service.| [SourceCode](Examples/ForceExample/src/)
+|[08](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.MD)| This example shows how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
+|[09](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
 
 ## Getting started
 
