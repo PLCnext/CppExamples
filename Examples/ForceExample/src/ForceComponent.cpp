@@ -1,4 +1,9 @@
-﻿#include "ForceComponent.hpp"
+﻿///////////////////////////////////////////////////////////////////////////////"
+//
+//  Copyright PHOENIX CONTACT Electronics GmbH
+//
+///////////////////////////////////////////////////////////////////////////////
+#include "ForceComponent.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "ForceLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
