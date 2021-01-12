@@ -15,34 +15,34 @@
 
 void ReadPortNames(Arp::System::Rsc::Services::IRscWriteEnumerator<RscString<512>>& portNames)
 {
-	// In this case the values of three GDS variables will be read.
-	// The names of these variables are specified using the write enumerator.
-	portNames.BeginWrite(3);
-	try
-	{
-		portNames.WriteNext("Arp.Plc.Eclr/DataAccessInstance.Int_OUT");
-		portNames.WriteNext("Arp.Plc.Eclr/DataAccessInstance.Array_OUT");
-		portNames.WriteNext("Arp.Plc.Eclr/DataAccessInstance.Struct_OUT");
-		portNames.EndWrite();
-	}
-	catch (std::exception& e)
-	{
-		Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-		Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadPortNames()");
-	}
+    // In this case the values of three GDS variables will be read.
+    // The names of these variables are specified using the write enumerator.
+    portNames.BeginWrite(3);
+    try
+    {
+        portNames.WriteNext("Arp.Plc.Eclr/DataAccessInstance.Int_OUT");
+        portNames.WriteNext("Arp.Plc.Eclr/DataAccessInstance.Array_OUT");
+        portNames.WriteNext("Arp.Plc.Eclr/DataAccessInstance.Struct_OUT");
+        portNames.EndWrite();
+    }
+    catch (std::exception& e)
+    {
+        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadPortNames()");
+    }
 }
 
 void ReadResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Services::ReadItem>& dataItems)
 {
-	Arp::Plc::Gds::Services::ReadItem item;
-	auto elements = dataItems.BeginRead();
-	try
-	{
-		// The items in the ReadEnumerator appear in the order that the variable names were added in the "Port Names" delegate.
-		// The names of the variables are not available here, so it must be known what order the variable names were added.
-		// In this case, because each variable happens to have a different type, the variables can be identified by the type.
-		while (dataItems.ReadNext(item))
-		{
+    Arp::Plc::Gds::Services::ReadItem item;
+    auto elements = dataItems.BeginRead();
+    try
+    {
+        // The items in the ReadEnumerator appear in the order that the variable names were added in the "Port Names" delegate.
+        // The names of the variables are not available here, so it must be known what order the variable names were added.
+        // In this case, because each variable happens to have a different type, the variables can be identified by the type.
+        while (dataItems.ReadNext(item))
+        {
             switch (item.Value.GetType())
             {
                 case RscType::Int16:
@@ -59,8 +59,8 @@ void ReadResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Se
 
                     // Use the following RscArrayReader methods to get information about the array:
                     // - GetElementType()
-        		    // - GetSize()
-        		    // - GetDimensions();
+                    // - GetSize()
+                    // - GetDimensions();
 
                     RscVariant<512> current;
                     arrayReader.ReadNext(current);
@@ -76,12 +76,12 @@ void ReadResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Se
 
                 case RscType::Struct:
                 {
-                	RscStructReader<512> structReader{item.Value};
+                    RscStructReader<512> structReader{item.Value};
 
                     // Use the following RscStructReader method to get information about the struct:
                     // - GetFieldCount()
-                	// Struct element values will appear in the order that the elements are declared.
-                	// The names of the struct elements are not available.
+                    // Struct element values will appear in the order that the elements are declared.
+                    // The names of the struct elements are not available.
 
                     RscVariant<512> current;
                     structReader.ReadNextField(current);
@@ -104,31 +104,31 @@ void ReadResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Se
 
                 default:
                 {
-        		    Arp::System::Commons::Diagnostics::Logging::Log::Info("Unhandled type = {0}", item.Value.GetType());
-		            break;
+                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Unhandled type = {0}", item.Value.GetType());
+                    break;
                 }
             }
-		}
-		dataItems.EndRead();
-	}
-	catch (std::exception& e)
-	{
-		Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-		Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadResult()");
-	}
+        }
+        dataItems.EndRead();
+    }
+    catch (std::exception& e)
+    {
+        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadResult()");
+    }
 }
 
 void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Services::WriteItem>& dataItems)
 {
-	// This function writes values to three GDS variables - an Int16, a struct, and an array.
-	dataItems.BeginWrite(3);
-	try
-	{
+    // This function writes values to three GDS variables - an Int16, a struct, and an array.
+    dataItems.BeginWrite(3);
+    try
+    {
         // 1. Write the Integer port name and value.
         Arp::Plc::Gds::Services::WriteItem intItem;
         intItem.PortName="Arp.Plc.Eclr/DataAccessInstance.Int_IN";
         intItem.Value=(Arp::int16)42;
-		dataItems.WriteNext(intItem);
+        dataItems.WriteNext(intItem);
 
         // 2. Write the Array port name and value
         // Create the RscVariant representing the array
@@ -137,7 +137,7 @@ void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Se
         arrayItem.Value=RscVariant<512>::CreateArrayVariant(10,RscType::Int16);
 
         // Write the array item to the enumerator *before* creating the RscArrayWriter
-		dataItems.WriteNext(arrayItem);
+        dataItems.WriteNext(arrayItem);
 
         // Create an RscArrayWriter for the array
         // This must be done *after* the array WriteItem has been written to the enumerator,
@@ -163,7 +163,7 @@ void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Se
         structItem.Value=RscVariant<512>::CreateStructVariant(4);
 
         // Write the struct item to the enumerator *before* creating the RscStructWriter
-		dataItems.WriteNext(structItem);
+        dataItems.WriteNext(structItem);
 
         // Create an RscStructWriter for the struct
         RscStructWriter<512> structWriter{structItem.Value};
@@ -178,32 +178,32 @@ void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Se
         Arp::System::Rsc::Services::RscString<512> myString("String from C++");
         structWriter.WriteNextField(myString);
 
-		dataItems.EndWrite();
-	}
-	catch (std::exception& e)
-	{
-		Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-		Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteData()");
-	}
+        dataItems.EndWrite();
+    }
+    catch (std::exception& e)
+    {
+        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteData()");
+    }
 }
 
 void WriteResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Services::DataAccessError>& errors)
 {
     Arp::Plc::Gds::Services::DataAccessError error;
-	auto elements = errors.BeginRead();
-	try
-	{
-		while (errors.ReadNext(error))
-		{
+    auto elements = errors.BeginRead();
+    try
+    {
+        while (errors.ReadNext(error))
+        {
             // TODO: Handle the error.
-		}
-		errors.EndRead();
-	}
-	catch (std::exception& e)
-	{
-		Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-		Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteResult()");
-	}
+        }
+        errors.EndRead();
+    }
+    catch (std::exception& e)
+    {
+        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteResult()");
+    }
 }
 
 namespace DataAccess
@@ -244,7 +244,7 @@ void DataAccessComponent::SubscribeServices()
 
 void DataAccessComponent::LoadSettings(const String& /*settingsPath*/)
 {
-	// load firmware settings here
+    // load firmware settings here
 }
 
 void DataAccessComponent::SetupSettings()
@@ -252,12 +252,12 @@ void DataAccessComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-	// setup firmware settings here
+    // setup firmware settings here
 }
 
 void DataAccessComponent::PublishServices()
 {
-	// publish the services of this component here
+    // publish the services of this component here
 }
 
 void DataAccessComponent::LoadConfig()
@@ -294,7 +294,7 @@ void DataAccessComponent::Dispose()
 
 void DataAccessComponent::PowerDown()
 {
-	// implement this only if data must be retained even on power down event
+    // implement this only if data must be retained even on power down event
 }
 
 void DataAccessComponent::OnPlcLoaded()
@@ -343,7 +343,7 @@ void DataAccessComponent::AccessData()
     ReadItem readPortData = this->dataAccessServicePtr->ReadSingle("Arp.Plc.Eclr/DataAccessInstance.Int_OUT");
     if (readPortData.Error == DataAccessError::None)
     {
-    	readPortData.Value.CopyTo(Int_IN);
+        readPortData.Value.CopyTo(Int_IN);
         this->log.Info("Int_OUT '{0}' read from ReadSingle()", Int_IN);
     }
     else this->log.Info("Error reading single Int from GDS");
@@ -355,7 +355,7 @@ void DataAccessComponent::AccessData()
     writePortData.Value = this->Int_OUT++;
     if (this->dataAccessServicePtr->WriteSingle(writePortData) == DataAccessError::None)
     {
-    	// Success
+        // Success
     }
     else this->log.Info("Error writing single Int to GDS");
 

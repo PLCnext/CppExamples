@@ -48,7 +48,7 @@ void SubscriptionsComponent2::SubscribeServices()
 
 void SubscriptionsComponent2::LoadSettings(const String& /*settingsPath*/)
 {
-	// load firmware settings here
+    // load firmware settings here
 }
 
 void SubscriptionsComponent2::SetupSettings()
@@ -56,12 +56,12 @@ void SubscriptionsComponent2::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-	// setup firmware settings here
+    // setup firmware settings here
 }
 
 void SubscriptionsComponent2::PublishServices()
 {
-	// publish the services of this component here
+    // publish the services of this component here
 }
 
 void SubscriptionsComponent2::LoadConfig()
@@ -98,7 +98,7 @@ void SubscriptionsComponent2::Dispose()
 
 void SubscriptionsComponent2::PowerDown()
 {
-	// implement this only if data must be retained even on power down event
+    // implement this only if data must be retained even on power down event
 }
 
 void SubscriptionsComponent2::OnPlcLoaded()
@@ -232,7 +232,7 @@ void SubscriptionsComponent2::LogSubscription()
                     int64 usTicks = value.GetValue<int64>();
                     if ((i / 2) == 0)
                     {
-                    	this->value1->timestamp = DateTime::FromUnixTimeMicroseconds(usTicks);
+                        this->value1->timestamp = DateTime::FromUnixTimeMicroseconds(usTicks);
                     }
                     else
                     {

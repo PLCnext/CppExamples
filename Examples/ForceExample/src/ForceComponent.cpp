@@ -25,7 +25,7 @@ ForceComponent::ForceComponent(IApplication& application, const String& name)
 void ForceComponent::Initialize()
 {
     // never remove next line
-    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
     
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -47,7 +47,7 @@ void ForceComponent::SubscribeServices()
 
 void ForceComponent::LoadSettings(const String& /*settingsPath*/)
 {
-	// load firmware settings here
+    // load firmware settings here
 }
 
 void ForceComponent::SetupSettings()
@@ -55,12 +55,12 @@ void ForceComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-	// setup firmware settings here
+    // setup firmware settings here
 }
 
 void ForceComponent::PublishServices()
 {
-	// publish the services of this component here
+    // publish the services of this component here
 }
 
 void ForceComponent::LoadConfig()
@@ -97,7 +97,7 @@ void ForceComponent::Dispose()
 
 void ForceComponent::PowerDown()
 {
-	// implement this only if data must be retained even on power down event
+    // implement this only if data must be retained even on power down event
 }
 
 void ForceComponent::OnPlcLoaded()
@@ -140,158 +140,158 @@ void ForceComponent::StopForce()
 
 void ForceComponent::ForceData()
 {
-	// This is implemented as a step sequencer.
-	// Each step demonstrates different features of the Force service.
+    // This is implemented as a step sequencer.
+    // Each step demonstrates different features of the Force service.
 
-	switch(step)
-	{
-		case 5:
-		{
-			// Check if certain GDS variables are forceable
-			RscString<512> portName;
-			boolean isForceable;
+    switch(step)
+    {
+        case 5:
+        {
+            // Check if certain GDS variables are forceable
+            RscString<512> portName;
+            boolean isForceable;
 
-			// Global variables not connected to process data are not forceable
-			portName = "Arp.Plc.Eclr/Bool_GLOBAL";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            // Global variables not connected to process data are not forceable
+            portName = "Arp.Plc.Eclr/Bool_GLOBAL";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Plc.Eclr/Int_GLOBAL";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Plc.Eclr/Int_GLOBAL";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			// Certain types of global variables connected to process data are forceable
-			portName = "Arp.Plc.Eclr/Bool_GLOBAL_IN";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            // Certain types of global variables connected to process data are forceable
+            portName = "Arp.Plc.Eclr/Bool_GLOBAL_IN";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Plc.Eclr/Byte_GLOBAL_IN";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Plc.Eclr/Byte_GLOBAL_IN";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Plc.Eclr/Byte_GLOBAL_OUT";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Plc.Eclr/Byte_GLOBAL_OUT";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			// Certain types of program port variables are forceable
-			portName = "Arp.Plc.Eclr/MainInstance.Bool_IN";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            // Certain types of program port variables are forceable
+            portName = "Arp.Plc.Eclr/MainInstance.Bool_IN";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Plc.Eclr/MainInstance.Bool_OUT";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Plc.Eclr/MainInstance.Bool_OUT";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Plc.Eclr/MainInstance.Int_IN";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Plc.Eclr/MainInstance.Int_IN";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Plc.Eclr/MainInstance.Int_OUT";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Plc.Eclr/MainInstance.Int_OUT";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			// I/O port variables are not directly forceable
-			// These are not even recognised as valid variable names
-			portName = "Arp.Io.AxlC/0.IN00";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            // I/O port variables are not directly forceable
+            // These are not even recognised as valid variable names
+            portName = "Arp.Io.AxlC/0.IN00";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Io.AxlC/0.OUT00";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Io.AxlC/0.OUT00";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Io.AxlC/0.~DI8";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Io.AxlC/0.~DI8";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			portName = "Arp.Io.AxlC/0.~DO8";
-			isForceable = this->forceServicePtr->IsForcable(portName);
-			this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
+            portName = "Arp.Io.AxlC/0.~DO8";
+            isForceable = this->forceServicePtr->IsForcable(portName);
+            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-			break;
-		}
+            break;
+        }
 
-		case 6:
-		{
-			boolean isActive;
-			ForceItem forceVariable;
+        case 6:
+        {
+            boolean isActive;
+            ForceItem forceVariable;
 
-			// Check that forcing is inactive
-			isActive = this->forceServicePtr->IsActive();
-			this->log.Info("Before adding variables, is forcing active? {0}", isActive);
+            // Check that forcing is inactive
+            isActive = this->forceServicePtr->IsActive();
+            this->log.Info("Before adding variables, is forcing active? {0}", isActive);
 
-			// Start forcing by adding a variable to the force list
-			forceVariable.VariableName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
-			forceVariable.ForceValue = true;
-			this->forceServicePtr->AddVariable(forceVariable);
+            // Start forcing by adding a variable to the force list
+            forceVariable.VariableName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
+            forceVariable.ForceValue = true;
+            this->forceServicePtr->AddVariable(forceVariable);
 
-			// Check that forcing is active
-			isActive = this->forceServicePtr->IsActive();
-			this->log.Info("After adding a variable, is forcing active? {0}", isActive);
+            // Check that forcing is active
+            isActive = this->forceServicePtr->IsActive();
+            this->log.Info("After adding a variable, is forcing active? {0}", isActive);
 
-			// Add another variable to the force list
-			forceVariable.VariableName = "Arp.Plc.Eclr/MainInstance.Int_IN";
-			forceVariable.ForceValue = (Arp::int16)42;
-			this->forceServicePtr->AddVariable(forceVariable);
+            // Add another variable to the force list
+            forceVariable.VariableName = "Arp.Plc.Eclr/MainInstance.Int_IN";
+            forceVariable.ForceValue = (Arp::int16)42;
+            this->forceServicePtr->AddVariable(forceVariable);
 
-			break;
-		}
+            break;
+        }
 
-		case 10:
-		{
-			ForceItem forceVariable;
+        case 10:
+        {
+            ForceItem forceVariable;
 
-			// Change the value of variables already in the force list
-			forceVariable.VariableName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
-			forceVariable.ForceValue = false;
-			this->forceServicePtr->AddVariable(forceVariable);
+            // Change the value of variables already in the force list
+            forceVariable.VariableName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
+            forceVariable.ForceValue = false;
+            this->forceServicePtr->AddVariable(forceVariable);
 
-			forceVariable.VariableName = "Arp.Plc.Eclr/MainInstance.Int_IN";
-			forceVariable.ForceValue = 420;
-			this->forceServicePtr->AddVariable(forceVariable);
+            forceVariable.VariableName = "Arp.Plc.Eclr/MainInstance.Int_IN";
+            forceVariable.ForceValue = 420;
+            this->forceServicePtr->AddVariable(forceVariable);
 
-			// Get all the variables currently in the force list
-			auto forceVariables = this->forceServicePtr->GetVariables();
-			this->log.Info("Current list of forced variables:");
-			for (auto& item : forceVariables)
-			{
-				this->log.Info("- {0}", item.VariableName);
-			}
+            // Get all the variables currently in the force list
+            auto forceVariables = this->forceServicePtr->GetVariables();
+            this->log.Info("Current list of forced variables:");
+            for (auto& item : forceVariables)
+            {
+                this->log.Info("- {0}", item.VariableName);
+            }
 
-			break;
-		}
+            break;
+        }
 
-		case 15:
-		{
-			boolean isActive;
+        case 15:
+        {
+            boolean isActive;
 
-			// Remove a variable from the force list
-			this->forceServicePtr->RemoveVariable("Arp.Plc.Eclr/Bool_GLOBAL_OUT");
+            // Remove a variable from the force list
+            this->forceServicePtr->RemoveVariable("Arp.Plc.Eclr/Bool_GLOBAL_OUT");
 
-			// Check that forcing is still active
-			isActive = this->forceServicePtr->IsActive();
-			this->log.Info("After removing a variable from the force list, is forcing active? {0}", isActive);
+            // Check that forcing is still active
+            isActive = this->forceServicePtr->IsActive();
+            this->log.Info("After removing a variable from the force list, is forcing active? {0}", isActive);
 
-			// Stop forcing by removing the final variable to the force list
-			this->forceServicePtr->RemoveVariable("Arp.Plc.Eclr/MainInstance.Int_IN");
+            // Stop forcing by removing the final variable to the force list
+            this->forceServicePtr->RemoveVariable("Arp.Plc.Eclr/MainInstance.Int_IN");
 
-			// Check that forcing is active
-			isActive = this->forceServicePtr->IsActive();
-			this->log.Info("After removing all variables from the force list, is forcing active? {0}", isActive);
+            // Check that forcing is active
+            isActive = this->forceServicePtr->IsActive();
+            this->log.Info("After removing all variables from the force list, is forcing active? {0}", isActive);
 
-			break;
-		}
+            break;
+        }
 
-		default:
-			break;
-	}
+        default:
+            break;
+    }
 
-	// Increment the step and reset the sequence after a time
-	if (++step > 100) step = 0;
+    // Increment the step and reset the sequence after a time
+    if (++step > 100) step = 0;
 }
 
 } // end of namespace Force

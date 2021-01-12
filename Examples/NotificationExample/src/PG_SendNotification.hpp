@@ -48,33 +48,33 @@ private:
     DateTime now() const;
 
 public: /* Ports
-           =====
-           Ports are defined in the following way:
-           //#port
-           //#attributes(Input|Retain)
-           //#name(NameOfPort)
-           boolean portField;
+        =====
+        Ports are defined in the following way:
+        //#port
+        //#attributes(Input|Retain)
+        //#name(NameOfPort)
+        boolean portField;
 
-           The attributes comment define the port attributes and is optional.
-           The name comment defines the name of the port and is optional. Default is the name of the field.
+        The attributes comment define the port attributes and is optional.
+        The name comment defines the name of the port and is optional. Default is the name of the field.
         */
             // 4. Added port variables
-    		//#port
+            //#port
             //#attributes(Input)
-        	uint16 IP_uiInfoValue = 0;
+            uint16 IP_uiInfoValue = 0;
 
-    		//#port
+            //#port
             //#attributes(Input)
-        	uint16 IP_uiWarningValue = 0;
+            uint16 IP_uiWarningValue = 0;
 
             // 5. Added local variables to save the previous value of the ports
-        	uint16 uiPrevInfoValue = 0;
-        	uint16 uiPrevWarningValue = 0;
+            uint16 uiPrevInfoValue = 0;
+            uint16 uiPrevWarningValue = 0;
 
             // 6. Manager instance and registrations
-        	NotificationManager& nm = NotificationManager::GetInstance();
-        	NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration1;	// non-blocking needed because of real-time code execution
-        	NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration2;
+            NotificationManager& nm = NotificationManager::GetInstance();
+            NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration1;	// non-blocking needed because of real-time code execution
+            NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration2;
 
 private: // fields
     NotificationExample::COMP_Notifications& cOMP_Notifications;

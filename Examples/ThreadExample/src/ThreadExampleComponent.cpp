@@ -51,83 +51,83 @@ void ThreadExampleComponent::ResetConfig()
 }
 
 void ThreadExampleComponent::Start(void) {
-	xStopThread = false;
-	Log::Info("-------------------------------workerThreadInstance start");
-	workerThreadInstance.Start();
-	Log::Info("-------------------------------workerThreadInstance started");
+    xStopThread = false;
+    Log::Info("-------------------------------workerThreadInstance start");
+    workerThreadInstance.Start();
+    Log::Info("-------------------------------workerThreadInstance started");
 
-	Log::Info("-------------------------------delegateThreadInstance start");
-	delegateThreadInstance.Start();
-	Log::Info("-------------------------------delegateThreadInstance started");
+    Log::Info("-------------------------------delegateThreadInstance start");
+    delegateThreadInstance.Start();
+    Log::Info("-------------------------------delegateThreadInstance started");
 
 
-	Log::Info("-------------------------------staticThreadInstance start");
-	staticThreadInstance.Start();
-	Log::Info("-------------------------------staticThreadInstance started");
+    Log::Info("-------------------------------staticThreadInstance start");
+    staticThreadInstance.Start();
+    Log::Info("-------------------------------staticThreadInstance started");
 
 }
 
 void ThreadExampleComponent::Stop(void) {
-	// if you want to stop some loops of your thread during execution
-	// add something like "stoptheThread" before executing workerThreadStop.
-	xStopThread = true;
-	Log::Info("-------------------------------workerThreadInstance stop");
-	workerThreadInstance.Stop();
-	Log::Info("-------------------------------workerThreadInstance stopped");
+    // if you want to stop some loops of your thread during execution
+    // add something like "stoptheThread" before executing workerThreadStop.
+    xStopThread = true;
+    Log::Info("-------------------------------workerThreadInstance stop");
+    workerThreadInstance.Stop();
+    Log::Info("-------------------------------workerThreadInstance stopped");
 }
 
 /// Thread Body
 void ThreadExampleComponent::workerThreadBody(void) {
 
-	if(!xStopThread)
-	{
-		if(iCountervalue < iEndValue)
-			iCountervalue ++;
-		else
-			iCountervalue = iStartValue;
+    if(!xStopThread)
+    {
+        if(iCountervalue < iEndValue)
+            iCountervalue ++;
+        else
+            iCountervalue = iStartValue;
 
-		Log::Info("-------------------------------workerThreadInstance is running, iCountervalue={0}", iCountervalue);
-	}
-	else
-		Log::Info("-------------------------------workerThreadInstance is stopped, iCountervalue={0}", iCountervalue);
+        Log::Info("-------------------------------workerThreadInstance is running, iCountervalue={0}", iCountervalue);
+    }
+    else
+        Log::Info("-------------------------------workerThreadInstance is stopped, iCountervalue={0}", iCountervalue);
 }
 
 
 
 void ThreadExampleComponent::delegateThreadBody(void* pParameter) {
-	// has access to this*
-	int *i = reinterpret_cast<int*>(pParameter);
+    // has access to this*
+    int *i = reinterpret_cast<int*>(pParameter);
 
-	while(!xStopThread)
-	{
-		if(this->myparameter == *i)
-			Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running successful i={0} , myparameter = {1}", *i, this->myparameter);
+    while(!xStopThread)
+    {
+        if(this->myparameter == *i)
+            Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running successful i={0} , myparameter = {1}", *i, this->myparameter);
 
-		else
-			Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running with ERROR: i={0} , myparameter = {1}", *i, this->myparameter);
+        else
+            Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running with ERROR: i={0} , myparameter = {1}", *i, this->myparameter);
 
-		Thread::Sleep(1000);
-	}
+        Thread::Sleep(1000);
+    }
 
-	Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody stopped");
+    Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody stopped");
 }
 
 void ThreadExampleComponent::staticThreadBody(void* pParameter) {
-	bool* pValue = (bool*) pParameter;
-	// has NO access to this*
-	while(!*pValue){
+    bool* pValue = (bool*) pParameter;
+    // has NO access to this*
+    while(!*pValue){
 
-		//Do something and sleep for specifiedTime.
-		Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody is running  pParameter={0}", (int) *pValue);
-		Thread::Sleep(500);
-	}
+        //Do something and sleep for specifiedTime.
+        Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody is running  pParameter={0}", (int) *pValue);
+        Thread::Sleep(500);
+    }
 
-		Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody stopped");
+        Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody stopped");
 }
 
 
 int ThreadExampleComponent::GetCounterValue(){
-	return iCountervalue;
+    return iCountervalue;
 }
 
 } // end of namespace ThreadExample
