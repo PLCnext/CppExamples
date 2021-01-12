@@ -112,29 +112,29 @@ private: // static fields
     static const String complexVarName;
 
 public: /* Ports
-           =====
-           Component ports are defined in the following way:
+        =====
+        Component ports are defined in the following way:
 
-           //#attributes(Hidden)
-           struct Ports 
-           {
-               //#name(NameOfPort)
-               //#attributes(Input|Retain|Opc)
-               Arp::boolean portField = false;
-               // The GDS name is "<componentName>/NameOfPort" if the struct is declared as Hidden
-               // otherwise the GDS name is "<componentName>/PORTS.NameOfPort"
-           };
-           
-           //#port
-           Ports ports;
+        //#attributes(Hidden)
+        struct Ports 
+        {
+            //#name(NameOfPort)
+            //#attributes(Input|Retain|Opc)
+            Arp::boolean portField = false;
+            // The GDS name is "<componentName>/NameOfPort" if the struct is declared as Hidden
+            // otherwise the GDS name is "<componentName>/PORTS.NameOfPort"
+        };
+        
+        //#port
+        Ports ports;
 
-           Create one (and only one) instance of this struct.
-           Apart from this single struct instance, there must be no other Component variables declared with the #port comment.
-           The only attribute that is allowed on the struct instance is "Hidden", and this is optional.
-           The struct can contain as many members as necessary.
-           The #name comment can be applied to each member of the struct, and is optional.
-           The #name comment defines the GDS name of an individual port element. If omitted, the member variable name is used as the GDS name.
-           The members of the struct can be declared with any of the attributes allowed for a Program port.
+        Create one (and only one) instance of this struct.
+        Apart from this single struct instance, there must be no other Component variables declared with the #port comment.
+        The only attribute that is allowed on the struct instance is "Hidden", and this is optional.
+        The struct can contain as many members as necessary.
+        The #name comment can be applied to each member of the struct, and is optional.
+        The #name comment defines the GDS name of an individual port element. If omitted, the member variable name is used as the GDS name.
+        The members of the struct can be declared with any of the attributes allowed for a Program port.
         */
 
 };

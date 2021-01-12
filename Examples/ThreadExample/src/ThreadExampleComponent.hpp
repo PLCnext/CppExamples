@@ -43,9 +43,9 @@ using namespace Arp::Plc::Commons::Meta;
 //#component
 
 class ThreadExampleComponent : public ComponentBase
-							 , public ProgramComponentBase
-							 , public IControllerComponent
-							 , private Loggable<ThreadExampleComponent>
+                            , public ProgramComponentBase
+                            , public IControllerComponent
+                            , private Loggable<ThreadExampleComponent>
 {
 public: // typedefs
 
@@ -77,12 +77,12 @@ public: // static factory operations
 
 // Added: IProgramComponent operations
 public:
-       IProgramProvider & GetProgramProvider(bool useBackgroundDomain) override;
+    IProgramProvider & GetProgramProvider(bool useBackgroundDomain) override;
 
 // Added: IMetaComponent operations
 public:
-       IDataInfoProvider & GetDataInfoProvider(bool isChanging) override;
-       IDataNavigator*     GetDataNavigator() override;
+    IDataInfoProvider & GetDataInfoProvider(bool isChanging) override;
+    IDataNavigator*     GetDataNavigator() override;
 
 
 private: // fields
@@ -112,16 +112,16 @@ private: // fields
 
 
 public: /* Ports
-           =====
-           Component ports are defined in the following way:
-           //#port
-           //#name(NameOfPort)
-           boolean portField;
+        =====
+        Component ports are defined in the following way:
+        //#port
+        //#name(NameOfPort)
+        boolean portField;
 
-           The name comment defines the name of the port and is optional. Default is the name of the field.
-           Attributes which are defined for a component port are IGNORED. If component ports with attributes
-           are necessary, define a single structure port where attributes can be defined foreach field of the
-           structure.
+        The name comment defines the name of the port and is optional. Default is the name of the field.
+        Attributes which are defined for a component port are IGNORED. If component ports with attributes
+        are necessary, define a single structure port where attributes can be defined foreach field of the
+        structure.
         */
 };
 

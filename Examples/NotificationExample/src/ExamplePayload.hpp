@@ -28,32 +28,32 @@ using namespace Arp::System::Nm;
 class ExamplePayload : public SpecializedPayload<ExamplePayload>
 {
     public:
-	// definition of the payload values
-	ExamplePayload(const uint16& uiPortValue, const String & sMyMessage)
-	: SpecializedPayload("The value is: {0}")    		   				// definition of the payload string
-	{
-	    this->SetFieldValue(this->fieldIndexMyValue, uiPortValue); 		// relation variable value to index
+    // definition of the payload values
+    ExamplePayload(const uint16& uiPortValue, const String & sMyMessage)
+    : SpecializedPayload("The value is: {0}")    		   				// definition of the payload string
+    {
+        this->SetFieldValue(this->fieldIndexMyValue, uiPortValue); 		// relation variable value to index
         this->SetFieldValue(this->fieldIndexMyString, sMyMessage); 		// relation variable value to index
-	}
+    }
 
-	ExamplePayload(const Notification& notification)
-			: SpecializedPayload(notification)
-	{
-	}
-	// 5. Method for receiving the notification
-	const uint16 GetMyValue() const
-	{
-	return this->GetFieldValueAs<uint16>( this->fieldIndexMyValue);
-	}
+    ExamplePayload(const Notification& notification)
+            : SpecializedPayload(notification)
+    {
+    }
+    // 5. Method for receiving the notification
+    const uint16 GetMyValue() const
+    {
+    return this->GetFieldValueAs<uint16>( this->fieldIndexMyValue);
+    }
 
-	const String GetMyString() const
-	{
-	return this->GetFieldValueAs<String>( this->fieldIndexMyString);
-	}
+    const String GetMyString() const
+    {
+    return this->GetFieldValueAs<String>( this->fieldIndexMyString);
+    }
 
     private:
-	// 6. Define field index
-	size_t fieldIndexMyValue = this->AddField<uint16>();
+    // 6. Define field index
+    size_t fieldIndexMyValue = this->AddField<uint16>();
     size_t fieldIndexMyString = this->AddField<String>();
 
 };

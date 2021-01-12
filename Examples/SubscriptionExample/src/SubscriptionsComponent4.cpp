@@ -51,7 +51,7 @@ void SubscriptionsComponent4::SubscribeServices()
 
 void SubscriptionsComponent4::LoadSettings(const String& /*settingsPath*/)
 {
-	// load firmware settings here
+    // load firmware settings here
 }
 
 void SubscriptionsComponent4::SetupSettings()
@@ -59,12 +59,12 @@ void SubscriptionsComponent4::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-	// setup firmware settings here
+    // setup firmware settings here
 }
 
 void SubscriptionsComponent4::PublishServices()
 {
-	// publish the services of this component here
+    // publish the services of this component here
 }
 
 void SubscriptionsComponent4::LoadConfig()
@@ -101,7 +101,7 @@ void SubscriptionsComponent4::Dispose()
 
 void SubscriptionsComponent4::PowerDown()
 {
-	// implement this only if data must be retained even on power down event
+    // implement this only if data must be retained even on power down event
 }
 
 void SubscriptionsComponent4::OnPlcLoaded()
