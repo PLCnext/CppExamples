@@ -4,7 +4,6 @@
 #include "Arp/System/Acf/IApplication.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "CppDataTypeTestComponentProgramProvider.hpp"
-#include "CppDataTypeTestLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 
@@ -60,12 +59,6 @@ public: /* Ports
 
 ///////////////////////////////////////////////////////////////////////////////
 // inline methods of class CppDataTypeTestComponent
-inline CppDataTypeTestComponent::CppDataTypeTestComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance(), name, ComponentCategory::Custom)
-, programProvider(*this)
-, ProgramComponentBase(::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance().GetNamespace(), programProvider)
-{
-}
 
 inline IComponent::Ptr CppDataTypeTestComponent::Create(Arp::System::Acf::IApplication& application, const String& name)
 {

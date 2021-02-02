@@ -24,8 +24,7 @@ namespace CppDataTypeTest
 void CppDataTypeTestProgram::Execute()
 {
     //implement program 
-
-
+    
     if(outBoolean == true)
             outBoolean = false;
         else

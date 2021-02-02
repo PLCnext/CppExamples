@@ -1,9 +1,15 @@
 #include "CppDataTypeTestComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
-
+#include "CppDataTypeTestLibrary.hpp"
 namespace CppDataTypeTest
 {
 
+CppDataTypeTestComponent::CppDataTypeTestComponent(IApplication& application, const String& name)
+: ComponentBase(application, ::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance(), name, ComponentCategory::Custom)
+, programProvider(*this)
+, ProgramComponentBase(::CppDataTypeTest::CppDataTypeTestLibrary::GetInstance().GetNamespace(), programProvider)
+{
+}
 void CppDataTypeTestComponent::Initialize()
 {
     // never remove next line
