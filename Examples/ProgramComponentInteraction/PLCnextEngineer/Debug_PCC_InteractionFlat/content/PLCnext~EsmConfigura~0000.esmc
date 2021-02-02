@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EsmConfiguration id="d1c6589e-eaf0-4a20-9cbe-c9fb70bb044d" version="2" importRevision="1">
+	<Esms>
+		<Esm id="1ef1fb85-51ac-4889-9829-4bb3854012cd" name="ESM1" cpuAffinity="1" timerInterval="500000" taskSchedulerMode="" comment="" readonly="False" />
+		<Esm id="07552777-47f0-4645-938e-5c5f9f8b7d6d" name="ESM2" cpuAffinity="2" timerInterval="500000" taskSchedulerMode="" comment="" readonly="False" />
+	</Esms>
+	<Tasks>
+		<Task id="93b5ae55-56fd-4dec-9e38-7606355ecf2a" name="Task_1000ms" taskType="CyclicTask" priority="1" intervalTime="1000000000" watchdogTime="800000000" executionTimeThreshold="400000000" coreAffinity="0" stackSize="0" taskBuffer="None" comment="" esmId="1ef1fb85-51ac-4889-9829-4bb3854012cd" readonly="False">
+			<ProgramInstances>
+				<ProgramInstance id="00beb470-0c58-4ef9-8a1f-64fe45843ee1" name="DownCounterProgram1" programType="DownCounterProgram" componentId="53d3fb3b-e577-4a63-80f7-338a25ee3ff4" libraryName="ProgramComponentInteraction" componentName="CounterComponent1" componentType="CounterComponent" comment="" readonly="False" groupName="" />
+				<ProgramInstance id="0ab741d8-eae8-40ea-b965-8b2533288b14" name="NewProgram1" programType="NewProgram" componentId="00000000-0000-0000-0000-000000000000" libraryName="Arp.Plc.Eclr" componentName="Arp.Plc.Eclr" componentType="EclrComponent" comment="" readonly="False" groupName="" />
+			</ProgramInstances>
+		</Task>
+		<Task id="1ebf67e3-713d-4e21-86a8-90663c27fbdb" name="Task_2000ms" taskType="CyclicTask" priority="2" intervalTime="2000000000" watchdogTime="800000000" executionTimeThreshold="400000000" coreAffinity="0" stackSize="0" taskBuffer="None" comment="" esmId="1ef1fb85-51ac-4889-9829-4bb3854012cd" readonly="False">
+			<ProgramInstances>
+				<ProgramInstance id="e0dbfa16-776f-48e8-a078-efc561c1c353" name="UpCounterProgram1" programType="UpCounterProgram" componentId="53d3fb3b-e577-4a63-80f7-338a25ee3ff4" libraryName="ProgramComponentInteraction" componentName="CounterComponent1" componentType="CounterComponent" comment="" readonly="False" groupName="" />
+			</ProgramInstances>
+		</Task>
+	</Tasks>
+</EsmConfiguration>

@@ -1,0 +1,6 @@
+{ CustomGroupDefinition('2ac73918-d71f-4466-8d91-3ae704c794c5', '') }
+
+VAR_GLOBAL
+    UP : INT { InputPort, CustomGroupReference('2ac73918-d71f-4466-8d91-3ae704c794c5') } {Id('c52fb3ef-8ec8-4e91-8e29-823769eae025')};
+    DOWN : INT { InputPort, CustomGroupReference('2ac73918-d71f-4466-8d91-3ae704c794c5') } {Id('69414510-27d8-41de-9e2b-001bbac52f35')};
+END_VAR

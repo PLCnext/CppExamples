@@ -31,7 +31,7 @@ switch(progress)
         case Progress::Running :
         {
             this->OP_Counter++;
-            if(  this->OP_Counter == 255 )
+            if(  this->OP_Counter >= 255 )
             {
                 progress = Progress::Stopped;
             }

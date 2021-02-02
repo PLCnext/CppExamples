@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserMetadataDoc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <UserMetadata Id="1be191c1-76d1-44d4-a578-3f9a61ddabac" xmlns="">
+      <dcec>
+         <dc:identifier></dc:identifier>
+         <dc:title></dc:title>
+      </dcec>
+      <revTable />
+	  <DescriptionCollection>
+         <Description relativePath=".\Description.html" format="HTML" />
+		 <Description relativePath=".\Description.rtf" format="RTF" />
+      </DescriptionCollection>
+   </UserMetadata>
+</UserMetadataDoc>
