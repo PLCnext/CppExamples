@@ -41,7 +41,7 @@ Note left of CounterComponent: Command::CountUp
 |Controller | AXC F 2152 |
 |FW | 2020.0 LTS or later |
 |SDK | 2020.0 LTS or later |
-|PLCnext Engineer | 2020.0 LTS or later |
+|PLCnext Engineer | 2021.0 LTS or later |
 
 ## Preconditions
 
