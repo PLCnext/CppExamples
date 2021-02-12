@@ -17,9 +17,26 @@
 
 #include "ThreadExampleComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
+#include "ThreadExampleLibrary.hpp"
 
 namespace ThreadExample
 {
+
+///////////////////////////////////////////////////////////////////////////////
+// inline methods of class ThreadExampleComponent
+ThreadExampleComponent::ThreadExampleComponent(IApplication& application, const String& name)
+: ComponentBase(application, ::ThreadExample::ThreadExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
+, programProvider(*this)
+, ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
+
+// Worker Thread Example
+, workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
+
+//Commons/Thread Example
+, delegateThreadInstance(delegateThreadSettings,this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
+, staticThreadInstance(staticThreadSettings,&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
+{
+}
 
 void ThreadExampleComponent::Initialize()
 {
