@@ -21,7 +21,6 @@
 #include "Arp/System/Acf/IApplication.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "ThreadExampleComponentProgramProvider.hpp"
-#include "ThreadExampleLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 
@@ -41,7 +40,6 @@ using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
 
 //#component
-
 class ThreadExampleComponent : public ComponentBase
                             , public ProgramComponentBase
                             , public IControllerComponent
@@ -75,19 +73,8 @@ private: // methods
 public: // static factory operations
     static IComponent::Ptr Create(Arp::System::Acf::IApplication& application, const String& name);
 
-// Added: IProgramComponent operations
-public:
-    IProgramProvider & GetProgramProvider(bool useBackgroundDomain) override;
-
-// Added: IMetaComponent operations
-public:
-    IDataInfoProvider & GetDataInfoProvider(bool isChanging) override;
-    IDataNavigator*     GetDataNavigator() override;
-
-
 private: // fields
     ThreadExampleComponentProgramProvider programProvider;
-    DataInfoProvider    		  		  dataInfoProvider;
 
     // Worker Thread Example
     WorkerThread workerThreadInstance;
@@ -110,65 +97,32 @@ private: // fields
     int myparameter{123};
     static void staticThreadBody(void* pParameter);
 
-
 public: /* Ports
-        =====
-        Component ports are defined in the following way:
-        //#port
-        //#name(NameOfPort)
-        boolean portField;
+           =====
+           Component ports are defined in the following way:
 
-        The name comment defines the name of the port and is optional. Default is the name of the field.
-        Attributes which are defined for a component port are IGNORED. If component ports with attributes
-        are necessary, define a single structure port where attributes can be defined foreach field of the
-        structure.
+           //#attributes(Hidden)
+           struct Ports
+           {
+               //#name(NameOfPort)
+               //#attributes(Input|Retain|Opc)
+               Arp::boolean portField = false;
+               // The GDS name is "<componentName>/NameOfPort" if the struct is declared as Hidden
+               // otherwise the GDS name is "<componentName>/PORTS.NameOfPort"
+           };
+
+           //#port
+           Ports ports;
+
+           Create one (and only one) instance of this struct.
+           Apart from this single struct instance, there must be no other Component variables declared with the #port comment.
+           The only attribute that is allowed on the struct instance is "Hidden", and this is optional.
+           The struct can contain as many members as necessary.
+           The #name comment can be applied to each member of the struct, and is optional.
+           The #name comment defines the GDS name of an individual port element. If omitted, the member variable name is used as the GDS name.
+           The members of the struct can be declared with any of the attributes allowed for a Program port.
         */
 };
-
-///////////////////////////////////////////////////////////////////////////////
-// inline methods of class ThreadExampleComponent
-inline ThreadExampleComponent::ThreadExampleComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::ThreadExample::ThreadExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
-, programProvider(*this)
-, ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
-
-// Added: data info provider
-, dataInfoProvider(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), &(this->programProvider))
-
-//// Worker Thread Example
-, workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
-
-//Commons/Thread Example
-, delegateThreadInstance(delegateThreadSettings,this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
-, staticThreadInstance(staticThreadSettings,&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
-{
-}
-
-
-#pragma region IProgramComponent implementation
-
-inline IProgramProvider& ThreadExampleComponent::GetProgramProvider(bool /*useBackgroundDomain*/)
-{
-    return this->programProvider;
-}
-
-#pragma endregion
-
-
-#pragma region IMetaComponent implementation
-
-inline IDataInfoProvider& ThreadExampleComponent::GetDataInfoProvider(bool /*useBackgroundDomain*/)
-{
-    return this->dataInfoProvider;
-}
-
-inline IDataNavigator* ThreadExampleComponent::GetDataNavigator()
-{
-    return nullptr;
-}
-
-#pragma endregion
-
 
 inline IComponent::Ptr ThreadExampleComponent::Create(Arp::System::Acf::IApplication& application, const String& name)
 {

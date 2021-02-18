@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<content>
+  <file_system name="Safety" id="Safety~0000" />
+  <file name="StorageProperties.xml" id="StorageProperties~0000.xml" />
+  <file name="StorageContent.xml" id="StorageContent~0000.xml" />
+  <folder name="PROJECT">
+    <file name="PROJECT.proj" id="PROJECT~PROJECT~0000.proj" />
+    <folder name="Logical Elements">
+      <file name="CRC32.crc" id="Logical Elemen~CRC32~0000.crc" />
+      <file name="GeneratedDataTypes.dt" id="Logical E~GeneratedD~0000.dt" />
+      <folder name="NewProgram.pou">
+        <file name="Metadata.meta" id="NewProgram.~Metadata~0000.meta" />
+        <file name="Variables.var" id="NewProgram~Variables~0000.var" />
+        <file name="VersionHistory.usermeta" id="NewProgra~VersionHis~0000.usermeta" />
+        <file name="Description.rtf" id="NewProgra~Descriptio~0000.rtf" />
+        <file name="Variables.var.locres" id="NewProgra~Variables.~0000.locres" />
+        <file name="User.locres" id="NewProgram.pou~User~0000.locres" />
+        <file name="Code.st" id="NewProgram.pou~Code~0000.st" />
+        <file name="Description.html" id="NewProgra~Descriptio~0001.html" />
+      </folder>
+    </folder>
+    <folder name="Hardware">
+      <file name="ba87f980-c6ef-4eb9-9e15-9a0db7033c0c.DataLink" id="Hardware~ba87f980-c6~0000.DataLink" />
+      <file name="ba87f980-c6ef-4eb9-9e15-9a0db7033c0c.Transport" id="Hardware~ba87f980-c6~0001.Transport" />
+      <file name="VersionHistory.usermeta" id="Hardware~VersionHist~0000.usermeta" />
+      <file name="ba87f980-c6ef-4eb9-9e15-9a0db7033c0c.projset" id="Hardware~ba87f980-c6~0002.projset" />
+      <file name="Description.rtf" id="Hardware~Description~0000.rtf" />
+      <folder name="CFG_1379F2027CBE47E3871C80CA2EC7DE90">
+        <file name="PlmConfiguration.plmc" id="CFG_1379F~PlmConfigu~0000.plmc" />
+        <file name="6aff7cb6-d8e0-48c1-a326-d8cad274e635.ds" id="CFG_1379F~6aff7cb6-d~0000.ds" />
+        <file name="DataList.dl" id="CFG_1379F20~DataList~0000.dl" />
+        <folder name="PLCnext">
+          <file name="EsmConfiguration.esmc" id="PLCnext~EsmConfigura~0000.esmc" />
+          <file name="6aff7cb6-d8e0-48c1-a326-d8cad274e635.L7_1.datalogger" id="PLCnext~6aff7cb6-d8e~0000.datalogger" />
+        </folder>
+        <folder name="RES_B9EDE5F589844181B5FD91D1F4D4C5D2">
+          <file name="DataList.dlr4var" id="RES_B9EDE5F~DataList~0000.dlr4var" />
+          <file name="IOConfiguration.ioc" id="RES_B9EDE~IOConfigur~0000.ioc" />
+          <file name="ResourceSettings.set" id="RES_B9EDE~ResourceSe~0000.set" />
+          <file name="GlobalVariables.var" id="RES_B9EDE~GlobalVari~0000.var" />
+          <file name="Arp.Plc.Eclr.libmeta" id="RES_B9EDE~Arp.Plc.Ec~0000.libmeta" />
+          <file name="EclrComponent.compmeta" id="RES_B9EDE~EclrCompon~0000.compmeta" />
+        </folder>
+        <folder name="HMI_Server">
+          <file name="DataList.dlr4hmi" id="HMI_Server~DataList~0000.dlr4hmi" />
+          <folder name="Applikation">
+            <file name="Profiles.hmiprofiles" id="Applikation~Profiles~0000.hmiprofiles" />
+            <file name="Variables.hmivar" id="Applikatio~Variables~0000.hmivar" />
+            <file name="Navigation.hminav" id="Applikati~Navigation~0000.hminav" />
+          </folder>
+        </folder>
+        <folder name="EIP_Master">
+          <file name="Arp.Io.EthernetIP.libmeta" id="EIP_Maste~Arp.Io.Eth~0000.libmeta" />
+          <file name="ControllerComponent.compmeta" id="EIP_Maste~Controller~0000.compmeta" />
+        </folder>
+        <folder name="PN_Master">
+          <file name="Arp.Io.Pn.libmeta" id="PN_Master~Arp.Io.Pn~0000.libmeta" />
+          <file name="ControllerComponent.compmeta" id="PN_Master~Controller~0000.compmeta" />
+        </folder>
+        <folder name="AXLF_Master">
+          <file name="Arp.Io.Axl.libmeta" id="AXLF_Mast~Arp.Io.Axl~0000.libmeta" />
+          <file name="Arp.Io.Axl.ControllerComponent.compmeta" id="AXLF_Mast~Arp.Io.Axl~0001.compmeta" />
+        </folder>
+        <folder name="IB_Master">
+          <file name="Arp.Io.Ib.libmeta" id="IB_Master~Arp.Io.Ib~0000.libmeta" />
+          <file name="Arp.Io.Ib.ControllerComponent.compmeta" id="IB_Master~Arp.Io.Ib.~0000.compmeta" />
+        </folder>
+      </folder>
+    </folder>
+  </folder>
+</content>

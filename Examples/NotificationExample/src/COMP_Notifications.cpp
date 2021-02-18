@@ -6,9 +6,22 @@
 
 #include "COMP_Notifications.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
+#include "NotificationExampleLibrary.hpp"
 
 namespace NotificationExample
 {
+
+COMP_Notifications::COMP_Notifications(IApplication& application, const String& name)
+: ComponentBase(application, ::NotificationExample::NotificationExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
+, programProvider(*this)
+, ProgramComponentBase(::NotificationExample::NotificationExampleLibrary::GetInstance().GetNamespace(), programProvider)
+,    Custom_subscription("My.NameSpace.1")
+,    Custom_subscription2("My.NameSpace.2")
+,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged")
+,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged")
+{
+
+}
 
 void COMP_Notifications::Initialize()
 {

@@ -32,17 +32,17 @@ Both the PLCnext Technology firmware and user-defined components can send notifi
 |Description | Value |
 |------------ |-----------|
 |Created | 20.09.2019 |
-|Last modified| 05.08.2020 |
+|Last modified| 15.02.2021 |
 |Controller| AXC F 2152 |
-|FW| 2020.6.1 |
-|Arpversion| 20.6.1.30859 |
-|SVN Revision| 30859 |
-|SDK| 20.6.1.30859 |
-|PLCnext CLI | 2020.0 (20.0.0.243) |
+|FW| 2021.0.0 LTS |
+|Arpversion| 21.0.0.35466 |
+|SVN Revision| 35466 |
+|SDK| 2021.0.0 LTS (21.0.0.35466) |
+|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
 
 ## When to use Notifications
 
-Notifications are useful when event data must be transferred between two otherwise independent components on a PLCnext Control.
+Notifications are useful when event data must be transferred between two otherwise independent components on a PLCnext Control device.
 
 The following are some examples of how the Notification manager can be used by a user component:
 
@@ -68,11 +68,11 @@ It is assumed that the user has some experience [building C++ Components and Pro
 
 Prerequisites:
 
-- PLCnext Command Line Interface (CLI) tool, version 2020.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Command Line Interface (CLI) tool, version 2021.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
 
-- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2020.6.1. This is also included in the "PLCnext Technology C++ tool chain".
+- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2021.0.0. This is also included in the "PLCnext Technology C++ tool chain".
 
-- PLCnext Engineer version 2020.6.
+- PLCnext Engineer version 2021.0.1.
 
 Procedure:
 
@@ -175,9 +175,7 @@ Arp::System::Nm::NotificationSubscriber PlcStateChanged_subscription;
 ... and in the Component constructor, each Subscriber is associated with with a notification name:
 
 ```cpp
-///////////////////////////////////////////////////////////////////////////////
-// inline methods of class COMP_Notifications
-inline COMP_Notifications::COMP_Notifications(IApplication& application, const String& name)
+COMP_Notifications::COMP_Notifications(IApplication& application, const String& name)
 : ComponentBase(application, ::NotificationExample::NotificationExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
 , programProvider(*this)
 , ProgramComponentBase(::NotificationExample::NotificationExampleLibrary::GetInstance().GetNamespace(), programProvider)

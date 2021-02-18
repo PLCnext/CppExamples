@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NetworkDoc>
+  <EndPoint uuid="IP:Subnet">
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip02' type='IP:FirstIpAddress']" Type="Ade.Fdcml.Core.Ipv4">192.168.1.2</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip03' type='IP:LastIpAddress']" Type="Ade.Fdcml.Core.Ipv4">192.168.254.254</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip04' type='IP:DefaultGateway']" Type="Ade.Fdcml.Core.Ipv4"></InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip05' type='IP:SubnetMask']" Type="Ade.Fdcml.Core.Ipv4">255.255.0.0</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip06' type='IP:SubnetRepresentation']" Type="Ade.Fdcml.Core.String">[UTF-8;6E6574776F726B3031]</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip07' type='IP:TopLevelDomain']" Type="Ade.Fdcml.Core.StringAscii"></InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip10' type='SNMP:ReadCommunity']" Type="Ade.Fdcml.Core.StringAscii">public</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip11' type='SNMP:WriteCommunity']" Type="Ade.Fdcml.Core.StringAscii">private</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip12' type='SNMP:V3UserName']" Type="Ade.Fdcml.Core.StringAscii"></InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip13' type='SNMP:Version']" Type="Ade.Fdcml.Core.Signed32">2</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip14' type='SNMP:V3AuthenticationDigests']" Type="Ade.Fdcml.Core.Unsigned32">1</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip15' type='SNMP:V3AuthenticationSecrets']" Type="Ade.Fdcml.Core.StringAscii"></InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip16' type='SNMP:V3PrivacyProtocols']" Type="Ade.Fdcml.Core.Unsigned32">1</InstVal>
+    <InstVal xPath="/EndPoint[@uID='IP:Subnet']/InstanceObjList/Obj[@uID='ip17' type='SNMP:V3PrivacySecrets']" Type="Ade.Fdcml.Core.StringAscii"></InstVal>
+  </EndPoint>
+</NetworkDoc>

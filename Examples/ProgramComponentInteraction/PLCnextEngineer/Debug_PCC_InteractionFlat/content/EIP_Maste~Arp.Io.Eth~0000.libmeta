@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MetaConfigurationDocument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0" xmlns="http://www.phoenixcontact.com/schema/metaconfig">
+  <Library name="Arp.Io.EthernetIP" namespace="Arp.Io.EthernetIP">
+    <ComponentIncludes>
+      <Include path="ControllerComponent.compmeta" />
+    </ComponentIncludes>
+  </Library>
+</MetaConfigurationDocument>

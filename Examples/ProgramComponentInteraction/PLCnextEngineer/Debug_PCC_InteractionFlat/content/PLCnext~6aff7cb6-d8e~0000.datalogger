@@ -1,0 +1,7 @@
+<DataLoggerConfigDocument>
+  <LogSession Name="CheckCounters" Datasink="Volatile" Destination="" SamplingInterval="500" PublishInterval="5000" BufferCapacity="30" Rollover="false" WriteInterval="1000" MaxFileSize="5000000" MaxFiles="-1" StoreChanges="true" DeleteRatio="30" TimestampFormat="Iso8601">
+    <Variable Name="CounterComponent1/DownCounterProgram1.Down_Counter" />
+    <Variable Name="CounterComponent1/UpCounterProgram1.UP_Counter" />
+    <Variable Name="CounterComponent1/StopCounting" />
+  </LogSession>
+</DataLoggerConfigDocument>

@@ -31,8 +31,6 @@ using namespace Arp::Plc::Commons::Esm;
 class CppDataTypeTestProgram : public ProgramBase, private Loggable<CppDataTypeTestProgram>
 {
 public: // typedefs
-
-
     struct s_alltypes{
 
         int8	outInt8		=	0; 	//SINT

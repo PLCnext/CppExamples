@@ -1,0 +1,32 @@
+{ Type('AXCF2152') }
+RESOURCE PLC
+{ DeviceProfileWorksheet('DeviceProfile', Id := 'd1d1ed6c-9510-4a40-9e04-a070d1afd202') }
+{ DeviceProfile(
+    Name := 'RES_B9EDE5F589844181B5FD91D1F4D4C5D2',
+    Parent := ( Name := 'AXCF2152', Version := '2021.0.0'), 
+    UpdateType := 'Manual',
+    FilesIni := 
+    [
+    ],
+    CommunicationMetadata := 'UniqueId=TCP/IP;IsBackup=False',
+    DeviceDescription := 
+    (
+        MaxProgramSize := '8388608',
+        MaxDataSize := '16777208',
+        MaxRetainDataSize := '0',
+        MaxTaskPriority := '96',
+        Endianness := 'LittleEndian'
+    ),
+    CommunicationType := 'TcpIp',
+    CommunicationParameters := 'DLL socomm.dll -ip192.168.1.10 -p41100 -to2000',
+    DownloadFiles := 
+    [
+    ]
+)}
+
+
+TASK Task_1000ms (INTERVAL := T#1000ms, PRIORITY := 1) { Watchdog(T#800ms), Id('93b5ae55-56fd-4dec-9e38-7606355ecf2a') };
+
+PROGRAM NewProgram1 WITH Task_1000ms : NewProgram { Id('0ab741d8-eae8-40ea-b965-8b2533288b14') };
+
+END_RESOURCE

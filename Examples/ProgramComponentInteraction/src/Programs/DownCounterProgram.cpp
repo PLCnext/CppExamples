@@ -33,7 +33,7 @@ void DownCounterProgram::Execute()
         case Progress::Running :
         {
             this->OP_Counter--;
-            if(  this->OP_Counter == 0 )
+            if(  this->OP_Counter <= 0 )
             {
                 progress = Progress::Stopped;
             }

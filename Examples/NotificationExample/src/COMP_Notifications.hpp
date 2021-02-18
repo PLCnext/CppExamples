@@ -10,11 +10,10 @@
 #include "Arp/System/Acf/IApplication.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "COMP_NotificationsProgramProvider.hpp"
-#include "NotificationExampleLibrary.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
-#include "Arp/Plc/Commons/Domain/PlcState.hpp"
 #include "Arp/System/Commons/Logging.h"
 
+#include "Arp/Plc/Commons/Domain/PlcState.hpp"
 #include "Arp/System/Nm/NotificationManager.hpp"
 #include "Arp/System/NmPayload/Plc/PlcStateChangedPayload.hpp"
 #include "Arp/System/NmPayload/Device/NetworkConfigurationChangedPayload.hpp"
@@ -73,32 +72,31 @@ private: // fields
 public: /* Ports
            =====
            Component ports are defined in the following way:
-           //#port
-           //#name(NameOfPort)
-           boolean portField;
 
-           The name comment defines the name of the port and is optional. Default is the name of the field.
-           Attributes which are defined for a component port are IGNORED. If component ports with attributes
-           are necessary, define a single structure port where attributes can be defined foreach field of the
-           structure.
+           //#attributes(Hidden)
+           struct Ports
+           {
+               //#name(NameOfPort)
+               //#attributes(Input|Retain|Opc)
+               Arp::boolean portField = false;
+               // The GDS name is "<componentName>/NameOfPort" if the struct is declared as Hidden
+               // otherwise the GDS name is "<componentName>/PORTS.NameOfPort"
+           };
+
+           //#port
+           Ports ports;
+
+           Create one (and only one) instance of this struct.
+           Apart from this single struct instance, there must be no other Component variables declared with the #port comment.
+           The only attribute that is allowed on the struct instance is "Hidden", and this is optional.
+           The struct can contain as many members as necessary.
+           The #name comment can be applied to each member of the struct, and is optional.
+           The #name comment defines the GDS name of an individual port element. If omitted, the member variable name is used as the GDS name.
+           The members of the struct can be declared with any of the attributes allowed for a Program port.
         */
        int OP_uiValue1{};
        int OP_uiValue2{};
 };
-
-///////////////////////////////////////////////////////////////////////////////
-// inline methods of class COMP_Notifications
-inline COMP_Notifications::COMP_Notifications(IApplication& application, const String& name)
-: ComponentBase(application, ::NotificationExample::NotificationExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
-, programProvider(*this)
-, ProgramComponentBase(::NotificationExample::NotificationExampleLibrary::GetInstance().GetNamespace(), programProvider)
-,    Custom_subscription("My.NameSpace.1")
-,    Custom_subscription2("My.NameSpace.2")
-,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged")
-,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged")
-{
-
-}
 
 inline IComponent::Ptr COMP_Notifications::Create(Arp::System::Acf::IApplication& application, const String& name)
 {
