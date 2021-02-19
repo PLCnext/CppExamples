@@ -21,20 +21,18 @@
 
 namespace ThreadExample
 {
-
-///////////////////////////////////////////////////////////////////////////////
-// inline methods of class ThreadExampleComponent
+///
+///ThreadExampleComponent Constructor
+///
 ThreadExampleComponent::ThreadExampleComponent(IApplication& application, const String& name)
 : ComponentBase(application, ::ThreadExample::ThreadExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
 , programProvider(*this)
 , ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
-
 // Worker Thread Example
 , workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
-
 //Commons/Thread Example
-, delegateThreadInstance(delegateThreadSettings,this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
-, staticThreadInstance(staticThreadSettings,&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
+, delegateThreadInstance(ThreadSettings("DelegateThreadName", 20, 0, 0),this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
+, staticThreadInstance(ThreadSettings("StaticThreadName", 20, 0, 0),&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
 {
 }
 

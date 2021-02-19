@@ -85,12 +85,11 @@ private: // fields
 
     void workerThreadBody(void);
 
-    //Commons/Thread Example
+     //Commons/Thread Example
     Thread delegateThreadInstance;
     Thread staticThreadInstance;
 
-    ThreadSettings delegateThreadSettings {"DelegateThreadName", 0, 0, 0};
-    ThreadSettings staticThreadSettings {"StaticThreadName", 0, 0, 0};
+
 
     void delegateThreadBody(void * pParameter);
 
