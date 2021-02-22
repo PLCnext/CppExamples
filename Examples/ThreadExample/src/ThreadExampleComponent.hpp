@@ -85,7 +85,7 @@ private: // fields
 
     void workerThreadBody(void);
 
-     //Commons/Thread Example
+    //Commons/Thread Example
     Thread delegateThreadInstance;
     Thread staticThreadInstance;
 
