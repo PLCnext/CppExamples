@@ -94,7 +94,7 @@ static void staticThreadBody(void* pParameter);
 3.) Initialize the `WorkerThread`, `delegateThread` and `staticThread` in your Components constructor:
     
 ```cpp
-inline ThreadExampleComponent::ThreadExampleComponent(IApplication& application, const String& name)
+ThreadExampleComponent::ThreadExampleComponent(IApplication& application, const String& name)
 : ComponentBase(application, ::ThreadExample::ThreadExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
 , programProvider(*this)
 , ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
@@ -106,10 +106,10 @@ inline ThreadExampleComponent::ThreadExampleComponent(IApplication& application,
 , workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
 
 //// Delegate Thread Example
-, delegateThreadInstance(delegateThreadSettings,this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
+, delegateThreadInstance(ThreadSettings("DelegateThreadName", 20, 0, 0),this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
 
 //// Static Thread Example
-, staticThreadInstance(staticThreadSettings,&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
+, staticThreadInstance(ThreadSettings("StaticThreadName", 20, 0, 0),&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
 ```
 
 4.) Add `workerThreadInstance.Start()`, `workerThreadInstance.Stop()`, `delegateThreadInstance.Start()`, `staticThreadInstance.Start()` to the Component. The Start method is used to start or stop the threads during start of the controller or/and component, respectively.

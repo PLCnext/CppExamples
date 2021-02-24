@@ -89,6 +89,20 @@ void ThreadExampleComponent::Stop(void) {
     Log::Info("-------------------------------workerThreadInstance stop");
     workerThreadInstance.Stop();
     Log::Info("-------------------------------workerThreadInstance stopped");
+    
+    Log::Info("-------------------------------staticThreadInstance stop");
+    staticThreadInstance.Interrupt();
+    if (staticThreadInstance.IsJoinable()){   
+    staticThreadInstance.Join();
+    }
+    Log::Info("-------------------------------staticThreadInstance stopped");
+
+    Log::Info("-------------------------------delegateThreadInstance stop");
+    delegateThreadInstance.Interrupt();
+    if (delegateThreadInstance.IsJoinable()){   
+    delegateThreadInstance.Join();
+    }
+    Log::Info("-------------------------------delegateThreadInstance stopped");
 }
 
 /// Thread Body

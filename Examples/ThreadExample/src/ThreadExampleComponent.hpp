@@ -73,28 +73,27 @@ private: // methods
 public: // static factory operations
     static IComponent::Ptr Create(Arp::System::Acf::IApplication& application, const String& name);
 
+private: // Thread Bodys
+    void workerThreadBody(void);
+    void delegateThreadBody(void * pParameter); 
+    static void staticThreadBody(void* pParameter);
+
 private: // fields
     ThreadExampleComponentProgramProvider programProvider;
 
-    // Worker Thread Example
+    // WorkerThread Example
     WorkerThread workerThreadInstance;
     int iStartValue = 0;
     int iEndValue = 1000;
     int iCountervalue = 0;
     bool xStopThread = false;
 
-    void workerThreadBody(void);
-
-    //Commons/Thread Example
+    // delegate Thread Example
     Thread delegateThreadInstance;
-    Thread staticThreadInstance;
 
-
-
-    void delegateThreadBody(void * pParameter);
-
+    // static Thread Example
     int myparameter{123};
-    static void staticThreadBody(void* pParameter);
+    Thread staticThreadInstance;
 
 public: /* Ports
            =====
