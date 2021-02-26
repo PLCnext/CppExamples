@@ -1,4 +1,4 @@
-﻿#include "BufferedExchangeComponent.hpp"
+#include "BufferedExchangeComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "BufferedExchangeLibrary.hpp"
 
@@ -15,7 +15,7 @@ BufferedExchangeComponent::BufferedExchangeComponent(IApplication &application,c
 		//
 		workerThread(make_delegate(&wT, &MyWorker::RunSingle), 1000,"-WorkerThread")
 {
-	log.Info("-------------------BufferedExchangeComponent Constructor");
+	log.Info("------------------- BufferedExchangeComponent Constructor");
 }
 
 void BufferedExchangeComponent::Initialize() {
@@ -40,13 +40,13 @@ void BufferedExchangeComponent::SetupConfig() {
 void BufferedExchangeComponent::ResetConfig() {
 	// never remove next line
 	ProgramComponentBase::ResetConfig();
-	log.Info("---------------- ResetConfig");
+	log.Info("--- ResetConfig");
 
 	// implement this inverse to SetupConfig() and LoadConfig()
 }
 
 void BufferedExchangeComponent::Start(void) {
-	log.Info("---------------- Start");
+	log.Info("--- Start");
 	try {
 		wT.Stop = false;
 		workerThread.Start();
@@ -57,35 +57,32 @@ void BufferedExchangeComponent::Start(void) {
 		wD.Stop = false;
 		delegateThread.Start();
 	} catch (Exception &e) {
-		log.Error("---------------- Error thread start:{0}",
-				e.GetMessage());
+		log.Error("--- Error thread start:{0}",	e.GetMessage());
 	}
 }
 
 void BufferedExchangeComponent::Stop(void) {
-	log.Info("----------------Stop:");
+	log.Info("--- Stop:");
 	try {
 		StopWT(wT, workerThread);
 		StopT(wD, delegateThread);
 		StopT(wS, staticThread);
 
 	} catch (Exception &e) {
-		log.Error("---------------- Error thread Stop:{0}",
-				e.GetMessage());
+		log.Error("--- Error thread Stop:{0}",	e.GetMessage());
 	}
 }
 
 void BufferedExchangeComponent::StopWT(MyWorker &W, WorkerThread &T) {
-	log.Info("---------------- Thread:{0} Running:{1} ", "Worker",
-			T.IsRunning());
+	log.Info("--- Thread:{0} Running:{1} ", "Worker", T.IsRunning());
 	W.Stop = true;
 	// Stopping WorkerThread synchronously.
 	T.Stop();
 }
 
 void BufferedExchangeComponent::StopT(MyWorker &W, Thread &T) {
-	log.Info("---------------- Thread:{0} Running:{1} Joinable:{2} }",
-			T.GetName(), T.IsRunning(), T.IsJoinable());
+	log.Info("--- Thread:{0} Running:{1} Joinable:{2} }",
+		T.GetName(), T.IsRunning(), T.IsJoinable());
 	// Stopping thread synchronously.
 	W.Stop = true;
 	T.Interrupt();
