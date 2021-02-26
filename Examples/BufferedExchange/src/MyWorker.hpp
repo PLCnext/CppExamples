@@ -22,11 +22,11 @@ namespace BufferedExchange
         //"Endless loop" for normal thread
         void Run(void *)
         {
-			while (!this->Stop)
-			{
-				RunSingle();
-				Arp::Thread::Sleep(1000);
-			}
+		while (!this->Stop)
+		{
+			RunSingle();
+			Arp::Thread::Sleep(1000);
+		}
         };
 
         //Static thread implementation
@@ -73,7 +73,7 @@ namespace BufferedExchange
                     // Do something with the first element of this queue
                     if (data_toprocess.front().second % (int)1000 == (int)0)
                     {
-                        Log::Info("---------------- Thread time:{0} data:{1}", data_toprocess.front().first, data_toprocess.front().second);
+                        Log::Info("--- Thread time:{0} data:{1}", data_toprocess.front().first, data_toprocess.front().second);
                     }
                     data_toprocess.pop();
                 }
@@ -84,13 +84,15 @@ namespace BufferedExchange
                 }
                 if (d1.TryLock())
                 {
-                    Log::Info("---------------- Swap Thread queue pointers data_store<<-->>data_toprocess");
+                    Log::Info("--- Swap Thread queue pointers data_store<<-->>data_toprocess");
                     std::swap(data_store, data_toprocess);
                     d1.Unlock();
                 }
             }
-            catch (...)
+            catch (Exception &e)
             {
+		Log::Error("--- Exception during ThreadProcess:{0}",Thread::GetCurrentThreadId());
+		Log::Error("--- {0}",e.GetMessage());
                 Stop = true;
             }
         };
@@ -105,13 +107,15 @@ namespace BufferedExchange
             {
                 d1.Lock();
                 auto time =  std::chrono::high_resolution_clock::now();
-                data_store.push(std::pair<double, int>( std::chrono::duration_cast< std::chrono::duration<double>>(time - last_time).count(), x));
+                data_store.push(std::pair<double, int>( std::chrono::duration_cast<std::chrono::duration<double>>(time - last_time).count(), x));
                 last_time = time;
                 d1.Unlock();
             }
             // error handling for pushing  //full buffer etc.
-            catch (...)
+            catch (Exception &e)
             {
+		Log::Error("--- Exception in SetData Function called by:{0}",Thread::GetCurrentThreadId());
+		Log::Error("--- {0}",e.GetMessage());
                 result = true; // error Occured
             }
             return result;
