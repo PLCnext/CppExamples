@@ -23,10 +23,10 @@ namespace ThreadExample
 
 void ThreadExampleProgram::Execute()
 {
-    //implement program 
-
+    //implement program
     i_pCounter = threadExampleComponent.GetCounterValue();
     Log::Info("-------------------------------Program Cyclic Call:  i_pCounter = {0}", i_pCounter);
+
 }
 
 } // end of namespace ThreadExample
