@@ -15,7 +15,7 @@ namespace BufferedExchange
         count++;
 
         //Watch out blocking!
-      //  if (bufferedExchangeComponent.wT.SetData(count))
+        if (bufferedExchangeComponent.wT.SetData(count))
         {
             log.Warning("-------------- Instance:{1} DataLost: {0} ", count, this->GetFullName());
         }
