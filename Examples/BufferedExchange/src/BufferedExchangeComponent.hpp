@@ -55,19 +55,19 @@ public: // static factory operations
 
 private: // fields
 	BufferedExchangeComponentProgramProvider programProvider;
-public:
-	void StopWT(MyWorker &W, WorkerThread &T);
-	void StopT(MyWorker &W, Thread &T);
-public:
-	MyWorker wT;
-	MyWorker wS;
-	MyWorker wD;
-	int RunCounter { 0 };
 
 public:
-	WorkerThread workerThread;
+	MyWorker<long int> wD; // Thread execution environment
+	int RunCounter { 0 };
 	Thread delegateThread;
-	Thread staticThread;
+
+
+public:
+	template<typename S>
+	void StopWT(MyWorker<S> &W, WorkerThread &T);
+
+	template<typename S>
+	void StopT(MyWorker<S> &W, Thread &T);
 };
 
 inline IComponent::Ptr BufferedExchangeComponent::Create(Arp::System::Acf::IApplication &application, const String &name) {

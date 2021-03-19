@@ -14,21 +14,19 @@ namespace BufferedExchange
         }
         count++;
 
-        //Watch out blocking!
-      //  if (bufferedExchangeComponent.wT.SetData(count))
+        //Watch out this is blocking!
+        if(!error_LastCycle || retry )
         {
-            log.Warning("-------------- Instance:{1} DataLost: {0} ", count, this->GetFullName());
-        }
-
-        if (bufferedExchangeComponent.wS.SetData(count_d))
-        {
-            log.Warning("-------------- Instance:{1} DataLost: {0} ", count_d, this->GetFullName());
-        }
-
-        count_d++;
-        if (bufferedExchangeComponent.wD.SetData(count_d + count))
-        {
-            log.Warning("-------------- Instance:{1} DataLost: {0} ", count_d + count, this->GetFullName());
+			if (!bufferedExchangeComponent.wD.SetData( count))
+			{
+				// ensure the log does not get flooded.
+				if(!error_LastCycle){
+				log.Warning("-------------- Instance:{1} DataLost: {0} ",  count, this->GetFullName());
+				error_LastCycle = true;
+				}
+			}else{
+				error_LastCycle = false;
+			}
         }
     }
 

@@ -4,8 +4,7 @@
 #include "Arp/Plc/Commons/Esm/ProgramBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 
-namespace BufferedExchange
-{
+namespace BufferedExchange {
 
 using namespace Arp;
 using namespace Arp::System::Commons::Diagnostics::Logging;
@@ -13,36 +12,42 @@ using namespace Arp::Plc::Commons::Esm;
 
 //#program
 //#component(BufferedExchange::BufferedExchangeComponent)
-class BufferedExchangeProgram : public ProgramBase, private Loggable<BufferedExchangeProgram>
-{
+class BufferedExchangeProgram: public ProgramBase, private Loggable<BufferedExchangeProgram> {
 public: // typedefs
 
 public: // construction/destruction
-    BufferedExchangeProgram(BufferedExchange::BufferedExchangeComponent& bufferedExchangeComponentArg, const String& name);
-    BufferedExchangeProgram(const BufferedExchangeProgram& arg) = delete;
-    virtual ~BufferedExchangeProgram() = default;
+	BufferedExchangeProgram(
+			BufferedExchange::BufferedExchangeComponent &bufferedExchangeComponentArg,
+			const String &name);
+	BufferedExchangeProgram(const BufferedExchangeProgram &arg) = delete;
+	virtual ~BufferedExchangeProgram() = default;
 
 public: // operators
-    BufferedExchangeProgram&  operator=(const BufferedExchangeProgram& arg) = delete;
+	BufferedExchangeProgram& operator=(const BufferedExchangeProgram &arg) = delete;
 
 public: // properties
 
 public: // operations
-    void    Execute() override;
+	void Execute() override;
 
 private: // fields
-    BufferedExchange::BufferedExchangeComponent& bufferedExchangeComponent;
-    int count{0};
-    long int count_d{0};
-
+	BufferedExchange::BufferedExchangeComponent &bufferedExchangeComponent;
+	long int count { 0 };
+	bool error_LastCycle { false };
+public:
+	//#port
+	//#attributes(Input)
+	//#name(retry_sending)
+	boolean retry{false};
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 // inline methods of class ProgramBase
-inline BufferedExchangeProgram::BufferedExchangeProgram(BufferedExchange::BufferedExchangeComponent& bufferedExchangeComponentArg, const String& name)
-: ProgramBase(name)
-, bufferedExchangeComponent(bufferedExchangeComponentArg)
-{
+inline BufferedExchangeProgram::BufferedExchangeProgram(
+		BufferedExchange::BufferedExchangeComponent &bufferedExchangeComponentArg,
+		const String &name) :
+		ProgramBase(name),
+		bufferedExchangeComponent(bufferedExchangeComponentArg) {
 }
 
 } // end of namespace BufferedExchange

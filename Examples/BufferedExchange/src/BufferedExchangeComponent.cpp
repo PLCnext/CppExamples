@@ -1,21 +1,17 @@
-#include "BufferedExchangeComponent.hpp"
+﻿#include "BufferedExchangeComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "BufferedExchangeLibrary.hpp"
 
 namespace BufferedExchange {
 
-BufferedExchangeComponent::BufferedExchangeComponent(IApplication &application,const String &name) :
-		ComponentBase(application,::BufferedExchange::BufferedExchangeLibrary::GetInstance(), name,ComponentCategory::Custom),
+BufferedExchangeComponent::BufferedExchangeComponent(IApplication &application,
+		const String &name) :
+		ComponentBase(application,::BufferedExchange::BufferedExchangeLibrary::GetInstance(),name, ComponentCategory::Custom),
 		programProvider(*this),
-		ProgramComponentBase(::BufferedExchange::BufferedExchangeLibrary::GetInstance().GetNamespace(), programProvider),
+		ProgramComponentBase(::BufferedExchange::BufferedExchangeLibrary::GetInstance().GetNamespace(),	programProvider),
 		//
-		delegateThread(ThreadSettings("-DelegateThread", 20, 0, 0),	Arp::make_delegate(&wD, &MyWorker::Run)),
-		//
-		staticThread(ThreadSettings("-StaticThread", 20, 0, 0), &MyWorker::RunStatic,(void*)&wS),
-		//
-		workerThread(make_delegate(&wT, &MyWorker::RunSingle), 1000,"-WorkerThread")
-{
-	log.Info("------------------- BufferedExchangeComponent Constructor");
+		delegateThread(ThreadSettings("-DelegateThread", 0, 0, 0),	Arp::make_delegate(&wD, &BufferedExchange::MyWorker<long int>::Run)) {
+	log.Info("-------------------BufferedExchangeComponent Constructor");
 }
 
 void BufferedExchangeComponent::Initialize() {
@@ -40,52 +36,52 @@ void BufferedExchangeComponent::SetupConfig() {
 void BufferedExchangeComponent::ResetConfig() {
 	// never remove next line
 	ProgramComponentBase::ResetConfig();
-	log.Info("--- ResetConfig");
+	log.Info("---------------- ResetConfig");
 
 	// implement this inverse to SetupConfig() and LoadConfig()
 }
 
 void BufferedExchangeComponent::Start(void) {
-	log.Info("--- Start");
+	log.Info("---------------- Start");
 	try {
-		wT.Stop = false;
-		workerThread.Start();
-
-		wS.Stop = false;
-		staticThread.Start();
-
 		wD.Stop = false;
 		delegateThread.Start();
 	} catch (Exception &e) {
-		log.Error("--- Error thread start:{0}",	e.GetMessage());
+		log.Error("---------------- Error thread start:{0}", e.GetMessage());
 	}
 }
 
 void BufferedExchangeComponent::Stop(void) {
-	log.Info("--- Stop:");
+	log.Info("----------------Stop:");
 	try {
-		StopWT(wT, workerThread);
 		StopT(wD, delegateThread);
-		StopT(wS, staticThread);
-
 	} catch (Exception &e) {
-		log.Error("--- Error thread Stop:{0}",	e.GetMessage());
+		log.Error("---------------- Error thread Stop:{0}", e.GetMessage());
 	}
 }
-
-void BufferedExchangeComponent::StopWT(MyWorker &W, WorkerThread &T) {
-	log.Info("--- Thread:{0} Running:{1} ", "Worker", T.IsRunning());
+template<typename S>
+void BufferedExchangeComponent::StopWT(MyWorker<S> &W, WorkerThread &T) {
+	log.Info("---------------- Thread:{0} Running:{1} ", "Worker",
+			T.IsRunning());
 	W.Stop = true;
 	// Stopping WorkerThread synchronously.
 	T.Stop();
 }
+template<typename S>
+void BufferedExchangeComponent::StopT(MyWorker<S> &W, Thread &T) {
+	log.Info("---------------- Thread:{0} Running:{1} Joinable:{2}",
+			T.GetName(), T.IsRunning(), T.IsJoinable());
 
-void BufferedExchangeComponent::StopT(MyWorker &W, Thread &T) {
-	log.Info("--- Thread:{0} Running:{1} Joinable:{2} }",
-		T.GetName(), T.IsRunning(), T.IsJoinable());
-	// Stopping thread synchronously.
+	// Stopping thread loops
 	W.Stop = true;
-	T.Interrupt();
+
+	// If thread is still running after setting "Stop" call interrupt
+	// to ensure thread shutdown.
+	if (T.IsRunning()){
+		T.Interrupt();
+	}
+
+	// Wait for the thread to finish.
 	if (T.IsJoinable()) {
 		T.Join();
 	}
