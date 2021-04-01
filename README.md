@@ -27,8 +27,8 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[07](Examples/ForceExample/)| [Force Example](Examples/ForceExample/README.MD)| This example shows how GDS variables can be forced using the Force service.| [SourceCode](Examples/ForceExample/src/)
 |[08](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.MD)| This example shows how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
 |[09](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
-|[10](Examples/FileStreamExample/)| [Commons::Io::FileStream Example](Examples/FileStreamExample/README.md)| This Example shows how to use a File Stream to check the binary generation timestamp whenever a Component is reinitialized.|
-|[11](Examples/BufferedExchange/)| [BufferedExchange Example](Examples/BufferedExchange/README.md)| This example shows how to communicate larger amounts of data between a Program and a Component and how to process these data using a Thread|
+|[10](Examples/FileStreamExample/)| [Commons::Io::FileStream Example](Examples/FileStreamExample/README.md)| This Example shows how to use a File Stream to check the binary generation timestamp whenever a Component is reinitialized.|[SourceCode](Examples/FileStreamExample/src/)
+|[11](Examples/BufferedExchange/)| [BufferedExchange Example](Examples/BufferedExchange/README.md)| This example shows how to communicate larger amounts of data between a Program and a Component and how to process these data using a Thread|[SourceCode](Examples/BufferedExchange/src/)
 |[12](Examples/OpcUaMethodExample/)| [OPC UA Methods](Examples/OpcUaMethodExample/README.MD)| This example shows how to use OPC UA methods to execute functions in an ACF component written in C++.| [SourceCode](Examples/OpcUaMethodExample/src/)
 
 
@@ -47,7 +47,7 @@ There are different ways to build your code:
 1. Install Eclipse IDE, CLI, SDK and Eclipse Add-in (how-to guide: see links in the "Getting started" section above)
 1. Clone this repository
 1. Navigate to the project you want to test, e.g. `cd Examples/ProgramComponentInteraction` 
-1. Execute `plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*`
+1. Execute `plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*` or `plcncli new acfproject -c DummyC && ls -la src && rm src/Dummy*` for acf projects
 1. Execute `plcncli set target --add --name AXCF2152 --version 2020.6` to specify details of the build target
 1. Execute `plcncli generate all` to generate intermediate code and Config files
 1. Execute `plcncli build` to build the code.
@@ -60,14 +60,16 @@ There are different ways to build your code:
 1. Move the source files from the example you want to use into your workspace at `ProjectName/src`
 1. Build the project
 
-### Compile using [build-local.sh](tools/build-local.sh) script
+### Compile using [build.sh](tools/build.sh) script
 
 1. Clone this Repository
-1. Modify the [build-local.sh](tools/build-local.sh) script to fit your needs
-    1. select Hardware
-    1. select Project
-1. Make sure it is executable for example with ```chmod +x tools/build-local.sh```
-1. Execute the script ```./tools/build-local.sh``` or  ```sh tools/build-local.sh ```
+1. Modify the [build.sh](tools/build.sh) script to fit your needs
+    1. select hardware
+    1. select project
+    1. rename folder to fit namespace name (e.g. mv Example/DataAccessExample Example/DataAccess)
+    1. switch between acfproject and pwoject
+1. Make sure it is executable for example with ```chmod +x tools/build.sh```
+1. Execute the script ```./tools/build.sh``` or  ```sh tools/build.sh ```
 
 ## Contributing
 
