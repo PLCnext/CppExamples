@@ -66,7 +66,7 @@ There are different ways to build your code:
 1. Modify the [build.sh](tools/build.sh) script to fit your needs
     1. select hardware
     1. select project
-    1. rename folder to fit namespace name (e.g. mv Example/DataAccessExample Example/DataAccess)
+    1. rename folder to fit namespace name (e.g. mv Examples/DataAccessExample Examples/DataAccess)
     1. switch between acfproject and pwoject
 1. Make sure it is executable for example with ```chmod +x tools/build.sh```
 1. Execute the script ```./tools/build.sh``` or  ```sh tools/build.sh ```
