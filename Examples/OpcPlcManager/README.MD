@@ -16,7 +16,7 @@ This example shows how to use OPC UA methods to execute functions in an ACF comp
 
 To understand how to create and use OPC UA methods with PLCnext Control devices, the following tutorial should be completed:
 
-https://github.com/PLCnext/OpcPlcManager
+https://github.com/PLCnext/OpcUaMethods
 
 The concepts and procedures demonstrated in that tutorial were used to prepare this example.
 
