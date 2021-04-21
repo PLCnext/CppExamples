@@ -69,7 +69,7 @@ Procedure:
    ```
 
 - Create the variables that will be forced:
-  - In PLCnext Engineer, open the PLCnext Engineer project in the `Examples/ForceExample` directory of this repository.
+  - In PLCnext Engineer, open the PLCnext Engineer project in the `Examples/Force` directory of this repository.
   - Check that the controller model and firmware version in the project matches the controller you are using.
   - Send the project to the PLC and check that the PLC starts OK.
 
@@ -78,7 +78,7 @@ Procedure:
   - Component name: `ForceComponent`
   - Project namespace: `Force`
 
-- Copy the contents of the `Examples/ForceExample/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
+- Copy the contents of the `Examples/Force/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
 
 - Build the ACF project.
 

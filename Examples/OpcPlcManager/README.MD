@@ -72,7 +72,7 @@ Procedure:
 - Copy the OPC UA Node Set file to the PLC (replacing the IP address with the IP address of your PLC), e.g:
 
    ```sh
-   cd CppExamples/Examples/OpcUaMethodExample
+   cd CppExamples/Examples/OpcPlcManager
    scp PlcManager.xml admin@192.168.1.10:~/projects/Default/Services/OpcUA/NodeSets
    ```
 
@@ -83,11 +83,11 @@ Procedure:
   - Component name: `OpcPlcManagerComponent`
   - Project namespace: `OpcPlcManager`
 
-- Copy the contents of the `Examples/OpcUaMethods/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
+- Copy the contents of the `Examples/OpcPlcManager/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
 
 - Build the ACF project.
 
-- Deploy the ACF project to the PLC, using the `.acf.config` file in the `Examples/OpcUaMethods/src` directory. This configuration file includes the name of the component instance that is referenced by the Node Set configuration file.
+- Deploy the ACF project to the PLC, using the `.acf.config` file in the `Examples/OpcPlcManager/src` directory. This configuration file includes the name of the component instance that is referenced by the Node Set configuration file.
 
 - Restart the PLCnext Runtime.
 

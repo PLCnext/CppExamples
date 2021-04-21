@@ -65,7 +65,7 @@ Procedure:
 - Create the GDS variables that will be accessed:
   - Create a new PLCnext Engineer project for your target PLC.
   - Create one cyclic task.
-  - Add the User Library "DataAccess.pcwlx", which is included in the `Examples/DataAccessExample` directory of this repository. This library contains one Program, called "DataAccess".
+  - Add the User Library "DataAccess.pcwlx", which is included in the `Examples/DataAccess` directory of this repository. This library contains one Program, called "DataAccess".
   - Create one instance of the "DataAccess" program in the cyclic task.
   - Name the program instance `DataAccessInstance`.
   - Write and start the project on the PLC.
@@ -75,7 +75,7 @@ Procedure:
   - Component name: `DataAccessComponent`
   - Project namespace: `DataAccess`
 
-- Copy the contents of the `Examples/DataAccessExample/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
+- Copy the contents of the `Examples/DataAccess/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
 
 - Build the ACF project.
 
