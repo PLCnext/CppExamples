@@ -70,7 +70,7 @@ Procedure:
 - Create the GDS variables that will be subscribed to:
   - Create a new PLCnext Engineer project for your target PLC.
   - Create two cyclic tasks, with interval values of 100ms and 500ms.
-  - Add the User Library "SubscriptionData.pcwlx", which is included in the `Examples/SubscriptionExample` directory of this repository. This library contains one Program, called "RealTimeProgram".
+  - Add the User Library "SubscriptionData.pcwlx", which is included in the `Examples/Subscriptions` directory of this repository. This library contains one Program, called "RealTimeProgram".
   - Create two instances of "RealTimeProgram", one in each of the two cyclic tasks.
   - Name the two program instances `RealTimeProgram100ms` and `RealTimeProgram500ms`.
   - Write and start the project on the PLC.
@@ -80,7 +80,7 @@ Procedure:
   - Component name: `SubscriptionsComponent`
   - Project namespace: `Subscriptions`
 
-- Copy the contents of the `Examples/SubscriptionExample/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
+- Copy the contents of the `Examples/Subscriptions/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
 
 - Build the ACF project.
 
