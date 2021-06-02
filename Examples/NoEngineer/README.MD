@@ -7,7 +7,7 @@
 - [Prerequisites](#prerequisites)
 - [Introduction](#introduction)
 - [Guide details](#guide-details)
-- [References](#references)
+- [Reference](#reference)
 - [Example](#example)
 
 <!-- /TOC -->
