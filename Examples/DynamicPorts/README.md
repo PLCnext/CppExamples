@@ -229,7 +229,9 @@ The source files in this repository demonstrate a complete solution, including p
 
 ## Explore unlimited possibilities ...
 
-- It is possible to use dynamic ports in many ways. For example, you could define a set of logic blocks in the code, e.g. timer blocks. These could be instantiated, connected to port variables, and chained together, using entries in configuration file(s). In the above example, the user could configure the outside light to turn on for a preset time if movement is detected during the night.
+- Additional port types can be added, e.g. Analog Inputs, or complex types representing complete devices with multiple inputs and/or outputs.
+
+- A set of logic blocks can be defined in C++, e.g. analog scaling blocks, mathematical operators, or timer blocks. These blocks could be instantiated, connected to port variables, and chained together, using entries in configuration file(s). In the above example, the user could configure the outside light to turn on for a preset time if movement is detected during the night.
 
 - The example above uses PLCnext Engineer to create a program instance in an ESM task. It is also possible to achieve this without PLCnext Engineer, using [file-based configuration](https://github.com/PLCnext/CppExamples/blob/master/Examples/NoEngineer/README.MD).
 
