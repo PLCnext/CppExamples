@@ -7,7 +7,7 @@
 - [Introduction](#introduction)
 - [Guide details](#guide-details)
 - [Example - Home automation controller](#example---home-automation-controller)
-- [Explore unlimited possibilities ...](#explore-unlimited-possibilities)
+- [Explore unlimited possibilities ...](#explore-unlimited-possibilities-)
 - [Notes and limitations](#notes-and-limitations)
 
 <!-- /TOC -->
