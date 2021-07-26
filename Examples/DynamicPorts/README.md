@@ -203,7 +203,7 @@ The source files in this repository demonstrate a complete solution, including p
    - Program name: `DynamicPortsProgram`
    - Project namespace: `DynamicPorts`
 
-1. Copy the contents of the `Examples/DynamicPorts/src` directory in this repository, to the `src` directory of the ACF project. Replace the existing source files with the same name.
+1. Copy the contents of the `Examples/DynamicPorts/src` directory in this repository, to the `src` directory of the C++ project. Replace the existing source files with the same name.
 
 1. Build the C++ project and create the PLCnext Engineer library.
 
