@@ -48,6 +48,7 @@ private: // fields
 	FileStreamExampleComponentProgramProvider programProvider;
 	const Arp::String filePath = "/opt/plcnext/logs/TestFile.txt";
 	bool newbin{false};
+	bool nofile{false};
 public:
 	boolean bReset { false };
 };

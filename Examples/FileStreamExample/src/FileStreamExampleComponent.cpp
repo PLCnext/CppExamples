@@ -48,7 +48,8 @@ void FileStreamExampleComponent::SetupConfig() {
 
 	// setup project config here
 	log.Info("--- SetupConfig");
-	if (newbin) WriteToFile (__TIMESTAMP__);
+	if (newbin||nofile) WriteToFile (__TIMESTAMP__);
+
 }
 
 void FileStreamExampleComponent::ResetConfig() {
@@ -82,7 +83,7 @@ void FileStreamExampleComponent::WriteToFile(String textToWrite) {
 		try {
 			// Write String
 			if (stream.CanWrite())
-				stream.Write((byte*) str.CStr(), str.Length(), 0, str.Length());
+			stream.Write((Arp::byte*) str.CStr(), str.Length(), 0, str.Length());
 		} catch (const Arp::Exception &e) {
 			log.Error("--- Cannot Write to File. Error message: {0}.",
 					e.GetMessage());
@@ -109,8 +110,7 @@ String FileStreamExampleComponent::ReadFromFile() {
 		try {
 			// Read String
 			if (stream.CanRead()) {
-				stream.Read((byte*) str.CStr(), stream.GetLength(), 0,
-						stream.GetLength());
+			stream.Read((Arp::byte*) str.CStr(), stream.GetLength(), 0, stream.GetLength());
 				log.Info("--- Read from file: " + str);
 			}
 		}
@@ -125,6 +125,7 @@ String FileStreamExampleComponent::ReadFromFile() {
 	} catch (Arp::System::Commons::Io::NotExistException &e) {
 		// Example of catching InvalidPathException
 		log.Error("--- File does not exist. Message: {0}.", e.GetMessage());
+		nofile = true;
 		return  "Error";
 	} catch (const Arp::Exception &e) {
 		log.Error("--- Cannot Open File. Error message: {0}.", e.GetMessage());

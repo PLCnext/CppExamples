@@ -1,0 +1,5 @@
+bin/
+external/
+intermediate/
+CMakeLists.txt
+plcnext.proj

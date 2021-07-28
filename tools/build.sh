@@ -12,7 +12,7 @@ plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*
 
 
 # Chose target name and version
-plcncli set target --add --name AXCF2152 --version 2021.0.3
+plcncli set target --add --name AXCF2152 --version 2021.6
 
 # Generate Intermediate files
 plcncli generate all
