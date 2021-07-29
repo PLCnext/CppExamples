@@ -1,0 +1,20 @@
+{
+    "digital_device":[
+        {
+            "name":"sitting_room_light",
+            "attributes":36
+        },
+        {
+            "name":"outside_light",
+            "attributes":36
+        },
+        {
+            "name":"outside_movement",
+            "attributes":34
+        },
+        {
+            "name":"outside_daytime",
+            "attributes":34
+        }
+    ]
+}
