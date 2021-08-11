@@ -99,7 +99,7 @@ The problems with this solution include:
 
 PLCnext Control SDK version 2021.6 introduces the ability to add GDS ports to a program during the creation of a program instance.
 
-Starting from a default PLCnext Engineer C++ project template, this can be achieved in the following steps. This example uses a C++ project that was created with the following parameters:
+Starting from a default PLCnext C++ project template, this can be achieved in the following steps. This example uses a PLCnext C++ project that was created with the following parameters:
 
 - Project name: DynamicPorts
 - Component Name: DynamicPortsComponent
