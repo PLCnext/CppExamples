@@ -38,7 +38,7 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 
 - [C++ programs in PLCnext Technology](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm)
 - [Required Installations for C++ programming](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Required_Installations.htm)
-- [Working with Eclipse](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Working_with_Eclipse.htm) for firmware/SDKs 2021.6 or newer
+- [Working with Eclipse](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Working_with_Eclipse.htm)
 
 ## Compiling an example
 
