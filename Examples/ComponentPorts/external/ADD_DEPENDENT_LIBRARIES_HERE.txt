@@ -1,0 +1,19 @@
+﻿The CLI will automatically set the CMAKE_PREFIX_PATH to find CMake packages to
+this directory or a sub-directory of this directory. To decide which directory
+to use for the CMAKE_PREFIX_PATH the CLI looks for a directory with the name
+<target_name>_<target_version>.
+
+To choose such a directory the target_name must match the current build target
+name and the version must be lower or equal to the current build target
+version. If such a directory is found the CLI looks whether the directory
+contains the current build type (Release, Debug, ...). If no such directory is
+found it looks for a directory named "Release".
+
+If the CLI finds the build type directory or the "Release" directory it uses
+this directory as CMAKE_PREFIX_PATH. If not it uses as fallback the found
+target specific directory. If that is not found it uses the external directory.
+If the CMAKE_PREFIX_PATH is already set by a command line option it will not
+override the set value.
+
+Please make sure that if the libraries which are used by this project use other
+libraries themself, that the library must have the RPATH set to $ORIGIN.
