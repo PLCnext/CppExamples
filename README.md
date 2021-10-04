@@ -33,7 +33,7 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[13](Examples/BufferedExchange/)| [BufferedExchange Example](Examples/BufferedExchange/README.md)| This example shows how to communicate larger amounts of data between a Program and a Component and how to process these data using a Thread|[SourceCode](Examples/BufferedExchange/src/)
 |[14](Examples/OpcPlcManager/)| [OPC UA Methods](Examples/OpcPlcManager/README.MD)| This example shows how to use OPC UA methods to execute functions in an ACF component written in C++.| [SourceCode](Examples/OpcPlcManager/src/)
 |[15](Examples/NoEngineer/)| [PLM/ESM/GDS Configuration without PLCnext Engineer](Examples/NoEngineer/README.MD)| This example shows how to configure C++ programs to run on a PLC without using PLCnext Engineer.|
-|[16](Examples/ComponentPorts/)| [ComponentPorts](Examples/ComponentPorts/README.MD)| This example shows how to initialize at Cold/Warm/Hot-Start similar to ProgramPorts. |
+|[16](Examples/ComponentPorts/)| [ComponentPorts](Examples/ComponentPorts/README.MD)| This example shows how to initialize ComponentPorts using PLC events like Cold/Warm/Hot-Start similar to ProgramPorts. |
 
 
 ## Getting started
