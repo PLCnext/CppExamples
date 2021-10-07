@@ -38,12 +38,11 @@ In cases where the project does not include any IEC 61131 programs, it is possib
 |Description | Value |
 |------------ |-----------|
 |Created | 2.06.2021 |
-|Last modified| 2.06.2021 |
+|Last modified| 7.10.2021 |
 |Controller| AXC F 2152 |
-|FW| 2021.0.0 LTS |
-|Arpversion| 21.0.0.35466 |
-|SVN Revision| 35466 |
-|SDK| 2021.0.0 LTS (21.0.0.35466) |
+|FW| 2021.6 |
+|Arpversion| 21.6.0.46 |
+|SDK| 2021.6 (21.6.0.46) |
 |PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
 
 ## Reference
@@ -53,6 +52,14 @@ In cases where the project does not include any IEC 61131 programs, it is possib
 ## Example
 
 In this example, a PLCnext Control device is configured as a Profinet device (slave). A real-time C++ program instance, running in an Execution and Synchronisation Manager (ESM) task, uses Global Data Space (GDS) variables to exchange data with the two Profinet Device (PND) system variables `PND_S1_INPUTS` and `PND_S1_OUTPUTS`. The complete project is configured without the use of PLCnext Engineer.
+
+1. Configure the PLC System Services
+
+   This application example uses a PLC that must have the IEC feature disabled, and the PROFINET DEVICE feature enabled. Other applications that use the principles demonstrated in this example may not require these settings.
+
+   Using the PLCs [Web Based Management](https://www.plcnext.help/te/WBM/Configuration_System_Services.htm) interface, disable the IEC system feature, and enable the PROFINET DEVICE feature. The PLC must be rebooted for changes to take effect.
+
+   ![image](https://user-images.githubusercontent.com/13133969/136402485-6097e087-fc1a-4731-a138-4a6087f6bd04.png)
 
 1. Create the C++ program.
 
