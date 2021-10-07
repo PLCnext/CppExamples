@@ -8,9 +8,6 @@
 4. [Project compiling in Eclipse](#project-compiling-in-eclipse)
 5. [PLCnext Engineer project](#plcnext-engineer-project)
 6. [Start-Up instructions](#start-up-instructions)
-7. [Cpp Source Code](#cpp-source-code)  
-7.1. [CppDataTypeTestProgram.hpp](#cppdatatypetestprogramhpp)  
-7.2. [CppDataTypeTestProgram.cpp](#cppdatatypetestprogramcpp)  
 
 <!-- /TOC -->
 
