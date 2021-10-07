@@ -48,60 +48,33 @@ All supported elementary data types are documented in the [PLCnext Info Center](
 			TYPE
 				STRING420:STRING[420];
 
-				s_alltypes : STRUCT
-				
-					outInt8: SINT;
-					outUint8:USINT;
-					
-					outInt16:Int;
-					outUint16:UInt;
-				
-					outInt32:DInt;
-					outUint32:UDInt;
-					
-					outInt64:LInt;
-					outUint64:ULInt;
-					
-					outBoolean:Bool;
-					outByte:Byte;
-					outWord:Word;
-					outDword:Dword;
-					outLword:LWord;
-					
-					outFloat32:Real;
-					outFloat64:LREAL;
-
-					outString:STRING;
-				END_STRUCT
-
-				
-			bool_array: ARRAY[0..9] OF BOOL;
-			//8Bit
-			sint_array: ARRAY[0..9] OF SINT;
-			usint_array: ARRAY[0..9] OF USINT;
-			//16Bit
-			int_array: ARRAY[0..9] OF INT;
-			uint_array: ARRAY[0..9] OF UINT;
-			//32Bit
-			dint_array: ARRAY[0..9] OF DINT;
-			udint_array: ARRAY[0..9] OF UDINT;
-			//64Bit
-			lint_array: ARRAY[0..9] OF LINT;
-			ulint_array: ARRAY[0..9] OF ULINT;
-			//8Bit
-			byte_array: ARRAY[0..9] OF BYTE;
-			//16Bit
-			word_array: ARRAY[0..9] OF WORD;
-			//32Bit
-			doubleword_array: ARRAY[0..9] OF DWORD;
-			//64Bit
-			Lword_array: ARRAY[0..9] OF LWORD;
-			//xx digit precision
-			real_array: ARRAY[0..9] OF REAL;
-			//xx digit precision
-			Lreal_array: ARRAY[0..9] OF LREAL;
-			//String
-			String_array: ARRAY[0..9] OF STRING;
+				bool_array: ARRAY[0..9] OF BOOL;
+				//8Bit
+				sint_array: ARRAY[0..9] OF SINT;
+				usint_array: ARRAY[0..9] OF USINT;
+				//16Bit
+				int_array: ARRAY[0..9] OF INT;
+				uint_array: ARRAY[0..9] OF UINT;
+				//32Bit
+				dint_array: ARRAY[0..9] OF DINT;
+				udint_array: ARRAY[0..9] OF UDINT;
+				//64Bit
+				lint_array: ARRAY[0..9] OF LINT;
+				ulint_array: ARRAY[0..9] OF ULINT;
+				//8Bit
+				byte_array: ARRAY[0..9] OF BYTE;
+				//16Bit
+				word_array: ARRAY[0..9] OF WORD;
+				//32Bit
+				doubleword_array: ARRAY[0..9] OF DWORD;
+				//64Bit
+				Lword_array: ARRAY[0..9] OF LWORD;
+				//xx digit precision
+				real_array: ARRAY[0..9] OF REAL;
+				//xx digit precision
+				Lreal_array: ARRAY[0..9] OF LREAL;
+				//String
+				String_array: ARRAY[0..9] OF STRING;
 			END_TYPE
 	```
 
