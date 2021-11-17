@@ -68,6 +68,10 @@ void CppDataTypeTestProgram::Execute()
     outString420 = "This is a custom length string - in this case, with a maximum of 420 chars, but can be up to 32766 chars.";
     outStruct.outString = "This is a standard IEC 61131 string (max. 80 char).";  //StructElement
 
+    outWString = "This is a standard IEC 61131 wide string (max. 80 char).";
+    outWString420 = "This is a custom length wide string - in this case, with a maximum of 420 chars, but can be up to 32766 chars.";
+    outStruct.outWString = "This is a standard IEC 61131 wide string (max. 80 char).";  //StructElement
+
     for(int i=0; i < 10;i++)
     {
         if(outarrayBoolean[i] == true)
@@ -96,6 +100,7 @@ void CppDataTypeTestProgram::Execute()
         outarrayLword[i]++;	//Lword
 
         outarrayString[i] = "This is a standard IEC 61131 string (max. 80 chars).";
+        outarrayWString[i] = "This is a standard IEC 61131 wide string (max. 80 chars).";
     }
 }
 

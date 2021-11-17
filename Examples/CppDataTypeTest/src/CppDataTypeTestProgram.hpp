@@ -55,6 +55,7 @@ public: // typedefs
         float64	outFloat64	=	0.0;	//LREAL
 
         StaticString<80> outString = "";  // String
+        StaticWString<80> outWString;  // WString
         // Structs containing custom-length strings  are currently not supported by PLCnext Engineer (version 2020.6).
 
     };
@@ -168,9 +169,18 @@ public: /* Ports
 
     //#port
     //#attributes(Output|Retain)
+    //#name(outWString)
+    StaticWString<80> outWString;  // WString
+
+    //#port
+    //#attributes(Output|Retain)
     //#name(outString420)
     StaticString<420> outString420 = "";  // Custom-length string
 
+    //#port
+    //#attributes(Output|Retain)
+    //#name(outWString420)
+    StaticWString<420> outWString420;  // Custom-length wide string
 
     //#port
     //#attributes(Output|Retain)
@@ -256,6 +266,11 @@ public: /* Ports
     //#attributes(Output|Retain)
     //#name(outarrayString)
     StaticString<80> outarrayString[10] = {""};  // String
+
+    //#port
+    //#attributes(Output|Retain)
+    //#name(outarrayWString)
+    StaticWString<80> outarrayWString[10];  // WString
 
     // Array of custom-length strings are currently not supported by PLCnext  Engineer (version 2020.6).
 
