@@ -21,14 +21,15 @@ All supported elementary data types are documented in the [PLCnext Info Center](
 |Description | Value |
 |------------ |-----------|
 |Controller| AXC F 2152 |
-|FW | 2020.0 LTS or later |
-|SDK | 2020.0 LTS or later |
-|PLCnext Engineer| 2020.0 LTS |
+|FW | 2021.9 |
+|SDK | 2021.9 |
+|PLCnext CLI| 2021.6 |
+|PLCnext Engineer| 2021.9 |
 
 ## Preconditions
 
-- PLCnext Control AXC F 2152 with firmware 2020.0 LTS or later
-- PLCnext Engineer 2020.0 LTS or later
+- PLCnext Control AXC F 2152 with firmware 2021.6 or later
+- PLCnext Engineer 2021.6 or later
 - Eclipse<sup>&reg;</sup> IDE "Photon" or later
 
 ## Project compiling in Eclipse
@@ -47,6 +48,7 @@ All supported elementary data types are documented in the [PLCnext Info Center](
 	```text
 			TYPE
 				STRING420:STRING[420];
+				WSTRING420:WSTRING[420];
 
 				bool_array: ARRAY[0..9] OF BOOL;
 				//8Bit
@@ -73,8 +75,9 @@ All supported elementary data types are documented in the [PLCnext Info Center](
 				real_array: ARRAY[0..9] OF REAL;
 				//xx digit precision
 				Lreal_array: ARRAY[0..9] OF LREAL;
-				//String
+				//Strings
 				String_array: ARRAY[0..9] OF STRING;
+				Wide_string_array: ARRAY[0..9] OF WSTRING;
 			END_TYPE
 	```
 
