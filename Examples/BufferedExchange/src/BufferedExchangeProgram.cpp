@@ -17,16 +17,16 @@ namespace BufferedExchange
         //Watch out this is blocking!
         if(!error_LastCycle || retry )
         {
-			if (!bufferedExchangeComponent.wD.SetData( count))
-			{
-				// ensure the log does not get flooded.
-				if(!error_LastCycle){
-				log.Warning("-------------- Instance:{1} DataLost: {0} ",  count, this->GetFullName());
-				error_LastCycle = true;
-				}
-			}else{
-				error_LastCycle = false;
-			}
+            if (!bufferedExchangeComponent.wD.SetData( count))
+            {
+                // ensure the log does not get flooded.
+                if(!error_LastCycle){
+                log.Warning("-------------- Instance:{1} DataLost: {0} ",  count, this->GetFullName());
+                error_LastCycle = true;
+                }
+            }else{
+                error_LastCycle = false;
+            }
         }
     }
 

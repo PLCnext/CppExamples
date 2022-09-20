@@ -34,7 +34,7 @@ void COMP_Notifications::Initialize()
     }
     // subscribe events from the event system (Nm) here
     this->Custom_subscription.OnNotification += make_delegate(this, &COMP_Notifications::NM_Subscription1_Callback);
-	this->Custom_subscription2.OnNotification += make_delegate(this, &COMP_Notifications::NM_Subscription2_Callback);
+    this->Custom_subscription2.OnNotification += make_delegate(this, &COMP_Notifications::NM_Subscription2_Callback);
     this->NetworkConfigurationChanged_subscription.OnNotification += make_delegate(this, &COMP_Notifications::NetworkConfigurationChanged_Callback);
     this->PlcStateChanged_subscription.OnNotification += make_delegate(this, &COMP_Notifications::PlcStateChanged_Callback);
 }
@@ -99,7 +99,7 @@ void COMP_Notifications::PlcStateChanged_Callback(const Arp::System::Nm::Notific
 {
 //Plc state changed: {"None"|"Ready"|"Stop"|"Running"|"Halt"|"Changing","Warning"|"Er­ror"|"SuspendedBySwitch"|"DcgNotPossi­ble"|"DcgRealTimeViolation"}
 //               ==> {"None"|"Ready"|"Stop"|"Running"|"Halt"|"Changing","Warning"|"Er­ror"|"SuspendedBySwitch"|"DcgNotPossi­ble"|"DcgRealTimeViolation"}
-	auto payload = notification.GetPayloadAs<Arp::System::NmPayload::Plc::PlcStateChangedPayload>();
+    auto payload = notification.GetPayloadAs<Arp::System::NmPayload::Plc::PlcStateChangedPayload>();
     Arp::Plc::Commons::Domain::PlcState NewState = payload.GetNewState();
     Arp::Plc::Commons::Domain::PlcState LastState = payload.GetLastState();
 

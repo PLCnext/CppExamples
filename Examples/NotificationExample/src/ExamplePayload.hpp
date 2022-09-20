@@ -30,10 +30,10 @@ class ExamplePayload : public SpecializedPayload<ExamplePayload>
     public:
     // definition of the payload values
     ExamplePayload(const uint16& uiPortValue, const String & sMyMessage)
-    : SpecializedPayload("The value is: {0}")    		   				// definition of the payload string
+    : SpecializedPayload("The value is: {0}")                               // definition of the payload string
     {
-        this->SetFieldValue(this->fieldIndexMyValue, uiPortValue); 		// relation variable value to index
-        this->SetFieldValue(this->fieldIndexMyString, sMyMessage); 		// relation variable value to index
+        this->SetFieldValue(this->fieldIndexMyValue, uiPortValue);         // relation variable value to index
+        this->SetFieldValue(this->fieldIndexMyString, sMyMessage);         // relation variable value to index
     }
 
     ExamplePayload(const Notification& notification)

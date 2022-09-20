@@ -6,7 +6,7 @@
  *  CppDataTypeTestProgram.hpp
  *
  *  Created on: 21.02.2019
- *  	Author: Eduard Münz, Oliver Warneke, Martin Boers
+ *      Author: Eduard Münz, Oliver Warneke, Martin Boers
  *
  ******************************************************************************/
 
@@ -33,26 +33,26 @@ class CppDataTypeTestProgram : public ProgramBase, private Loggable<CppDataTypeT
 public: // typedefs
     struct s_alltypes{
 
-        int8	outInt8		=	0; 	//SINT
-        uint8	outUint8	=	0;	//USINT
+        int8    outInt8      =    0;     //SINT
+        uint8   outUint8     =    0;    //USINT
 
-        int16	outInt16	=	0;	//INT
-        uint16	outUint16	=	0;	//UINT
+        int16    outInt16    =    0;    //INT
+        uint16   outUint16   =    0;    //UINT
 
-        int32	outInt32	=	0;	//DINT
-        uint32	outUint32	=	0;	//UDINT
+        int32    outInt32    =    0;    //DINT
+        uint32   outUint32   =    0;    //UDINT
 
-        int64 	outInt64	=	0;	//LINT
-        uint64	outUint64	=	0;	//ULINT
+        int64    outInt64    =    0;    //LINT
+        uint64   outUint64   =    0;    //ULINT
 
-        boolean outBoolean	=	false;	// BOOL
-        uint8	outByte		=	0;	//Byte
-        uint16	outWord		=	0;	//Word
-        uint32	outDword	=	0;	//DWORD
-        uint64	outLword	=	0;	//LWORD
+        boolean  outBoolean  =    false;    // BOOL
+        uint8    outByte     =    0;    //Byte
+        uint16   outWord     =    0;    //Word
+        uint32   outDword    =    0;    //DWORD
+        uint64   outLword    =    0;    //LWORD
 
-        float32	outFloat32	=	0.0;	//Real
-        float64	outFloat64	=	0.0;	//LREAL
+        float32  outFloat32  =    0.0;    //Real
+        float64  outFloat64  =    0.0;    //LREAL
 
         StaticString<80> outString = "";  // String
         StaticWString<80> outWString;  // WString
@@ -90,77 +90,77 @@ public: /* Ports
     //#port
     //#attributes(Output|Retain)
     //#name(outBoolean)
-    boolean	outBoolean		=	false;	//BOOL
+    boolean outBoolean = false;    //BOOL
 
     //#port
     //#attributes(Output|Retain)
     //#name(outInt8)
-    int8	outInt8		=	0; 		//SINT
+    int8 outInt8 = 0;         //SINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outUint8)
-    uint8	outUint8	=	0;		//USINT
+    uint8 outUint8 = 0;        //USINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outInt16)
-    int16	outInt16	=	0;		//INT
+    int16 outInt16 = 0;        //INT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outUint16)
-    uint16	outUint16	=	0;		//UINT
+    uint16 outUint16 = 0;        //UINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outInt32)
-    int32	outInt32	=	0;		//DINT
+    int32 outInt32 = 0;        //DINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outUint32)
-    uint32	outUint32	=	0;		//UDINT
+    uint32 outUint32 = 0;        //UDINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outInt64)
-    int64 	outInt64	=	0;		//LINT
+    int64 outInt64 = 0;        //LINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outUint64)
-    uint64	outUint64	=	0;		//ULINT
+    uint64 outUint64 = 0;        //ULINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outByte)
-    uint8	outByte		=	0;		//Byte
+    uint8 outByte = 0;        //Byte
 
     //#port
     //#attributes(Output|Retain)
     //#name(outWord)
-    uint16	outWord		=	0;		//Word
+    uint16 outWord = 0;        //Word
 
     //#port
     //#attributes(Output|Retain)
     //#name(outDword)
-    uint32	outDword	=	0;		//DWORD
+    uint32 outDword = 0;        //DWORD
 
     //#port
     //#attributes(Output|Retain)
     //#name(outLword)
-    uint64	outLword	=	0;		//LWORD
+    uint64 outLword = 0;        //LWORD
 
     //#port
     //#attributes(Output|Retain)
     //#name(outFloat32)
-    float32	outFloat32	=	0.0;	//Real
+    float32 outFloat32 = 0.0;    //Real
 
     //#port
     //#attributes(Output|Retain)
     //#name(outFloat64)
-    float64	outFloat64	=	0.0;	//LREAL
+    float64 outFloat64 = 0.0;    //LREAL
 
     //#port
     //#attributes(Output|Retain)
@@ -190,77 +190,77 @@ public: /* Ports
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayBoolean)
-    boolean	outarrayBoolean	[10] = {false};	//BOOL
+    boolean outarrayBoolean [10] = {false};    //BOOL
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayInt8)
-    int8	outarrayInt8[10] = {0};		//SINT
+    int8 outarrayInt8[10] = {0};        //SINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayUint8)
-    uint8	outarrayUint8[10] = {0};	//USINT
+    uint8 outarrayUint8[10] = {0};    //USINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayInt16)
-    int16	outarrayInt16[10] = {0};	//INT
+    int16 outarrayInt16[10] = {0};    //INT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayUint16)
-    uint16	outarrayUint16[10] = {0};	//UINT
+    uint16 outarrayUint16[10] = {0};    //UINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayInt32)
-    int32	outarrayInt32[10] = {0};	//DINT
+    int32 outarrayInt32[10] = {0};    //DINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayUint32)
-    uint32	outarrayUint32[10] = {0};	//UDINT
+    uint32 outarrayUint32[10] = {0};    //UDINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayInt64)
-    int64 	outarrayInt64[10] = {0};	//LINT
+    int64 outarrayInt64[10] = {0};    //LINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayUint64)
-    uint64	outarrayUint64[10] = {0};	//ULINT
+    uint64 outarrayUint64[10] = {0};    //ULINT
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayByte)
-    uint8	outarrayByte[10] = {0};		//Byte
+    uint8 outarrayByte[10] = {0};        //Byte
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayWord)
-    uint16	outarrayWord[10] = {0};		//Word
+    uint16 outarrayWord[10] = {0};        //Word
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayDword)
-    uint32	outarrayDword[10] = {0};	//DWORD
+    uint32 outarrayDword[10] = {0};    //DWORD
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayLword)
-    uint64	outarrayLword[10] = {0};	//LWORD
+    uint64 outarrayLword[10] = {0};    //LWORD
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayFloat32)
-    float32	outarrayFloat32[10] = {0.0};//Real
+    float32 outarrayFloat32[10] = {0.0};//Real
 
     //#port
     //#attributes(Output|Retain)
     //#name(outarrayFloat64)
-    float64	outarrayFloat64[10] = {0.0};//LREAL
+    float64 outarrayFloat64[10] = {0.0};//LREAL
 
     //#port
     //#attributes(Output|Retain)

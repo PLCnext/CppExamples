@@ -41,10 +41,10 @@ public: /* Ports
            The attributes comment define the port attributes and is optional.
            The name comment defines the name of the port and is optional. Default is the name of the field.
         */
-		//#port
-		//#attributes(Input)
-		//#name(DeleteFileAtNextStart)
-		boolean portField{false};
+        //#port
+        //#attributes(Input)
+        //#name(DeleteFileAtNextStart)
+        boolean portField{false};
 private: // fields
     FileStreamExample::FileStreamExampleComponent& fileStreamExampleComponent;
 
@@ -56,7 +56,7 @@ inline FileStreamExampleProgram::FileStreamExampleProgram(FileStreamExample::Fil
 : ProgramBase(name)
 , fileStreamExampleComponent(fileStreamExampleComponentArg)
 {
-	log.Info("---Constructor:{0}",GetFullName());
+    log.Info("---Constructor:{0}",GetFullName());
 }
 
 } // end of namespace FileStreamExample

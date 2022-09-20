@@ -31,7 +31,7 @@ void OpcPlcManagerComponent::SubscribeServices()
 
 void OpcPlcManagerComponent::LoadSettings(const String& /*settingsPath*/)
 {
-	// load firmware settings here
+    // load firmware settings here
 }
 
 void OpcPlcManagerComponent::SetupSettings()
@@ -39,12 +39,12 @@ void OpcPlcManagerComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-	// setup firmware settings here
+    // setup firmware settings here
 }
 
 void OpcPlcManagerComponent::PublishServices()
 {
-	// publish the services of this component here
+    // publish the services of this component here
 }
 
 void OpcPlcManagerComponent::LoadConfig()
@@ -71,12 +71,12 @@ void OpcPlcManagerComponent::Dispose()
     // never remove next line
     MetaComponentBase::Dispose();
 
-	// implement this inverse to SetupSettings(), LoadSettings() and Initialize()
+    // implement this inverse to SetupSettings(), LoadSettings() and Initialize()
 }
 
 void OpcPlcManagerComponent::PowerDown()
 {
-	// implement this only if data must be retained even on power down event
+    // implement this only if data must be retained even on power down event
 }
 
 // Thread Body
