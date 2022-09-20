@@ -21,8 +21,8 @@ void PG_ReactToNotification::Execute()
 
     // Do other stuff with component values
     // if(this->cOMP_Notifications.OP_uiValue1 >10){
-    // 	log.Info("Value1:{0}",this->cOMP_Notifications.OP_uiValue1);
-    // 	log.Info("Value1:{0}",this->cOMP_Notifications.OP_uiValue2);
+    //     log.Info("Value1:{0}",this->cOMP_Notifications.OP_uiValue1);
+    //     log.Info("Value1:{0}",this->cOMP_Notifications.OP_uiValue2);
     // }
 }
 

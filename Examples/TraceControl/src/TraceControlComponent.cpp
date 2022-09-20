@@ -47,7 +47,7 @@ void TraceControlComponent::SubscribeServices()
 
 void TraceControlComponent::LoadSettings(const String& /*settingsPath*/)
 {
-	// load firmware settings here
+    // load firmware settings here
 }
 
 void TraceControlComponent::SetupSettings()
@@ -55,12 +55,12 @@ void TraceControlComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-	// setup firmware settings here
+    // setup firmware settings here
 }
 
 void TraceControlComponent::PublishServices()
 {
-	// publish the services of this component here
+    // publish the services of this component here
 }
 
 void TraceControlComponent::LoadConfig()
@@ -96,7 +96,7 @@ void TraceControlComponent::Dispose()
 
 void TraceControlComponent::PowerDown()
 {
-	// implement this only if data must be retained even on power down event
+    // implement this only if data must be retained even on power down event
 }
 
 void TraceControlComponent::OnPlcLoaded()

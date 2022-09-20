@@ -73,12 +73,12 @@ public: /* Ports
 
             // 6. Manager instance and registrations
             NotificationManager& nm = NotificationManager::GetInstance();
-            NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration1;	// non-blocking needed because of real-time code execution
+            NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration1;    // non-blocking needed because of real-time code execution
             NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration2;
 
 private: // fields
     NotificationExample::COMP_Notifications& cOMP_Notifications;
-    DateTime TimeStamp;															// 7. Time stamp
+    DateTime TimeStamp;                                                            // 7. Time stamp
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ private: // fields
 inline PG_SendNotification::PG_SendNotification(NotificationExample::COMP_Notifications& cOMP_NotificationsArg, const String& name)
 : ProgramBase(name)
 , cOMP_Notifications(cOMP_NotificationsArg)
-, MySenderRegistration1("My.NameSpace.1", name, Severity::Info, nm)				// 8. Registrations for the two notifications to be sent
+, MySenderRegistration1("My.NameSpace.1", name, Severity::Info, nm)                // 8. Registrations for the two notifications to be sent
 , MySenderRegistration2("My.NameSpace.2", name, Severity::Warning, nm)
 {
 }

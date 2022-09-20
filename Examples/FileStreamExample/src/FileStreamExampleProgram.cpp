@@ -8,8 +8,8 @@ namespace FileStreamExample
 void FileStreamExampleProgram::Execute()
 {
     //implement program 
-	//log.Info("bReset={0} , portfield={1}", fileStreamExampleComponent.bReset, portField);
-	fileStreamExampleComponent.bReset =  portField;
+    //log.Info("bReset={0} , portfield={1}", fileStreamExampleComponent.bReset, portField);
+    fileStreamExampleComponent.bReset =  portField;
 }
 
 } // end of namespace FileStreamExample

@@ -16,45 +16,45 @@ using namespace Arp::Plc::Commons::Meta;
 
 //#component
 class FileStreamExampleComponent: public ComponentBase,
-		public ProgramComponentBase,
-		private Loggable<FileStreamExampleComponent> {
+        public ProgramComponentBase,
+        private Loggable<FileStreamExampleComponent> {
 public: // typedefs
 
 public: // construction/destruction
-	FileStreamExampleComponent(IApplication &application, const String &name);
-	virtual ~FileStreamExampleComponent() = default;
+    FileStreamExampleComponent(IApplication &application, const String &name);
+    virtual ~FileStreamExampleComponent() = default;
 
 public: // IComponent operations
-	void Initialize() override;
-	void LoadConfig() override;
-	void SetupConfig() override;
-	void ResetConfig() override;
+    void Initialize() override;
+    void LoadConfig() override;
+    void SetupConfig() override;
+    void ResetConfig() override;
 
 public: // ProgramComponentBase operations
-	void RegisterComponentPorts() override;
+    void RegisterComponentPorts() override;
 
 private: // methods
-	FileStreamExampleComponent(const FileStreamExampleComponent &arg) = delete;
-	FileStreamExampleComponent& operator=(const FileStreamExampleComponent &arg) = delete;
+    FileStreamExampleComponent(const FileStreamExampleComponent &arg) = delete;
+    FileStreamExampleComponent& operator=(const FileStreamExampleComponent &arg) = delete;
 
-	void WriteToFile(String textToWrite);
-	String ReadFromFile();
+    void WriteToFile(String textToWrite);
+    String ReadFromFile();
 
 public: // static factory operations
-	static IComponent::Ptr Create(Arp::System::Acf::IApplication &application,
-			const String &name);
+    static IComponent::Ptr Create(Arp::System::Acf::IApplication &application,
+            const String &name);
 
 private: // fields
-	FileStreamExampleComponentProgramProvider programProvider;
-	const Arp::String filePath = "/opt/plcnext/logs/TestFile.txt";
-	bool newbin{false};
-	bool nofile{false};
+    FileStreamExampleComponentProgramProvider programProvider;
+    const Arp::String filePath = "/opt/plcnext/logs/TestFile.txt";
+    bool newbin{false};
+    bool nofile{false};
 public:
-	boolean bReset { false };
+    boolean bReset { false };
 };
 
 inline IComponent::Ptr FileStreamExampleComponent::Create(Arp::System::Acf::IApplication &application, const String &name) {
-	return IComponent::Ptr(new FileStreamExampleComponent(application, name));
+    return IComponent::Ptr(new FileStreamExampleComponent(application, name));
 }
 
 } // end of namespace FileStreamExample

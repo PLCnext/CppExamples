@@ -6,7 +6,7 @@
  *  ThreadExampleProgram.cpp
  *
  *  Created on: 16.05.2019
- *  	Author: Eduard Münz, Oliver Warneke
+ *      Author: Eduard Münz, Oliver Warneke
  *
  ******************************************************************************/
 

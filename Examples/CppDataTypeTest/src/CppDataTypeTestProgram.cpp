@@ -6,7 +6,7 @@
  *  CppDataTypeTestProgram.cpp
  *
  *  Created on: 21.02.2019
- *  	Author: Eduard Münz, Oliver Warneke, Martin Boers
+ *      Author: Eduard Münz, Oliver Warneke, Martin Boers
  *
  ******************************************************************************/
 
@@ -30,22 +30,22 @@ void CppDataTypeTestProgram::Execute()
         else
             outBoolean = true;
 
-    outInt8++; 	//SINT
-    outUint8++;	//USINT
+    outInt8++;     //SINT
+    outUint8++;    //USINT
     outStruct.outInt8++; //StructElement
     outStruct.outUint8++; //StructElement
 
-    outInt16++;	//INT
+    outInt16++; //INT
     outUint16++;//UINT
     outStruct.outInt16++; //StructElement
     outStruct.outUint16++; //StructElement
 
-    outInt32++;	//DINT
+    outInt32++; //DINT
     outUint32++;//UDINT
     outStruct.outInt32++; //StructElement
     outStruct.outUint32++; //StructElement
 
-    outInt64++;	//LINT
+    outInt64++; //LINT
     outUint64++;//ULINT
     outStruct.outInt64++; //StructElement
     outStruct.outUint64++; //StructElement
@@ -55,10 +55,10 @@ void CppDataTypeTestProgram::Execute()
     outStruct.outFloat32++; //StructElement
     outStruct.outFloat64++; //StructElement
 
-    outByte++;	//Byte
-    outWord++;	//Word
-    outDword++;	//DWORD
-    outLword++;	//Lword
+    outByte++;    //Byte
+    outWord++;    //Word
+    outDword++;   //DWORD
+    outLword++;   //Lword
     outStruct.outByte++; //StructElement
     outStruct.outWord++; //StructElement
     outStruct.outDword++; //StructElement
@@ -79,25 +79,25 @@ void CppDataTypeTestProgram::Execute()
         else
             outarrayBoolean[i] = true;
 
-        outarrayInt8[i]++; 	//SINT
-        outarrayUint8[i]++;	//USINT
+        outarrayInt8[i]++;     //SINT
+        outarrayUint8[i]++;    //USINT
 
-        outarrayInt16[i]++;	//INT
-        outarrayUint16[i]++;//UINT
+        outarrayInt16[i]++;    //INT
+        outarrayUint16[i]++;   //UINT
 
-        outarrayInt32[i]++;	//DINT
-        outarrayUint32[i]++;//UDINT
+        outarrayInt32[i]++;    //DINT
+        outarrayUint32[i]++;   //UDINT
 
-        outarrayInt64[i]++;	//LINT
-        outarrayUint64[i]++;//ULINT
+        outarrayInt64[i]++;    //LINT
+        outarrayUint64[i]++;   //ULINT
 
-        outarrayFloat32[i]++;//REAL
-        outarrayFloat64[i]++;//LREAL
+        outarrayFloat32[i]++;  //REAL
+        outarrayFloat64[i]++;  //LREAL
 
-        outarrayByte[i]++;	//Byte
-        outarrayWord[i]++;	//Word
-        outarrayDword[i]++;	//DWORD
-        outarrayLword[i]++;	//Lword
+        outarrayByte[i]++;    //Byte
+        outarrayWord[i]++;    //Word
+        outarrayDword[i]++;   //DWORD
+        outarrayLword[i]++;   //Lword
 
         outarrayString[i] = "This is a standard IEC 61131 string (max. 80 chars).";
         outarrayWString[i] = "This is a standard IEC 61131 wide string (max. 80 chars).";
