@@ -1,0 +1,25 @@
+name: Build all examples
+run-name: ${{ github.actor }} is building all examples
+on: [workflow_dispatch]
+jobs:
+  build-all-job:
+    runs-on: ubuntu-latest
+    container:
+      image: martinboers/plcnext-build-environment:axcf2152-2022.6
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+      - name: Build the Dynamic Ports example
+        run: |
+          plcncli --version
+          plcncli new acfproject --component DummyC --output Examples/DynamicPorts
+          rm Examples/DynamicPorts/src/Dummy*
+          plcncli set target --path Examples/DynamicPorts --name AXCF2152 --version 2022.6 --add
+          plcncli generate code --path Examples/DynamicPorts
+          plcncli build --path Examples/DynamicPorts --buildtype Release
+          plcncli deploy --path Examples/DynamicPorts
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: DynamicPorts
+          path: Examples/DynamicPorts/bin
