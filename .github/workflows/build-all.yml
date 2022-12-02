@@ -15,7 +15,7 @@ jobs:
           plcncli new acfproject --component DummyC --output Examples/DataAccess
           rm Examples/DataAccess/src/Dummy*
           plcncli set target --path Examples/DataAccess --name AXCF2152 --version 2022.6 --add
-          plcncli generate code --path Examples/DataAccess
+          plcncli generate all --path Examples/DataAccess
           plcncli build --path Examples/DataAccess --buildtype Release
           plcncli deploy --path Examples/DataAccess
       - name: Archive build artifacts
