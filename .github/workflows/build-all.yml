@@ -9,17 +9,17 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
-      - name: Build the Dynamic Ports example
+      - name: Build the DataAccess example
         run: |
           plcncli --version
-          plcncli new acfproject --component DummyC --output Examples/DynamicPorts
-          rm Examples/DynamicPorts/src/Dummy*
-          plcncli set target --path Examples/DynamicPorts --name AXCF2152 --version 2022.6 --add
-          plcncli generate code --path Examples/DynamicPorts
-          plcncli build --path Examples/DynamicPorts --buildtype Release
-          plcncli deploy --path Examples/DynamicPorts
+          plcncli new acfproject --component DummyC --output Examples/DataAccess
+          rm Examples/DataAccess/src/Dummy*
+          plcncli set target --path Examples/DataAccess --name AXCF2152 --version 2022.6 --add
+          plcncli generate code --path Examples/DataAccess
+          plcncli build --path Examples/DataAccess --buildtype Release
+          plcncli deploy --path Examples/DataAccess
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: DynamicPorts
-          path: Examples/DynamicPorts/bin
+          name: DataAccess
+          path: Examples/DataAccess/bin
