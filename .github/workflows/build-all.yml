@@ -1,1 +1,3 @@
-
+name: Build all examples
+run-name: ${{ github.actor }} is building all examples
+on: [workflow_dispatch]
