@@ -17,7 +17,6 @@ jobs:
           plcncli set target --path Examples/DataAccess --name AXCF2152 --version 2022.6 --add
           plcncli generate all --path Examples/DataAccess
           plcncli build --path Examples/DataAccess --buildtype Release
-          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Examples/DataAccess
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
