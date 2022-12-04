@@ -10,6 +10,8 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
       - name: Build the DataAccess example
+        # Globalisation invariant mode must be set to avoid errors in EngineeringLibraryBuilder.
+        # See: https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization
         run: |
           plcncli --version
           plcncli new acfproject --component DummyC --output Examples/DataAccess
