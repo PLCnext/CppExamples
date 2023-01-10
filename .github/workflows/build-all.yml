@@ -5,7 +5,7 @@ jobs:
   build-all-job:
     runs-on: ubuntu-latest
     container:
-      image: martinboers/plcnext-build-environment:axcf2152-2022.6
+      image: martinboers/plcnext-build-environment:axcf2152-2023.0
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -14,15 +14,15 @@ jobs:
         # See: https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization
         run: |
           plcncli --version
-          plcncli new acfproject --component DummyC --output Examples/DataAccess
-          rm Examples/DataAccess/src/Dummy*
-          plcncli set target --path Examples/DataAccess --name AXCF2152 --version 2022.6 --add
-          plcncli generate all --path Examples/DataAccess
-          plcncli build --path Examples/DataAccess --buildtype Release
+          plcncli new acfproject --output Build/DataAccess
+          cp Examples/DataAccess/src/* Build/DataAccess/src/*
+          plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/DataAccess
+          plcncli build --path Build/DataAccess --buildtype Release
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
-          plcncli deploy --path Examples/DataAccess
+          plcncli deploy --path Build/DataAccess
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: DataAccess
-          path: Examples/DataAccess/bin
+          path: Build/DataAccess/bin
