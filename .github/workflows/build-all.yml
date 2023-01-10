@@ -15,7 +15,7 @@ jobs:
         run: |
           plcncli --version
           plcncli new acfproject --output Build/DataAccess
-          cp Examples/DataAccess/src/* Build/DataAccess/src/*
+          cp Examples/DataAccess/src/* Build/DataAccess/src
           plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/DataAccess
           plcncli build --path Build/DataAccess --buildtype Release
