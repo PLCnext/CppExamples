@@ -1,13 +1,11 @@
 # This script is designed to be executed by bats (https://github.com/bats-core/)
-# It requires bats-core to be installed, along with the submodules bats-support and bats-assert
+# It requires:
+# - bats-core to be installed, along with the submodules bats-support and bats-assert
+# - PLC login credentials in the following environment variables: IP_ADDR, USERNAME, PASSWORD
 
 setup() {
     load 'bats-support/load'
     load 'bats-assert/load'
-    
-#    IP_ADDR="192.168.1.10"
-    USERNAME="admin"
-    PASSWORD="88f037bb"
 }
 
 @test "DataAccess Example" {
