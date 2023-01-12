@@ -5,7 +5,7 @@ setup() {
     load 'bats-support/load'
     load 'bats-assert/load'
     
-    IP_ADDR="192.168.1.10"
+#    IP_ADDR="192.168.1.10"
     USERNAME="admin"
     PASSWORD="88f037bb"
 }
@@ -23,5 +23,5 @@ setup() {
     assert_output --partial 'read from ReadSingle()'
 }
 
-teardown() {
-}
+#teardown() {
+#}
