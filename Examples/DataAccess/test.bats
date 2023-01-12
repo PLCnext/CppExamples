@@ -5,7 +5,7 @@ setup() {
     load 'bats-support/load'
     load 'bats-assert/load'
     
-    IP_ADDR=${IP_ADDR}
+    IP_ADDR="192.168.1.10"
     USERNAME="admin"
     PASSWORD="88f037bb"
 }
