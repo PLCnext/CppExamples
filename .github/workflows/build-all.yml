@@ -9,11 +9,27 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
-      - name: Build the DataAccess example
+      # DYNAMIC PORTS EXAMPLE
+      - name: Build the DynamicPorts example
         # Globalisation invariant mode must be set to avoid errors in EngineeringLibraryBuilder.
         # See: https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization
         run: |
           plcncli --version
+          plcncli new project --output Build/DynamicPorts
+          cp Examples/DynamicPorts/src/* Build/DynamicPorts/src
+          plcncli set target --path Build/DynamicPorts --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/DynamicPorts
+          plcncli build --path Build/DynamicPorts --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/DynamicPorts
+      - name: Archive DynamicPorts build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: DynamicPorts
+          path: Build/DynamicPorts/bin
+      # DATA ACCESS EXAMPLE
+      - name: Build the DataAccess example
+        run: |
           plcncli new acfproject --output Build/DataAccess
           cp Examples/DataAccess/src/* Build/DataAccess/src
           plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
@@ -21,7 +37,7 @@ jobs:
           plcncli build --path Build/DataAccess --buildtype Release
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/DataAccess
-      - name: Archive build artifacts
+      - name: Archive DataAccess build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: DataAccess
