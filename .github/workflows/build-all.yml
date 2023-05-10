@@ -10,16 +10,12 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
       # DATA TYPE EXAMPLE
-      # - includes a work-around for bug https://github.com/PLCnext/PLCnext_CLI_Templates/issues/5
       - name: Build the CppDataTypeTest example
         # Globalisation invariant mode must be set to avoid errors in EngineeringLibraryBuilder.
         # See: https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization
         run: |
           plcncli --version
-          mkdir -p Build
-          cd Build
-          plcncli new project --output CppDataTypeTest
-          cd ..
+          plcncli new project --output Build/CppDataTypeTest
           cp Examples/CppDataTypeTest/src/* Build/CppDataTypeTest/src
           plcncli set target --path Build/CppDataTypeTest --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/CppDataTypeTest
@@ -32,6 +28,7 @@ jobs:
           name: CppDataTypeTest
           path: Build/CppDataTypeTest/bin
       # DYNAMIC PORTS EXAMPLE
+      # - includes a work-around for bug https://github.com/PLCnext/PLCnext_CLI_Templates/issues/5
       - name: Build the DynamicPorts example
         run: |
           plcncli --version
@@ -54,10 +51,7 @@ jobs:
       - name: Build the ComponentPorts example
         run: |
           plcncli --version
-          mkdir -p Build
-          cd Build
-          plcncli new project --output ComponentPorts
-          cd ..
+          plcncli new project --output Build/ComponentPorts
           rm Build/ComponentPorts/src/*
           cp Examples/ComponentPorts/src/* Build/ComponentPorts/src
           plcncli set target --path Build/ComponentPorts --name AXCF2152 --version 2023.0 --add
@@ -70,6 +64,53 @@ jobs:
         with:
           name: ComponentPorts
           path: Build/ComponentPorts/bin
+      # PROGRAM COMPONENT INTERACTION EXAMPLE
+      - name: Build the ProgramComponentInteraction example
+        run: |
+          plcncli --version
+          plcncli new project --output Build/ProgramComponentInteraction
+          rm Build/ProgramComponentInteraction/src/*
+          cp Examples/ProgramComponentInteraction/src/* Build/ProgramComponentInteraction/src
+          plcncli set target --path Build/ProgramComponentInteraction --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/ProgramComponentInteraction
+          plcncli build --path Build/ProgramComponentInteraction --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/ProgramComponentInteraction
+      - name: Archive ProgramComponentInteraction build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ProgramComponentInteraction
+          path: Build/ProgramComponentInteraction/bin
+      # THREAD EXAMPLE
+      - name: Build the Thread example
+        run: |
+          plcncli new project --output Build/ThreadExample
+          cp Examples/ThreadExample/src/* Build/ThreadExample/src
+          plcncli set target --path Build/ThreadExample --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/ThreadExample
+          plcncli build --path Build/ThreadExample --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/ThreadExample
+      - name: Archive ThreadExample build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ThreadExample
+          path: Build/ThreadExample/bin
+      # BUFFERED EXCHANGE EXAMPLE
+      - name: Build the BufferedExchange example
+        run: |
+          plcncli new project --output Build/BufferedExchange
+          cp Examples/BufferedExchange/src/* Build/BufferedExchange/src
+          plcncli set target --path Build/BufferedExchange --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/BufferedExchange
+          plcncli build --path Build/BufferedExchange --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/BufferedExchange
+      - name: Archive BufferedExchange build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: BufferedExchange
+          path: Build/BufferedExchange/bin
       # DATA ACCESS EXAMPLE
       - name: Build the DataAccess example
         run: |
