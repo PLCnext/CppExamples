@@ -28,9 +28,12 @@ jobs:
           name: DynamicPorts
           path: Build/DynamicPorts/bin
       # DATA ACCESS EXAMPLE
+      # - includes a work-around for bug https://github.com/PLCnext/PLCnext_CLI_Templates/issues/5
       - name: Build the DataAccess example
         run: |
-          plcncli new acfproject --output Build/DataAccess
+          cd Build
+          plcncli new acfproject --output DataAccess
+          cd ..
           cp Examples/DataAccess/src/* Build/DataAccess/src
           plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/DataAccess
