@@ -9,11 +9,30 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
-      # DYNAMIC PORTS EXAMPLE
+      # DATA TYPE EXAMPLE
       # - includes a work-around for bug https://github.com/PLCnext/PLCnext_CLI_Templates/issues/5
-      - name: Build the DynamicPorts example
+      - name: Build the CppDataTypeTest example
         # Globalisation invariant mode must be set to avoid errors in EngineeringLibraryBuilder.
         # See: https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization
+        run: |
+          plcncli --version
+          mkdir -p Build
+          cd Build
+          plcncli new project --output CppDataTypeTest
+          cd ..
+          cp Examples/CppDataTypeTest/src/* Build/CppDataTypeTest/src
+          plcncli set target --path Build/CppDataTypeTest --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/CppDataTypeTest
+          plcncli build --path Build/CppDataTypeTest --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/CppDataTypeTest
+      - name: Archive CppDataTypeTest build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: CppDataTypeTest
+          path: Build/CppDataTypeTest/bin
+      # DYNAMIC PORTS EXAMPLE
+      - name: Build the DynamicPorts example
         run: |
           plcncli --version
           mkdir -p Build
