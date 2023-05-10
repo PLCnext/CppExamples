@@ -31,6 +31,25 @@ jobs:
         with:
           name: DynamicPorts
           path: Build/DynamicPorts/bin
+      # COMPONENT PORTS EXAMPLE
+      - name: Build the ComponentPorts example
+        run: |
+          plcncli --version
+          mkdir -p Build
+          cd Build
+          plcncli new project --output ComponentPorts
+          cd ..
+          rm Build/ComponentPorts/src/*
+          cp Examples/ComponentPorts/src/* Build/ComponentPorts/src
+          plcncli set target --path Build/ComponentPorts --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/ComponentPorts
+          plcncli build --path Build/ComponentPorts --buildtype Release
+          plcncli deploy --path Build/ComponentPorts
+      - name: Archive ComponentPorts build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ComponentPorts
+          path: Build/ComponentPorts/bin
       # DATA ACCESS EXAMPLE
       - name: Build the DataAccess example
         run: |
@@ -39,7 +58,6 @@ jobs:
           plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/DataAccess
           plcncli build --path Build/DataAccess --buildtype Release
-          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/DataAccess
       - name: Archive DataAccess build artifacts
         uses: actions/upload-artifact@v3
