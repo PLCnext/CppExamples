@@ -10,12 +10,16 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
       # DYNAMIC PORTS EXAMPLE
+      # - includes a work-around for bug https://github.com/PLCnext/PLCnext_CLI_Templates/issues/5
       - name: Build the DynamicPorts example
         # Globalisation invariant mode must be set to avoid errors in EngineeringLibraryBuilder.
         # See: https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization
         run: |
           plcncli --version
-          plcncli new project --output Build/DynamicPorts
+          mkdir -p Build
+          cd Build
+          plcncli new project --output DynamicPorts
+          cd ..
           cp Examples/DynamicPorts/src/* Build/DynamicPorts/src
           plcncli set target --path Build/DynamicPorts --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/DynamicPorts
@@ -28,12 +32,9 @@ jobs:
           name: DynamicPorts
           path: Build/DynamicPorts/bin
       # DATA ACCESS EXAMPLE
-      # - includes a work-around for bug https://github.com/PLCnext/PLCnext_CLI_Templates/issues/5
       - name: Build the DataAccess example
         run: |
-          cd Build
-          plcncli new acfproject --output DataAccess
-          cd ..
+          plcncli new acfproject --output Build/DataAccess
           cp Examples/DataAccess/src/* Build/DataAccess/src
           plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/DataAccess
