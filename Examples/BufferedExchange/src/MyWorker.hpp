@@ -2,6 +2,7 @@
 #include "Arp/System/Commons/Threading/Thread.hpp"
 #include "Arp/System/Commons/Exceptions/Exceptions.h"
 #include "Arp/System/Commons/Chrono/SystemTick.hpp"
+#include "Arp/System/Commons/Threading/Mutex.hpp"
 
 #include <queue>
 #include <utility>
@@ -20,7 +21,7 @@ namespace BufferedExchange
     public: // Properties
         int RunCount;
         bool Stop;
-        Arp::Mutex d1;
+        Mutex d1;
 
     public: // Methods the Threads call.
 
@@ -38,7 +39,7 @@ namespace BufferedExchange
             {
                 RunSingle();
                 // Sleep for X ms until next RunSingle execution.
-                Arp::Thread::Sleep(999);
+                Thread::Sleep(999);
             }
         };
 
