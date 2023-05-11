@@ -20,6 +20,7 @@ using namespace Arp;
 using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
+using namespace Arp::System::Commons::Threading;
 
 //#component
 class BufferedExchangeComponent: public ComponentBase,
