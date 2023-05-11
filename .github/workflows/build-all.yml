@@ -16,7 +16,7 @@ jobs:
         run: |
           plcncli --version
           plcncli new project --output Build/CppDataTypeTest
-          cp Examples/CppDataTypeTest/src/* Build/CppDataTypeTest/src
+          cp -r Examples/CppDataTypeTest/src/* Build/CppDataTypeTest/src
           plcncli set target --path Build/CppDataTypeTest --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/CppDataTypeTest
           plcncli build --path Build/CppDataTypeTest --buildtype Release
@@ -36,7 +36,7 @@ jobs:
           cd Build
           plcncli new project --output DynamicPorts
           cd ..
-          cp Examples/DynamicPorts/src/* Build/DynamicPorts/src
+          cp -r Examples/DynamicPorts/src/* Build/DynamicPorts/src
           plcncli set target --path Build/DynamicPorts --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/DynamicPorts
           plcncli build --path Build/DynamicPorts --buildtype Release
@@ -53,7 +53,7 @@ jobs:
           plcncli --version
           plcncli new project --output Build/ComponentPorts
           rm Build/ComponentPorts/src/*
-          cp Examples/ComponentPorts/src/* Build/ComponentPorts/src
+          cp -r Examples/ComponentPorts/src/* Build/ComponentPorts/src
           plcncli set target --path Build/ComponentPorts --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/ComponentPorts
           plcncli build --path Build/ComponentPorts --buildtype Release
@@ -70,7 +70,7 @@ jobs:
           plcncli --version
           plcncli new project --output Build/ProgramComponentInteraction
           rm Build/ProgramComponentInteraction/src/*
-          cp Examples/ProgramComponentInteraction/src/* Build/ProgramComponentInteraction/src
+          cp -r Examples/ProgramComponentInteraction/src/* Build/ProgramComponentInteraction/src
           plcncli set target --path Build/ProgramComponentInteraction --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/ProgramComponentInteraction
           plcncli build --path Build/ProgramComponentInteraction --buildtype Release
@@ -85,7 +85,7 @@ jobs:
       - name: Build the Thread example
         run: |
           plcncli new project --output Build/ThreadExample
-          cp Examples/ThreadExample/src/* Build/ThreadExample/src
+          cp -r Examples/ThreadExample/src/* Build/ThreadExample/src
           plcncli set target --path Build/ThreadExample --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/ThreadExample
           plcncli build --path Build/ThreadExample --buildtype Release
@@ -100,7 +100,7 @@ jobs:
       - name: Build the BufferedExchange example
         run: |
           plcncli new project --output Build/BufferedExchange
-          cp Examples/BufferedExchange/src/* Build/BufferedExchange/src
+          cp -r Examples/BufferedExchange/src/* Build/BufferedExchange/src
           plcncli set target --path Build/BufferedExchange --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/BufferedExchange
           plcncli build --path Build/BufferedExchange --buildtype Release
@@ -115,7 +115,7 @@ jobs:
       - name: Build the DataAccess example
         run: |
           plcncli new acfproject --output Build/DataAccess
-          cp Examples/DataAccess/src/* Build/DataAccess/src
+          cp -r Examples/DataAccess/src/* Build/DataAccess/src
           plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/DataAccess
           plcncli build --path Build/DataAccess --buildtype Release
