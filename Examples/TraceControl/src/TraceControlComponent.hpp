@@ -19,6 +19,7 @@ using namespace Arp;
 using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Meta;
 using namespace Arp::Services::TraceController::Services;
+using namespace Arp::System::Commons::Threading;
 
 /// <summary>
 /// ###########################

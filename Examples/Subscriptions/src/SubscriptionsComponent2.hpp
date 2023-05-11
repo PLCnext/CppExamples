@@ -21,6 +21,7 @@ using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Meta;
 using namespace Arp::Plc::Gds::Services;
 using Subscriptions::Internal::TimestampedValue;
+using namespace Arp::System::Commons::Threading;
 
 /// <summary>
 /// ######################################
