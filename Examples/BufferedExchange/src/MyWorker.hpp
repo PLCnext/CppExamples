@@ -10,6 +10,7 @@
 namespace BufferedExchange
 {
     using namespace std::chrono;
+    using namespace Arp::System::Commons::Threading;
     template<typename S>
     class MyWorker
     {
