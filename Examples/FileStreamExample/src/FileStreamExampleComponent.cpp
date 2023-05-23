@@ -61,9 +61,9 @@ void FileStreamExampleComponent::ResetConfig() {
     if (bReset) {
         log.Info("--- Delete File {0}", filePath);
         try {
-            if (Io::File::Exists(filePath))
+            if (Arp::System::Commons::Io::File::Exists(filePath))
             {
-                Io::File::Delete(filePath);
+                Arp::System::Commons::Io::File::Delete(filePath);
             }
 
         } catch (const Arp::Exception &e) {
