@@ -160,6 +160,7 @@ jobs:
       - name: Build the Notification example
         run: |
           plcncli new project --output Build/NotificationExample
+          rm Build/NotificationExample/src/*
           cp -r Examples/NotificationExample/src/* Build/NotificationExample/src
           plcncli set target --path Build/NotificationExample --name AXCF2152 --version 2023.0 --add
           plcncli generate all --path Build/NotificationExample
