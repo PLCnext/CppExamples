@@ -1,3 +1,219 @@
 name: Build all examples
 run-name: ${{ github.actor }} is building all examples
 on: [workflow_dispatch]
+jobs:
+  build-all-job:
+    runs-on: ubuntu-latest
+    container:
+      image: martinboers/plcnext-build-environment:axcf2152-2023.0
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+      # DATA TYPE EXAMPLE
+      - name: Build the CppDataTypeTest example
+        # Globalisation invariant mode must be set to avoid errors in EngineeringLibraryBuilder.
+        # See: https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization
+        run: |
+          plcncli --version
+          plcncli new project --output Build/CppDataTypeTest
+          cp -r Examples/CppDataTypeTest/src/* Build/CppDataTypeTest/src
+          plcncli set target --path Build/CppDataTypeTest --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/CppDataTypeTest
+          plcncli build --path Build/CppDataTypeTest --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/CppDataTypeTest
+      - name: Archive CppDataTypeTest build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: CppDataTypeTest
+          path: Build/CppDataTypeTest/bin
+      # DYNAMIC PORTS EXAMPLE
+      # - includes a work-around for bug https://github.com/PLCnext/PLCnext_CLI_Templates/issues/5
+      - name: Build the DynamicPorts example
+        run: |
+          plcncli --version
+          mkdir -p Build
+          cd Build
+          plcncli new project --output DynamicPorts
+          cd ..
+          cp -r Examples/DynamicPorts/src/* Build/DynamicPorts/src
+          plcncli set target --path Build/DynamicPorts --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/DynamicPorts
+          plcncli build --path Build/DynamicPorts --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/DynamicPorts
+      - name: Archive DynamicPorts build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: DynamicPorts
+          path: Build/DynamicPorts/bin
+      # COMPONENT PORTS EXAMPLE
+      - name: Build the ComponentPorts example
+        run: |
+          plcncli --version
+          plcncli new project --output Build/ComponentPorts
+          rm Build/ComponentPorts/src/*
+          cp -r Examples/ComponentPorts/src/* Build/ComponentPorts/src
+          plcncli set target --path Build/ComponentPorts --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/ComponentPorts
+          plcncli build --path Build/ComponentPorts --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/ComponentPorts
+      - name: Archive ComponentPorts build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ComponentPorts
+          path: Build/ComponentPorts/bin
+      # PROGRAM COMPONENT INTERACTION EXAMPLE
+      - name: Build the ProgramComponentInteraction example
+        run: |
+          plcncli --version
+          plcncli new project --output Build/ProgramComponentInteraction
+          rm Build/ProgramComponentInteraction/src/*
+          cp -r Examples/ProgramComponentInteraction/src/* Build/ProgramComponentInteraction/src
+          plcncli set target --path Build/ProgramComponentInteraction --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/ProgramComponentInteraction
+          plcncli build --path Build/ProgramComponentInteraction --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/ProgramComponentInteraction
+      - name: Archive ProgramComponentInteraction build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ProgramComponentInteraction
+          path: Build/ProgramComponentInteraction/bin
+      # THREAD EXAMPLE
+      - name: Build the Thread example
+        run: |
+          plcncli new project --output Build/ThreadExample
+          cp -r Examples/ThreadExample/src/* Build/ThreadExample/src
+          plcncli set target --path Build/ThreadExample --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/ThreadExample
+          plcncli build --path Build/ThreadExample --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/ThreadExample
+      - name: Archive ThreadExample build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ThreadExample
+          path: Build/ThreadExample/bin
+      # BUFFERED EXCHANGE EXAMPLE
+      - name: Build the BufferedExchange example
+        run: |
+          plcncli new project --output Build/BufferedExchange
+          cp -r Examples/BufferedExchange/src/* Build/BufferedExchange/src
+          plcncli set target --path Build/BufferedExchange --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/BufferedExchange
+          plcncli build --path Build/BufferedExchange --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/BufferedExchange
+      - name: Archive BufferedExchange build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: BufferedExchange
+          path: Build/BufferedExchange/bin
+      # DATA ACCESS EXAMPLE
+      - name: Build the DataAccess example
+        run: |
+          plcncli new acfproject --output Build/DataAccess
+          cp -r Examples/DataAccess/src/* Build/DataAccess/src
+          plcncli set target --path Build/DataAccess --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/DataAccess
+          plcncli build --path Build/DataAccess --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/DataAccess
+      - name: Archive DataAccess build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: DataAccess
+          path: Build/DataAccess/bin
+      # SUBSCRIPTIONS EXAMPLE
+      - name: Build the Subscriptions example
+        run: |
+          plcncli new acfproject --output Build/Subscriptions
+          cp -r Examples/Subscriptions/src/* Build/Subscriptions/src
+          plcncli set target --path Build/Subscriptions --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/Subscriptions
+          plcncli build --path Build/Subscriptions --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/Subscriptions
+      - name: Archive Subscriptions build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Subscriptions
+          path: Build/Subscriptions/bin
+      # FORCE EXAMPLE
+      - name: Build the Force example
+        run: |
+          plcncli new acfproject --output Build/Force
+          cp -r Examples/Force/src/* Build/Force/src
+          plcncli set target --path Build/Force --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/Force
+          plcncli build --path Build/Force --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/Force
+      - name: Archive Force build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Force
+          path: Build/Force/bin
+      # NOTIFICATION EXAMPLE
+      - name: Build the Notification example
+        run: |
+          plcncli new project --output Build/NotificationExample
+          rm Build/NotificationExample/src/*
+          cp -r Examples/NotificationExample/src/* Build/NotificationExample/src
+          plcncli set target --path Build/NotificationExample --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/NotificationExample
+          plcncli build --path Build/NotificationExample --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/NotificationExample
+      - name: Archive NotificationExample build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: NotificationExample
+          path: Build/NotificationExample/bin
+      # TRACE CONTROL EXAMPLE
+      - name: Build the TraceControl example
+        run: |
+          plcncli new acfproject --output Build/TraceControl
+          cp -r Examples/TraceControl/src/* Build/TraceControl/src
+          plcncli set target --path Build/TraceControl --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/TraceControl
+          plcncli build --path Build/TraceControl --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/TraceControl
+      - name: Archive TraceControl build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: TraceControl
+          path: Build/TraceControl/bin
+      # FILE STREAM EXAMPLE
+      - name: Build the FileStream example
+        run: |
+          plcncli new project --output Build/FileStreamExample
+          cp -r Examples/FileStreamExample/src/* Build/FileStreamExample/src
+          plcncli set target --path Build/FileStreamExample --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/FileStreamExample
+          plcncli build --path Build/FileStreamExample --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/FileStreamExample
+      - name: Archive FileStreamExample build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: FileStreamExample
+          path: Build/FileStreamExample/bin
+      # OPC PLC MANAGER EXAMPLE
+      - name: Build the OpcPlcManager example
+        run: |
+          plcncli new acfproject --output Build/OpcPlcManager
+          cp -r Examples/OpcPlcManager/src/* Build/OpcPlcManager/src
+          plcncli set target --path Build/OpcPlcManager --name AXCF2152 --version 2023.0 --add
+          plcncli generate all --path Build/OpcPlcManager
+          plcncli build --path Build/OpcPlcManager --buildtype Release
+          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+          plcncli deploy --path Build/OpcPlcManager
+      - name: Archive OpcPlcManager build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: OpcPlcManager
+          path: Build/OpcPlcManager/bin

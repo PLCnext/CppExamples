@@ -14,6 +14,7 @@ using namespace Arp;
 using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Meta;
 using namespace Arp::Plc::Domain::Services;
+using namespace Arp::System::Commons::Threading;
 
 //#acfcomponent
 class OpcPlcManagerComponent : public ComponentBase, public MetaComponentBase, private Loggable<OpcPlcManagerComponent>
