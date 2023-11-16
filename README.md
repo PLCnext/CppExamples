@@ -38,9 +38,9 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 
 ## Getting started
 
-- [C++ programs in PLCnext Technology](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm)
-- [Required Installations for C++ programming](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Required_Installations.htm)
-- [Working with Eclipse](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Working_with_Eclipse.htm)
+- [C++ programs in PLCnext Technology](https://www.plcnext.help/te/Programming/Cplusplus/Cpp-programming.htm)
+- [Required Installations for C++ programming](https://www.plcnext.help/te/Programming/Cplusplus/Cpp_Required_installations.htm)
+- [Working with Eclipse](https://www.plcnext.help/te/Programming/Cplusplus/Working_with_Eclipse.htm)
 
 ## Compiling an example
 
@@ -81,7 +81,7 @@ You can participate in this project by submitting bugs and feature requests.
 Furthermore you can help us by discussing issues and letting us know where you have problems or where others could struggle.
 
 ## Feedback
-* Ask a question in our [Forum](https://www.plcnext-community.net/en/discussions-2-offcanvas/forums.html)
+* Ask a question in the [PLCnext Community's Forum](https://www.plcnext-community.net/forum/#/categories)
 * Request a new feature or example to be added on [GitHub](CONTRIBUTING.md)
 * Vote for [Popular Feature Requests](https://github.com/PLCnext/CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
 * File a bug in [GitHub Issues](https://github.com/PLCnext/CppExamples/issues)
