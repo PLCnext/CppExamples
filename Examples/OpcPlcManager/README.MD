@@ -37,7 +37,7 @@ This example also uses the [PLC Manager](https://api.plcnext.help/api_docs_2021-
 
 ## Quick-start example
 
-It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm).
+It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://plcnext.help/te/Programming/Cplusplus/Cpp_programs_in_PLCnext.htm).
 
 Prerequisites:
 
@@ -59,7 +59,7 @@ Procedure:
 
 - In PLCnext Engineer, create a new project based on the template for your PLC and firmware version.
 
-- Change the [OPC UA server settings](https://www.plcnext.help/te/Service_Components/OPC_UA_Server/OPC_UA_server_configuration.htm) so that "Visibility of variables" is set to either "Marked" or "All".
+- Change the [OPC UA server settings](https://plcnext.help/te/Communication_interfaces/OPC_UA/OPCUA_server_configuration.htm) so that "Visibility of variables" is set to either "Marked" or "All".
 
 - Write and start the PLCnext Engineer project on the PLC. The only purpose of this PLCnext Engineer project is to configure the OPC UA server to make the GDS port variables, defined in our ACF component, available to OPC UA clients.
 
