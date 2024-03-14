@@ -67,7 +67,7 @@ An ACF component is created which should fulfill the following tasks:
 
 ### Procedure:
 
-- Please exercise the e-learning ["Internal Function Extensions"](http://plcnext-infocenter.s3-website.eu-central-1.amazonaws.com/PLCnext_elearning_InternalFunctionExtensions/PLCnext%20Technology%20-%20Internal%20Function%20Extensions/story_html5.html)
+- Please exercise the e-learning ["Internal Function Extensions"](https://elearning.plcnext.help/PLCnTech_IntFuncExt/story_html5.html)
 
 
 
