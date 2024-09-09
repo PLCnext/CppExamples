@@ -1,4 +1,11 @@
-﻿#pragma once
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/ProgramBase.hpp"
 #include "Arp/System/Commons/Logging.h"
@@ -19,11 +26,8 @@ public: // typedefs
 
 public: // construction/destruction
     FileStreamExampleProgram(FileStreamExample::FileStreamExampleComponent& fileStreamExampleComponentArg, const String& name);
-    FileStreamExampleProgram(const FileStreamExampleProgram& arg) = delete;
-    virtual ~FileStreamExampleProgram() = default;
 
 public: // operators
-    FileStreamExampleProgram&  operator=(const FileStreamExampleProgram& arg) = delete;
 
 public: // properties
 
@@ -41,10 +45,11 @@ public: /* Ports
            The attributes comment define the port attributes and is optional.
            The name comment defines the name of the port and is optional. Default is the name of the field.
         */
-        //#port
-        //#attributes(Input)
-        //#name(DeleteFileAtNextStart)
-        boolean portField{false};
+    //#port
+    //#attributes(Input)
+    //#name(DeleteFileAtNextStart)
+    boolean portField{false};
+
 private: // fields
     FileStreamExample::FileStreamExampleComponent& fileStreamExampleComponent;
 
@@ -56,7 +61,8 @@ inline FileStreamExampleProgram::FileStreamExampleProgram(FileStreamExample::Fil
 : ProgramBase(name)
 , fileStreamExampleComponent(fileStreamExampleComponentArg)
 {
-    log.Info("---Constructor:{0}",GetFullName());
+	 log.Info("---Constructor:{0}",GetFullName());
 }
+
 
 } // end of namespace FileStreamExample

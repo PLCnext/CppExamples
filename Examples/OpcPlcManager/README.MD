@@ -20,20 +20,18 @@ https://github.com/PLCnext/OpcUaMethods
 
 The concepts and procedures demonstrated in that tutorial were used to prepare this example.
 
-This example also uses the [PLC Manager](https://api.plcnext.help/api_docs_2021-0-LTS/classArp_1_1Plc_1_1Domain_1_1Services_1_1IPlcManagerService2.html) RSC service.
+This example also uses the [PLC Manager](https://api.plcnext.help/api_docs_2024-0-LTS/classArp_1_1Plc_1_1Domain_1_1Services_1_1IPlcManagerService2.html) RSC service.
 
 ## Guide details
 
 |Description | Value |
 |------------ |-----------|
 |Created | 19.03.2021 |
-|Last modified| 19.03.2021 |
-|Controller| AXC F 2152 |
-|FW| 2021.0.3 LTS |
-|Arpversion| 21.0.3.35554 |
-|SVN Revision| 35554 |
-|SDK| 2021.0.3 LTS (21.0.3.35554) |
-|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
+|Last modified| 06.09.2024 |
+|Controller| SIM-AXC F 2152 |
+|FW| 2024.7 |
+|SDK| 2024.7 |
+|PLCnext CLI | 2025.0 PREVIEW |
 
 ## Quick-start example
 
@@ -41,11 +39,11 @@ It is assumed that the user has some experience [building C++ Components and Pro
 
 Prerequisites:
 
-- AXC F x152 controller.
+- SIM-AXC F 2152 controller.
 
-- PLCnext Command Line Interface (CLI) tool, version 2021.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Command Line Interface (CLI) tool, version 2025.0 PREVIEW.
 
-- A Software Development Kit (SDK) for the AXC F x152 PLCnext Control. This is also included in the "PLCnext Technology C++ tool chain".
+- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control.
 
 - PLCnext Engineer software.
 

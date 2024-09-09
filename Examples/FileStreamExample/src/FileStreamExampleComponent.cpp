@@ -1,4 +1,11 @@
-﻿#include "FileStreamExampleComponent.hpp"
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#include "FileStreamExampleComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "FileStreamExampleLibrary.hpp"
 
@@ -6,17 +13,18 @@
 #include "Arp/System/Commons/Io/File.hpp"
 #include "Arp/System/Commons/Exceptions/Exceptions.h"
 
-
-namespace FileStreamExample {
-
-FileStreamExampleComponent::FileStreamExampleComponent(IApplication &application, const String &name) :
-    ComponentBase(application,::FileStreamExample::FileStreamExampleLibrary::GetInstance(), name, ComponentCategory::Custom),
-    programProvider(*this),
-    ProgramComponentBase(::FileStreamExample::FileStreamExampleLibrary::GetInstance().GetNamespace(), programProvider) {
-    log.Info("---Constructor:{0}",GetFullName());
+namespace FileStreamExample
+{
+FileStreamExampleComponent::FileStreamExampleComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , programProvider(*this)
+    , ProgramComponentBase(::FileStreamExample::FileStreamExampleLibrary::GetInstance().GetNamespace(), programProvider)
+{
+	log.Info("---Constructor:{0}",GetFullName());
 }
 
-void FileStreamExampleComponent::Initialize() {
+void FileStreamExampleComponent::Initialize()
+{
     // never remove next line
     ProgramComponentBase::Initialize();
 
@@ -24,54 +32,63 @@ void FileStreamExampleComponent::Initialize() {
     log.Info("---Initialize - Compile on {0}", __TIMESTAMP__);
 }
 
-void FileStreamExampleComponent::LoadConfig() {
+void FileStreamExampleComponent::LoadConfig()
+{
+	 // load project config here
+	 log.Info("---LoadConfig");
 
-    // load project config here
-    log.Info("---LoadConfig");
+	 String out{__TIMESTAMP__};
+	 String in = ReadFromFile();
 
-    String out{__TIMESTAMP__};
-    String in = ReadFromFile();
+	 log.Info("Last Date: {0} ", in);
+	 log.Info("Current Date: {0}", out);
 
-    log.Info("Last Date: {0} ", in);
-    log.Info("Current Date: {0}", out);
-
-    if (in != out &&  in != "Error"){
-        newbin = true;
-        // Keep in mind that this does not mean that the component has been reconstructed.
-        log.Warning("--- New Binary has been loaded!");
-    }
+	 if (in != out &&  in != "Error"){
+	     newbin = true;
+	     // Keep in mind that this does not mean that the component has been reconstructed.
+	     log.Warning("--- New Binary has been loaded!");
+	 }
 }
 
-void FileStreamExampleComponent::SetupConfig() {
+void FileStreamExampleComponent::SetupConfig()
+{
     // never remove next line
     ProgramComponentBase::SetupConfig();
 
     // setup project config here
     log.Info("--- SetupConfig");
     if (newbin||nofile) WriteToFile (__TIMESTAMP__);
-
 }
 
-void FileStreamExampleComponent::ResetConfig() {
+void FileStreamExampleComponent::ResetConfig()
+{
     // never remove next line
     ProgramComponentBase::ResetConfig();
 
     // implement this inverse to SetupConfig() and LoadConfig()
     log.Info("---ResetConfig");
     if (bReset) {
-        log.Info("--- Delete File {0}", filePath);
-        try {
-            if (Arp::System::Commons::Io::File::Exists(filePath))
-            {
-                Arp::System::Commons::Io::File::Delete(filePath);
-            }
+                log.Info("--- Delete File {0}", filePath);
+                try {
+                    if (Arp::System::Commons::Io::File::Exists(filePath))
+                    {
+                        Arp::System::Commons::Io::File::Delete(filePath);
+                    }
 
-        } catch (const Arp::Exception &e) {
-            log.Error("--- Cannot Delete File. Error message: {0}.",
-                    e.GetMessage());
-        }
-    }
+                } catch (const Arp::Exception &e) {
+                    log.Error("--- Cannot Delete File. Error message: {0}.",
+                            e.GetMessage());
+                }
+     }
 }
+
+void FileStreamExampleComponent::PowerDown()
+{
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
+}
+
 void FileStreamExampleComponent::WriteToFile(String textToWrite) {
     try {
         // Create a FileStream that force creates a file.
@@ -132,4 +149,5 @@ String FileStreamExampleComponent::ReadFromFile() {
         return "Error";
     }
 }
+
 } // end of namespace FileStreamExample

@@ -1,10 +1,18 @@
-﻿#pragma once
-#include <BufferedExchangeComponent.hpp>
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/ProgramBase.hpp"
 #include "Arp/System/Commons/Logging.h"
+#include "BufferedExchangeComponent.hpp"
 
-namespace BufferedExchange {
+namespace BufferedExchange
+{
 
 using namespace Arp;
 using namespace Arp::System::Commons::Diagnostics::Logging;
@@ -12,26 +20,21 @@ using namespace Arp::Plc::Commons::Esm;
 
 //#program
 //#component(BufferedExchange::BufferedExchangeComponent)
-class BufferedExchangeProgram: public ProgramBase, private Loggable<BufferedExchangeProgram> {
+class BufferedExchangeProgram : public ProgramBase, private Loggable<BufferedExchangeProgram>
+{
 public: // typedefs
 
 public: // construction/destruction
-    BufferedExchangeProgram(
-            BufferedExchange::BufferedExchangeComponent &bufferedExchangeComponentArg,
-            const String &name);
-    BufferedExchangeProgram(const BufferedExchangeProgram &arg) = delete;
-    virtual ~BufferedExchangeProgram() = default;
+    BufferedExchangeProgram(BufferedExchange::BufferedExchangeComponent& bufferedExchangeComponentArg, const String& name);
 
 public: // operators
-    BufferedExchangeProgram& operator=(const BufferedExchangeProgram &arg) = delete;
 
 public: // properties
 
 public: // operations
-    void Execute() override;
+    void    Execute() override;
 
 private: // fields
-    BufferedExchange::BufferedExchangeComponent &bufferedExchangeComponent;
     long int count { 0 };
     bool error_LastCycle { false };
 public:
@@ -39,15 +42,18 @@ public:
     //#attributes(Input)
     //#name(retry_sending)
     boolean retry{false};
+
+private: // fields
+    BufferedExchange::BufferedExchangeComponent& bufferedExchangeComponent;
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 // inline methods of class ProgramBase
-inline BufferedExchangeProgram::BufferedExchangeProgram(
-        BufferedExchange::BufferedExchangeComponent &bufferedExchangeComponentArg,
-        const String &name) :
-        ProgramBase(name),
-        bufferedExchangeComponent(bufferedExchangeComponentArg) {
+inline BufferedExchangeProgram::BufferedExchangeProgram(BufferedExchange::BufferedExchangeComponent& bufferedExchangeComponentArg, const String& name)
+: ProgramBase(name)
+, bufferedExchangeComponent(bufferedExchangeComponentArg)
+{
 }
 
 } // end of namespace BufferedExchange

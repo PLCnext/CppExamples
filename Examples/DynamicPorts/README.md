@@ -23,12 +23,11 @@ The benefits of this feature will be demonstrated using a simple example.
 |Description | Value |
 |------------ |-----------|
 |Created | 26.07.2021 |
-|Last modified| 26.07.2021 |
-|Controller| AXC F 2152 |
-|FW| 2021.6 |
-|Arpversion| 21.6.0.46 |
-|SDK| 2021.6.0 (21.6.0.46) |
-|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
+|Last modified| 06.09.2024 |
+|Controller| SIM-AXC F 2152 |
+|FW| 2024.7 |
+|SDK| 2024.7 |
+|PLCnext CLI | 2025.0 PREVIEW |
 
 ## Example - Home automation controller
 
@@ -209,7 +208,7 @@ The source files in this repository demonstrate a complete solution, including p
 
 1. Create a new PLCnext Engineer project for the target PLC.
 
-1. [Enable the OPC UA server](https://www.plcnext.help/te/Service_Components/OPC_UA_Server/OPCUA_server_configuration.htm) in the PLCnext Engineer project.
+1. [Enable the OPC UA server](https://plcnext.help/te/Communication_interfaces/OPC_UA/OPCUA_server_configuration.htm) in the PLCnext Engineer project.
 
 1. Add the library containing the C++ program to the PLCnext Engineer project.
 
@@ -217,7 +216,7 @@ The source files in this repository demonstrate a complete solution, including p
 
 1. Send the project to the PLC.
 
-1. Check that there are no errors in the `Output.log` file on the PLC, and that it contains an entry similar to this:
+1. Check that there are no errors in the `Arp.log` file on the PLC, and that the `Custom.log` file contains an entry similar to this:
 
    ```text
    26.07.21 15:29:54.004 root      INFO  - Number of dynamic ports used: 4
@@ -255,8 +254,21 @@ The source files in this repository demonstrate a complete solution, including p
   - Program ports to be deleted by the user at run-time.
   - Program ports to be different on different instances of a single program. All instances of a program **must** have the same set of dynamic port variables.
 
-- GDS ports of type `struct` require a library meta (C++) file to define the fields of the structure. For static ports, this file is generated automatically by the PLCnext CLI during the build process. At the moment, this file must be created manually for dynamic GDS ports of type `struct`.
+- GDS ports of type `struct` require a library meta (C++) file to define the fields of the structure. For static ports, this file is generated automatically by the PLCnext CLI during the build process. For dynamic GDS ports of type `struct`, the struct definition must include the `//#typedefinition` decorator, like this: 
+
+   ```cpp
+   // Define the struct that will be used to declare port variables.
+   // The typeinformation attribute means that the plcncli will generate GDS metadata for this struct.
+   //#typeinformation
+   struct SampleStruct
+   {
+      float64 ElemA;
+      uint32 ElemB;
+      uint16 ElemC;
+      boolean ElemD;
+   };
+   ```
 
 - Metadata (XML) is not generated for dynamic ports during the build process, and without this information PLCnext Engineer is unable to display dynamic ports in the PLCnext Port List window. GDS connections to dynamic ports can be made manually in a custom `.gds.config` file, or else at run-time using the DataAccess or Subscription RSC services.
 
-- Building a C++ project with dynamic GDS ports will give similar compiler warnings to those generated for static GDS ports, [as described in the PLCnext Info Center](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Creating_a_Cpp_project_in_Eclipse.htm).
+- Building a C++ project with dynamic GDS ports will give similar compiler warnings to those generated for static GDS ports, [as described in the PLCnext Info Center](https://plcnext.help/te/Programming/Cplusplus/Creating_a_Cpp_project_in_Eclipse.htm).

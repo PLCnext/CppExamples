@@ -1,4 +1,11 @@
-﻿#pragma once
+﻿﻿/******************************************************************************
+ *
+ * Copyright (c) 2024 Phoenix Contact GmbH & Co. KG. All rights reserved.
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.
+ *
+ ******************************************************************************/
+
+#pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/DynamicPortsProgramBase.hpp"
 #include "Arp/System/Commons/Logging.h"

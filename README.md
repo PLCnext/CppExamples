@@ -6,13 +6,14 @@
 [![Web](https://img.shields.io/badge/PLCnext-Website-blue.svg)](https://www.phoenixcontact.com/plcnext)
 [![Community](https://img.shields.io/badge/PLCnext-Community-blue.svg)](https://www.plcnext-community.net)
 
-
 The [CppExamples](https://github.com/PLCnext/CppExamples) repository is a collection of various sample code for PLCnext Technology controllers. 
 It is assumed that the reader has basic know-how of C++ programming and has read the key parts of the [PLCnext Info Center](https://www.plcnext.help/).  
 Each example explains one or more topics on how to use C++11 with PLCnext Technology. Explanations are given in the *README.md* document and via comments in the example code. 
 Each example holds separate user components which can be instantiated on a *PLCnext Control*. 
 
 This project aims to supply, over time, examples and best practices of PLCnext Technology functions regarding C++11.
+
+**IMPORTANT NOTE: All the examples in this repository have now been updated to work with firmware versions 2024.7 and later. These examples may not compatible with firmware versions earier than 2024.7. Examples for earlier firmware versions are on the branch `pre-2024.7`.**
 
 ## Table of Contents
 
@@ -52,7 +53,7 @@ There are different ways to build your code:
 1. Clone this repository
 1. Navigate to the project you want to test, e.g. `cd Examples/ProgramComponentInteraction` 
 1. Execute `plcncli new project -c DummyC -p DummyP && ls -la src && rm src/Dummy*` or `plcncli new acfproject -c DummyC && ls -la src && rm src/Dummy*` for acf projects
-1. Execute `plcncli set target --add --name AXCF2152 --version 2020.6` to specify details of the build target
+1. Execute `plcncli set target --add --name AXCF2152 --version 2024.7` to specify details of the build target
 1. Execute `plcncli generate all` to generate intermediate code and Config files
 1. Execute `plcncli build` to build the code.
 1. Execute `plcncli deploy` to generate a *.pcwlx* file that can be included in PLCnext Engineer 

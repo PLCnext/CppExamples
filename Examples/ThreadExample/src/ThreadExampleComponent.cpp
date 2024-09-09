@@ -14,25 +14,21 @@
 /*  INCLUDES                                                                  */
 /******************************************************************************/
 
-
 #include "ThreadExampleComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "ThreadExampleLibrary.hpp"
 
 namespace ThreadExample
 {
-///
-///ThreadExampleComponent Constructor
-///
-ThreadExampleComponent::ThreadExampleComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::ThreadExample::ThreadExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
-, programProvider(*this)
-, ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
-// Worker Thread Example
-, workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
-//Commons/Thread Example
-, delegateThreadInstance(ThreadSettings("DelegateThreadName", 20, 0, 0),this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
-, staticThreadInstance(ThreadSettings("StaticThreadName", 20, 0, 0),&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
+ThreadExampleComponent::ThreadExampleComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , programProvider(*this)
+    , ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
+	// Worker Thread Example
+	, workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
+	//Commons/Thread Example
+	, delegateThreadInstance(ThreadSettings("DelegateThreadName", 20, 0, 0),this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
+	, staticThreadInstance(ThreadSettings("StaticThreadName", 20, 0, 0),&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
 {
 }
 
@@ -65,6 +61,13 @@ void ThreadExampleComponent::ResetConfig()
     // implement this inverse to SetupConfig() and LoadConfig()
 }
 
+void ThreadExampleComponent::PowerDown()
+{
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
+}
+
 void ThreadExampleComponent::Start(void) {
     xStopThread = false;
     Log::Info("-------------------------------workerThreadInstance start");
@@ -89,17 +92,17 @@ void ThreadExampleComponent::Stop(void) {
     Log::Info("-------------------------------workerThreadInstance stop");
     workerThreadInstance.Stop();
     Log::Info("-------------------------------workerThreadInstance stopped");
-    
+
     Log::Info("-------------------------------staticThreadInstance stop");
     staticThreadInstance.Interrupt();
-    if (staticThreadInstance.IsJoinable()){   
+    if (staticThreadInstance.IsJoinable()){
     staticThreadInstance.Join();
     }
     Log::Info("-------------------------------staticThreadInstance stopped");
 
     Log::Info("-------------------------------delegateThreadInstance stop");
     delegateThreadInstance.Interrupt();
-    if (delegateThreadInstance.IsJoinable()){   
+    if (delegateThreadInstance.IsJoinable()){
     delegateThreadInstance.Join();
     }
     Log::Info("-------------------------------delegateThreadInstance stopped");

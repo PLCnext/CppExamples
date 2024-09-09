@@ -1,24 +1,24 @@
-﻿///////////////////////////////////////////////////////////////////////////////"
-//
-//  Copyright PHOENIX CONTACT Electronics GmbH
-//
-///////////////////////////////////////////////////////////////////////////////
+﻿/******************************************************************************
+ *
+ * Copyright (c) 2024 Phoenix Contact GmbH & Co. KG. All rights reserved.
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.
+ *
+ ******************************************************************************/
+
 #include "TraceControlComponent.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "TraceControlLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
-#include "Arp/System/Core/Exception.hpp"
 
 namespace TraceControl
 {
 
 using Arp::System::Rsc::ServiceManager;
 using namespace Arp::Plc::Commons::Domain;
-
-TraceControlComponent::TraceControlComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::TraceControl::TraceControlLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::TraceControl::TraceControlLibrary::GetInstance().GetNamespace())
-, traceThread(this, &TraceControlComponent::TraceActions, 1000, "TraceThread")
+TraceControlComponent::TraceControlComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::TraceControl::TraceControlLibrary::GetInstance().GetNamespace())
+	, traceThread(this, &TraceControlComponent::TraceActions, 1000, "TraceThread")
 {
 }
 
@@ -47,7 +47,7 @@ void TraceControlComponent::SubscribeServices()
 
 void TraceControlComponent::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void TraceControlComponent::SetupSettings()
@@ -55,12 +55,12 @@ void TraceControlComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void TraceControlComponent::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void TraceControlComponent::LoadConfig()
@@ -92,11 +92,14 @@ void TraceControlComponent::Dispose()
     plcDomainProxy.PlcStopping -= make_delegate(this, &TraceControlComponent::OnPlcStopping);
     plcDomainProxy.PlcUnloading -= make_delegate(this, &TraceControlComponent::OnPlcUnloading);
     plcDomainProxy.PlcChanging -= make_delegate(this, &TraceControlComponent::OnPlcChanging);
-    plcDomainProxy.PlcChanged -= make_delegate(this, &TraceControlComponent::OnPlcChanged);}
+    plcDomainProxy.PlcChanged -= make_delegate(this, &TraceControlComponent::OnPlcChanged);
+}
 
 void TraceControlComponent::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void TraceControlComponent::OnPlcLoaded()
@@ -199,7 +202,7 @@ void TraceControlComponent::TraceActions()
             {
                 this->log.Error("Exception in method '{0}' : {1}", __FUNCTION__, e.GetMessage());
             }
-            
+
             break;
         }
 
@@ -212,7 +215,7 @@ void TraceControlComponent::TraceActions()
             this->log.Info("Loading session '{0}'.", session);
             isLoaded = this->traceServicePtr->LoadSessionConfiguration(session, path);
             this->log.Info("Has the '{0}' session been loaded successfully? {1}", session, isLoaded);
-            
+
             break;
         }
 
@@ -224,7 +227,7 @@ void TraceControlComponent::TraceActions()
             RscString<512> session = "plcnexttrace_snapshot";
             isSnapshot = this->traceServicePtr->IsSessionInSnapshotMode(session);
             this->log.Info("Is the '{0}' session in snapshot mode? {1}", session, isSnapshot);
-            
+
             break;
         }
 

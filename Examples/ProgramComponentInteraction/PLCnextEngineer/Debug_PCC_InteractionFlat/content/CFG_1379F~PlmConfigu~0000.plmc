@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<PlmConfiguration>
-	<ComponentInstances id="10c0e465-2438-403d-bd6b-87409c258d7e" contextUri="adeprojectref:///e639c0f9-db09-46f4-abf7-50216a13f220/606e2993-1c57-411c-b0d2-c57a13c52bbf/1379f202-7cbe-47e3-871c-80ca2ec7de90">
-		<ComponentInstance id="53d3fb3b-e577-4a63-80f7-338a25ee3ff4" name="CounterComponent1" libraryName="ProgramComponentInteraction" componentType="CounterComponent" comment="" isReadOnly="false" />
-	</ComponentInstances>
-</PlmConfiguration>

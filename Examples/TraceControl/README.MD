@@ -26,19 +26,17 @@ As with the knowledge base article, this example is not intended to describe how
 |Description | Value |
 |------------ |-----------|
 |Created | 4.05.2021 |
-|Last modified| 4.05.2021 |
-|Controller| AXC F 2152 |
-|FW| 2021.0.3 LTS |
-|Arpversion| 21.0.3.35554 |
-|SVN Revision| 35554 |
-|SDK| 2021.0.3 LTS (21.0.3.35554) |
-|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
+|Last modified| 06.09.2024 |
+|Controller| SIM-AXC F 2152 |
+|FW| 2024.7 |
+|SDK| 2024.7 |
+|PLCnext CLI | 2025.0 PREVIEW |
 
 ## References
 
 A complete description of the Trace Controller service is available from this source:
 
-- [API documentation](https://api.plcnext.help/api_docs_2021-0-LTS/classArp_1_1System_1_1Commons_1_1Diagnostics_1_1TraceController.html)
+- [API documentation](https://api.plcnext.help/api_docs_2024-0-LTS/classArp_1_1System_1_1Commons_1_1Diagnostics_1_1TraceController.html)
 
 General information on LTTng is available from the [LTTng website](https://lttng.org/).
 
@@ -46,19 +44,19 @@ General information on LTTng is available from the [LTTng website](https://lttng
 
 This example demonstrates features of the Trace Controller RSC service.
 
-It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm).
+It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext-community.net/infocenter/cpp_programs_in_plcnext/).
 
 Prerequisites:
 
-- AXC F x152 controller.
+- SIM-AXC F 2152 controller.
 
-- PLCnext Command Line Interface (CLI) tool, version 2021.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Command Line Interface (CLI) tool, version 2025.0 PREVIEW.
 
-- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2021.0.0 or later. This is also included in the "PLCnext Technology C++ tool chain".
+- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2024.7.
 
-- (optional) Eclipse IDE, with the PLCnext Technology feature installed.
+- (optional) Eclipse IDE, with the PLCnext Technology add-in installed.
 
-- (optional) Visual Studio, with the PLCnext Technology add-in installed.
+- (optional) Visual Studio, with the PLCnext Technology extension installed.
 
 Procedure:
 
@@ -81,4 +79,4 @@ Procedure:
 
 - Restart the PLCnext Runtime.
 
-- Check the contents of the file `/opt/plcnext/logs/Output.log`. It should contain messages from your ACF component. In the component source code, you can see where these messages are generated in each step of the call sequence.
+- Check the contents of the file `/opt/plcnext/logs/Custom.log`. It should contain messages from your ACF component. In the component source code, you can see where these messages are generated in each step of the call sequence.

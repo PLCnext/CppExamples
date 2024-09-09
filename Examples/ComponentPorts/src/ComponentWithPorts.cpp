@@ -1,6 +1,6 @@
 ﻿/******************************************************************************
  *
- * Copyright (c) 2021 Phoenix Contact GmbH & Co. KG. All rights reserved.
+ * Copyright (c) 2024 Phoenix Contact GmbH & Co. KG. All rights reserved.
  * Licensed under the MIT. See LICENSE file in the project root for full license information.
  *
  ******************************************************************************/
@@ -11,11 +11,10 @@
 
 namespace ComponentPorts
 {
-
-ComponentWithPorts::ComponentWithPorts(IApplication& application, const String& name)
-: ComponentBase(application, ::ComponentPorts::ComponentPortsLibrary::GetInstance(), name, ComponentCategory::Custom)
-, programProvider(*this)
-, ProgramComponentBase(::ComponentPorts::ComponentPortsLibrary::GetInstance().GetNamespace(), programProvider)
+ComponentWithPorts::ComponentWithPorts(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , programProvider(*this)
+    , ProgramComponentBase(::ComponentPorts::ComponentPortsLibrary::GetInstance().GetNamespace(), programProvider)
 {
 }
 
@@ -46,14 +45,6 @@ void ComponentWithPorts::SetupConfig()
     // setup project config here
 }
 
-void ComponentWithPorts::ResetConfig()
-{
-    // never remove next line
-    ProgramComponentBase::ResetConfig();
-
-    // implement this inverse to SetupConfig() and LoadConfig()
-}
-
 void ComponentWithPorts::Dispose()
 {
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -65,10 +56,19 @@ void ComponentWithPorts::Dispose()
     ComponentBase::Dispose();
 }
 
+void ComponentWithPorts::ResetConfig()
+{
+    // never remove next line
+    ProgramComponentBase::ResetConfig();
+
+    // implement this inverse to SetupConfig() and LoadConfig()
+}
+
 void ComponentWithPorts::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
-    // Available with 2021.6 FW
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void ComponentWithPorts::OnPlcStarting(PlcStartKind startKind)
@@ -79,7 +79,7 @@ void ComponentWithPorts::OnPlcStarting(PlcStartKind startKind)
     if (PlcStartKind::Warm == startKind ||
         PlcStartKind::RestoreWarm == startKind ||
         PlcStartKind::Cold == startKind)
-    {   
+    {
         // initialize non-retain ports anyhow (in all 3 cases)
         // if necessary, further member variables can be initialized, too
         ports.nonretainPort1 = 1;

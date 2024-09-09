@@ -1,4 +1,11 @@
-﻿#include "OpcPlcManagerComponent.hpp"
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#include "OpcPlcManagerComponent.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "OpcPlcManagerLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
@@ -9,10 +16,10 @@ namespace OpcPlcManager
 using namespace Arp::Plc::Commons::Domain;
 using Arp::System::Rsc::ServiceManager;
 
-OpcPlcManagerComponent::OpcPlcManagerComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::OpcPlcManager::OpcPlcManagerLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::OpcPlcManager::OpcPlcManagerLibrary::GetInstance().GetNamespace())
-, workerThreadInstance(make_delegate(this, &OpcPlcManagerComponent::workerThreadBody) , 1000, "WorkerThreadName")
+OpcPlcManagerComponent::OpcPlcManagerComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::OpcPlcManager::OpcPlcManagerLibrary::GetInstance().GetNamespace())
+    , workerThreadInstance(make_delegate(this, &OpcPlcManagerComponent::workerThreadBody) , 1000, "WorkerThreadName")
 {
 }
 
@@ -27,11 +34,12 @@ void OpcPlcManagerComponent::Initialize()
 void OpcPlcManagerComponent::SubscribeServices()
 {
     // gets the IDataAccessService pointer
-    this->plcManagerService2Ptr = ServiceManager::GetService<IPlcManagerService2>();}
+    this->plcManagerService2Ptr = ServiceManager::GetService<IPlcManagerService2>();
+}
 
 void OpcPlcManagerComponent::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void OpcPlcManagerComponent::SetupSettings()
@@ -39,12 +47,12 @@ void OpcPlcManagerComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void OpcPlcManagerComponent::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void OpcPlcManagerComponent::LoadConfig()
@@ -71,12 +79,14 @@ void OpcPlcManagerComponent::Dispose()
     // never remove next line
     MetaComponentBase::Dispose();
 
-    // implement this inverse to SetupSettings(), LoadSettings() and Initialize()
+	// implement this inverse to SetupSettings(), LoadSettings() and Initialize()
 }
 
 void OpcPlcManagerComponent::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 // Thread Body

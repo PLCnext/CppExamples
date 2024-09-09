@@ -26,16 +26,16 @@ The purpose of the delegateThread implementation is to use a call-back function 
 
 |Description | Value |
 |------------ |-----------|
-|Controller| AXC F 2152 |
-|FW | 2020.0 LTS or later |
-|SDK | 2020.0 LTS or later |
-|PLCnext Engineer| 2020.0 LTS or later |
+|Controller| SIM-AXC F 2152 |
+|FW | 2024.7 |
+|SDK | 2024.7 |
+|PLCnext Engineer| 2024.6 |
 
 ## Preconditions
 
-- AXC F 2152 controller with firmware 2020.0 LTS or later
-- Eclipse IDE "Photon" or later
-- PLCnext Engineer 2020.0 LTS or later
+- SIM-AXC F 2152 controller with firmware 2024.7
+- Eclipse<sup>&reg;</sup> IDE for C/C++ Developers version 2024-06
+- PLCnext Engineer 2024.6
 
 ## Project compiling in Eclipse
 
@@ -54,8 +54,8 @@ The purpose of the delegateThread implementation is to use a call-back function 
 
 ## Start-up instructions
 
-- If the project is successfully implemented and downloaded, you can follow the value incrementation of variable "i_pCounter" in PLCnext Engineer debug mode and/or in a watchwindow and threads status in the Output.log file on the plcnext target; see: /opt/plcnext/logs/Output.log
-- If the project does not start successfully, please see the error messages in Output.log file on the PLCnext target, see: /opt/plcnext/logs/Output.log
+- If the project is successfully implemented and downloaded, you can follow the value incrementation of variable "i_pCounter" in PLCnext Engineer debug mode and/or in a watchwindow and threads status in the Custom.log file on the plcnext target; see: /opt/plcnext/logs/Custom.log
+- If the project does not start successfully, please see the error messages in the Arp.log file on the PLCnext target, see: /opt/plcnext/logs/Arp.log
 
 ### Basic manual setup
 

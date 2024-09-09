@@ -1,14 +1,9 @@
-﻿///////////////////////////////////////////////////////////////////////////////"
-//
-//  Copyright PHOENIX CONTACT Electronics GmbH
-//
-///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent4.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "SubscriptionsLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
-#include "Arp/System/Rsc/Services/RscArrayReader.hpp"
-#include "Arp/System/Rsc/Services/RscStructReader.hxx"
+#include "Arp/Base/Rsc/Commons/RscArrayReader.hpp"
+#include "Arp/Base/Rsc/Commons/RscStructReader.hpp"
 
 namespace Subscriptions
 {
@@ -19,17 +14,17 @@ using Arp::System::Rsc::ServiceManager;
 const String SubscriptionsComponent4::varTask100msName = "Arp.Plc.Eclr/RealTimeProgram100ms.varUInt16";
 const String SubscriptionsComponent4::varTask500msName = "Arp.Plc.Eclr/RealTimeProgram500ms.varUInt16";
 
-SubscriptionsComponent4::SubscriptionsComponent4(IApplication& application, const String& name)
-: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
-, subscriptionThread(this, &SubscriptionsComponent4::LogSubscription, 1000, "SubscriptionLogThread")
+SubscriptionsComponent4::SubscriptionsComponent4(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+    , subscriptionThread(this, &SubscriptionsComponent4::LogSubscription, 1000, "SubscriptionLogThread")
 {
 }
 
 void SubscriptionsComponent4::Initialize()
 {
     // never remove next line
-    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, true);
     
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -51,7 +46,7 @@ void SubscriptionsComponent4::SubscribeServices()
 
 void SubscriptionsComponent4::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent4::SetupSettings()
@@ -59,12 +54,12 @@ void SubscriptionsComponent4::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent4::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent4::LoadConfig()
@@ -101,7 +96,9 @@ void SubscriptionsComponent4::Dispose()
 
 void SubscriptionsComponent4::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void SubscriptionsComponent4::OnPlcLoaded()

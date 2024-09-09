@@ -38,16 +38,15 @@ In cases where the project does not include any IEC 61131 programs, it is possib
 |Description | Value |
 |------------ |-----------|
 |Created | 2.06.2021 |
-|Last modified| 7.10.2021 |
+|Last modified| 27.08.2024 |
 |Controller| AXC F 2152 |
-|FW| 2021.6 |
-|Arpversion| 21.6.0.46 |
-|SDK| 2021.6 (21.6.0.46) |
-|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
+|FW| 2024.7 |
+|SDK| 2024.7 |
+|PLCnext CLI | 2024.6 |
 
 ## Reference
 
-- [PLCnext Runtime configuration files](https://www.plcnext.help/te/PLCnext_Runtime/Configuration_files.htm), in the PLCnext Info Center.
+- [PLCnext Runtime configuration files](https://plcnext.help/te/PLCnext_Runtime/Configuration_files.htm), in the PLCnext Info Center.
 
 ## Example
 
@@ -57,7 +56,7 @@ In this example, a PLCnext Control device is configured as a Profinet device (sl
 
    This application example uses a PLC that must have the IEC feature disabled, and the PROFINET DEVICE feature enabled. Other applications that use the principles demonstrated in this example may not require these settings.
 
-   Using the PLCs [Web Based Management](https://www.plcnext.help/te/WBM/Configuration_System_Services.htm) interface, disable the IEC system feature, and enable the PROFINET DEVICE feature. The PLC must be rebooted for changes to take effect.
+   Using the PLCs [Web Based Management](https://plcnext.help/te/WBM/Configuration_System_Services.htm) interface, disable the IEC system feature, and enable the PROFINET DEVICE feature. The PLC must be rebooted for changes to take effect.
 
    ![image](https://user-images.githubusercontent.com/13133969/136402485-6097e087-fc1a-4731-a138-4a6087f6bd04.png)
 
@@ -162,10 +161,10 @@ In this example, a PLCnext Control device is configured as a Profinet device (sl
    Restart the PLCnext Runtime.
 
    ```text
-   sudo /etc/init.d/plcnext restart
+   sudo systemctl restart plcnext
    ```
 
-   Check the `Output.log` file for any errors - there should be no errors!
+   Check the `Arp.log` file for any errors - there should be no errors!
 
 The C++ program is now running and exchanging data with the system variables `PND_S1_INPUTS` and `PND_S1_OUTPUTS`. At the moment this data is all zeroes, which is not very interesting.
 

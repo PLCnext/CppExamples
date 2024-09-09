@@ -20,16 +20,16 @@ This Example shows how to use a FileStream to check the binary generation timest
 
 |Description | Value |
 |------------ |-----------|
-|Controller| AXC F 2152 |
-|FW | 2021.0 LTS or later |
-|SDK | 2021.0 LTS or later |
-|PLCnext Engineer| 2021.0 LTS or later |
+|Controller| SIM-AXC F 2152 |
+|FW | 2024.7 |
+|SDK | 2024.7 |
+|PLCnext Engineer| 2024.6 |
 
 ## Preconditions
 
-- AXC F 2152 controller with firmware 2021.0 LTS or later
-- Eclipse IDE "2020.9" or later
-- PLCnext Engineer 2021.0 LTS or later
+- SIM-AXC F 2152 controller with firmware 2024.7
+- Eclipse IDE for C/C++ Developers version 2024-06
+- PLCnext Engineer 2024.6
 
 ## Project compiling in Eclipse
 
@@ -47,6 +47,7 @@ This Example shows how to use a FileStream to check the binary generation timest
 ## Project Execution
 During the Setup of the PLCnext Runtime our PLM component is loaded and the Initialize, LoadConfig , etc. are executed.
 This application writes a at compiletime generated localtime string [__TIMESTAMP__](https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html) into a file.
+
 This way, whenever the PLC Starts it will first load the last generated file, compare it to the Timestamp of the current binary and then overwrite the Binary.
 
 1. Component::LoadConfig 
@@ -142,9 +143,9 @@ String FileStreamExampleComponent::ReadFromFile() {
 ```
 ### Exceptions
 There are a lot of exceptions that you should handle when working with files.
-There are [Function Specific Exceptions](https://api.plcnext.help/api_docs_2021-0-LTS/classArp_1_1System_1_1Commons_1_1Io_1_1FileStream.html) like a `NotExistException` that might indicate that something went wrong during the last shutdown.
+There are [Function Specific Exceptions](https://api.plcnext.help/api_docs_2024-0-LTS/classArp_1_1System_1_1Commons_1_1Io_1_1FileStream.html) like a `NotExistException` that might indicate that something went wrong during the last shutdown.
 
-But also common exceptions like [Commons::Io::](https://api.plcnext.help/api_docs_2021-0-LTS/namespaceArp_1_1System_1_1Commons_1_1Io.html)`OutOfSpaceException`s. These might indicated that the whole application should better stop. 
+But also common exceptions like [Commons::Io::](https://api.plcnext.help/api_docs_2024-0-LTS/namespaceArp_1_1System_1_1Commons_1_1Io.html)`OutOfSpaceException`s. These might indicated that the whole application should better stop. 
 
 ### General Notes
 File or IO activities can take quite a long time and might inhibit your RealTime operation.

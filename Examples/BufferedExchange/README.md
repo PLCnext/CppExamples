@@ -14,22 +14,22 @@
 
 # Introduction
 
-This example shows how to transfere and process larger amounts of data from your C++ RealTime application without impacing the RealTime.
+This example shows how to transfer and process larger amounts of data from your C++ RealTime application without impacing the RealTime.
 
 ## Example details
 
 |Description | Value |
 |------------ |-----------|
-|Controller| AXC F 2152 |
-|FW | 2021.0 LTS or later |
-|SDK | 2021.0 LTS or later |
-|PLCnext Engineer| 2021.0 LTS or later |
+|Controller| SIM-AXC F 2152 |
+|FW | 2024.7 |
+|SDK | 2024.7 |
+|PLCnext Engineer| 2024.6 |
 
 ## Preconditions
 
-- AXC F 2152 controller with firmware 2021.0 LTS or later
-- Eclipse IDE "2020.9" or later
-- PLCnext Engineer 2021.0 LTS or later
+- SIM-AXC F 2152 controller with firmware 2024.7
+- Eclipse<sup>&reg;</sup> IDE for C/C++ Developers version 2024-06
+- PLCnext Engineer 2024.6
 
 ## Project compiling in Eclipse
 
@@ -60,6 +60,7 @@ As long as the time requirement or the forwarded data are not to large it will a
 Watch out the `SetData()` function is curently implemented as blocking, it actively waits for the Mutex to be locked and this might infulence your RealTime. If you are producing more data then you can handle.
 You can switch this Blocking behavior from `Mutex.Lock()` to `Mutex.TryLock()` and add a timeout loop if necessary.
 e.g
+
 ```cpp
 while(!Mutex.TryLock() && !timeout){}
 ```
@@ -72,6 +73,7 @@ Thread delegateThread;
 ///BufferedExchangComponent.cpp
 delegateThread(ThreadSettings("-DelegateThread", 20, 0, 0),	Arp::make_delegate(&wD, &BufferedExchange::MyWorker::Run))
 ```
+
 This means that the `MyWorker::Run` method of the instance  `wD` is called.
 
 Every Task Cycle the BufferedExchangeProgram::Exceute() method pushes data to the MyWorker instance `wD`.
@@ -80,8 +82,10 @@ Every Task Cycle the BufferedExchangeProgram::Exceute() method pushes data to th
 /// BufferedExchangeProgram.cpp
 bufferedExchangeComponent.wD.SetData(count)
 ```
-Every 1000 Cycles the Execute() method will print a hint that it is still running. If data can not be set a Warning is beeing written to the Output.log file.
+
+Every 1000 Cycles the Execute() method will print a hint that it is still running. If data can not be set a Warning is beeing written to the Custom.log file.
 When data are beeing stored we also store a timestamp that shows the passed time since the last data were added.
+
 ```cpp
 data_storage.push(std::pair<double, int>( duration_cast<duration<double>>(time - last_time).count(), x));
 ```
@@ -92,6 +96,7 @@ It prints the first and last element of a queue, this way we are able to compare
 ### Example Output
 This Example Output shows a ESM Task with a cycle time of 1 ms.
 Because the Thread sleep time is set to 1000ms and the MAX_QUEUE_SIZE is set to 1000 elements this is an area where a slight jitter in the cycletime of the Thread (sleep(999)+ execution time of process()) can cause an OutOfMemory exception to occure.
+
 ```cpp
 //"Endless loop" for normal thread
 void Run(void *t)
@@ -104,6 +109,7 @@ void Run(void *t)
     }
 };
 ```
+
 So if processing the stored data plus the sleep time results in more then 1000ms the storage might overflow.
 
 It is important that you take these cases as well as external factors (another application might take all the free memory!) into consideration and handle them according to your application requirements.
