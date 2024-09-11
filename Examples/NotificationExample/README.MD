@@ -66,7 +66,7 @@ It is assumed that the user has some experience [building C++ Components and Pro
 
 Prerequisites:
 
-- PLCnext Command Line Interface (CLI) tool, version 2024.6.
+- PLCnext Command Line Interface (CLI) tool, version 2025.0 Preview.
 
 - Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2024.7.
 
