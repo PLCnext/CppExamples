@@ -76,7 +76,7 @@ Procedure:
 
 - In Eclipse create a project named "NotificationExample" with component "COMP_Notifications", program "PG_SendNotification", and namespace "NotificationExample".
 
-- Copy all the files from this repository to the Eclipse project's src directory, replacing any files with the same name.
+- Copy all the files from the src folder in this example to the Eclipse project's src directory, replacing any files with the same name.
 
 - Compile the Eclipse project.
 
