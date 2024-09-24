@@ -18,7 +18,7 @@ COMP_Notifications::COMP_Notifications(ILibrary& library, const String& name)
 	,    Custom_subscription("My.NameSpace.1")
 	,    Custom_subscription2("My.NameSpace.2")
 	,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged")
-	,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged")
+	,    PlcStateChanged_subscription("Arp.Plc.Domain.Plc.StateChanged")
 {
 }
 
