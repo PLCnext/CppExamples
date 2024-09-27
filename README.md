@@ -13,7 +13,7 @@ Each example holds separate user components which can be instantiated on a *PLCn
 
 This project aims to supply, over time, examples and best practices of PLCnext Technology functions regarding C++11.
 
-**IMPORTANT NOTE: All the examples in this repository have now been updated to work with firmware versions 2024.7 and later. These examples may not compatible with firmware versions earier than 2024.7. Examples for earlier firmware versions are on the branch `pre-2024.7`.**
+**IMPORTANT NOTE: All the examples on this branch of the repository have been updated to work with firmware versions 2024.7 and later. These examples may not compatible with firmware versions earier than 2024.7. Examples for earlier firmware versions are located on the `master` branch.**
 
 ## Table of Contents
 
@@ -26,15 +26,16 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[05](Examples/ProgramComponentInteraction/)| [Program Component Interaction](Examples/ProgramComponentInteraction/README.md)| This example shows two *PLCnext programs* interacting with a *PLCnext component* by getting or setting variables through reference.| [SourceCode](Examples/ProgramComponentInteraction/src/)
 |[06](Examples/ThreadExample/)| [Thread Example](Examples/ThreadExample/README.md)| This describes how to implement Threads in a component of C++ project.| [SourceCode](Examples/ThreadExample/src/)
 |[07](Examples/BufferedExchange/)| [BufferedExchange Example](Examples/BufferedExchange/README.md)| This example shows how to communicate larger amounts of data between a Program and a Component and how to process these data using a Thread|[SourceCode](Examples/BufferedExchange/src/)
-|[08](Examples/DataAccess/)| [Data Access Example](Examples/DataAccess/README.MD)| This example shows how to read and write GDS variables using the Data Access service.| [SourceCode](Examples/DataAccess/src/)
-|[09](Examples/Subscriptions/)| [Subscription Example](Examples/Subscriptions/README.MD)| This example shows how to read GDS variables using the Subscription service.| [SourceCode](Examples/Subscriptions/src/)
-|[10](Examples/Force/)| [Force Example](Examples/Force/README.MD)| This example shows how GDS variables can be forced using the Force service.| [SourceCode](Examples/Force/src/)
-|[11](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.MD)| This example shows how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
-|[12](Examples/TraceControl/)| [Trace Control Example](Examples/TraceControl/README.MD)| This example shows how to use the Trace Controller service.| [SourceCode](Examples/TraceControl/src/)
-|[13](Examples/FileStreamExample/)| [Commons::Io::FileStream Example](Examples/FileStreamExample/README.md)| This Example shows how to use a File Stream to check the binary generation timestamp whenever a Component is reinitialized.|[SourceCode](Examples/FileStreamExample/src/)
-|[14](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
-|[15](Examples/OpcPlcManager/)| [OPC UA Methods](Examples/OpcPlcManager/README.MD)| This example shows how to use OPC UA methods to execute functions in an ACF component written in C++.| [SourceCode](Examples/OpcPlcManager/src/)
-|[16](Examples/NoEngineer/)| [PLM/ESM/GDS Configuration without PLCnext Engineer](Examples/NoEngineer/README.MD)| This example shows how to configure C++ programs to run on a PLC without using PLCnext Engineer.|
+|[08](Examples/DeviceInterface/)| [Device Interface Example](Examples/DeviceInterface/README.MD)| This example shows how to read and write device settings etc. using the four Device Interface RSC services.| [SourceCode](Examples/DeviceInterface/src/)
+|[09](Examples/DataAccess/)| [Data Access Example](Examples/DataAccess/README.MD)| This example shows how to read and write GDS variables using the Data Access service.| [SourceCode](Examples/DataAccess/src/)
+|[10](Examples/Subscriptions/)| [Subscription Example](Examples/Subscriptions/README.MD)| This example shows how to read GDS variables using the Subscription service.| [SourceCode](Examples/Subscriptions/src/)
+|[11](Examples/Force/)| [Force Example](Examples/Force/README.MD)| This example shows how GDS variables can be forced using the Force service.| [SourceCode](Examples/Force/src/)
+|[12](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.MD)| This example shows how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
+|[13](Examples/TraceControl/)| [Trace Control Example](Examples/TraceControl/README.MD)| This example shows how to use the Trace Controller service.| [SourceCode](Examples/TraceControl/src/)
+|[14](Examples/FileStreamExample/)| [Commons::Io::FileStream Example](Examples/FileStreamExample/README.md)| This Example shows how to use a File Stream to check the binary generation timestamp whenever a Component is reinitialized.|[SourceCode](Examples/FileStreamExample/src/)
+|[15](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
+|[16](Examples/OpcPlcManager/)| [OPC UA Methods](Examples/OpcPlcManager/README.MD)| This example shows how to use OPC UA methods to execute functions in an ACF component written in C++.| [SourceCode](Examples/OpcPlcManager/src/)
+|[17](Examples/NoEngineer/)| [PLM/ESM/GDS Configuration without PLCnext Engineer](Examples/NoEngineer/README.MD)| This example shows how to configure C++ programs to run on a PLC without using PLCnext Engineer.|
 
 
 ## Getting started
