@@ -32,10 +32,11 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[11](Examples/Force/)| [Force Example](Examples/Force/README.MD)| This example shows how GDS variables can be forced using the Force service.| [SourceCode](Examples/Force/src/)
 |[12](Examples/NotificationExample/)| [Notification Example](Examples/NotificationExample/README.MD)| This example shows how to use the Notification Manager.| [SourceCode](Examples/NotificationExample/src/)
 |[13](Examples/TraceControl/)| [Trace Control Example](Examples/TraceControl/README.MD)| This example shows how to use the Trace Controller service.| [SourceCode](Examples/TraceControl/src/)
-|[14](Examples/FileStreamExample/)| [Commons::Io::FileStream Example](Examples/FileStreamExample/README.md)| This Example shows how to use a File Stream to check the binary generation timestamp whenever a Component is reinitialized.|[SourceCode](Examples/FileStreamExample/src/)
-|[15](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
-|[16](Examples/OpcPlcManager/)| [OPC UA Methods](Examples/OpcPlcManager/README.MD)| This example shows how to use OPC UA methods to execute functions in an ACF component written in C++.| [SourceCode](Examples/OpcPlcManager/src/)
-|[17](Examples/NoEngineer/)| [PLM/ESM/GDS Configuration without PLCnext Engineer](Examples/NoEngineer/README.MD)| This example shows how to configure C++ programs to run on a PLC without using PLCnext Engineer.|
+|[14](Examples/ProfinetConfig/)| [Profinet Configuration Example](Examples/ProfinetConfig/README.MD)| This example shows how to use the Profinet Configuration service.| [SourceCode](Examples/ProfinetConfig/src/)
+|[15](Examples/FileStreamExample/)| [Commons::Io::FileStream Example](Examples/FileStreamExample/README.md)| This Example shows how to use a File Stream to check the binary generation timestamp whenever a Component is reinitialized.|[SourceCode](Examples/FileStreamExample/src/)
+|[16](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
+|[17](Examples/OpcPlcManager/)| [OPC UA Methods](Examples/OpcPlcManager/README.MD)| This example shows how to use OPC UA methods to execute functions in an ACF component written in C++.| [SourceCode](Examples/OpcPlcManager/src/)
+|[18](Examples/NoEngineer/)| [PLM/ESM/GDS Configuration without PLCnext Engineer](Examples/NoEngineer/README.MD)| This example shows how to configure C++ programs to run on a PLC without using PLCnext Engineer.|
 
 
 ## Getting started
