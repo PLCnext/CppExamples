@@ -13,7 +13,7 @@ Each example holds separate user components which can be instantiated on a *PLCn
 
 This project aims to supply, over time, examples and best practices of PLCnext Technology functions regarding C++11.
 
-**IMPORTANT NOTE: All the examples on this branch of the repository have been updated to work with firmware versions 2024.7 and later. These examples may not compatible with firmware versions earier than 2024.7. Examples for earlier firmware versions are located on the `master` branch.**
+**IMPORTANT NOTE: All the examples on this `master` branch of this repository have been updated to work with firmware versions 2025.0 and later. These examples may not compatible with firmware versions earier than 2025.0. Examples for earlier firmware versions are located on the `Pre-2025.0` branch.**
 
 ## Table of Contents
 
