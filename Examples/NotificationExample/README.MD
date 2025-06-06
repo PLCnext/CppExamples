@@ -363,7 +363,7 @@ Notifications that are sent to a persistent data store using the Notification Lo
 - In PLCnext Engineer, in the "Notifications" section of the controller "Cockpit" window. Note that PLCnext Engineer must be connected to the PLC for notifications to be displayed.
 - On the PLCs [Web Based Management](https://plcnext.help/te/WBM/Diagnostics_Notification_Logger.htm) page, in the "Notifications" section of the "Diagnostics" window.
 
-Notification archives can be managed in C++ using the [Notification Logger RSC service](https://plcnext.help/te/Communication_interfaces/Remote_Service_Calls_RSC/Querying_notifications_via_RSC.htm).
+Notification archives can also be viewed and managed in C++ using the [Notification Logger RSC service](https://plcnext.help/te/Communication_interfaces/Remote_Service_Calls_RSC/Querying_notifications_via_RSC.htm).
 
 The notification logger stores notification messages in an sqlite database, in the location specified in the `.config` file. In this example, the sqlite database is located at `/opt/plcnext/logs/My_Nm_Logger.sqlite`. This database can be copied from the PLC if necessary, and accessed in the same way as any other sqlite database (e.g. using [DB Browser for SQLite](https://sqlitebrowser.org/)).
 
