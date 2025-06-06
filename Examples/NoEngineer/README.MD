@@ -60,7 +60,7 @@ In this example, a PLCnext Control device is configured as a Profinet device (sl
 
    Using the PLCs [Web Based Management](https://plcnext.help/te/WBM/Configuration_System_Services.htm) interface, deactivate the IEC system feature, activate the OPC UA feature, and activate the PROFINET DEVICE feature. The PLC must be rebooted for changes to take effect.
 
-   ![image](https://user-images.githubusercontent.com/13133969/136402485-6097e087-fc1a-4731-a138-4a6087f6bd04.png)
+   ![image](img/services.jpg)
 
 1. Create the C++ program.
 
@@ -181,7 +181,11 @@ The C++ program is now running and exchanging data with the system variables `PN
 
 1. Check the program GDS ports via the OPC UA Server.
 
-   Use an OPC UA Client like [UaExpert](https://www.unified-automation.com/products/development-tools/uaexpert.html) to connect to the PLCnext Control device and view the two GDS port variables on the PndProgram instance. Note that the value of the array elements in the IN port variable can be changed by the OPC UA client, but the values of the array in the OUT port variable cannot - those values need to be set by the C++ program.
+   Use an OPC UA Client like [UaExpert](https://www.unified-automation.com/products/development-tools/uaexpert.html) to connect to the PLCnext Control device and view the two GDS port variables on the PndProgram instance.
+   
+   ![image](img/uaexpert.jpg)
+   
+   Note that the value of the array elements in the IN port variable can be changed by the OPC UA client, but the values of the array in the OUT port variable cannot - those values need to be set by the C++ program.
    
 The next steps are left up to the user:
 
