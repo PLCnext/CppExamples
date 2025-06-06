@@ -14,7 +14,6 @@
 /*  INCLUDES                                                                  */
 /******************************************************************************/
 
-
 #pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/ProgramBase.hpp"
@@ -36,11 +35,8 @@ public: // typedefs
 
 public: // construction/destruction
     ThreadExampleProgram(ThreadExample::ThreadExampleComponent& threadExampleComponentArg, const String& name);
-    ThreadExampleProgram(const ThreadExampleProgram& arg) = delete;
-    virtual ~ThreadExampleProgram() = default;
 
 public: // operators
-    ThreadExampleProgram&  operator=(const ThreadExampleProgram& arg) = delete;
 
 public: // properties
 
@@ -48,15 +44,15 @@ public: // operations
     void    Execute() override;
 
 public: /* Ports
-        =====
-        Ports are defined in the following way:
-        //#port
-        //#attributes(Input|Retain)
-        //#name(NameOfPort)
-        boolean portField;
+           =====
+           Ports are defined in the following way:
+           //#port
+           //#attributes(Input|Retain)
+           //#name(NameOfPort)
+           boolean portField;
 
-        The attributes comment define the port attributes and is optional.
-        The name comment defines the name of the port and is optional. Default is the name of the field.
+           The attributes comment define the port attributes and is optional.
+           The name comment defines the name of the port and is optional. Default is the name of the field.
         */
 
     //#port

@@ -1,11 +1,17 @@
-﻿#pragma once
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#pragma once
 #include "Arp/System/Core/Arp.h"
-#include "Arp/System/Acf/ComponentBase.hpp"
-#include "Arp/System/Acf/IApplication.hpp"
+#include "Arp/Base/Acf/Commons/ComponentBase.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
+#include "BufferedExchangeComponentProgramProvider.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
 #include "Arp/System/Commons/Logging.h"
-#include "BufferedExchangeComponentProgramProvider.hpp"
 
 #include "Arp/System/Acf/IControllerComponent.hpp"
 
@@ -14,30 +20,29 @@
 
 #include "MyWorker.hpp"
 
-namespace BufferedExchange {
+namespace BufferedExchange
+{
 
 using namespace Arp;
-using namespace Arp::System::Acf;
+using namespace Arp::Base::Acf::Commons;
 using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
 using namespace Arp::System::Commons::Threading;
 
 //#component
-class BufferedExchangeComponent: public ComponentBase,
-        public ProgramComponentBase,
-        public IControllerComponent,
-        private Loggable<BufferedExchangeComponent> {
+class BufferedExchangeComponent : public ComponentBase, public ProgramComponentBase, public IControllerComponent, private Loggable<BufferedExchangeComponent>
+{
 public: // typedefs
 
 public: // construction/destruction
-    BufferedExchangeComponent(IApplication &application, const String &name);
-    virtual ~BufferedExchangeComponent() = default;
+    BufferedExchangeComponent(ILibrary& library, const String& name);
 
-public: // Component operations
+public: // IComponent operations
     void Initialize() override;
     void LoadConfig() override;
     void SetupConfig() override;
     void ResetConfig() override;
+    void PowerDown() override;
 
 public: // IControllerComponent
     void Start();
@@ -47,12 +52,6 @@ public: // ProgramComponentBase operations
     void RegisterComponentPorts() override;
 
 private: // methods
-    BufferedExchangeComponent(const BufferedExchangeComponent &arg) = delete;
-    BufferedExchangeComponent& operator=(const BufferedExchangeComponent &arg) = delete;
-
-public: // static factory operations
-    static IComponent::Ptr Create(Arp::System::Acf::IApplication &application,
-            const String &name);
 
 private: // fields
     BufferedExchangeComponentProgramProvider programProvider;
@@ -62,7 +61,6 @@ public:
     int RunCounter { 0 };
     Thread delegateThread;
 
-
 public:
     template<typename S>
     void StopWT(MyWorker<S> &W, WorkerThread &T);
@@ -70,9 +68,5 @@ public:
     template<typename S>
     void StopT(MyWorker<S> &W, Thread &T);
 };
-
-inline IComponent::Ptr BufferedExchangeComponent::Create(Arp::System::Acf::IApplication &application, const String &name) {
-    return IComponent::Ptr(new BufferedExchangeComponent(application, name));
-}
 
 } // end of namespace BufferedExchange

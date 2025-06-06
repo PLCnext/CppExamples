@@ -1,19 +1,20 @@
 ﻿///////////////////////////////////////////////////////////////////////////////"
 //
-//  Copyright PHOENIX CONTACT Electronics GmbH
+// Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+// Licensed under the MIT. See LICENSE file in the project root for full license information.  
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "DataAccessComponent.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "DataAccessLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
-#include "Arp/System/Rsc/Services/RscArrayReader.hpp"
-#include "Arp/System/Rsc/Services/RscArrayWriter.hpp"
-#include "Arp/System/Rsc/Services/RscStructReader.hxx"
-#include "Arp/System/Rsc/Services/RscStructWriter.hxx"
-#include "Arp/System/Rsc/Services/RscString.hxx"
+#include "Arp/Base/Rsc/Commons/RscArrayReader.hpp"
+#include "Arp/Base/Rsc/Commons/RscArrayWriter.hpp"
+#include "Arp/Base/Rsc/Commons/RscStructReader.hpp"
+#include "Arp/Base/Rsc/Commons/RscStructWriter.hpp"
+#include "Arp/Base/Rsc/Commons/RscString.hxx"
 
-void ReadPortNames(Arp::System::Rsc::Services::IRscWriteEnumerator<RscString<512>>& portNames)
+void ReadPortNames(Arp::Base::Rsc::Commons::IRscWriteEnumerator<Arp::Base::Rsc::Commons::RscString<512>>& portNames)
 {
     // In this case the values of three GDS variables will be read.
     // The names of these variables are specified using the write enumerator.
@@ -27,12 +28,12 @@ void ReadPortNames(Arp::System::Rsc::Services::IRscWriteEnumerator<RscString<512
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadPortNames()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- ReadPortNames()");
     }
 }
 
-void ReadResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Services::ReadItem>& dataItems)
+void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Services::ReadItem>& dataItems)
 {
     Arp::Plc::Gds::Services::ReadItem item;
     auto elements = dataItems.BeginRead();
@@ -45,66 +46,66 @@ void ReadResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Se
         {
             switch (item.Value.GetType())
             {
-                case RscType::Int16:
+                case Arp::Base::Rsc::Commons::RscType::Int16:
                 {
                     Arp::int16 value;
                     item.Value.CopyTo(value);
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Int_OUT from DataAccess Read() = {0}", value);
+                    Arp::Base::Commons::Logging::Log::Info("Int_OUT from DataAccess Read() = {0}", value);
                     break;
                 }
 
-                case RscType::Array:
+                case Arp::Base::Rsc::Commons::RscType::Array:
                 {
-                    RscArrayReader arrayReader{item.Value};
+                	Arp::Base::Rsc::Commons::RscArrayReader arrayReader{item.Value};
 
                     // Use the following RscArrayReader methods to get information about the array:
                     // - GetElementType()
                     // - GetSize()
                     // - GetDimensions();
 
-                    RscVariant<512> current;
+                	Arp::Base::Rsc::Commons::RscVariant<512> current;
                     arrayReader.ReadNext(current);
 
                     Arp::int16 value;
                     current.CopyTo(value);
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Array_OUT[0] from DataAccess Read() = {0}", value);
+                    Arp::Base::Commons::Logging::Log::Info("Array_OUT[0] from DataAccess Read() = {0}", value);
 
                     // Use the ReadNext() method to iterate through all array elements.
 
                     break;
                 }
 
-                case RscType::Struct:
+                case Arp::Base::Rsc::Commons::RscType::Struct:
                 {
-                    RscStructReader<512> structReader{item.Value};
+                	Arp::Base::Rsc::Commons::RscStructReader structReader{item.Value};
 
                     // Use the following RscStructReader method to get information about the struct:
                     // - GetFieldCount()
                     // Struct element values will appear in the order that the elements are declared.
                     // The names of the struct elements are not available.
 
-                    RscVariant<512> current;
+                    Arp::Base::Rsc::Commons::RscVariant<512> current;
                     structReader.ReadNextField(current);
                     // Process the MyBool field if necessary.
 
                     structReader.ReadNextField(current);
                     Arp::int16 intValue;
                     current.CopyTo(intValue);
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Struct_OUT.MyInt16 from DataAccess Read() = {0}", intValue);
+                    Arp::Base::Commons::Logging::Log::Info("Struct_OUT.MyInt16 from DataAccess Read() = {0}", intValue);
 
                     structReader.ReadNextField(current);
                     // Process the MyFloat32 field if necessary.
 
                     structReader.ReadNextField(current);
                     const char * stringValue = current.GetChars();
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Struct_OUT.MyString from DataAccess Read() = {0}", stringValue);
+                    Arp::Base::Commons::Logging::Log::Info("Struct_OUT.MyString from DataAccess Read() = {0}", stringValue);
 
                     break;
                 }
 
                 default:
                 {
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Unhandled type = {0}", item.Value.GetType());
+                    Arp::Base::Commons::Logging::Log::Info("Unhandled type = {0}", item.Value.GetType());
                     break;
                 }
             }
@@ -113,12 +114,12 @@ void ReadResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Se
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadResult()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- ReadResult()");
     }
 }
 
-void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Services::WriteItem>& dataItems)
+void WriteData(Arp::Base::Rsc::Commons::IRscWriteEnumerator<Arp::Plc::Gds::Services::WriteItem>& dataItems)
 {
     // This function writes values to three GDS variables - an Int16, a struct, and an array.
     dataItems.BeginWrite(3);
@@ -134,7 +135,7 @@ void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Se
         // Create the RscVariant representing the array
         Arp::Plc::Gds::Services::WriteItem arrayItem;
         arrayItem.PortName="Arp.Plc.Eclr/DataAccessInstance.Array_IN";
-        arrayItem.Value=RscVariant<512>::CreateArrayVariant(10,RscType::Int16);
+        arrayItem.Value=Arp::Base::Rsc::Commons::RscVariant<512>::CreateArrayVariant(10, Arp::Base::Rsc::Commons::RscType::Int16);
 
         // Write the array item to the enumerator *before* creating the RscArrayWriter
         dataItems.WriteNext(arrayItem);
@@ -142,7 +143,7 @@ void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Se
         // Create an RscArrayWriter for the array
         // This must be done *after* the array WriteItem has been written to the enumerator,
         // otherwise this error appears: "WriteElementFunction in RscVariant has to be defined"
-        RscArrayWriter arrayWriter{arrayItem.Value};
+        Arp::Base::Rsc::Commons::RscArrayWriter arrayWriter{arrayItem.Value};
 
         // Fill the RSC Array Variant with RscType::Int16 values
         arrayWriter.WriteNext((Arp::int16)42);
@@ -160,13 +161,13 @@ void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Se
         // Create the RscVariant representing the struct, with four fields
         Arp::Plc::Gds::Services::WriteItem structItem;
         structItem.PortName="Arp.Plc.Eclr/DataAccessInstance.Struct_IN";
-        structItem.Value=RscVariant<512>::CreateStructVariant(4);
+        structItem.Value=Arp::Base::Rsc::Commons::RscVariant<512>::CreateStructVariant(4);
 
         // Write the struct item to the enumerator *before* creating the RscStructWriter
         dataItems.WriteNext(structItem);
 
         // Create an RscStructWriter for the struct
-        RscStructWriter<512> structWriter{structItem.Value};
+        Arp::Base::Rsc::Commons::RscStructWriter structWriter{structItem.Value};
 
         // Fill the RSC Struct Variant with values
         // The fields are written in the order that they are declared
@@ -175,19 +176,19 @@ void WriteData(Arp::System::Rsc::Services::IRscWriteEnumerator<Arp::Plc::Gds::Se
         structWriter.WriteNextField((Arp::float32)42.31);
         // Create an RscString variable to write to the next struct element
         // IMPORTANT: The maximum size of the RscString MUST be the same as the maximum string size of the RscStructWriter object,
-        Arp::System::Rsc::Services::RscString<512> myString("String from C++");
+        Arp::Base::Rsc::Commons::RscString<512> myString("String from C++");
         structWriter.WriteNextField(myString);
 
         dataItems.EndWrite();
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteData()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- WriteData()");
     }
 }
 
-void WriteResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::Services::DataAccessError>& errors)
+void WriteResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Services::DataAccessError>& errors)
 {
     Arp::Plc::Gds::Services::DataAccessError error;
     auto elements = errors.BeginRead();
@@ -201,8 +202,8 @@ void WriteResult(Arp::System::Rsc::Services::IRscReadEnumerator<Arp::Plc::Gds::S
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteResult()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- WriteResult()");
     }
 }
 
@@ -212,17 +213,17 @@ namespace DataAccess
 using Arp::System::Rsc::ServiceManager;
 using namespace Arp::Plc::Commons::Domain;
 
-DataAccessComponent::DataAccessComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::DataAccess::DataAccessLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::DataAccess::DataAccessLibrary::GetInstance().GetNamespace())
-, dataAccessThread(this, &DataAccessComponent::AccessData, 1000, "DataAccessThread")
+DataAccessComponent::DataAccessComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::DataAccess::DataAccessLibrary::GetInstance().GetNamespace())
+	, dataAccessThread(this, &DataAccessComponent::AccessData, 1000, "DataAccessThread")
 {
 }
 
 void DataAccessComponent::Initialize()
 {
     // never remove next line
-    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, true);
     
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -234,6 +235,9 @@ void DataAccessComponent::Initialize()
     plcDomainProxy.PlcUnloading += make_delegate(this, &DataAccessComponent::OnPlcUnloading);
     plcDomainProxy.PlcChanging += make_delegate(this, &DataAccessComponent::OnPlcChanging);
     plcDomainProxy.PlcChanged += make_delegate(this, &DataAccessComponent::OnPlcChanged);
+
+    // Initialise global logger
+    Arp::Base::Commons::Logging::Log::Initialize("Data Access Example");
 }
 
 void DataAccessComponent::SubscribeServices()
@@ -244,7 +248,7 @@ void DataAccessComponent::SubscribeServices()
 
 void DataAccessComponent::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void DataAccessComponent::SetupSettings()
@@ -252,12 +256,12 @@ void DataAccessComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void DataAccessComponent::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void DataAccessComponent::LoadConfig()
@@ -294,7 +298,9 @@ void DataAccessComponent::Dispose()
 
 void DataAccessComponent::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void DataAccessComponent::OnPlcLoaded()

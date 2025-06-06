@@ -1,14 +1,12 @@
-﻿///////////////////////////////////////////////////////////////////////////////"
+///////////////////////////////////////////////////////////////////////////////"
 //
-//  Copyright PHOENIX CONTACT Electronics GmbH
+//  Copyright PHOENIX CONTACT GmbH
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent3.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "SubscriptionsLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
-#include "Arp/System/Rsc/Services/RscArrayReader.hpp"
-#include "Arp/System/Rsc/Services/RscStructReader.hxx"
 
 namespace Subscriptions
 {
@@ -18,17 +16,17 @@ using Arp::System::Rsc::ServiceManager;
 
 const String SubscriptionsComponent3::complexVarName = "Arp.Plc.Eclr/RealTimeProgram100ms.varSampleStruct";
 
-SubscriptionsComponent3::SubscriptionsComponent3(IApplication& application, const String& name)
-: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
-, subscriptionThread(this, &SubscriptionsComponent3::LogSubscription, 1000, "SubscriptionLogThread")
+SubscriptionsComponent3::SubscriptionsComponent3(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+	, subscriptionThread(this, &SubscriptionsComponent3::LogSubscription, 1000, "SubscriptionLogThread")
 {
 }
 
 void SubscriptionsComponent3::Initialize()
 {
     // never remove next line
-    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, true);
     
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -50,7 +48,7 @@ void SubscriptionsComponent3::SubscribeServices()
 
 void SubscriptionsComponent3::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent3::SetupSettings()
@@ -58,12 +56,12 @@ void SubscriptionsComponent3::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent3::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent3::LoadConfig()
@@ -100,7 +98,9 @@ void SubscriptionsComponent3::Dispose()
 
 void SubscriptionsComponent3::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void SubscriptionsComponent3::OnPlcLoaded()
@@ -217,7 +217,7 @@ void SubscriptionsComponent3::LogValue(const RscVariant<512>& variant, std::ostr
     else if (rscType == RscType::Struct)
     {
         // 1. Call: The variant is from type 'RscType::Struct'
-        RscStructReader<512> structReader(variant);
+        RscStructReader structReader(variant);
         this->LogStruct(structReader, os);
     }
     else
@@ -254,7 +254,7 @@ void SubscriptionsComponent3::LogArray(RscArrayReader& arrayReader, std::ostream
         // 'ReadNextStruct'
         else if (arrayReader.GetElementType() == RscType::Struct)
         {
-            RscStructReader<512> structReader = arrayReader.ReadNextStruct<512>();
+            RscStructReader structReader = arrayReader.ReadNextStruct<512>();
             this->LogStruct(structReader, os);
         }
         // If the type is not a structure or an array the elements have to be read with the function
@@ -274,7 +274,7 @@ void SubscriptionsComponent3::LogArray(RscArrayReader& arrayReader, std::ostream
     os << ")";
 }
 
-void SubscriptionsComponent3::LogStruct(RscStructReader<512>& structReader, std::ostream& os)const
+void SubscriptionsComponent3::LogStruct(RscStructReader& structReader, std::ostream& os)const
 {
     RscVariant<512> currentElement;
     size_t fieldCount = structReader.GetFieldCount();

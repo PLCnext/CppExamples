@@ -4,10 +4,12 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [References](#references)
-- [Quick-start example](#quick-start-example)
+- [Force Service](#force-service)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [References](#references)
+  - [Quick-start example](#quick-start-example)
 
 <!-- /TOC -->
 
@@ -26,39 +28,37 @@ The PLCnext Runtime provides an RSC service, called `IForceService`, that a clie
 |Description | Value |
 |------------ |-----------|
 |Created | 7.01.2021 |
-|Last modified| 7.01.2021 |
+|Last modified| 05.06.2025 |
 |Controller| AXC F 2152 |
-|FW| 2021.0.0 LTS |
-|Arpversion| 21.0.0.35466 |
-|SVN Revision| 35466 |
-|SDK| 2021.0.0 LTS (21.0.0.35466) |
-|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
+|FW| 2025.0 |
+|SDK| 2025.0 |
+|PLCnext Technology Toolchain | 2025.0 |
 
 ## References
 
 A complete description of the Force service is available from this source:
 
-- [API documentation](https://api.plcnext.help/api_docs_2021-0-LTS/classArp_1_1Plc_1_1Gds_1_1Services_1_1IForceService.html)
+- [API documentation](https://api.plcnext.help/api_docs_2025-0/classArp_1_1Plc_1_1Gds_1_1Services_1_1IForceService.html)
 
 ## Quick-start example
 
 This example demonstrates features of the Force RSC service.
 
-It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm).
+It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://plcnext.help/te/Programming/Cplusplus/Cpp_programs_in_PLCnext.htm).
 
 Prerequisites:
 
-- AXC F x152 controller with AXL F DI8/3 DO8/3 2H (2702071) digital input/output module. Other hardware arrangements will require modifications to the sample code.
+- AXC F 2152 controller with AXL F DI8/3 DO8/3 2H (2702071) digital input/output module. Other hardware arrangements will require modifications to the sample code.
 
-- PLCnext Command Line Interface (CLI) tool, version 2021.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Technology Command Line Interface (CLI) tool, version 2025.0.
 
-- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2021.0.0 or later. This is also included in the "PLCnext Technology C++ tool chain".
+- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2025.0.
 
-- (optional) Eclipse IDE, with the PLCnext Technology feature installed.
+- (optional) Eclipse IDE, with the PLCnext Technology add-in installed.
 
-- (optional) Visual Studio, with the PLCnext Technology add-in installed.
+- (optional) Visual Studio, with the PLCnext Technology extension installed.
 
-- PLCnext Engineer version 2021.0.1 or later.
+- PLCnext Engineer version 2025.0.
 
 Procedure:
 
@@ -70,10 +70,10 @@ Procedure:
 
 - Create the variables that will be forced:
   - In PLCnext Engineer, open the PLCnext Engineer project in the `Examples/Force` directory of this repository.
-  - Check that the controller model and firmware version in the project matches the controller you are using.
+  - Check that the controller model and firmware version in the project matches the controller you are using. Update the controller in the project if necessary.
   - Send the project to the PLC and check that the PLC starts OK.
 
-- Create a new **ACF project** using either the PLCnext CLI tool, or Eclipse, or Visual Studio, with the following settings:
+- Create a new **ACF project** using either the PLCnext Technology CLI tool, or Eclipse, or Visual Studio, with the following settings:
   - Project name: `Force`
   - Component name: `ForceComponent`
   - Project namespace: `Force`
@@ -86,4 +86,6 @@ Procedure:
 
 - Restart the PLCnext Runtime.
 
-- Check the contents of the file `/opt/plcnext/logs/Output.log`. It should contain messages from your ACF component and from the `GdsForceManager` firmware component.
+- Check the contents of the file `/opt/plcnext/logs/Custom.log`. It should contain messages from your ACF component.
+
+- Check the contents of the file `/opt/plcnext/logs/Arp.log`. It should contain messages from the `GdsForceManager` firmware component.

@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<PlmConfiguration>
-	<ComponentInstances id="606a8d24-be9d-4906-82ba-a2151dadea88" contextUri="adeprojectref:///e639c0f9-db09-46f4-abf7-50216a13f220/606e2993-1c57-411c-b0d2-c57a13c52bbf/34e4c283-c4b5-48dc-890c-7d423672b16a">
-		<ComponentInstance id="85311bcc-4ca7-448f-8dd0-d68a3c448e28" name="COMP_Notifications1" libraryName="NotificationExample" componentType="COMP_Notifications" comment="" />
-	</ComponentInstances>
-</PlmConfiguration>

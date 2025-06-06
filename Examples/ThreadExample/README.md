@@ -1,15 +1,16 @@
 # Table of contents
 
 <!-- TOC depthFrom:1 orderedList:true -->
-1. [Introduction](#introduction)
-2. [Example details](#example-details)
-3. [Preconditions](#preconditions)
-4. [Project compiling in Eclipse](#project-compiling-in-eclipse)
-5. [PLCnext Engineer project](#plcnext-engineer-project)
-6. [Start-Up instructions](#start-up-instructions)
-7. [Manually basic Setup](#basic-manual-setup)
-8. [Commons::WorkerThread and Commons::Thread](#commonsworkerthread-and-commonsthread)
-9. [General Notes](#general-notes)
+- [Table of contents](#table-of-contents)
+- [Introduction](#introduction)
+	- [Example details](#example-details)
+	- [Preconditions](#preconditions)
+	- [Project compiling in Eclipse](#project-compiling-in-eclipse)
+	- [PLCnext Engineer project](#plcnext-engineer-project)
+	- [Start-up instructions](#start-up-instructions)
+		- [Basic manual setup](#basic-manual-setup)
+		- [Commons::WorkerThread and Commons::Thread](#commonsworkerthread-and-commonsthread)
+			- [General Notes](#general-notes)
 <!-- /TOC -->
 
 # Introduction
@@ -27,15 +28,15 @@ The purpose of the delegateThread implementation is to use a call-back function 
 |Description | Value |
 |------------ |-----------|
 |Controller| AXC F 2152 |
-|FW | 2020.0 LTS or later |
-|SDK | 2020.0 LTS or later |
-|PLCnext Engineer| 2020.0 LTS or later |
+|FW | 2025.0 |
+|SDK | 2025.0 |
+|PLCnext Engineer| 2025.0 |
 
 ## Preconditions
 
-- AXC F 2152 controller with firmware 2020.0 LTS or later
-- Eclipse IDE "Photon" or later
-- PLCnext Engineer 2020.0 LTS or later
+- AXC F 2152 controller with firmware 2025.0
+- Eclipse<sup>&reg;</sup> IDE for C/C++ Developers version 2025-03
+- PLCnext Engineer 2025.0
 
 ## Project compiling in Eclipse
 
@@ -48,14 +49,14 @@ The purpose of the delegateThread implementation is to use a call-back function 
 
 1. In PLCnext Engineer, create a new project and include the "ThreadExample.pcwlx" in the project.
 1. Instantiate the "ThreadExampleProgram" under a previously defined task.
-1. Declare a port variable of "INT" datatype, e.g. in the "main" program.
+1. Declare an IN port variable of "INT" datatype, e.g. in the "Main" program.
 1. In the "PLANT" area of the PLCnext Engineer, unfold the "PLCnext" node and connect the C++ port variable "i_pCounter" and the IEC 61131 port variable.
-1. Download the PLCnext Engineer project to the PLCnext Control.
+1. Download the PLCnext Engineer project to the PLCnext Control device.
 
 ## Start-up instructions
 
-- If the project is successfully implemented and downloaded, you can follow the value incrementation of variable "i_pCounter" in PLCnext Engineer debug mode and/or in a watchwindow and threads status in the Output.log file on the plcnext target; see: /opt/plcnext/logs/Output.log
-- If the project does not start successfully, please see the error messages in Output.log file on the PLCnext target, see: /opt/plcnext/logs/Output.log
+- If the project is successfully implemented and downloaded, you can follow the value incrementation of variable "i_pCounter" in PLCnext Engineer debug mode and/or in a watchwindow and threads status in the Custom.log file on the plcnext target; see: /opt/plcnext/logs/Custom.log
+- If the project does not start successfully, please see the error messages in the Arp.log file on the PLCnext target, see: /opt/plcnext/logs/Arp.log
 
 ### Basic manual setup
 
@@ -119,18 +120,18 @@ When component `Stop` is called, the staticThread or delegateThread will be sync
 ```cpp
 void ThreadExampleComponent::Start(void) {
 	xStopThread = false;
-	Log::Info("-------------------------------workerThreadInstance start");
+	log.Info("-------------------------------workerThreadInstance start");
 	workerThreadInstance.Start();
-	Log::Info("-------------------------------workerThreadInstance started");
+	log.Info("-------------------------------workerThreadInstance started");
 
-	Log::Info("-------------------------------delegateThreadInstance start");
+	log.Info("-------------------------------delegateThreadInstance start");
 	delegateThreadInstance.Start();
-	Log::Info("-------------------------------delegateThreadInstance started");
+	log.Info("-------------------------------delegateThreadInstance started");
 
 
-	Log::Info("-------------------------------staticThreadInstance start");
+	log.Info("-------------------------------staticThreadInstance start");
 	staticThreadInstance.Start();
-	Log::Info("-------------------------------staticThreadInstance started");
+	log.Info("-------------------------------staticThreadInstance started");
 
     }
     
@@ -138,9 +139,9 @@ void ThreadExampleComponent::Start(void) {
     	// if you want to stop some loops of your thread during execution
     	// add something like "stoptheThread" before executing workerThreadStop.
     	xStopThread = true;
-    	Log::Info("-------------------------------workerThreadInstance stop");
+    	log.Info("-------------------------------workerThreadInstance stop");
     	workerThreadInstance.Stop();
-    	Log::Info("-------------------------------workerThreadInstance stopped");
+    	log.Info("-------------------------------workerThreadInstance stopped");
     }
     
     /// worker Thread Body
@@ -153,10 +154,10 @@ void ThreadExampleComponent::Start(void) {
     		else
     			iCountervalue = iStartValue;
     
-    		Log::Info("-------------------------------workerThreadInstance is running, iCountervalue={0}", iCountervalue);
+    		log.Info("-------------------------------workerThreadInstance is running, iCountervalue={0}", iCountervalue);
     	}
     	else
-    		Log::Info("-------------------------------workerThreadInstance is stopped, iCountervalue={0}", iCountervalue);
+    		log.Info("-------------------------------workerThreadInstance is stopped, iCountervalue={0}", iCountervalue);
     }
     
     
@@ -168,15 +169,15 @@ void ThreadExampleComponent::Start(void) {
     	while(!xStopThread)
     	{
     		if(this->myparameter == *i)
-    			Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running successful i={0} , myparameter = {1}", *i, this->myparameter);
+    			log.Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running successful i={0} , myparameter = {1}", *i, this->myparameter);
     
     		else
-    			Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running with ERROR: i={0} , myparameter = {1}", *i, this->myparameter);
+    			log.Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running with ERROR: i={0} , myparameter = {1}", *i, this->myparameter);
     
     		Thread::Sleep(1000);
     	}
     
-    	Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody stopped");
+    	log.Info("-------------------------------ThreadExampleComponent::delegateThreadBody stopped");
     }
     
     
@@ -187,11 +188,11 @@ void ThreadExampleComponent::Start(void) {
     	while(!*pValue){
     
     		//Do something and sleep for specifiedTime.
-    		Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody is running  pParameter={0}", (int) *pValue);
+    		log.Info("-------------------------------ThreadExampleComponent::staticThreadBody is running  pParameter={0}", (int) *pValue);
     		Thread::Sleep(500);
     	}
     
-    		Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody stopped");
+    		log.Info("-------------------------------ThreadExampleComponent::staticThreadBody stopped");
     }
 ```
 

@@ -4,9 +4,11 @@
 
 <!-- TOC depthfFrom:2 orderedList:true -->
 
-- [Introduction](#Introduction)
-- [Background](#Background)
-- [Details](#Details)
+- [Component Ports](#component-ports)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Background](#background)
+  - [Details](#details)
 
 <!-- /TOC -->
 
@@ -16,7 +18,7 @@ In PLM projects it is possible to implement Inports and Outports for programs. A
 
 ## Background
 
-The PLCnext firmware creates program instances according to the ESM configuration when the PLC program is loaded. Program instances are deleted when the PLC application is unloaded. This holds true for component instances as well. Additionally (and in contrast to component instances) program instances are also deleted and created again when the PLC application is started (Cold as well as Warm Start). During this creation all member variables of the program are initialized by the C++ code. If the PLC is started by a warm start, program ports which are marked with the `Retain` attribute are restored to their last saved value. This is handled for program instances by the firmware but for component instances dedicated C++ code has to be provided within the component.
+The PLCnext Technology firmware creates program instances according to the ESM configuration when the PLC program is loaded. Program instances are deleted when the PLC application is unloaded. This holds true for component instances as well. Additionally (and in contrast to component instances) program instances are also deleted and created again when the PLC application is started (Cold as well as Warm Start). During this creation all member variables of the program are initialized by the C++ code. If the PLC is started by a warm start, program ports which are marked with the `Retain` attribute are restored to their last saved value. This is handled for program instances by the firmware but for component instances dedicated C++ code has to be provided within the component.
 
 This dedicated C++ code consists basically of one method added to the component. This method has to be registered at the firmware to be called when the PLC application is started. The input parameter of this method then indicates the start kind (warm/cold) of the PLC application.
 

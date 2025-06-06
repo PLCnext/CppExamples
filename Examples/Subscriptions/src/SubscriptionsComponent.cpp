@@ -1,6 +1,6 @@
-﻿///////////////////////////////////////////////////////////////////////////////"
+///////////////////////////////////////////////////////////////////////////////"
 //
-//  Copyright PHOENIX CONTACT Electronics GmbH
+//  Copyright PHOENIX CONTACT GmbH
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent.hpp"
@@ -13,17 +13,17 @@ namespace Subscriptions
 
 using Arp::System::Rsc::ServiceManager;
 using namespace Arp::Plc::Commons::Domain;
-
-SubscriptionsComponent::SubscriptionsComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
-, subscriptionThread(this, &SubscriptionsComponent::LogSubscription, 1000, "SubscriptionLogThread"){
+SubscriptionsComponent::SubscriptionsComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+	, subscriptionThread(this, &SubscriptionsComponent::LogSubscription, 1000, "SubscriptionLogThread")
+{
 }
 
 void SubscriptionsComponent::Initialize()
 {
     // never remove next line
-    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, true);
     
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -45,7 +45,7 @@ void SubscriptionsComponent::SubscribeServices()
 
 void SubscriptionsComponent::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent::SetupSettings()
@@ -53,12 +53,12 @@ void SubscriptionsComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent::LoadConfig()
@@ -95,7 +95,9 @@ void SubscriptionsComponent::Dispose()
 
 void SubscriptionsComponent::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void SubscriptionsComponent::OnPlcLoaded()
@@ -185,7 +187,7 @@ void SubscriptionsComponent::LogSubscription()const
             }
             else
             {
-                log.Warning("Unexpeted type: '{}'", current.GetType());
+                log.Warning("Unexpected type: '{}'", current.GetType());
             }
         }
         readEnumerator.EndRead();

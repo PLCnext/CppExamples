@@ -1,31 +1,32 @@
 ﻿/******************************************************************************
  *
- * Copyright (c) 2021 Phoenix Contact GmbH & Co. KG. All rights reserved.
+ * Copyright (c) 2024 Phoenix Contact GmbH & Co. KG. All rights reserved.
  * Licensed under the MIT. See LICENSE file in the project root for full license information.
  *
  ******************************************************************************/
+
 #pragma once
 #include "Arp/System/Core/Arp.h"
-#include "Arp/System/Acf/ComponentBase.hpp"
-#include "Arp/System/Acf/IApplication.hpp"
+#include "Arp/Base/Acf/Commons/ComponentBase.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "ComponentWithPortsProgramProvider.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
-#include "Arp/System/Commons/Logging.h"
+#include "Arp/Base/Commons/Logging/Log.hpp"
 
 // added to the template
-#include "Arp/Plc/Commons/Domain/PlcStartKind.hpp"
+#include "Arp/Plc/Domain/Commons/PlcStartKind.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 
 namespace ComponentPorts
 {
 
 using namespace Arp;
-using namespace Arp::System::Acf;
+using namespace Arp::Base::Acf::Commons;
 using namespace Arp::Plc::Commons::Esm;
 using namespace Arp::Plc::Commons::Meta;
 
 // "using" added to the template
+using namespace Arp::Plc::Domain::Commons;
 using namespace Arp::Plc::Commons::Domain;
 
 //#component
@@ -34,15 +35,14 @@ class ComponentWithPorts : public ComponentBase, public ProgramComponentBase, pr
 public: // typedefs
 
 public: // construction/destruction
-    ComponentWithPorts(IApplication& application, const String& name);
-    virtual ~ComponentWithPorts() = default;
+    ComponentWithPorts(ILibrary& library, const String& name);
 
 public: // IComponent operations
     void Initialize() override;
     void LoadConfig() override;
     void SetupConfig() override;
     void ResetConfig() override;
- // "Dispose()" added to the template
+    // "Dispose()" added to the template
     void Dispose() override;
     void PowerDown() override;
 
@@ -51,14 +51,9 @@ public: // ProgramComponentBase operations
 
 // "Handler methods" added to the template
 private: // Plc event handler methods
-    void OnPlcStarting(PlcStartKind startKind);
+	void OnPlcStarting(PlcStartKind startKind);
 
 private: // methods
-    ComponentWithPorts(const ComponentWithPorts& arg) = delete;
-    ComponentWithPorts& operator= (const ComponentWithPorts& arg) = delete;
-
-public: // static factory operations
-    static IComponent::Ptr Create(Arp::System::Acf::IApplication& application, const String& name);
 
 private: // fields
     ComponentWithPortsProgramProvider programProvider;
@@ -67,6 +62,7 @@ public: /* Ports
            =====
            Component ports are defined in the following way:
         */
+
            //#attributes(Hidden)
            struct Ports 
            {
@@ -81,6 +77,7 @@ public: /* Ports
            
            //#port
            Ports ports;
+
         /*
            Create one (and only one) instance of this struct.
            Apart from this single struct instance, it is recommended, that there should be no other Component variables 
@@ -97,10 +94,5 @@ public: /* Ports
            The members of the struct can be declared with any of the attributes allowed for a Program port.
         */
 };
-
-inline IComponent::Ptr ComponentWithPorts::Create(Arp::System::Acf::IApplication& application, const String& name)
-{
-    return IComponent::Ptr(new ComponentWithPorts(application, name));
-}
 
 } // end of namespace ComponentPorts

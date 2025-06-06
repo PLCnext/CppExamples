@@ -1,4 +1,11 @@
-﻿#include "OpcPlcManagerComponent.hpp"
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#include "OpcPlcManagerComponent.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "OpcPlcManagerLibrary.hpp"
 #include "Arp/System/Rsc/ServiceManager.hpp"
@@ -9,10 +16,10 @@ namespace OpcPlcManager
 using namespace Arp::Plc::Commons::Domain;
 using Arp::System::Rsc::ServiceManager;
 
-OpcPlcManagerComponent::OpcPlcManagerComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::OpcPlcManager::OpcPlcManagerLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::OpcPlcManager::OpcPlcManagerLibrary::GetInstance().GetNamespace())
-, workerThreadInstance(make_delegate(this, &OpcPlcManagerComponent::workerThreadBody) , 1000, "WorkerThreadName")
+OpcPlcManagerComponent::OpcPlcManagerComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::OpcPlcManager::OpcPlcManagerLibrary::GetInstance().GetNamespace())
+    , workerThreadInstance(make_delegate(this, &OpcPlcManagerComponent::workerThreadBody) , 1000, "WorkerThreadName")
 {
 }
 
@@ -27,11 +34,12 @@ void OpcPlcManagerComponent::Initialize()
 void OpcPlcManagerComponent::SubscribeServices()
 {
     // gets the IDataAccessService pointer
-    this->plcManagerService2Ptr = ServiceManager::GetService<IPlcManagerService2>();}
+    this->plcManagerService2Ptr = ServiceManager::GetService<IPlcManagerService2>();
+}
 
 void OpcPlcManagerComponent::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void OpcPlcManagerComponent::SetupSettings()
@@ -39,12 +47,12 @@ void OpcPlcManagerComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void OpcPlcManagerComponent::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void OpcPlcManagerComponent::LoadConfig()
@@ -55,14 +63,14 @@ void OpcPlcManagerComponent::LoadConfig()
 void OpcPlcManagerComponent::SetupConfig()
 {
     // setup project config here
-    Log::Info("OpcPlcManagerComponent: Starting worker thread.");
+    log.Info("OpcPlcManagerComponent: Starting worker thread.");
     workerThreadInstance.Start();
 }
 
 void OpcPlcManagerComponent::ResetConfig()
 {
     // implement this inverse to SetupConfig() and LoadConfig()
-    Log::Info("OpcPlcManagerComponent: Stopping worker thread.");
+    log.Info("OpcPlcManagerComponent: Stopping worker thread.");
     workerThreadInstance.Stop();
 }
 
@@ -71,12 +79,14 @@ void OpcPlcManagerComponent::Dispose()
     // never remove next line
     MetaComponentBase::Dispose();
 
-    // implement this inverse to SetupSettings(), LoadSettings() and Initialize()
+	// implement this inverse to SetupSettings(), LoadSettings() and Initialize()
 }
 
 void OpcPlcManagerComponent::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 // Thread Body
@@ -88,7 +98,7 @@ void OpcPlcManagerComponent::workerThreadBody(void)
 
     if (this->GetPlcState.UA_MethodState == 1)
     {
-        Log::Info("OpcPlcManagerComponent: GetPlcState.");
+        log.Info("OpcPlcManagerComponent: GetPlcState.");
 
         // Get the PLC state from the RSC service
         this->GetPlcState.state = static_cast<Arp::uint32>(this->plcManagerService2Ptr->GetPlcState());
@@ -100,7 +110,7 @@ void OpcPlcManagerComponent::workerThreadBody(void)
 
     if (this->Start.UA_MethodState == 1)
     {
-        Log::Info("OpcPlcManagerComponent: Start: {0:d} {1}", this->Start.startKind, (this->Start.async ? "asynchronous" : "synchronous"));
+        log.Info("OpcPlcManagerComponent: Start: {0:d} {1}", this->Start.startKind, (this->Start.async ? "asynchronous" : "synchronous"));
 
         // Start the PLC via the RSC service
         this->plcManagerService2Ptr->Start((PlcStartKind)this->Start.startKind, this->Start.async);
@@ -112,7 +122,7 @@ void OpcPlcManagerComponent::workerThreadBody(void)
 
     if (this->Stop.UA_MethodState == 1)
     {
-        Log::Info("OpcPlcManagerComponent: Stop {0}.", (this->Stop.async ? "asynchronous" : "synchronous"));
+        log.Info("OpcPlcManagerComponent: Stop {0}.", (this->Stop.async ? "asynchronous" : "synchronous"));
 
         // Stop the PLC via the RSC service
         this->plcManagerService2Ptr->Stop(this->Stop.async);

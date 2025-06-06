@@ -1,8 +1,9 @@
-///////////////////////////////////////////////////////////////////////////////"
-//
-//  Copyright PHOENIX CONTACT Electronics GmbH
-//
-///////////////////////////////////////////////////////////////////////////////
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
 
 #include "COMP_Notifications.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
@@ -10,24 +11,23 @@
 
 namespace NotificationExample
 {
-
-COMP_Notifications::COMP_Notifications(IApplication& application, const String& name)
-: ComponentBase(application, ::NotificationExample::NotificationExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
-, programProvider(*this)
-, ProgramComponentBase(::NotificationExample::NotificationExampleLibrary::GetInstance().GetNamespace(), programProvider)
-,    Custom_subscription("My.NameSpace.1")
-,    Custom_subscription2("My.NameSpace.2")
-,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged")
-,    PlcStateChanged_subscription("Arp.Plc.Domain.PlcManager.StateChanged")
+COMP_Notifications::COMP_Notifications(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , programProvider(*this)
+    , ProgramComponentBase(::NotificationExample::NotificationExampleLibrary::GetInstance().GetNamespace(), programProvider)
+	,    Custom_subscription("My.NameSpace.1")
+	,    Custom_subscription2("My.NameSpace.2")
+	,    NetworkConfigurationChanged_subscription("Arp.Device.Interface.NetworkConfigurationChanged")
+	,    PlcStateChanged_subscription("Arp.Plc.Domain.Plc.StateChanged")
 {
-
 }
 
 void COMP_Notifications::Initialize()
 {
     // never remove next line
     ProgramComponentBase::Initialize();
-        log.Info("Notifications:");
+
+    log.Info("Notifications:");
     for (auto &x : nm.GetAllKnownNotificationNameIds()){
     log.Info("Name:{1} Value:{0}",x.GetValue(), nm.GetNotificationName(x));
 
@@ -59,6 +59,14 @@ void COMP_Notifications::ResetConfig()
 
     // implement this inverse to SetupConfig() and LoadConfig()
 }
+
+void COMP_Notifications::PowerDown()
+{
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
+}
+
 // Receive first self-defined notification
 void COMP_Notifications::NM_Subscription1_Callback(const Arp::System::Nm::Notification& notification)
 {
@@ -82,23 +90,23 @@ void COMP_Notifications::NM_Subscription2_Callback(const Arp::System::Nm::Notifi
 // Receive Network Configuration Changes.
 void COMP_Notifications::NetworkConfigurationChanged_Callback(const Arp::System::Nm::Notification& notification)
 {
-auto payload = notification.GetPayloadAs<Arp::System::NmPayload::Device::NetworkConfigurationChangedPayload>();
+    auto payload = notification.GetPayloadAs<Arp::System::NmPayload::Device::NetworkConfigurationChangedPayload>();
 
-//Configuration of network interface {num­ber} changed: {Parameter} = {Value}
-auto parameter = payload.GetChangedParameter();
-auto deviceId = payload.GetDeviceId();
-auto id = payload.GetId();
-auto name = payload.GetName();
-auto value = payload.GetValue();
-log.Info("Parameter:{0},devieId:{1},id:{2},name:{3},value:{4}",parameter,deviceId,id,name,value);
+    //Configuration of network interface {num­ber} changed: {Parameter} = {Value}
+    auto parameter = payload.GetChangedParameter();
+    auto deviceId = payload.GetDeviceId();
+    auto id = payload.GetId();
+    auto name = payload.GetName();
+    auto value = payload.GetValue();
+    log.Info("Parameter:{0},devieId:{1},id:{2},name:{3},value:{4}",parameter,deviceId,id,name,value);
 }
 
 // This notification informs you about the latest PLC Status changes.
 // And allows you to react accordingly.
 void COMP_Notifications::PlcStateChanged_Callback(const Arp::System::Nm::Notification& notification)
 {
-//Plc state changed: {"None"|"Ready"|"Stop"|"Running"|"Halt"|"Changing","Warning"|"Er­ror"|"SuspendedBySwitch"|"DcgNotPossi­ble"|"DcgRealTimeViolation"}
-//               ==> {"None"|"Ready"|"Stop"|"Running"|"Halt"|"Changing","Warning"|"Er­ror"|"SuspendedBySwitch"|"DcgNotPossi­ble"|"DcgRealTimeViolation"}
+    //Plc state changed: {"None"|"Ready"|"Stop"|"Running"|"Halt"|"Changing","Warning"|"Er­ror"|"SuspendedBySwitch"|"DcgNotPossi­ble"|"DcgRealTimeViolation"}
+    //               ==> {"None"|"Ready"|"Stop"|"Running"|"Halt"|"Changing","Warning"|"Er­ror"|"SuspendedBySwitch"|"DcgNotPossi­ble"|"DcgRealTimeViolation"}
     auto payload = notification.GetPayloadAs<Arp::System::NmPayload::Plc::PlcStateChangedPayload>();
     Arp::Plc::Commons::Domain::PlcState NewState = payload.GetNewState();
     Arp::Plc::Commons::Domain::PlcState LastState = payload.GetLastState();
@@ -141,9 +149,7 @@ void COMP_Notifications::PlcStateChanged_Callback(const Arp::System::Nm::Notific
         default:
          log.Info( "Handling Halt State:{0} LastState:{1}", NewState,LastState );
         break;
-
     }
-
 }
 
-}
+} // end of namespace NotificationExample

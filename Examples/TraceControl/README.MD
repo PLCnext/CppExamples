@@ -4,10 +4,12 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [References](#references)
-- [Quick-start example](#quick-start-example)
+- [Trace Controller Service](#trace-controller-service)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [References](#references)
+  - [Quick-start example](#quick-start-example)
 
 <!-- /TOC -->
 
@@ -26,19 +28,17 @@ As with the knowledge base article, this example is not intended to describe how
 |Description | Value |
 |------------ |-----------|
 |Created | 4.05.2021 |
-|Last modified| 4.05.2021 |
-|Controller| AXC F 2152 |
-|FW| 2021.0.3 LTS |
-|Arpversion| 21.0.3.35554 |
-|SVN Revision| 35554 |
-|SDK| 2021.0.3 LTS (21.0.3.35554) |
-|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
+|Last modified | 05.06.2025 |
+|Controller | AXC F 2152 |
+|FW | 2025.0 |
+|SDK | 2025.0 |
+|PLCnext Technology Toolchain | 2025.0 |
 
 ## References
 
 A complete description of the Trace Controller service is available from this source:
 
-- [API documentation](https://api.plcnext.help/api_docs_2021-0-LTS/classArp_1_1System_1_1Commons_1_1Diagnostics_1_1TraceController.html)
+- [API documentation](https://api.plcnext.help/api_docs_2025-0/classArp_1_1Services_1_1TraceController_1_1Services_1_1ITraceControllerService.html)
 
 General information on LTTng is available from the [LTTng website](https://lttng.org/).
 
@@ -46,19 +46,19 @@ General information on LTTng is available from the [LTTng website](https://lttng
 
 This example demonstrates features of the Trace Controller RSC service.
 
-It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext.help/te/Programming/Cpp/Cpp_programming/Cpp_programs_in_PLCnext.htm).
+It is assumed that the user has some experience [building C++ Components and Programs for PLCnext Control](https://www.plcnext-community.net/infocenter/cpp_programs_in_plcnext/).
 
 Prerequisites:
 
-- AXC F x152 controller.
+- AXC F 2152 controller.
 
-- PLCnext Command Line Interface (CLI) tool, version 2021.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Command Line Interface (CLI) tool, version 2025.0.
 
-- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2021.0.0 or later. This is also included in the "PLCnext Technology C++ tool chain".
+- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2025.0.
 
-- (optional) Eclipse IDE, with the PLCnext Technology feature installed.
+- (optional) Eclipse IDE, with the PLCnext Technology add-in installed.
 
-- (optional) Visual Studio, with the PLCnext Technology add-in installed.
+- (optional) Visual Studio, with the PLCnext Technology extension installed.
 
 Procedure:
 
@@ -68,7 +68,7 @@ Procedure:
    git clone https://github.com/PLCnext/CppExamples.git
    ```
 
-- Create a new **ACF project** using either the PLCnext CLI tool, or Eclipse, or Visual Studio, with the following settings:
+- Create a new **ACF project** using either the PLCnext Technology CLI tool, or Eclipse, or Visual Studio, with the following settings:
   - Project name: `TraceControl`
   - Component name: `TraceControlComponent`
   - Project namespace: `TraceControl`
@@ -81,4 +81,4 @@ Procedure:
 
 - Restart the PLCnext Runtime.
 
-- Check the contents of the file `/opt/plcnext/logs/Output.log`. It should contain messages from your ACF component. In the component source code, you can see where these messages are generated in each step of the call sequence.
+- Check the contents of the file `/opt/plcnext/logs/Custom.log`. It should contain messages from your ACF component. In the component source code, you can see where these messages are generated in each step of the call sequence.

@@ -1,44 +1,61 @@
-﻿#include "BufferedExchangeComponent.hpp"
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#include "BufferedExchangeComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "BufferedExchangeLibrary.hpp"
 
-namespace BufferedExchange {
-
-BufferedExchangeComponent::BufferedExchangeComponent(IApplication &application,
-        const String &name) :
-        ComponentBase(application,::BufferedExchange::BufferedExchangeLibrary::GetInstance(),name, ComponentCategory::Custom),
-        programProvider(*this),
-        ProgramComponentBase(::BufferedExchange::BufferedExchangeLibrary::GetInstance().GetNamespace(),    programProvider),
-        //
-        delegateThread(ThreadSettings("-DelegateThread", 0, 0, 0),    Arp::make_delegate(&wD, &BufferedExchange::MyWorker<long int>::Run)) {
+namespace BufferedExchange
+{
+BufferedExchangeComponent::BufferedExchangeComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , programProvider(*this)
+    , ProgramComponentBase(::BufferedExchange::BufferedExchangeLibrary::GetInstance().GetNamespace(), programProvider)
+    , delegateThread(ThreadSettings("-DelegateThread", 0, 0, 0)
+    , Arp::make_delegate(&wD, &BufferedExchange::MyWorker<long int>::Run))
+{
     log.Info("-------------------BufferedExchangeComponent Constructor");
 }
 
-void BufferedExchangeComponent::Initialize() {
+void BufferedExchangeComponent::Initialize()
+{
     // never remove next line
     ProgramComponentBase::Initialize();
 
     // subscribe events from the event system (Nm) here
 }
 
-void BufferedExchangeComponent::LoadConfig() {
+void BufferedExchangeComponent::LoadConfig()
+{
     // load project config here
-
 }
 
-void BufferedExchangeComponent::SetupConfig() {
+void BufferedExchangeComponent::SetupConfig()
+{
     // never remove next line
     ProgramComponentBase::SetupConfig();
 
     // setup project config here
 }
 
-void BufferedExchangeComponent::ResetConfig() {
+void BufferedExchangeComponent::ResetConfig()
+{
     // never remove next line
     ProgramComponentBase::ResetConfig();
     log.Info("---------------- ResetConfig");
 
     // implement this inverse to SetupConfig() and LoadConfig()
+}
+
+void BufferedExchangeComponent::PowerDown()
+{
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void BufferedExchangeComponent::Start(void) {
@@ -86,4 +103,5 @@ void BufferedExchangeComponent::StopT(MyWorker<S> &W, Thread &T) {
         T.Join();
     }
 }
+
 } // end of namespace BufferedExchange

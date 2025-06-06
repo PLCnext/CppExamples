@@ -1,18 +1,19 @@
-///////////////////////////////////////////////////////////////////////////////"
-//
-//  Copyright PHOENIX CONTACT Electronics GmbH
-//
-///////////////////////////////////////////////////////////////////////////////
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
 
 #pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/ProgramBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 #include "COMP_Notifications.hpp"
+
 // 1. Added header files
 #include "Arp/System/Nm/NotificationManager.hpp"
 #include "ExamplePayload.hpp"
-
 
 namespace NotificationExample
 {
@@ -32,11 +33,8 @@ public: // typedefs
 
 public: // construction/destruction
     PG_SendNotification(NotificationExample::COMP_Notifications& cOMP_NotificationsArg, const String& name);
-    PG_SendNotification(const PG_SendNotification& arg) = delete;
-    virtual ~PG_SendNotification() = default;
 
 public: // operators
-    PG_SendNotification&  operator=(const PG_SendNotification& arg) = delete;
 
 public: // properties
 
@@ -48,33 +46,34 @@ private:
     DateTime now() const;
 
 public: /* Ports
-        =====
-        Ports are defined in the following way:
-        //#port
-        //#attributes(Input|Retain)
-        //#name(NameOfPort)
-        boolean portField;
+           =====
+           Ports are defined in the following way:
+           //#port
+           //#attributes(Input|Retain)
+           //#name(NameOfPort)
+           boolean portField;
 
-        The attributes comment define the port attributes and is optional.
-        The name comment defines the name of the port and is optional. Default is the name of the field.
+           The attributes comment define the port attributes and is optional.
+           The name comment defines the name of the port and is optional. Default is the name of the field.
         */
-            // 4. Added port variables
-            //#port
-            //#attributes(Input)
-            uint16 IP_uiInfoValue = 0;
 
-            //#port
-            //#attributes(Input)
-            uint16 IP_uiWarningValue = 0;
+    // 4. Added port variables
+    //#port
+    //#attributes(Input)
+    uint16 IP_uiInfoValue = 0;
 
-            // 5. Added local variables to save the previous value of the ports
-            uint16 uiPrevInfoValue = 0;
-            uint16 uiPrevWarningValue = 0;
+    //#port
+    //#attributes(Input)
+    uint16 IP_uiWarningValue = 0;
 
-            // 6. Manager instance and registrations
-            NotificationManager& nm = NotificationManager::GetInstance();
-            NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration1;    // non-blocking needed because of real-time code execution
-            NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration2;
+    // 5. Added local variables to save the previous value of the ports
+    uint16 uiPrevInfoValue = 0;
+    uint16 uiPrevWarningValue = 0;
+
+    // 6. Manager instance and registrations
+    NotificationManager& nm = NotificationManager::GetInstance();
+    NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration1;    // non-blocking needed because of real-time code execution
+    NonBlockingNotificationRegistration<ExamplePayload> MySenderRegistration2;
 
 private: // fields
     NotificationExample::COMP_Notifications& cOMP_Notifications;

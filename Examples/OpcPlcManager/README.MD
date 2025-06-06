@@ -4,9 +4,11 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [Quick-start example](#quick-start-example)
+- [OPC UA Method Example](#opc-ua-method-example)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [Quick-start example](#quick-start-example)
 
 <!-- /TOC -->
 
@@ -20,20 +22,18 @@ https://github.com/PLCnext/OpcUaMethods
 
 The concepts and procedures demonstrated in that tutorial were used to prepare this example.
 
-This example also uses the [PLC Manager](https://api.plcnext.help/api_docs_2021-0-LTS/classArp_1_1Plc_1_1Domain_1_1Services_1_1IPlcManagerService2.html) RSC service.
+This example also uses the [PLC Manager](https://api.plcnext.help/api_docs_2025-0/classArp_1_1Plc_1_1Domain_1_1Services_1_1IPlcManagerService2.html) RSC service.
 
 ## Guide details
 
 |Description | Value |
 |------------ |-----------|
 |Created | 19.03.2021 |
-|Last modified| 19.03.2021 |
-|Controller| AXC F 2152 |
-|FW| 2021.0.3 LTS |
-|Arpversion| 21.0.3.35554 |
-|SVN Revision| 35554 |
-|SDK| 2021.0.3 LTS (21.0.3.35554) |
-|PLCnext CLI | 21.0.0 LTS (21.0.0.489) |
+|Last modified | 05.06.2025 |
+|Controller | AXC F 2152 |
+|FW | 2025.0 |
+|SDK | 2025.0 |
+|PLCnext Technology Toolchain | 2025.0 |
 
 ## Quick-start example
 
@@ -41,11 +41,11 @@ It is assumed that the user has some experience [building C++ Components and Pro
 
 Prerequisites:
 
-- AXC F x152 controller.
+- AXC F 2152 controller.
 
-- PLCnext Command Line Interface (CLI) tool, version 2021.0. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Technology Command Line Interface (CLI) tool, version 2025.0.
 
-- A Software Development Kit (SDK) for the AXC F x152 PLCnext Control. This is also included in the "PLCnext Technology C++ tool chain".
+- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2025.0.
 
 - PLCnext Engineer software.
 
@@ -78,7 +78,7 @@ Procedure:
 
    This `.xml` file, in OPC UA Node Set format, defines the OPC UA methods that are implemented by our ACF component.
 
-- Create a new **ACF project** using either the PLCnext CLI tool, or Eclipse, or Visual Studio, with the following settings:
+- Create a new **ACF project** using either the PLCnext Technology CLI tool, or Eclipse, or Visual Studio, with the following settings:
   - Project name: `OpcPlcManager`
   - Component name: `OpcPlcManagerComponent`
   - Project namespace: `OpcPlcManager`

@@ -2,35 +2,36 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-1. [Introduction](#introduction)
-2. [Example details](#example-details)
-3. [Preconditions](#preconditions)
-4. [Project compiling in Eclipse](#project-compiling-in-eclipse)
-5. [PLCnext Engineer project](#plcnext-engineer-project)
-6. [Start-Up instructions](#start-up-instructions)
+- [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Example details](#example-details)
+  - [Preconditions](#preconditions)
+  - [Project compiling in Eclipse](#project-compiling-in-eclipse)
+  - [PLCnext Engineer project](#plcnext-engineer-project)
+  - [Start-up instructions](#start-up-instructions)
 
 <!-- /TOC -->
 
 ## Introduction
 
 This example demonstrates the creation and usage of port variables in PLCnext Engineer and C++ applications for data exchange via elementary data types.
-All supported elementary data types are documented in the [PLCnext Info Center](https://www.plcnext.help/te/PLCnext_Runtime/Available_data_types.htm).
+All supported elementary data types are documented in the [PLCnext Technology Info Center](https://plcnext.help/te/PLCnext_Runtime/Supported_elementary_data_types.htm).
 
 ## Example details
 
 |Description | Value |
 |------------ |-----------|
 |Controller| AXC F 2152 |
-|FW | 2021.9 |
-|SDK | 2021.9 |
-|PLCnext CLI| 2021.6 |
-|PLCnext Engineer| 2021.9 |
+|FW | 2025.0 |
+|SDK | 2025.0 |
+|Toolchain | 2025.0 |
+|PLCnext Engineer| 2025.0 |
 
 ## Preconditions
 
-- PLCnext Control AXC F 2152 with firmware 2021.6 or later
-- PLCnext Engineer 2021.6 or later
-- Eclipse<sup>&reg;</sup> IDE "Photon" or later
+- PLCnext Control AXC F 2152 with firmware 2025.0
+- PLCnext Engineer 2025.0
+- Eclipse<sup>&reg;</sup> IDE for C/C++ Developers version 2025-03
 
 ## Project compiling in Eclipse
 
@@ -43,49 +44,24 @@ All supported elementary data types are documented in the [PLCnext Info Center](
 
 1. In PLCnext Engineer create a new project and add the user library "CppDataTypeTest.pcwlx" to the project.
 1. Instantiate the program "CppDataTypeTestProgram" under a previously defined task.
-1. In the "COMPONENT" area under "Programming" -> "Datatypes" create an new datatype worksheet and include the following user-defined datatypes:
+1. In the "COMPONENTS" area, under "Programming" -> "Local" -> "Data Types", create a new datatype worksheet and include the following user-defined datatypes:
 
 	```text
-			TYPE
-				STRING420:STRING[420];
-				WSTRING420:WSTRING[420];
-
-				bool_array: ARRAY[0..9] OF BOOL;
-				//8Bit
-				sint_array: ARRAY[0..9] OF SINT;
-				usint_array: ARRAY[0..9] OF USINT;
-				//16Bit
-				int_array: ARRAY[0..9] OF INT;
-				uint_array: ARRAY[0..9] OF UINT;
-				//32Bit
-				dint_array: ARRAY[0..9] OF DINT;
-				udint_array: ARRAY[0..9] OF UDINT;
-				//64Bit
-				lint_array: ARRAY[0..9] OF LINT;
-				ulint_array: ARRAY[0..9] OF ULINT;
-				//8Bit
-				byte_array: ARRAY[0..9] OF BYTE;
-				//16Bit
-				word_array: ARRAY[0..9] OF WORD;
-				//32Bit
-				doubleword_array: ARRAY[0..9] OF DWORD;
-				//64Bit
-				Lword_array: ARRAY[0..9] OF LWORD;
-				//xx digit precision
-				real_array: ARRAY[0..9] OF REAL;
-				//xx digit precision
-				Lreal_array: ARRAY[0..9] OF LREAL;
-				//Strings
-				String_array: ARRAY[0..9] OF STRING;
-				Wide_string_array: ARRAY[0..9] OF WSTRING;
-			END_TYPE
+            TYPE
+                byte_array : ARRAY[0..9] OF BYTE;
+                word_array : ARRAY[0..9] OF WORD;
+                doubleword_array : ARRAY[0..9] OF DWORD;
+                Lword_array : ARRAY[0..9] OF LWORD;
+            END_TYPE
 	```
 
-1. Declare one IN port variable for each of the user-defined and elementary datatypes in a program, e.g. "Main". Find a table of elementary datatypes in the [PLCnext Info Center](https://www.plcnext.help/te/PLCnext_Runtime/Available_data_types.htm).
+	(all other custom types are generated automatically).
+
+1. Declare one IN port variable for each of the user-defined and elementary datatypes in a program, e.g. "Main". Find a table of elementary datatypes in the [PLCnext Technology Info Center](https://plcnext.help/te/PLCnext_Runtime/Supported_elementary_data_types.htm). To make this easier, a .csv file containing these variable definitions is included in this repository, which you can import into a Variable Table in the PLCnext Engineer project.
 1. Connect the C++ port variables and IEC 61131 port variables under the "PLCnext" node in the "PLANT" area of PLCnext Engineer.
-1. Download the PLCnext Engineer project to the PLCnext Control.
+1. Download the PLCnext Engineer project to the PLCnext Control device.
 
 ## Start-up instructions
 
 - If the project is successfully implemented and downloaded, you can follow the data exchange in PLCnext Engineer running in debug mode and/or in the watch window of PLCnext Engineer.
-- If the project did not start successfully, please see the error messages in Output.log file on the PLCnext target: /opt/plcnext/logs/Output.log
+- If the project did not start successfully, please check for error messages in [the diagnostic log files](https://www.plcnext.help/te/PLCnext_Runtime/output_log.htm) on the PLCnext Control device.

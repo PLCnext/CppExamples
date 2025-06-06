@@ -14,25 +14,21 @@
 /*  INCLUDES                                                                  */
 /******************************************************************************/
 
-
 #include "ThreadExampleComponent.hpp"
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "ThreadExampleLibrary.hpp"
 
 namespace ThreadExample
 {
-///
-///ThreadExampleComponent Constructor
-///
-ThreadExampleComponent::ThreadExampleComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::ThreadExample::ThreadExampleLibrary::GetInstance(), name, ComponentCategory::Custom)
-, programProvider(*this)
-, ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
-// Worker Thread Example
-, workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
-//Commons/Thread Example
-, delegateThreadInstance(ThreadSettings("DelegateThreadName", 20, 0, 0),this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
-, staticThreadInstance(ThreadSettings("StaticThreadName", 20, 0, 0),&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
+ThreadExampleComponent::ThreadExampleComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , programProvider(*this)
+    , ProgramComponentBase(::ThreadExample::ThreadExampleLibrary::GetInstance().GetNamespace(), programProvider)
+	// Worker Thread Example
+	, workerThreadInstance(make_delegate(this, &ThreadExampleComponent::workerThreadBody) , 10000, "WorkerThreadName")
+	//Commons/Thread Example
+	, delegateThreadInstance(ThreadSettings("DelegateThreadName", 20, 0, 0),this,&ThreadExampleComponent::delegateThreadBody,(void*)&myparameter)
+	, staticThreadInstance(ThreadSettings("StaticThreadName", 20, 0, 0),&ThreadExampleComponent::staticThreadBody,(void*)&xStopThread)
 {
 }
 
@@ -65,20 +61,27 @@ void ThreadExampleComponent::ResetConfig()
     // implement this inverse to SetupConfig() and LoadConfig()
 }
 
+void ThreadExampleComponent::PowerDown()
+{
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
+}
+
 void ThreadExampleComponent::Start(void) {
     xStopThread = false;
-    Log::Info("-------------------------------workerThreadInstance start");
+    log.Info("-------------------------------workerThreadInstance start");
     workerThreadInstance.Start();
-    Log::Info("-------------------------------workerThreadInstance started");
+    log.Info("-------------------------------workerThreadInstance started");
 
-    Log::Info("-------------------------------delegateThreadInstance start");
+    log.Info("-------------------------------delegateThreadInstance start");
     delegateThreadInstance.Start();
-    Log::Info("-------------------------------delegateThreadInstance started");
+    log.Info("-------------------------------delegateThreadInstance started");
 
 
-    Log::Info("-------------------------------staticThreadInstance start");
+    log.Info("-------------------------------staticThreadInstance start");
     staticThreadInstance.Start();
-    Log::Info("-------------------------------staticThreadInstance started");
+    log.Info("-------------------------------staticThreadInstance started");
 
 }
 
@@ -86,23 +89,23 @@ void ThreadExampleComponent::Stop(void) {
     // if you want to stop some loops of your thread during execution
     // add something like "stoptheThread" before executing workerThreadStop.
     xStopThread = true;
-    Log::Info("-------------------------------workerThreadInstance stop");
+    log.Info("-------------------------------workerThreadInstance stop");
     workerThreadInstance.Stop();
-    Log::Info("-------------------------------workerThreadInstance stopped");
-    
-    Log::Info("-------------------------------staticThreadInstance stop");
+    log.Info("-------------------------------workerThreadInstance stopped");
+
+    log.Info("-------------------------------staticThreadInstance stop");
     staticThreadInstance.Interrupt();
-    if (staticThreadInstance.IsJoinable()){   
+    if (staticThreadInstance.IsJoinable()){
     staticThreadInstance.Join();
     }
-    Log::Info("-------------------------------staticThreadInstance stopped");
+    log.Info("-------------------------------staticThreadInstance stopped");
 
-    Log::Info("-------------------------------delegateThreadInstance stop");
+    log.Info("-------------------------------delegateThreadInstance stop");
     delegateThreadInstance.Interrupt();
-    if (delegateThreadInstance.IsJoinable()){   
+    if (delegateThreadInstance.IsJoinable()){
     delegateThreadInstance.Join();
     }
-    Log::Info("-------------------------------delegateThreadInstance stopped");
+    log.Info("-------------------------------delegateThreadInstance stopped");
 }
 
 /// Thread Body
@@ -115,10 +118,10 @@ void ThreadExampleComponent::workerThreadBody(void) {
         else
             iCountervalue = iStartValue;
 
-        Log::Info("-------------------------------workerThreadInstance is running, iCountervalue={0}", iCountervalue);
+        log.Info("-------------------------------workerThreadInstance is running, iCountervalue={0}", iCountervalue);
     }
     else
-        Log::Info("-------------------------------workerThreadInstance is stopped, iCountervalue={0}", iCountervalue);
+        log.Info("-------------------------------workerThreadInstance is stopped, iCountervalue={0}", iCountervalue);
 }
 
 
@@ -130,15 +133,15 @@ void ThreadExampleComponent::delegateThreadBody(void* pParameter) {
     while(!xStopThread)
     {
         if(this->myparameter == *i)
-            Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running successful i={0} , myparameter = {1}", *i, this->myparameter);
+            log.Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running successful i={0} , myparameter = {1}", *i, this->myparameter);
 
         else
-            Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running with ERROR: i={0} , myparameter = {1}", *i, this->myparameter);
+            log.Info("-------------------------------ThreadExampleComponent::delegateThreadBody is running with ERROR: i={0} , myparameter = {1}", *i, this->myparameter);
 
         Thread::Sleep(1000);
     }
 
-    Log::Info("-------------------------------ThreadExampleComponent::delegateThreadBody stopped");
+    log.Info("-------------------------------ThreadExampleComponent::delegateThreadBody stopped");
 }
 
 void ThreadExampleComponent::staticThreadBody(void* pParameter) {
@@ -147,11 +150,11 @@ void ThreadExampleComponent::staticThreadBody(void* pParameter) {
     while(!*pValue){
 
         //Do something and sleep for specifiedTime.
-        Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody is running  pParameter={0}", (int) *pValue);
+        log.Info("-------------------------------ThreadExampleComponent::staticThreadBody is running  pParameter={0}", (int) *pValue);
         Thread::Sleep(500);
     }
 
-        Log::Info("-------------------------------ThreadExampleComponent::staticThreadBody stopped");
+        log.Info("-------------------------------ThreadExampleComponent::staticThreadBody stopped");
 }
 
 

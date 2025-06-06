@@ -1,8 +1,16 @@
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
 #pragma once
 #include "Arp/System/Commons/Threading/Thread.hpp"
 #include "Arp/System/Commons/Exceptions/Exceptions.h"
 #include "Arp/System/Commons/Chrono/SystemTick.hpp"
 #include "Arp/System/Commons/Threading/Mutex.hpp"
+#include "Arp/Base/Commons/Logging/Log.hpp"
 
 #include <queue>
 #include <utility>
@@ -12,6 +20,8 @@ namespace BufferedExchange
 {
     using namespace std::chrono;
     using namespace Arp::System::Commons::Threading;
+    using namespace Arp::Base::Commons::Logging;
+
     template<typename S>
     class MyWorker
     {
@@ -54,6 +64,7 @@ namespace BufferedExchange
         MyWorker() : RunCount(0),
                      Stop(true)
         {
+        	Log::Initialize("MyWorker");
             Log::Info("------------------- MyWorker Constructed: {0}",Stop);
         }
 

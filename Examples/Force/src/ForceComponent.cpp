@@ -1,8 +1,10 @@
-﻿///////////////////////////////////////////////////////////////////////////////"
-//
-//  Copyright PHOENIX CONTACT Electronics GmbH
-//
-///////////////////////////////////////////////////////////////////////////////
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
 #include "ForceComponent.hpp"
 #include "Arp/Plc/Commons/Domain/PlcDomainProxy.hpp"
 #include "ForceLibrary.hpp"
@@ -15,17 +17,17 @@ namespace Force
 using Arp::System::Rsc::ServiceManager;
 using namespace Arp::Plc::Commons::Domain;
 
-ForceComponent::ForceComponent(IApplication& application, const String& name)
-: ComponentBase(application, ::Force::ForceLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::Force::ForceLibrary::GetInstance().GetNamespace())
-, forceThread(this, &ForceComponent::ForceData, 1000, "ForceThread")
+ForceComponent::ForceComponent(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::Force::ForceLibrary::GetInstance().GetNamespace())
+	, forceThread(this, &ForceComponent::ForceData, 1000, "ForceThread")
 {
 }
 
 void ForceComponent::Initialize()
 {
     // never remove next line
-PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, true);
     
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -47,7 +49,7 @@ void ForceComponent::SubscribeServices()
 
 void ForceComponent::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void ForceComponent::SetupSettings()
@@ -55,12 +57,12 @@ void ForceComponent::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void ForceComponent::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void ForceComponent::LoadConfig()
@@ -97,7 +99,9 @@ void ForceComponent::Dispose()
 
 void ForceComponent::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void ForceComponent::OnPlcLoaded()
@@ -165,10 +169,6 @@ void ForceComponent::ForceData()
             isForceable = this->forceServicePtr->IsForcable(portName);
             this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
 
-            portName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
-            isForceable = this->forceServicePtr->IsForcable(portName);
-            this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
-
             portName = "Arp.Plc.Eclr/Byte_GLOBAL_IN";
             isForceable = this->forceServicePtr->IsForcable(portName);
             this->log.Info("Is '{0}' forceable? {1}", portName, isForceable);
@@ -225,7 +225,7 @@ void ForceComponent::ForceData()
             this->log.Info("Before adding variables, is forcing active? {0}", isActive);
 
             // Start forcing by adding a variable to the force list
-            forceVariable.VariableName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
+            forceVariable.VariableName = "Arp.Plc.Eclr/Byte_GLOBAL_OUT";
             forceVariable.ForceValue = true;
             this->forceServicePtr->AddVariable(forceVariable);
 
@@ -246,8 +246,8 @@ void ForceComponent::ForceData()
             ForceItem forceVariable;
 
             // Change the value of variables already in the force list
-            forceVariable.VariableName = "Arp.Plc.Eclr/Bool_GLOBAL_OUT";
-            forceVariable.ForceValue = false;
+            forceVariable.VariableName = "Arp.Plc.Eclr/Byte_GLOBAL_OUT";
+            forceVariable.ForceValue = 0x01;
             this->forceServicePtr->AddVariable(forceVariable);
 
             forceVariable.VariableName = "Arp.Plc.Eclr/MainInstance.Int_IN";
@@ -270,7 +270,7 @@ void ForceComponent::ForceData()
             boolean isActive;
 
             // Remove a variable from the force list
-            this->forceServicePtr->RemoveVariable("Arp.Plc.Eclr/Bool_GLOBAL_OUT");
+            this->forceServicePtr->RemoveVariable("Arp.Plc.Eclr/Byte_GLOBAL_OUT");
 
             // Check that forcing is still active
             isActive = this->forceServicePtr->IsActive();

@@ -1,7 +1,13 @@
-﻿#pragma once
+/******************************************************************************
+ * 
+ * Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+ * Licensed under the MIT. See LICENSE file in the project root for full license information.  
+ *
+ ******************************************************************************/
+
+#pragma once
 #include "Arp/System/Core/Arp.h"
-#include "Arp/System/Acf/ComponentBase.hpp"
-#include "Arp/System/Acf/IApplication.hpp"
+#include "Arp/Base/Acf/Commons/ComponentBase.hpp"
 #include "Arp/Plc/Commons/Meta/MetaComponentBase.hpp"
 #include "Arp/System/Commons/Logging.h"
 #include "Arp/System/Commons/Threading/WorkerThread.hpp"
@@ -9,9 +15,8 @@
 
 namespace OpcPlcManager
 {
-
+using namespace Arp::Base::Acf::Commons;
 using namespace Arp;
-using namespace Arp::System::Acf;
 using namespace Arp::Plc::Commons::Meta;
 using namespace Arp::Plc::Domain::Services;
 using namespace Arp::System::Commons::Threading;
@@ -19,11 +24,8 @@ using namespace Arp::System::Commons::Threading;
 //#acfcomponent
 class OpcPlcManagerComponent : public ComponentBase, public MetaComponentBase, private Loggable<OpcPlcManagerComponent>
 {
-public: // typedefs
-
 public: // construction/destruction
-    OpcPlcManagerComponent(IApplication& application, const String& name);
-    virtual ~OpcPlcManagerComponent() = default;
+    OpcPlcManagerComponent(ILibrary& library, const String& name);
 
 public: // IComponent operations
     void Initialize() override;
@@ -39,13 +41,6 @@ public: // IComponent operations
 
 public: // MetaComponentBase operations
     void RegisterComponentPorts() override;
-
-private: // methods
-    OpcPlcManagerComponent(const OpcPlcManagerComponent& arg) = delete;
-    OpcPlcManagerComponent& operator= (const OpcPlcManagerComponent& arg) = delete;
-
-public: // static factory operations
-    static IComponent::Ptr Create(Arp::System::Acf::IApplication& application, const String& name);
 
 private: // fields
     WorkerThread workerThreadInstance;
@@ -104,10 +99,5 @@ public: // ports
     //#port
     STOP Stop;
 };
-
-inline IComponent::Ptr OpcPlcManagerComponent::Create(Arp::System::Acf::IApplication& application, const String& name)
-{
-    return IComponent::Ptr(new OpcPlcManagerComponent(application, name));
-}
 
 } // end of namespace OpcPlcManager

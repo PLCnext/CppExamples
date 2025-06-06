@@ -1,6 +1,6 @@
-﻿///////////////////////////////////////////////////////////////////////////////"
+///////////////////////////////////////////////////////////////////////////////"
 //
-//  Copyright PHOENIX CONTACT Electronics GmbH
+//  Copyright PHOENIX CONTACT GmbH
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "SubscriptionsComponent2.hpp"
@@ -17,16 +17,17 @@ using namespace Arp::Plc::Commons::Domain;
 const String SubscriptionsComponent2::varTask100msName = "Arp.Plc.Eclr/RealTimeProgram100ms.varUInt16";
 const String SubscriptionsComponent2::varTask500msName = "Arp.Plc.Eclr/RealTimeProgram500ms.varUInt16";
 
-SubscriptionsComponent2::SubscriptionsComponent2(IApplication& application, const String& name)
-: ComponentBase(application, ::Subscriptions::SubscriptionsLibrary::GetInstance(), name, ComponentCategory::Custom)
-, MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
-, subscriptionThread(this, &SubscriptionsComponent2::LogSubscription, 1000, "SubscriptionLogThread"){
+SubscriptionsComponent2::SubscriptionsComponent2(ILibrary& library, const String& name)
+    : ComponentBase(library, name, ComponentCategory::Custom, GetDefaultStartOrder())
+    , MetaComponentBase(::Subscriptions::SubscriptionsLibrary::GetInstance().GetNamespace())
+	, subscriptionThread(this, &SubscriptionsComponent2::LogSubscription, 1000, "SubscriptionLogThread")
+{
 }
 
 void SubscriptionsComponent2::Initialize()
 {
     // never remove next line
-    PlcDomainProxy::GetInstance().RegisterComponent(*this, false);
+    PlcDomainProxy::GetInstance().RegisterComponent(*this, true);
     
     // initialize singletons here, subscribe notifications here
     PlcDomainProxy& plcDomainProxy = PlcDomainProxy::GetInstance();
@@ -48,7 +49,7 @@ void SubscriptionsComponent2::SubscribeServices()
 
 void SubscriptionsComponent2::LoadSettings(const String& /*settingsPath*/)
 {
-    // load firmware settings here
+	// load firmware settings here
 }
 
 void SubscriptionsComponent2::SetupSettings()
@@ -56,12 +57,12 @@ void SubscriptionsComponent2::SetupSettings()
     // never remove next line
     MetaComponentBase::SetupSettings();
 
-    // setup firmware settings here
+	// setup firmware settings here
 }
 
 void SubscriptionsComponent2::PublishServices()
 {
-    // publish the services of this component here
+	// publish the services of this component here
 }
 
 void SubscriptionsComponent2::LoadConfig()
@@ -98,7 +99,9 @@ void SubscriptionsComponent2::Dispose()
 
 void SubscriptionsComponent2::PowerDown()
 {
-    // implement this only if data must be retained even on power down event
+	// implement this only if data shall be retained even on power down event
+	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// Available with 2021.6 FW
 }
 
 void SubscriptionsComponent2::OnPlcLoaded()
