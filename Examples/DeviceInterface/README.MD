@@ -4,10 +4,12 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [References](#references)
-- [Quick-start example](#quick-start-example)
+- [Device Interface Services](#device-interface-services)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [References](#references)
+  - [Quick-start example](#quick-start-example)
 
 <!-- /TOC -->
 
@@ -20,15 +22,15 @@ The PLCnext Runtime provides four RSC services related to the device interface -
 |Description | Value |
 |------------ |-----------|
 |Created | 27.09.2024 |
-|Last modified| 27.09.2024 |
-|Controller| SIM-AXC F 2152 |
-|FW| 2024.7 |
-|SDK| 2024.7 |
-|PLCnext CLI | 2025.0 PREVIEW |
+|Last modified| 05.06.2025 |
+|Controller| AXC F 2152 |
+|FW| 2025.0 |
+|SDK| 2025.0 |
+|PLCnext Technology Toolchain | 2025.0 |
 
 ## References
 
-A complete description of the these services is available in the PLCnext Info Center:
+A complete description of the these services is available in the PLCnext Technology Info Center:
 
 - [RSC Device Interface Services](https://www.plcnext.help/te/Communication_interfaces/Remote_Service_Calls_RSC/RSC_device_interface_services.htm)
 
@@ -40,11 +42,11 @@ It is assumed that the user has some experience [building C++ Components and Pro
 
 Prerequisites:
 
-- SIM-AXC F 2152 controller with firmware 2024.7.
+- AXC F 2152 controller with firmware 2025.0.
 
-- PLCnext Command Line Interface (CLI) tool, version 2025.0 PREVIEW.
+- PLCnext Technology Command Line Interface (CLI) tool, version 2025.0.
 
-- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2024.7.
+- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2025.0.
 
 - (optional) Eclipse IDE, with the PLCnext Technology add-in installed.
 

@@ -1,15 +1,19 @@
 # Table of contents
 
 <!-- TOC depthFrom:1 orderedList:true -->
-1. [Introduction](#introduction)
-2. [Example details](#example-details)
-3. [Preconditions](#preconditions)
-4. [Project compiling in Eclipse](#project-compiling-in-eclipse)
-5. [PLCnext Engineer project](#plcnext-engineer-project)
-6. [Project Execution](#project-execution)
-7. [FileStream Operations ](#filestream-operations)
-8. [Exception Handling](#exceptions)
-9. [General Notes](#general-notes)
+- [Table of contents](#table-of-contents)
+- [Introduction](#introduction)
+	- [Example details](#example-details)
+	- [Preconditions](#preconditions)
+	- [Project compiling in Eclipse](#project-compiling-in-eclipse)
+	- [PLCnext Engineer project](#plcnext-engineer-project)
+	- [Project Execution](#project-execution)
+		- [Example output](#example-output)
+		- [FileStream Operations](#filestream-operations)
+			- [FileStream::Write](#filestreamwrite)
+			- [FileStream::Read](#filestreamread)
+		- [Exceptions](#exceptions)
+		- [General Notes](#general-notes)
 <!-- /TOC -->
 
 # Introduction
@@ -20,16 +24,16 @@ This Example shows how to use a FileStream to check the binary generation timest
 
 |Description | Value |
 |------------ |-----------|
-|Controller| SIM-AXC F 2152 |
-|FW | 2024.7 |
-|SDK | 2024.7 |
-|PLCnext Engineer| 2024.6 |
+|Controller| AXC F 2152 |
+|FW | 2025.0 |
+|SDK | 2025.0 |
+|PLCnext Engineer | 2025.0 |
 
 ## Preconditions
 
-- SIM-AXC F 2152 controller with firmware 2024.7
-- Eclipse IDE for C/C++ Developers version 2024-06
-- PLCnext Engineer 2024.6
+- AXC F 2152 controller with firmware 2025.0
+- Eclipse IDE for C/C++ Developers version 2025-03
+- PLCnext Engineer 2025.0
 
 ## Project compiling in Eclipse
 
@@ -143,9 +147,9 @@ String FileStreamExampleComponent::ReadFromFile() {
 ```
 ### Exceptions
 There are a lot of exceptions that you should handle when working with files.
-There are [Function Specific Exceptions](https://api.plcnext.help/api_docs_2024-0-LTS/classArp_1_1System_1_1Commons_1_1Io_1_1FileStream.html) like a `NotExistException` that might indicate that something went wrong during the last shutdown.
+There are [Function Specific Exceptions](https://api.plcnext.help/api_docs_2025-0/classArp_1_1System_1_1Commons_1_1Io_1_1FileStream.html) like a `NotExistException` that might indicate that something went wrong during the last shutdown.
 
-But also common exceptions like [Commons::Io::](https://api.plcnext.help/api_docs_2024-0-LTS/namespaceArp_1_1System_1_1Commons_1_1Io.html)`OutOfSpaceException`s. These might indicated that the whole application should better stop. 
+But also common exceptions like [Commons::Io::](https://api.plcnext.help/api_docs_2025-0/namespaceArp_1_1System_1_1Commons_1_1Io.html)`OutOfSpaceException`s. These might indicated that the whole application should better stop. 
 
 ### General Notes
 File or IO activities can take quite a long time and might inhibit your RealTime operation.

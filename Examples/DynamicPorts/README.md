@@ -4,17 +4,24 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [Example - Home automation controller](#example---home-automation-controller)
-- [Explore unlimited possibilities ...](#explore-unlimited-possibilities-)
-- [Notes and limitations](#notes-and-limitations)
+- [Dynamic Ports](#dynamic-ports)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [Example - Home automation controller](#example---home-automation-controller)
+    - [Requirements](#requirements)
+    - [Solution A - static, hard-coded ports](#solution-a---static-hard-coded-ports)
+    - [Solution B - static, hard-coded "generic" ports](#solution-b---static-hard-coded-generic-ports)
+    - [Solution C - dynamic ports](#solution-c---dynamic-ports)
+    - [Complete example](#complete-example)
+  - [Explore unlimited possibilities ...](#explore-unlimited-possibilities-)
+  - [Notes and limitations](#notes-and-limitations)
 
 <!-- /TOC -->
 
 ## Introduction
 
-In PLCnext Control projects, it has always been possible to hard-code Global Data Space (GDS) port definitions in C++ programs. SDK version 2021.6 introduces a new feature that allows programs to instead create _dynamic_ program ports at run-time.
+In PLCnext Control projects, it has always been possible to hard-code Global Data Space (GDS) port definitions in C++ programs. SDK version 2021.6 introduced a new feature that allows programs to instead create _dynamic_ program ports at run-time.
 
 The benefits of this feature will be demonstrated using a simple example.
 
@@ -23,11 +30,12 @@ The benefits of this feature will be demonstrated using a simple example.
 |Description | Value |
 |------------ |-----------|
 |Created | 26.07.2021 |
-|Last modified| 06.09.2024 |
-|Controller| SIM-AXC F 2152 |
-|FW| 2024.7 |
-|SDK| 2024.7 |
-|PLCnext CLI | 2025.0 PREVIEW |
+|Last modified| 27.05.2025 |
+|Controller| AXC F 2152 |
+|FW| 2025.0 |
+|SDK| 2025.0 |
+|Toolchain | 2025.0 |
+|PLCnext Engineer | 2025.0 |
 
 ## Example - Home automation controller
 
@@ -96,9 +104,9 @@ The problems with this solution include:
 
 ### Solution C - dynamic ports
 
-PLCnext Control SDK version 2021.6 introduces the ability to add GDS ports to a program during the creation of a program instance.
+PLCnext Control SDK version 2021.6 introduced the ability to add GDS ports to a program during the creation of a program instance.
 
-Starting from a default PLCnext C++ project template, this can be achieved in the following steps. This example uses a PLCnext C++ project that was created with the following parameters:
+Starting from a default C++ project template, this can be achieved in the following steps. This example uses a C++ project that was created with the following parameters:
 
 - Project name: DynamicPorts
 - Component Name: DynamicPortsComponent
@@ -195,7 +203,7 @@ The source files in this repository demonstrate a complete solution, including p
 
 1. Copy the file `dynaports.json` to the `/opt/plcnext` directory on the PLC. This contains the port configuration information in JSON format.
 
-1. Create a new C++ project using either the PLCnext CLI tool, or Eclipse, or Visual Studio, with the following settings:
+1. Create a new C++ project using either the PLCnext Technology CLI tool, or Eclipse, or Visual Studio, with the following settings:
 
    - Project name: `DynamicPorts`
    - Component name: `DynamicPortsComponent`
@@ -240,7 +248,7 @@ The source files in this repository demonstrate a complete solution, including p
 
 ## Notes and limitations
 
-- There is currently no PLCnext CLI template for this type of program.
+- There is currently no PLCnext Technology CLI template for this type of program.
 
 - The dynamic ports feature is currently only available for C++ programs, not for C++ components.
 
@@ -254,7 +262,7 @@ The source files in this repository demonstrate a complete solution, including p
   - Program ports to be deleted by the user at run-time.
   - Program ports to be different on different instances of a single program. All instances of a program **must** have the same set of dynamic port variables.
 
-- GDS ports of type `struct` require a library meta (C++) file to define the fields of the structure. For static ports, this file is generated automatically by the PLCnext CLI during the build process. For dynamic GDS ports of type `struct`, the struct definition must include the `//#typedefinition` decorator, like this: 
+- GDS ports of type `struct` require a library meta (C++) file to define the fields of the structure. For static ports, this file is generated automatically by the PLCnext Technology CLI during the build process. For dynamic GDS ports of type `struct`, the struct definition must include the `//#typeinformation` decorator, like this:
 
    ```cpp
    // Define the struct that will be used to declare port variables.
@@ -269,6 +277,6 @@ The source files in this repository demonstrate a complete solution, including p
    };
    ```
 
-- Metadata (XML) is not generated for dynamic ports during the build process, and without this information PLCnext Engineer is unable to display dynamic ports in the PLCnext Port List window. GDS connections to dynamic ports can be made manually in a custom `.gds.config` file, or else at run-time using the DataAccess or Subscription RSC services.
+- Metadata (XML) is not generated for dynamic ports during the build process, and without this information PLCnext Engineer is unable to display dynamic ports in the GDS Port List window. GDS connections to dynamic ports can be made manually in a custom `.gds.config` file ([as described in the PLCnext Technology Info Center](https://plcnext.help/te/PLCnext_Runtime/Global_Data_Space_configuration.htm)) or else at run-time using the [DataAccess or Subscription RSC services](https://plcnext.help/te/Communication_interfaces/Remote_Service_Calls_RSC/RSC_GDS_services.htm).
 
-- Building a C++ project with dynamic GDS ports will give similar compiler warnings to those generated for static GDS ports, [as described in the PLCnext Info Center](https://plcnext.help/te/Programming/Cplusplus/Creating_a_Cpp_project_in_Eclipse.htm).
+- Building a C++ project with dynamic GDS ports will give similar compiler warnings to those generated for static GDS ports, [as described in the PLCnext Technology Info Center](https://plcnext.help/te/Programming/Cplusplus/Creating_a_Cpp_project_in_Eclipse.htm).

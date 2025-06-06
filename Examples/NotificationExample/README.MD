@@ -4,19 +4,21 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [When to use Notifications](#when-to-use-notifications)
-- [Limitations](#limitations)
-- [Quick-start example](#quick-start-example)
-- [PART 1 - Receiving notifications](#part-1---receiving-notifications)
-- [PART 2 - Creating custom notifications](#part-2---creating-custom-notifications)
-- [PART 3 - Sending notifications](#part-3---sending-notifications)
-- [PART 4 - Debugging notifications](#part-4---debugging-notifications)
-- [PART 5 - Logging notifications](#part-5---logging-notifications)
-- [PART 6 - Viewing notification history](#part-6---viewing-notification-history)
-- [IMPORTANT NOTE on notification logging](#important-note-on-notification-logging)
-- [Further information](#further-information)
+- [Notification Manager](#notification-manager)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [When to use Notifications](#when-to-use-notifications)
+  - [Limitations](#limitations)
+  - [Quick-start example](#quick-start-example)
+  - [PART 1 - Receiving notifications](#part-1---receiving-notifications)
+  - [PART 2 - Creating custom notifications](#part-2---creating-custom-notifications)
+  - [PART 3 - Sending notifications](#part-3---sending-notifications)
+  - [PART 4 - Debugging notifications](#part-4---debugging-notifications)
+  - [PART 5 - Logging notifications](#part-5---logging-notifications)
+  - [PART 6 - Viewing notification history](#part-6---viewing-notification-history)
+  - [IMPORTANT NOTE on notification logging](#important-note-on-notification-logging)
+  - [Further information](#further-information)
 
 <!-- /TOC -->
 
@@ -32,11 +34,11 @@ Both the PLCnext Technology firmware and user-defined components can send notifi
 |Description | Value |
 |------------ |-----------|
 |Created | 20.09.2019 |
-|Last modified| 06.09.2024 |
-|Controller| SIM-AXC F 2152 |
-|FW| 2024.7 |
-|SDK| 2024.7 |
-|PLCnext CLI | 2025.0 PREVIEW |
+|Last modified | 05.06.2025 |
+|Controller | AXC F 2152 |
+|FW | 2025.0 |
+|SDK | 2025.0 |
+|PLCnext Technology Toolchain | 2025.0 |
 
 ## When to use Notifications
 
@@ -56,7 +58,7 @@ The following are some examples of how the Notification manager can be used by a
 
 Notifications are not designed to send process data, and they do not operate in a real-time context.
 
-At present, the Notification Manager can only be accessed by C++ components and programs on a PLCnext Control. It is not possible for the Notification Manager to be accessed directly from IEC 61131 POUs in PLCnext Engineer.
+At present, the Notification Manager can only be accessed by C++ components and programs on a PLCnext Control device. It is not possible for the Notification Manager to be accessed directly from IEC 61131 POUs in PLCnext Engineer.
 
 ## Quick-start example
 
@@ -66,11 +68,11 @@ It is assumed that the user has some experience [building C++ Components and Pro
 
 Prerequisites:
 
-- PLCnext Command Line Interface (CLI) tool, version 2025.0 Preview.
+- PLCnext Technology Command Line Interface (CLI) tool, version 2025.0.
 
-- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2024.7.
+- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2025.0.
 
-- PLCnext Engineer version 2024.6.
+- PLCnext Engineer version 2025.0.
 
 Procedure:
 
@@ -320,7 +322,7 @@ In this case all three files will be located in the PLC directory `/opt/plcnext/
 
 It is also possible to send notifications to a persistent data store, if required, using the **Notification Logger**. The Notification Logger can be configured to subscribe to custom notifications and store these notifications in non-volatile memory.
 
-The notification logger can be configured using configuration files (in XML format), located in a specific directory on the PLCnext Control. The required format and location of the configuration file is described in the [PLCnext Technology Info Center](https://plcnext.help/te/Functions_and_applications/Notification_Logger.htm).
+The notification logger can be configured using configuration files (in XML format), located in a specific directory on the PLCnext Control device. The required format and location of the configuration file is described in the [PLCnext Technology Info Center](https://plcnext.help/te/Functions_and_applications/Notification_Logger.htm).
 
 By default, the PLCnext Runtime configures the notification logger to store notifications from the `Arp` and `Security` namespaces. The default configuration files can be seen on the PLC, in the `/opt/plcnext/projects/Default/Services/NotificationLogger` directory.
 
@@ -351,4 +353,4 @@ If the logging of process data is required, then the solution is to use the [Dat
 
 ## Further information
 
-- PLCnext Technology Info Center - "[Notifications](https://plcnext.help/te/Functions_and_applications/Notification_manager.htm)"
+- PLCnext Technology Info Center - "[Notifications](https://plcnext.help/te/Functions_and_applications/Notifications_with_Cpp.htm)"

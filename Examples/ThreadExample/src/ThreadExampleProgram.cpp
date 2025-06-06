@@ -25,7 +25,7 @@ void ThreadExampleProgram::Execute()
 {
     //implement program
     i_pCounter = threadExampleComponent.GetCounterValue();
-    Log::Info("-------------------------------Program Cyclic Call:  i_pCounter = {0}", i_pCounter);
+    log.Info("-------------------------------Program Cyclic Call:  i_pCounter = {0}", i_pCounter);
 }
 
 } // end of namespace ThreadExample

@@ -27,8 +27,8 @@ This example shows how to transfer and process larger amounts of data from your 
 
 ## Preconditions
 
-- SIM-AXC F 2152 controller with firmware 2025.0
-- Eclipse<sup>&reg;</sup> IDE for C/C++ Developers version 2024-06
+- AXC F 2152 controller with firmware 2025.0
+- Eclipse<sup>&reg;</sup> IDE for C/C++ Developers version 2025-03
 - PLCnext Engineer 2025.0
 
 ## Project compiling in Eclipse
@@ -42,7 +42,7 @@ This example shows how to transfer and process larger amounts of data from your 
 
 1. In PLCnext Engineer, create a new project and include the "BufferedExchange.pcwlx" in the project.
 1. Instantiate the "BufferedExchangeProgram" under a previously defined task.
-1. Download the PLCnext Engineer project to the PLCnext Control.
+1. Download the PLCnext Engineer project to the PLCnext Control device.
 
 ## Application Description
 
@@ -114,43 +114,42 @@ So if processing the stored data plus the sleep time results in more then 1000ms
 
 It is important that you take these cases as well as external factors (another application might take all the free memory!) into consideration and handle them according to your application requirements.
 It also is recomended to set fixed limits for your application storage size as this will make testing the boundaries much easier.
-Also other users of your library will be able to determine how much resources your appliication requires at max. and set the dimension of their applicaiton.
+Also other users of your library will be able to determine how much resources your appliication requires at max. and set the dimension of their application.
 
-```bash
-27.03.18 17:36:15.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 0
-27.03.18 17:36:15.433 root                                                         INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
-27.03.18 17:36:16.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 1000
-27.03.18 17:36:16.434 root                                                         INFO  - ---------------- -DelegateThread firstElement: time:362614  data:1
-27.03.18 17:36:16.435 root                                                         INFO  - -----------------DelegateThread lastElement time:0.00099717  data:17
-27.03.18 17:36:16.435 root                                                         INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
-27.03.18 17:36:17.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 2000
-27.03.18 17:36:17.435 root                                                         INFO  - ---------------- -DelegateThread firstElement: time:0.0012245  data:18
-27.03.18 17:36:17.436 root                                                         INFO  - -----------------DelegateThread lastElement time:0.00102634  data:1018
-27.03.18 17:36:17.436 root                                                         INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
-27.03.18 17:36:18.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 3000
-27.03.18 17:36:18.436 root                                                         INFO  - ---------------- -DelegateThread firstElement: time:0.00120248  data:1019
-27.03.18 17:36:18.437 root                                                         INFO  - -----------------DelegateThread lastElement time:0.00100479  data:2019
-27.03.18 17:36:18.437 root                                                         INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
-27.03.18 17:36:19.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 4000
-27.03.18 17:36:19.437 root                                                         INFO  - ---------------- -DelegateThread firstElement: time:0.00130645  data:2020
-27.03.18 17:36:19.438 root                                                         INFO  - -----------------DelegateThread lastElement time:0.00100336  data:3020
-27.03.18 17:36:19.444 root                                                         ERROR - --- Exception in ThreadProcess:T_FastTask
-27.03.18 17:36:19.444 root                                                         ERROR - --- DataStore has to many elements already!
-27.03.18 17:36:19.444 root                                                         ERROR - --- Process Queue:0, Store Queue:1001
-27.03.18 17:36:19.444 BufferedExchange.BufferedExchangeProgram                     WARN  - -------------- Instance:BufferedExchangeComponent1/BufferedExchangeProgram1 DataLost: 4022
-27.03.18 17:36:19.445 root                                                         INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
-27.03.18 17:36:20.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 5000
-27.03.18 17:36:20.445 root                                                         INFO  - ---------------- -DelegateThread firstElement: time:0.00134554  data:3021
-27.03.18 17:36:20.446 root                                                         INFO  - -----------------DelegateThread lastElement time:0.00101738  data:4021
-27.03.18 17:36:21.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 6000
-27.03.18 17:36:22.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 7000
-27.03.18 17:36:23.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 8000
-
+```text
+27.03.25 17:36:15.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 0
+27.03.25 17:36:15.433 MyWorker                                                     INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
+27.03.25 17:36:16.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 1000
+27.03.25 17:36:16.434 MyWorker                                                     INFO  - ---------------- -DelegateThread firstElement: time:362614  data:1
+27.03.25 17:36:16.435 MyWorker                                                     INFO  - -----------------DelegateThread lastElement time:0.00099717  data:17
+27.03.25 17:36:16.435 MyWorker                                                     INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
+27.03.25 17:36:17.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 2000
+27.03.25 17:36:17.435 MyWorker                                                     INFO  - ---------------- -DelegateThread firstElement: time:0.0012245  data:18
+27.03.25 17:36:17.436 MyWorker                                                     INFO  - -----------------DelegateThread lastElement time:0.00102634  data:1018
+27.03.25 17:36:17.436 MyWorker                                                     INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
+27.03.25 17:36:18.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 3000
+27.03.25 17:36:18.436 MyWorker                                                     INFO  - ---------------- -DelegateThread firstElement: time:0.00120248  data:1019
+27.03.25 17:36:18.437 MyWorker                                                     INFO  - -----------------DelegateThread lastElement time:0.00100479  data:2019
+27.03.25 17:36:18.437 MyWorker                                                     INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
+27.03.25 17:36:19.417 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 4000
+27.03.25 17:36:19.437 MyWorker                                                     INFO  - ---------------- -DelegateThread firstElement: time:0.00130645  data:2020
+27.03.25 17:36:19.438 MyWorker                                                     INFO  - -----------------DelegateThread lastElement time:0.00100336  data:3020
+27.03.25 17:36:19.444 MyWorker                                                     ERROR - --- Exception in ThreadProcess:T_FastTask
+27.03.25 17:36:19.444 MyWorker                                                     ERROR - --- DataStore has to many elements already!
+27.03.25 17:36:19.444 MyWorker                                                     ERROR - --- Process Queue:0, Store Queue:1001
+27.03.25 17:36:19.444 BufferedExchange.BufferedExchangeProgram                     WARN  - -------------- Instance:BufferedExchangeComponent1/BufferedExchangeProgram1 DataLost: 4022
+27.03.25 17:36:19.445 MyWorker                                                     INFO  - -----------------DelegateThread Swap queue pointers data_store<<-->>data_toprocess
+27.03.25 17:36:20.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 5000
+27.03.25 17:36:20.445 MyWorker                                                     INFO  - ---------------- -DelegateThread firstElement: time:0.00134554  data:3021
+27.03.25 17:36:20.446 MyWorker                                                     INFO  - -----------------DelegateThread lastElement time:0.00101738  data:4021
+27.03.25 17:36:21.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 6000
+27.03.25 17:36:22.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 7000
+27.03.25 17:36:23.423 BufferedExchange.BufferedExchangeProgram                     INFO  - ---------------- Execute: 8000
 ```
 
 ## General notes:
 Please make sure that your Buffer meets your speed requirements and implement a overflow exception.
 
-You have to be able to process the data faster then they are beeing created or else this setup will create issues.
+You have to be able to process the data faster then it is being created or else this setup will create issues.
 
-The logging is used mainly for demonstration purposes in this application in productive systems it should now be used as excecively e.g. Change `Log.Info()` to `Log.Debug()`.
+The logging is used mainly for demonstration purposes in this application. In productive systems it should not be used as excessively e.g. Change `Log.Info()` to `Log.Debug()`.

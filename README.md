@@ -7,11 +7,11 @@
 [![Community](https://img.shields.io/badge/PLCnext-Community-blue.svg)](https://www.plcnext-community.net)
 
 The [CppExamples](https://github.com/PLCnext/CppExamples) repository is a collection of various sample code for PLCnext Technology controllers. 
-It is assumed that the reader has basic know-how of C++ programming and has read the key parts of the [PLCnext Info Center](https://www.plcnext.help/).  
-Each example explains one or more topics on how to use C++11 with PLCnext Technology. Explanations are given in the *README.md* document and via comments in the example code. 
-Each example holds separate user components which can be instantiated on a *PLCnext Control*. 
+It is assumed that the reader has basic know-how of C++ programming and has read the key parts of the [PLCnext Technology Info Center](https://www.plcnext.help/).  
+Each example explains one or more topics on how to use C++20 with PLCnext Technology. Explanations are given in the *README.md* document and via comments in the example code. 
+Each example holds separate user components which can be instantiated on a *PLCnext Control* device.
 
-This project aims to supply, over time, examples and best practices of PLCnext Technology functions regarding C++11.
+This project aims to supply, over time, examples and best practices of PLCnext Technology functions regarding C++20.
 
 **IMPORTANT NOTE: All the examples on this `master` branch of this repository have been updated to work with firmware versions 2025.0 and later. These examples may not compatible with firmware versions earier than 2025.0. Examples for earlier firmware versions are located on the `Pre-2025.0` branch.**
 
@@ -23,7 +23,7 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[02](Examples/CppDataTypeTest/)| [Data Type Exchange Example](Examples/CppDataTypeTest/README.md)| This example shows how to transfer data from a C++ project to the GDS by declaring *Port variables* in C++. Variables published to the GDS can be accessed by other programs (IEC/C++/Simulink/C#) or the IOs| [SourceCode](Examples/CppDataTypeTest/src/)
 |[03](Examples/DynamicPorts/)| [Dynamic GDS ports example](Examples/DynamicPorts/README.md)| This example shows how to create and use dynamic GDS ports on a C++ program.| [SourceCode](Examples/DynamicPorts/src/)
 |[04](Examples/ComponentPorts/)| [ComponentPorts](Examples/ComponentPorts/README.md)| This example shows how to initialize ComponentPorts using PLC events like Cold/Warm/Hot-Start similar to ProgramPorts. |[SourceCode](Examples/ComponentPorts/src/)
-|[05](Examples/ProgramComponentInteraction/)| [Program Component Interaction](Examples/ProgramComponentInteraction/README.md)| This example shows two *PLCnext programs* interacting with a *PLCnext component* by getting or setting variables through reference.| [SourceCode](Examples/ProgramComponentInteraction/src/)
+|[05](Examples/ProgramComponentInteraction/)| [Program Component Interaction](Examples/ProgramComponentInteraction/README.md)| This example shows two *programs* interacting with a *component* by getting or setting variables through reference.| [SourceCode](Examples/ProgramComponentInteraction/src/)
 |[06](Examples/ThreadExample/)| [Thread Example](Examples/ThreadExample/README.md)| This describes how to implement Threads in a component of C++ project.| [SourceCode](Examples/ThreadExample/src/)
 |[07](Examples/BufferedExchange/)| [BufferedExchange Example](Examples/BufferedExchange/README.md)| This example shows how to communicate larger amounts of data between a Program and a Component and how to process these data using a Thread|[SourceCode](Examples/BufferedExchange/src/)
 |[08](Examples/DeviceInterface/)| [Device Interface Example](Examples/DeviceInterface/README.MD)| This example shows how to read and write device settings etc. using the four Device Interface RSC services.| [SourceCode](Examples/DeviceInterface/src/)
@@ -49,7 +49,7 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 
 There are different ways to build your code:
 
-### Compile the code with the PLCnext CLI 
+### Compile the code with the PLCnext Technology Toolchain
 
 1. Install Eclipse IDE, CLI, SDK and Eclipse Add-in (how-to guide: see links in the "Getting started" section above)
 1. Clone this repository
@@ -84,7 +84,7 @@ You can participate in this project by submitting bugs and feature requests.
 Furthermore you can help us by discussing issues and letting us know where you have problems or where others could struggle.
 
 ## Feedback
-* Ask a question in the [PLCnext Community's Forum](https://www.plcnext-community.net/forum/#/categories)
+* Ask a question in the [PLCnext Community Forum](https://www.plcnext-community.net/forum/#/categories)
 * Request a new feature or example to be added on [GitHub](CONTRIBUTING.md)
 * Vote for [Popular Feature Requests](https://github.com/PLCnext/CppExamples/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
 * File a bug in [GitHub Issues](https://github.com/PLCnext/CppExamples/issues)

@@ -4,12 +4,17 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [When to use Internal Function Extensions](#when-to-use-internal-function-extensions)
-- [Limitations](#limitations)
-- [Quick-start example](#quick-start-example)
-- [IMPORTANT NOTE on acyclic communication service](#important-note-on-acyclic-communication-service)
+- [E-Learning: Internal Function Extensions](#e-learning-internal-function-extensions)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [When to use Internal Function Extensions](#when-to-use-internal-function-extensions)
+  - [Limitations](#limitations)
+  - [Quick start example](#quick-start-example)
+    - [Prerequisites:](#prerequisites)
+    - [Procedure:](#procedure)
+    - [Procedure steps shown in the e-learning and Quick-start:](#procedure-steps-shown-in-the-e-learning-and-quick-start)
+  - [IMPORTANT NOTE on Internal Function Extensions](#important-note-on-internal-function-extensions)
 
 <!-- /TOC -->
 
@@ -27,7 +32,7 @@ The Internal Function Extensions allows to access the I/O Data, GDS(Global Data 
 |Arpversion| 19.9.0.23151|
 |SVN Revision|23151|
 |SDK| 19.9.0.23151 |
-|PLCnext CLI | 2020.0 LTS|
+|PLCnext Technology Toolchain | 2020.0 LTS|
 
 ## When to use Internal Function Extensions
 
@@ -48,7 +53,7 @@ An ACF component is created which should fulfill the following tasks:
 
 - Axioline PDI data should be read via RSC and be written to the diagnostic log file.
 - The data to be read can be specified in a JSON configuration file.
-- The selection of the module that provides the PDI data can be set via the process data inputs of the Axioline module. On the PLCnext Starter Kit, the process data inputs are connected to a switch module. If e.g. the second Axioline module has to provide data, the switch 1 must be set to true, because this results in binary two.
+- The selection of the module that provides the PDI data can be set via the process data inputs of the Axioline module. On the PLCnext Technology Starter Kit, the process data inputs are connected to a switch module. If e.g. the second Axioline module has to provide data, the switch 1 must be set to true, because this results in binary two.
 
 ![Architecture](Picture/Architecture.png)
 
@@ -56,9 +61,9 @@ An ACF component is created which should fulfill the following tasks:
 
 - Starterkit - AXC F 2152 STARTERKIT (Order Number: 1046568)
 
-- PLCnext Command Line Interface (CLI) tool, version 2020.0 LTS. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
+- PLCnext Technology Command Line Interface (CLI) tool, version 2020.0 LTS. This is included in the "PLCnext Technology C++ tool chain", available on the Phoenix Contact website.
 
-- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2019.9. This is available on the Phoenix Contact website, and must be installed using the PLCnext CLI.
+- Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2019.9. This is available on the Phoenix Contact website, and must be installed using the PLCnext Technology CLI.
 
 - PLCnext Engineer version 2019.9.
 
@@ -85,13 +90,13 @@ An ACF component is created which should fulfill the following tasks:
 10)	Find the shared object `libLIB_AxioRead.so` in an Eclipse® workspace directory e.g. `LIB_AxioRead\bin\AXCF2152_19.9.0.23151\Release\lib` and copy it to the `/opt/plcnext/projects/Components` PLC's directory.
 11)	Copy the “AxioReadConfig.schema.json” and the “AxioReadConfig.json” file (contained in the `data` directory of this repository) to the `/opt/plcnext/projects/Components` PLC's directory.
 12)	Copy the `LIB_AxioReadLibrary.acf.config` file (contained in the `data` directory of this repository) to the `/opt/plcnext/projects/Default` PLC's directory. All `.acf.config` files in this directory are processed by the ACF when the plcnext process starts up.
-13)	Restart the PLCnext process via command line `sudo /etc/init.d/plcnext restart` in the PuTTY terminal.
-14)	Check that your application has started successfully by changing the DI-Signals on `AXL F DI8/1 DO8/1 1H` mudul and examining the PLCnext log file: `/opt/plcnext/logs/Output.log`.
+13)	Restart the plcnext process via command line `sudo /etc/init.d/plcnext restart` in the PuTTY terminal.
+14)	Check that your application has started successfully by changing the DI-Signals on `AXL F DI8/1 DO8/1 1H` mudul and examining the log file: `/opt/plcnext/logs/Output.log`.
    
 
 
 ## IMPORTANT NOTE on Internal Function Extensions
 
 - If you think about using the "PdiRead" and "PdiWrite" methods of pAcyclicCommunicationService to transfer the process data to the real-time application - please don't!
-- For applications that need real-time access to I/O data, the easiest and fastest way is to create your C++ application in the PLCnext Technology Eclipse® Add-in - using PLCnext components, programs and port variables from the template for real-time applications.
+- For applications that need real-time access to I/O data, the easiest and fastest way is to create your C++ application in the PLCnext Technology Eclipse® Add-in - using PLCnext Technology components, programs and port variables from the template for real-time applications.
 - If the access to the real-time process data is required for external application running directly on the Linux OS, then the best solution is to use the [Sample Runtime](https://github.com/PLCnext/SampleRuntime) example, which is designed especially for this purpose.

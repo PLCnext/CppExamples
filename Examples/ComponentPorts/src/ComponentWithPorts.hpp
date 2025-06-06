@@ -11,7 +11,7 @@
 #include "Arp/Plc/Commons/Esm/ProgramComponentBase.hpp"
 #include "ComponentWithPortsProgramProvider.hpp"
 #include "Arp/Plc/Commons/Meta/MetaLibraryBase.hpp"
-#include "Arp/System/Commons/Logging.h"
+#include "Arp/Base/Commons/Logging/Log.hpp"
 
 // added to the template
 #include "Arp/Plc/Domain/Commons/PlcStartKind.hpp"

@@ -4,10 +4,12 @@
 
 <!-- TOC depthFrom:2 orderedList:true -->
 
-- [Introduction](#introduction)
-- [Guide details](#guide-details)
-- [References](#references)
-- [Quick-start example](#quick-start-example)
+- [Force Service](#force-service)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Guide details](#guide-details)
+  - [References](#references)
+  - [Quick-start example](#quick-start-example)
 
 <!-- /TOC -->
 
@@ -26,17 +28,17 @@ The PLCnext Runtime provides an RSC service, called `IForceService`, that a clie
 |Description | Value |
 |------------ |-----------|
 |Created | 7.01.2021 |
-|Last modified| 06.09.2024 |
-|Controller| SIM-AXC F 2152 |
-|FW| 2024.7 |
-|SDK| 2024.7 |
-|PLCnext CLI | 2025.0 PREVIEW |
+|Last modified| 05.06.2025 |
+|Controller| AXC F 2152 |
+|FW| 2025.0 |
+|SDK| 2025.0 |
+|PLCnext Technology Toolchain | 2025.0 |
 
 ## References
 
 A complete description of the Force service is available from this source:
 
-- [API documentation](https://api.plcnext.help/api_docs_2024-0-LTS/classArp_1_1Plc_1_1Gds_1_1Services_1_1IForceService.html)
+- [API documentation](https://api.plcnext.help/api_docs_2025-0/classArp_1_1Plc_1_1Gds_1_1Services_1_1IForceService.html)
 
 ## Quick-start example
 
@@ -48,15 +50,15 @@ Prerequisites:
 
 - AXC F 2152 controller with AXL F DI8/3 DO8/3 2H (2702071) digital input/output module. Other hardware arrangements will require modifications to the sample code.
 
-- PLCnext Command Line Interface (CLI) tool, version 2025.0 PREVIEW.
+- PLCnext Technology Command Line Interface (CLI) tool, version 2025.0.
 
-- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2024.7.
+- A Software Development Kit (SDK) for the AXC F 2152 PLCnext Control, version 2025.0.
 
 - (optional) Eclipse IDE, with the PLCnext Technology add-in installed.
 
 - (optional) Visual Studio, with the PLCnext Technology extension installed.
 
-- PLCnext Engineer version 2024.6.
+- PLCnext Engineer version 2025.0.
 
 Procedure:
 
@@ -68,10 +70,10 @@ Procedure:
 
 - Create the variables that will be forced:
   - In PLCnext Engineer, open the PLCnext Engineer project in the `Examples/Force` directory of this repository.
-  - Check that the controller model and firmware version in the project matches the controller you are using.
+  - Check that the controller model and firmware version in the project matches the controller you are using. Update the controller in the project if necessary.
   - Send the project to the PLC and check that the PLC starts OK.
 
-- Create a new **ACF project** using either the PLCnext CLI tool, or Eclipse, or Visual Studio, with the following settings:
+- Create a new **ACF project** using either the PLCnext Technology CLI tool, or Eclipse, or Visual Studio, with the following settings:
   - Project name: `Force`
   - Component name: `ForceComponent`
   - Project namespace: `Force`

@@ -63,14 +63,14 @@ void OpcPlcManagerComponent::LoadConfig()
 void OpcPlcManagerComponent::SetupConfig()
 {
     // setup project config here
-    Log::Info("OpcPlcManagerComponent: Starting worker thread.");
+    log.Info("OpcPlcManagerComponent: Starting worker thread.");
     workerThreadInstance.Start();
 }
 
 void OpcPlcManagerComponent::ResetConfig()
 {
     // implement this inverse to SetupConfig() and LoadConfig()
-    Log::Info("OpcPlcManagerComponent: Stopping worker thread.");
+    log.Info("OpcPlcManagerComponent: Stopping worker thread.");
     workerThreadInstance.Stop();
 }
 
@@ -85,7 +85,7 @@ void OpcPlcManagerComponent::Dispose()
 void OpcPlcManagerComponent::PowerDown()
 {
 	// implement this only if data shall be retained even on power down event
-	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
 	// Available with 2021.6 FW
 }
 
@@ -98,7 +98,7 @@ void OpcPlcManagerComponent::workerThreadBody(void)
 
     if (this->GetPlcState.UA_MethodState == 1)
     {
-        Log::Info("OpcPlcManagerComponent: GetPlcState.");
+        log.Info("OpcPlcManagerComponent: GetPlcState.");
 
         // Get the PLC state from the RSC service
         this->GetPlcState.state = static_cast<Arp::uint32>(this->plcManagerService2Ptr->GetPlcState());
@@ -110,7 +110,7 @@ void OpcPlcManagerComponent::workerThreadBody(void)
 
     if (this->Start.UA_MethodState == 1)
     {
-        Log::Info("OpcPlcManagerComponent: Start: {0:d} {1}", this->Start.startKind, (this->Start.async ? "asynchronous" : "synchronous"));
+        log.Info("OpcPlcManagerComponent: Start: {0:d} {1}", this->Start.startKind, (this->Start.async ? "asynchronous" : "synchronous"));
 
         // Start the PLC via the RSC service
         this->plcManagerService2Ptr->Start((PlcStartKind)this->Start.startKind, this->Start.async);
@@ -122,7 +122,7 @@ void OpcPlcManagerComponent::workerThreadBody(void)
 
     if (this->Stop.UA_MethodState == 1)
     {
-        Log::Info("OpcPlcManagerComponent: Stop {0}.", (this->Stop.async ? "asynchronous" : "synchronous"));
+        log.Info("OpcPlcManagerComponent: Stop {0}.", (this->Stop.async ? "asynchronous" : "synchronous"));
 
         // Stop the PLC via the RSC service
         this->plcManagerService2Ptr->Stop(this->Stop.async);

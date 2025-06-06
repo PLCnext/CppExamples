@@ -1,13 +1,14 @@
 ﻿///////////////////////////////////////////////////////////////////////////////"
 //
-//  Copyright PHOENIX CONTACT GmbH
+// Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+// Licensed under the MIT. See LICENSE file in the project root for full license information.  
 //
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Base/Acf/Commons/ComponentBase.hpp"
 #include "Arp/Plc/Commons/Meta/MetaComponentBase.hpp"
-#include "Arp/System/Commons/Logging.h"
+#include "Arp/Base/Commons/Logging/Log.hpp"
 #include "Arp/System/Commons/Threading/WorkerThread.hpp"
 #include "Arp/Plc/Gds/Services/IDataAccessService.hpp"
 

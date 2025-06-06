@@ -90,7 +90,7 @@ void DeviceInterfaceComponent::Dispose()
 void DeviceInterfaceComponent::PowerDown()
 {
 	// implement this only if data shall be retained even on power down event
-	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
 	// Available with 2021.6 FW
 }
 
@@ -129,7 +129,7 @@ void DeviceInterfaceComponent::InfoItems(IRscReadEnumerator<RscVariant<512>>& in
                     break;
                 }
 
-                case RscType::Utf8String:
+                case RscType::String:
                 {
             		log.Info("{0} = {1}", infoItemNames[i], item.ToString());
                     break;
@@ -220,7 +220,7 @@ void DeviceInterfaceComponent::DeviceInfoDemo()
                 break;
             }
 
-            case RscType::Utf8String:
+            case RscType::String:
             {
         		log.Info("{0} = {1}", itemName, result.ToString());
                 break;
@@ -288,7 +288,7 @@ void DeviceInterfaceComponent::StatusItems(IRscReadEnumerator<RscVariant<512>>& 
                     break;
                 }
 
-                case RscType::Utf8String:
+                case RscType::String:
                 {
             		log.Info("{0} = {1}", statusItemNames[i], item.ToString());
                     break;
@@ -413,7 +413,7 @@ void DeviceInterfaceComponent::DeviceStatusDemo()
                 break;
             }
 
-            case RscType::Utf8String:
+            case RscType::String:
             {
         		log.Info("{0} = {1}", itemName, result.ToString());
                 break;
@@ -463,7 +463,7 @@ void DeviceInterfaceComponent::SettingsItems(IRscReadEnumerator<DeviceSettingRes
                     break;
                 }
 
-                case RscType::Utf8String:
+                case RscType::String:
                 {
             		log.Info("{0} = {1}", settingsItemNames[i], item.Value.ToString());
                     break;
@@ -590,7 +590,7 @@ void DeviceInterfaceComponent::DeviceSettingsDemo()
                 break;
             }
 
-            case RscType::Utf8String:
+            case RscType::String:
             {
         		log.Info("{0} = {1}", itemName, result.Value.ToString());
                 break;

@@ -187,7 +187,7 @@ void SubscriptionsComponent::LogSubscription()const
             }
             else
             {
-                log.Warning("Unexpeted type: '{}'", current.GetType());
+                log.Warning("Unexpected type: '{}'", current.GetType());
             }
         }
         readEnumerator.EndRead();

@@ -1,6 +1,6 @@
 ﻿﻿/******************************************************************************
  *
- * Copyright (c) 2024 Phoenix Contact GmbH & Co. KG. All rights reserved.
+ * Copyright (c) 2025 Phoenix Contact GmbH & Co. KG. All rights reserved.
  * Licensed under the MIT. See LICENSE file in the project root for full license information.
  *
  ******************************************************************************/
@@ -8,7 +8,7 @@
 #pragma once
 #include "Arp/System/Core/Arp.h"
 #include "Arp/Plc/Commons/Esm/DynamicPortsProgramBase.hpp"
-#include "Arp/System/Commons/Logging.h"
+#include "Arp/Base/Commons/Logging/Log.hpp"
 #include "DynamicPortsComponent.hpp"
 #include "DynamicPortsLibrary.hpp"
 
@@ -19,7 +19,7 @@ namespace DynamicPorts
 {
 
 using namespace Arp;
-using namespace Arp::System::Commons::Diagnostics::Logging;
+using namespace Arp::Base::Commons::Logging;
 using namespace Arp::Plc::Commons::Esm;
 
 //#program
@@ -68,6 +68,9 @@ inline DynamicPortsProgram::DynamicPortsProgram(DynamicPorts::DynamicPortsCompon
 : DynamicPortsProgramBase(name, DynamicPortsLibrary::GetInstance().GetTypeDomain())
 , dynamicPortsComponent(dynamicPortsComponentArg)
 {
+    // Initialise the logger
+    Log::Initialize("Dynamic Ports Example");
+
     // Read configuration from a specific file, in JSON format.
     // For simplicity, no error checks are done on the configuration.
     using json = nlohmann::json;

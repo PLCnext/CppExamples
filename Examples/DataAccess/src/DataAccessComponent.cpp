@@ -1,6 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////"
 //
-//  Copyright PHOENIX CONTACT GmbH
+// Copyright (c) Phoenix Contact GmbH & Co. KG. All rights reserved.  
+// Licensed under the MIT. See LICENSE file in the project root for full license information.  
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "DataAccessComponent.hpp"
@@ -27,8 +28,8 @@ void ReadPortNames(Arp::Base::Rsc::Commons::IRscWriteEnumerator<Arp::Base::Rsc::
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadPortNames()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- ReadPortNames()");
     }
 }
 
@@ -49,7 +50,7 @@ void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Servi
                 {
                     Arp::int16 value;
                     item.Value.CopyTo(value);
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Int_OUT from DataAccess Read() = {0}", value);
+                    Arp::Base::Commons::Logging::Log::Info("Int_OUT from DataAccess Read() = {0}", value);
                     break;
                 }
 
@@ -67,7 +68,7 @@ void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Servi
 
                     Arp::int16 value;
                     current.CopyTo(value);
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Array_OUT[0] from DataAccess Read() = {0}", value);
+                    Arp::Base::Commons::Logging::Log::Info("Array_OUT[0] from DataAccess Read() = {0}", value);
 
                     // Use the ReadNext() method to iterate through all array elements.
 
@@ -90,21 +91,21 @@ void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Servi
                     structReader.ReadNextField(current);
                     Arp::int16 intValue;
                     current.CopyTo(intValue);
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Struct_OUT.MyInt16 from DataAccess Read() = {0}", intValue);
+                    Arp::Base::Commons::Logging::Log::Info("Struct_OUT.MyInt16 from DataAccess Read() = {0}", intValue);
 
                     structReader.ReadNextField(current);
                     // Process the MyFloat32 field if necessary.
 
                     structReader.ReadNextField(current);
                     const char * stringValue = current.GetChars();
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Struct_OUT.MyString from DataAccess Read() = {0}", stringValue);
+                    Arp::Base::Commons::Logging::Log::Info("Struct_OUT.MyString from DataAccess Read() = {0}", stringValue);
 
                     break;
                 }
 
                 default:
                 {
-                    Arp::System::Commons::Diagnostics::Logging::Log::Info("Unhandled type = {0}", item.Value.GetType());
+                    Arp::Base::Commons::Logging::Log::Info("Unhandled type = {0}", item.Value.GetType());
                     break;
                 }
             }
@@ -113,8 +114,8 @@ void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Servi
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- ReadResult()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- ReadResult()");
     }
 }
 
@@ -182,8 +183,8 @@ void WriteData(Arp::Base::Rsc::Commons::IRscWriteEnumerator<Arp::Plc::Gds::Servi
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteData()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- WriteData()");
     }
 }
 
@@ -201,8 +202,8 @@ void WriteResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Serv
     }
     catch (std::exception& e)
     {
-        Arp::System::Commons::Diagnostics::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-        Arp::System::Commons::Diagnostics::Logging::Log::Info("<- WriteResult()");
+        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+        Arp::Base::Commons::Logging::Log::Info("<- WriteResult()");
     }
 }
 
@@ -234,6 +235,9 @@ void DataAccessComponent::Initialize()
     plcDomainProxy.PlcUnloading += make_delegate(this, &DataAccessComponent::OnPlcUnloading);
     plcDomainProxy.PlcChanging += make_delegate(this, &DataAccessComponent::OnPlcChanging);
     plcDomainProxy.PlcChanged += make_delegate(this, &DataAccessComponent::OnPlcChanged);
+
+    // Initialise global logger
+    Arp::Base::Commons::Logging::Log::Initialize("Data Access Example");
 }
 
 void DataAccessComponent::SubscribeServices()
@@ -295,7 +299,7 @@ void DataAccessComponent::Dispose()
 void DataAccessComponent::PowerDown()
 {
 	// implement this only if data shall be retained even on power down event
-	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
 	// Available with 2021.6 FW
 }
 

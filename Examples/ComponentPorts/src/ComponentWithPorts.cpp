@@ -67,7 +67,7 @@ void ComponentWithPorts::ResetConfig()
 void ComponentWithPorts::PowerDown()
 {
 	// implement this only if data shall be retained even on power down event
-	// will work only for PLCnext controllers with an "Integrated uninterruptible power supply (UPS)"
+	// will work only for PLCnext Control devices with an "Integrated uninterruptible power supply (UPS)"
 	// Available with 2021.6 FW
 }
 

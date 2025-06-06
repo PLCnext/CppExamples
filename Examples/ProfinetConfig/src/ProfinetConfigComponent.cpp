@@ -81,7 +81,7 @@ void ProfinetConfigComponent::SetupConfig()
 	// For simplicity, call all the RSC service methods here.
 	// In a real application these methods would be called elsewhere.
 	RscVariant<512> deviceName;
-	RscString<512> newDeviceName;
+	RscVariant<512> newDeviceName;
 
 	// Get the Profinet device name (i.e. the Station Name)
 	ConfigurationErrorCode result = configServicePtr->Read("Arp.Io.PnD/StationName", deviceName);
@@ -89,7 +89,8 @@ void ProfinetConfigComponent::SetupConfig()
 	log.Info("Profinet device name is {0}", deviceName.ToString());
 
 	// Write a new Profinet device name
-	newDeviceName = random_string(16);
+	newDeviceName.SetType(RscType::String);
+	newDeviceName.Assign(Arp::Base::Core::String(random_string(16)));
 	log.Info("Writing new Profinet device name : {0}", newDeviceName.ToString());
 	result = configServicePtr->Write("Arp.Io.PnD/StationName", newDeviceName);
 	log.Info("Result of Config Write: {0}", result);
