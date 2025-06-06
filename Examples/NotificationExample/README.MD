@@ -206,7 +206,7 @@ void COMP_Notifications::NetworkConfigurationChanged_Callback(const Arp::System:
     auto deviceId = payload.GetDeviceId();
     auto id = payload.GetId();
     auto name = payload.GetName();
-    auto value = payload.GetValued();  // No, this is not a typo  :(
+    auto value = payload.GetValue();
     log.Info("Parameter:{0},devieId:{1},id:{2},name:{3},value:{4}",parameter,deviceId,id,name,value);
 }
 ```
