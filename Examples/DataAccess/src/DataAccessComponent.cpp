@@ -35,6 +35,12 @@ void ReadPortNames(Arp::Base::Rsc::Commons::IRscWriteEnumerator<Arp::Base::Rsc::
 
 void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Services::ReadItem>& dataItems)
 {
+    // !!! IMPORTANT !!!
+    // *Every single* data item in the enumerator must be explicitly read by the RSC client,
+    // including ALL elements of every array and structure.
+    // Failing to do this will cause a Protocol Violation exception.
+    // This is a feature of the PLCnext Runtime remoting implementation, not a bug.
+
     Arp::Plc::Gds::Services::ReadItem item;
     auto elements = dataItems.BeginRead();
     try
@@ -62,15 +68,19 @@ void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Servi
                     // - GetElementType()
                     // - GetSize()
                     // - GetDimensions();
-
-                	Arp::Base::Rsc::Commons::RscVariant<512> current;
-                    arrayReader.ReadNext(current);
-
-                    Arp::int16 value;
-                    current.CopyTo(value);
-                    Arp::Base::Commons::Logging::Log::Info("Array_OUT[0] from DataAccess Read() = {0}", value);
-
-                    // Use the ReadNext() method to iterate through all array elements.
+                    
+                    size_t arraySize = arrayReader.GetSize();
+                    for (size_t i = 0; i < arraySize; i++)
+                    {
+                        Arp::Base::Rsc::Commons::RscVariant<512> current;
+                        // Use the ReadNext() method to iterate through ALL the array elements.
+                        // As mentioned above, EVERY SINGLE ELEMENT MUST BE EXPLICITLY READ HERE,
+                        // otherwise a Protocol Violation exception will occur.
+                        arrayReader.ReadNext(current);
+                        Arp::int16 value;
+                        current.CopyTo(value);
+                        Arp::Base::Commons::Logging::Log::Info("Array_OUT[{0}] from DataAccess Read() = {1}", i, value);
+                    }
 
                     break;
                 }
