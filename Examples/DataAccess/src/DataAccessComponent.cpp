@@ -92,7 +92,8 @@ void ReadResult(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Gds::Servi
                     // Use the following RscStructReader method to get information about the struct:
                     // - GetFieldCount()
                     // Struct element values will appear in the order that the elements are declared.
-                    // The names of the struct elements are not available.
+                    // The names of the struct elements are not available here, but from firmware version 2026.0.0 LTS.
+                    // these field names can be retrieved using the IVariableBrowseService.
 
                     Arp::Base::Rsc::Commons::RscVariant<512> current;
                     structReader.ReadNextField(current);
