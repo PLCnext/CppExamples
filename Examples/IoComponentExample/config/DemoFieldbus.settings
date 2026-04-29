@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FieldbusComponentSettingsDocument
+  xmlns="http://www.phoenixcontact.com/schema/fbiosettings"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.phoenixcontact.com/schema/fbiosettings"
+  schemaVersion="1.0">  
+
+  <!-- Setting for project-specific I/O configuration -->
+  <Links path="$ARP_PATH_PROJECT_CURRENT_DIR$/Io/DemoFieldbus/links.xml" />
+
+</FieldbusComponentSettingsDocument>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<TIC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.phoenixcontact.com/IMA/TIC/1.0/tic.xsd">
+  <E n="DemoFb">
+    <EL>
+      <E n="IO:Hierarchy">
+        <AL>
+          <A n="BrowseName">
+            <V>DemoDevice</V>
+          </A>
+        </AL>
+        <EL>
+          <E n="IO:Node">
+            <AL>
+              <A n="BrowseName">
+                <V>DemoModule1</V>
+              </A>
+              <A n="NodeId">
+                <V>1</V>
+              </A>
+            </AL>
+          </E>
+          <E n="IO:Node">
+            <AL>
+              <A n="BrowseName">
+                <V>DemoModule2</V>
+              </A>
+              <A n="NodeId">
+                <V>2</V>
+              </A>
+            </AL>
+          </E>
+        </EL>
+      </E>
+      <E n="IO:Frames">
+        <AL>
+          <A n="FrameCount">
+            <V>2</V>
+          </A>
+        </AL>
+        <EL>
+          <E n="IO:Frame">
+            <AL>
+              <A n="FrameId">
+                <V>IN</V>
+              </A>
+              <A n="Length">
+                <V>10.0</V>
+              </A>
+            </AL>
+            <EL>
+              <E n="IO:Ports">
+                <AL>
+                  <A n="PortCount">
+                    <V>2</V>
+                  </A>
+                </AL>
+                <EL>
+                  <E n="IO:Port">
+                    <AL>
+                      <A n="NodeId">
+                        <V>1</V>
+                      </A>
+                      <A n="Name">
+                        <V>IN_UINT32</V>
+                      </A>
+                      <A n="DataType">
+                        <V>Unsigned32</V>
+                      </A>
+                      <A n="Offset">
+                        <V>0.0</V>
+                      </A>
+                      <A n="Length">
+                        <V>4.0</V>
+                      </A>
+                    </AL>
+                  </E>
+                  <E n="IO:Port">
+                    <AL>
+                      <A n="NodeId">
+                        <V>2</V>
+                      </A>
+                      <A n="Name">
+                        <V>IN_UINT8ARRAY</V>
+                      </A>
+                      <A n="DataType">
+                        <V>Unsigned32</V>
+                      </A>
+                      <A n="Offset">
+                        <V>6.0</V>
+                      </A>
+                      <A n="Length">
+                        <V>4.0</V>
+                      </A>
+                    </AL>
+                  </E>
+                </EL>
+              </E>
+            </EL>
+          </E>
+          <E n="IO:Frame">
+            <AL>
+              <A n="FrameId">
+                <V>OUT</V>
+              </A>
+              <A n="Length">
+                <V>10.0</V>
+              </A>
+            </AL>
+            <EL>
+              <E n="IO:Ports">
+                <AL>
+                  <A n="PortCount">
+                    <V>1</V>
+                  </A>
+                </AL>
+                <EL>
+                  <E n="IO:Port">
+                    <AL>
+                      <A n="NodeId">
+                        <V>1</V>
+                      </A>
+                      <A n="Name">
+                        <V>OUT_UINT32</V>
+                      </A>
+                      <A n="DataType">
+                        <V>Unsigned32</V>
+                      </A>
+                      <A n="Offset">
+                        <V>0.0</V>
+                      </A>
+                      <A n="Length">
+                        <V>4.0</V>
+                      </A>
+                    </AL>
+                  </E>
+                </EL>
+              </E>
+            </EL>
+          </E>
+        </EL>
+      </E>
+    </EL>
+  </E>
+</TIC>

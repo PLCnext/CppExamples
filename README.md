@@ -38,7 +38,7 @@ This project aims to supply, over time, examples and best practices of PLCnext T
 |[17](Examples/IncludeOpenSourceLibrary/)| [Include an Open Source Library](Examples/IncludeOpenSourceLibrary/README.md)| This describes how to use a third-party open-source library in a C++ project that is built for PLCnext Control using Eclipse|
 |[18](Examples/OpcPlcManager/)| [OPC UA Methods](Examples/OpcPlcManager/README.MD)| This example shows how to use OPC UA methods to execute functions in an ACF component written in C++.| [SourceCode](Examples/OpcPlcManager/src/)
 |[19](Examples/NoEngineer/)| [PLM/ESM/GDS Configuration without PLCnext Engineer](Examples/NoEngineer/README.MD)| This example shows how to configure C++ programs to run on a PLC without using PLCnext Engineer.|
-
+|[20](Examples/IoComponentExample/)| [I/O Component Example](Examples/IoComponentExample/README.MD)| In this example, a simple I/O (fieldbus) Component is created and deployed.|
 
 ## Getting started
 
