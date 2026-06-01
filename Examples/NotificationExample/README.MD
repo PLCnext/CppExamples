@@ -35,11 +35,11 @@ Both the PLCnext Technology firmware and user-defined components can send notifi
 |Description | Value |
 |------------ |-----------|
 |Created | 20.09.2019 |
-|Last modified | 06.06.2025 |
+|Last modified | 01.06.2026 |
 |Controller | AXC F 2152 |
-|FW | 2025.0 |
-|SDK | 2025.0 |
-|PLCnext Technology Toolchain | 2025.0 |
+|FW | 2026.0 |
+|SDK | 2026.0 |
+|PLCnext Technology Toolchain | 2026.0 |
 
 ## When to use Notifications
 
@@ -362,7 +362,6 @@ Notifications that are sent to a persistent data store using the Notification Lo
 
 - In PLCnext Engineer, in the ["Notifications" section of the controller "Cockpit" window](https://engineer.plcnext.help/latest/UIOverview_NotificationLogger.htm). Note that PLCnext Engineer must be connected to the PLC in order for notifications to be displayed.
 - On the PLCs [Web Based Management](https://plcnext.help/te/WBM/Diagnostics_Notification_Logger.htm) page, in the "Notifications" section of the "Diagnostics" window.
-- By opening the notification archive file (in the `/opt/plcnext/logs` directory) using an sqlite client like [DB Browser for SQLite](https://sqlitebrowser.org/).
 
 Notification archives can also be viewed and managed in C++ using the [Notification Logger RSC service](https://plcnext.help/te/Communication_interfaces/Remote_Service_Calls_RSC/Querying_notifications_via_RSC.htm).
 
