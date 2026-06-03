@@ -359,7 +359,7 @@ An example of a custom notification logger configuration file is [My_Nm_Logger.c
 Some features of the notification logger configuration file include:
 
 - From firmware version 2026.6: The optional `thresholdPercent` and `stepPercent` attributes on the `SizeLimitiation` element will cause a "Storage Usage" (information) notification to be generated when the archive file reaches the "threshold" size, and then every "step" size after that. If these attributes are omitted, then no "Storage Usage" notifications will be sent.
-- From firmware version 2026.6: The optional `executionCountUntilWarning` attribute on the `SizeLimitation` element will cause a "Size Limitation Enforced" (warning) notification to be generated when records are automatically deleted from the archive. Rather than generate this notification every time records are deleted, the notification period is specified using this attribute. If the attribute is omitted, the value defaults to 100 - that is, a warning notification will be generated after every 100 executions of the record deletion process.
+- From firmware version 2026.6: The optional `executionCountUntilWarning` attribute on the `SizeReduction` element will cause a "Size Limitation Enforced" (warning) notification to be generated when records are automatically deleted from the archive. Rather than generate this notification every time records are deleted, the notification period is specified using this attribute. If the attribute is omitted, the value defaults to 100 - that is, a warning notification will be generated after every 100 executions of the record deletion process.
 
 ## PART 6 - Viewing notification history
 
