@@ -23,7 +23,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/CppDataTypeTest
       - name: Archive CppDataTypeTest build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CppDataTypeTest
           path: Build/CppDataTypeTest/bin
@@ -43,7 +43,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/DynamicPorts
       - name: Archive DynamicPorts build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: DynamicPorts
           path: Build/DynamicPorts/bin
@@ -60,7 +60,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/ComponentPorts
       - name: Archive ComponentPorts build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ComponentPorts
           path: Build/ComponentPorts/bin
@@ -77,7 +77,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/ProgramComponentInteraction
       - name: Archive ProgramComponentInteraction build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ProgramComponentInteraction
           path: Build/ProgramComponentInteraction/bin
@@ -92,7 +92,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/ThreadExample
       - name: Archive ThreadExample build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ThreadExample
           path: Build/ThreadExample/bin
@@ -107,7 +107,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/BufferedExchange
       - name: Archive BufferedExchange build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: BufferedExchange
           path: Build/BufferedExchange/bin
@@ -122,7 +122,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/DataAccess
       - name: Archive DataAccess build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: DataAccess
           path: Build/DataAccess/bin
@@ -137,7 +137,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/Subscriptions
       - name: Archive Subscriptions build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Subscriptions
           path: Build/Subscriptions/bin
@@ -152,7 +152,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/Force
       - name: Archive Force build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Force
           path: Build/Force/bin
@@ -168,7 +168,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/NotificationExample
       - name: Archive NotificationExample build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: NotificationExample
           path: Build/NotificationExample/bin
@@ -183,7 +183,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/TraceControl
       - name: Archive TraceControl build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: TraceControl
           path: Build/TraceControl/bin
@@ -198,7 +198,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/FileStreamExample
       - name: Archive FileStreamExample build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: FileStreamExample
           path: Build/FileStreamExample/bin
@@ -213,7 +213,7 @@ jobs:
           export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
           plcncli deploy --path Build/OpcPlcManager
       - name: Archive OpcPlcManager build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: OpcPlcManager
           path: Build/OpcPlcManager/bin
