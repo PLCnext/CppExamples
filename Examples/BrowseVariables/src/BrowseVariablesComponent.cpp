@@ -5,74 +5,6 @@
 #include "Arp/Plc/Meta/Services/VariableBrowseResult.hpp"
 #include "Arp/Plc/Meta/Services/VariableInformation.hpp"
 
-// Define the delegate method that will be passed to the GetComponentNames method of the IVariableBrowseService.
-// In this case, the delegate simply logs the names of all the components in the enumerator.
-void LogComponentNames(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Base::Rsc::Commons::RscString<512>>& componentNames)
-{
-	Arp::Base::Rsc::Commons::RscString<512> componentName;
-    auto elements = componentNames.BeginRead();
-
-    Arp::Base::Commons::Logging::Log::Info("*** Here are the names of all components that provide variables:");
-
-    try
-    {
-        while (componentNames.ReadNext(componentName))
-        {
-            Arp::Base::Commons::Logging::Log::Info("- {0}", componentName);
-        }
-    }
-    catch (std::exception& e)
-    {
-        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-    }
-
-    Arp::Base::Commons::Logging::Log::Info("*** End of component names.");
-}
-
-// Define the delegate method that will be passed to the GetRoots method of the IVariableBrowseService.
-// In this case, the delegate simply logs information about each root in the enumerator.
-void LogRoots(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Meta::Services::VariableBrowseResult>& roots)
-{
-	Arp::Plc::Meta::Services::VariableBrowseResult root;
-    auto elements = roots.BeginRead();
-
-    Arp::Base::Commons::Logging::Log::Info("*** Information about the roots of the Arp.Plc.Esm component:");
-
-    try
-    {
-        while (roots.ReadNext(root))
-        {
-            Arp::Base::Commons::Logging::Log::Info("- Name: {0}, Type: {1}", root.VariableInfo.Name, root.VariableInfo.Type);
-        }
-    }
-    catch (std::exception& e)
-    {
-        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-    }
-
-    Arp::Base::Commons::Logging::Log::Info("*** End of Arp.Plc.Esm roots.");
-}
-
-// Define the delegate method that will be passed to the GetRoots method of the IVariableBrowseService.
-// In this case, the delegate simply logs information about each root in the enumerator.
-void LogChildren(Arp::Base::Rsc::Commons::IRscReadEnumerator<Arp::Plc::Meta::Services::VariableBrowseResult>& children)
-{
-	Arp::Plc::Meta::Services::VariableBrowseResult child;
-    auto elements = children.BeginRead();
-
-    try
-    {
-        while (children.ReadNext(child))
-        {
-            Arp::Base::Commons::Logging::Log::Info("- Name: {0}, Type: {1}", child.VariableInfo.Name, child.VariableInfo.Type);
-        }
-    }
-    catch (std::exception& e)
-    {
-        Arp::Base::Commons::Logging::Log::Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
-    }
-}
-
 namespace BrowseVariables
 {
 
@@ -206,6 +138,74 @@ void BrowseVariablesComponent::StopBrowseVariables()
 
 void BrowseVariablesComponent::BrowseVariablesData()
 {
+	// Define the delegate method that will be passed to the GetComponentNames method of the IVariableBrowseService.
+	// In this case, the delegate simply logs the names of all the components in the enumerator.
+	auto LogComponentNames = [](IRscReadEnumerator<RscString<512>>& componentNames)
+	{
+		RscString<512> componentName;
+	    auto elements = componentNames.BeginRead();
+
+	    log.Info("*** Here are the names of all components that provide variables:");
+
+	    try
+	    {
+	        while (componentNames.ReadNext(componentName))
+	        {
+	            log.Info("- {0}", componentName);
+	        }
+	    }
+	    catch (std::exception& e)
+	    {
+	        log.Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+	    }
+
+	    log.Info("*** End of component names.");
+	};
+
+	// Define the delegate method that will be passed to the GetRoots method of the IVariableBrowseService.
+	// In this case, the delegate simply logs information about each root in the enumerator.
+	auto LogRoots = [](IRscReadEnumerator<VariableBrowseResult>& roots)
+	{
+		VariableBrowseResult root;
+	    auto elements = roots.BeginRead();
+
+	    log.Info("*** Information about the roots of the Arp.Plc.Esm component:");
+
+	    try
+	    {
+	        while (roots.ReadNext(root))
+	        {
+	            log.Info("- Name: {0}, Type: {1}", root.VariableInfo.Name, root.VariableInfo.Type);
+	        }
+	    }
+	    catch (std::exception& e)
+	    {
+	        log.Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+	    }
+
+	    log.Info("*** End of Arp.Plc.Esm roots.");
+	};
+
+	// Define the delegate method that will be passed to the GetRoots method of the IVariableBrowseService.
+	// In this case, the delegate simply logs information about each root in the enumerator.
+	auto LogChildren = [](IRscReadEnumerator<VariableBrowseResult>& children)
+	{
+		VariableBrowseResult child;
+	    auto elements = children.BeginRead();
+
+	    try
+	    {
+	        while (children.ReadNext(child))
+	        {
+	            log.Info("- Name: {0}, Type: {1}", child.VariableInfo.Name, child.VariableInfo.Type);
+	        }
+	    }
+	    catch (std::exception& e)
+	    {
+	        log.Error("Error occurred in {0}:\n{1}", __FUNCTION__, e.what());
+	    }
+	};
+
     // This is implemented as a step sequencer.
     // Each step demonstrates different features of the VariableBrowse service.
     switch(step)
@@ -231,7 +231,7 @@ void BrowseVariablesComponent::BrowseVariablesData()
             // Get information about a root node that we already know the name of.
         	// In a real application the variable name would not be hard-coded,
         	// but would be retrieved by iterating through component roots and children.
-            Arp::Base::Commons::Logging::Log::Info("*** Children of the Arp.Plc.Esm/ESM_DATA variable:");
+            log.Info("*** Children of the Arp.Plc.Esm/ESM_DATA variable:");
 
             // Get the variable info in order to retrieve the Browse Handle.
             // The Browse Handle can also be obtained in the GetRoots delegate,
@@ -241,7 +241,7 @@ void BrowseVariablesComponent::BrowseVariablesData()
             // Use the Browse Handle to get information about the variable's children.
             this->variableBrowseServicePtr->GetChildren(variableInfo.BrowseHandle, LogChildren);
 
-            Arp::Base::Commons::Logging::Log::Info("*** End of ESM_DATA children.");
+            log.Info("*** End of ESM_DATA children.");
             break;
         }
 
